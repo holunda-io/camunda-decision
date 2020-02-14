@@ -9,11 +9,9 @@
     <relativePath/>
   </parent>
 
-  <groupId>io.holunda.dmn.project</groupId>
+  <groupId>io.holunda.decision.project</groupId>
   <artifactId>camunda-decision-root</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>${project.artifactId}</name>
-  <description>Camunda Decision</description>
   <url>https://github.com/holunda-io/camunda-decision/</url>
   <packaging>pom</packaging>
 
@@ -26,9 +24,7 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <version.java>${java.version}</version.java>
 
-    <camunda-ee>false</camunda-ee>
     <camunda.version>7.12.0</camunda.version>
-    <camunda.version.ee>7.12.2-ee</camunda.version.ee>
 
     <spring-boot.version>2.2.4.RELEASE</spring-boot.version>
     <camunda-spring-boot.version>3.4.1</camunda-spring-boot.version>
@@ -52,6 +48,7 @@
   </properties>
 
   <modules>
+    <module>lib/test</module>
     <module>extension</module>
   </modules>
 
@@ -135,23 +132,10 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Testing -->
     <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-core</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.assertj</groupId>
-      <artifactId>assertj-core</artifactId>
-      <scope>test</scope>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib-jdk8</artifactId>
+      <version>${kotlin.version}</version>
     </dependency>
 
   </dependencies>
@@ -511,6 +495,30 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
       </plugin>
+      <plugin>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-maven-plugin</artifactId>
+        <version>${kotlin.version}</version>
+        <executions>
+          <execution>
+            <id>compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>test-compile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>test-compile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <jvmTarget>1.8</jvmTarget>
+        </configuration>
+      </plugin>
     </plugins>
 
   </build>
@@ -533,33 +541,6 @@
           <dependency>
             <groupId>org.camunda.bpm.springboot</groupId>
             <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
-            <version>${camunda-spring-boot.version}</version>
-          </dependency>
-        </dependencies>
-      </dependencyManagement>
-    </profile>
-    <profile>
-      <id>camunda-ee</id>
-      <activation>
-        <property>
-          <name>camunda-ee</name>
-        </property>
-      </activation>
-      <properties>
-        <camunda.version>${camunda.version.ee}</camunda.version>
-      </properties>
-      <repositories>
-        <repository>
-          <id>camunda-bpm-ee</id>
-          <name>camunda-bpm-ee</name>
-          <url>https://app.camunda.com/nexus/content/repositories/camunda-bpm-ee</url>
-        </repository>
-      </repositories>
-      <dependencyManagement>
-        <dependencies>
-          <dependency>
-            <groupId>org.camunda.bpm.springboot</groupId>
-            <artifactId>camunda-bpm-spring-boot-starter-webapp-ee</artifactId>
             <version>${camunda-spring-boot.version}</version>
           </dependency>
         </dependencies>
@@ -656,20 +637,20 @@
   </profile>
     -->
 
-    <!--
-  <profile>
-    Profile for building examples
-    <id>examples</id>
-    <activation>
-      <property>
-        <name>!skipExamples</name>
-      </property>
-    </activation>
-    <modules>
-      <module>example</module>
-    </modules>
-  </profile>
-    -->
+    <profile>
+      <!--
+        Profile for building examples
+      -->
+      <id>examples</id>
+      <activation>
+        <property>
+          <name>!skipExamples</name>
+        </property>
+      </activation>
+      <modules>
+        <module>examples</module>
+      </modules>
+    </profile>
 
   </profiles>
 

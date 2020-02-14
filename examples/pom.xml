@@ -9,28 +9,20 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>camunda-decision-extension-root</artifactId>
+  <artifactId>camunda-decision-examples-root</artifactId>
   <packaging>pom</packaging>
 
-  <modules>
-    <module>generator</module>
-  </modules>
+  <properties>
+    <jacoco.skip>true</jacoco.skip>
+    <maven.javadoc.skip>true</maven.javadoc.skip>
+    <maven.sources.skip>true</maven.sources.skip>
+    <maven.install.skip>true</maven.install.skip>
+    <gpg.skip>true</gpg.skip>
+  </properties>
+
+  <modules />
 
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.holunda.decision.lib</groupId>
-        <artifactId>camunda-decision-extension-test</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>io.holunda.data</groupId>
-        <artifactId>camunda-bpm-data-kotlin</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <dependencies>
     <dependency>
@@ -89,11 +81,6 @@
     </dependency>
 
     <!-- Testing -->
-    <dependency>
-      <groupId>io.holunda.decision.lib</groupId>
-      <artifactId>camunda-decision-extension-test</artifactId>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>com.tngtech.jgiven</groupId>
       <artifactId>jgiven-junit</artifactId>
@@ -164,36 +151,5 @@
       </plugin>
     </plugins>
   </build>
-
-  <profiles>
-    <profile>
-      <id>camunda-ce</id>
-      <activation>
-        <property>
-          <name>!camunda-ee</name>
-        </property>
-      </activation>
-      <dependencies>
-        <dependency>
-          <groupId>org.camunda.bpm.springboot</groupId>
-          <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
-        </dependency>
-      </dependencies>
-    </profile>
-    <profile>
-      <id>camunda-ee</id>
-      <activation>
-        <property>
-          <name>camunda-ee</name>
-        </property>
-      </activation>
-      <dependencies>
-        <dependency>
-          <groupId>org.camunda.bpm.springboot</groupId>
-          <artifactId>camunda-bpm-spring-boot-starter-webapp-ee</artifactId>
-        </dependency>
-      </dependencies>
-    </profile>
-  </profiles>
 
 </project>
