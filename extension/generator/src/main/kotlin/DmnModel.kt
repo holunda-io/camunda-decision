@@ -30,14 +30,14 @@ class DmnModel(val dmn: DmnModelInstance, name: String) {
     this.label = column.label
     val inputExpression: InputExpression = newInstance(InputExpression::class)
     inputExpression.text = newText(column.key)
-    inputExpression.typeRef = column.typeRef
+    inputExpression.typeRef = column.expressionType.typeRef
     this.inputExpression = inputExpression
   }
 
   private fun output(column: ColumnHeader) = newInstance(Output::class).apply {
     this.name = column.key
     this.label = column.label
-    this.typeRef = column.typeRef
+    this.typeRef = column.expressionType.typeRef
   }
 
   private fun <T : DmnModelElementInstance> newInstance(elementClass: KClass<T>, id: String): T = dmn.newInstance(elementClass.java, id)

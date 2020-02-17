@@ -1,6 +1,6 @@
 package io.holunda.decision.generator
 
-import io.holunda.decision.generator.model.ColumnHeader
+import io.holunda.decision.generator.model.ColumnHeader.Companion.stringColumn
 import io.holunda.decision.generator.model.DmnRule
 import org.camunda.bpm.model.dmn.HitPolicy
 import org.junit.Test
@@ -9,9 +9,9 @@ class DecisionTableGeneratorTest {
 
   @Test
   fun name() {
-    val inputFoo = ColumnHeader("foo", "Foo (input)", "string")
-    val inputBar = ColumnHeader("bar", "Bar (input)", "string")
-    val outputResult = ColumnHeader("result", "Result (output)", "string")
+    val inputFoo = stringColumn("foo", "Foo (input)")
+    val inputBar = stringColumn("bar", "Bar (input)")
+    val outputResult = stringColumn("result", "Result (output)")
 
     val model = DmnModel.create("My DMN")
 
