@@ -1,11 +1,22 @@
+
+# IDEA
 *.iml
 .idea/
+
+# Eclipse
 .classpath
 .project
 .settings/
+
+# MAVEN
 .meta-data/
-.java-version
-.DS_Store
 target/
 pom.xml.versionsBackup
 .mvn/maven.config
+
+# OSX
+.java-version
+.DS_Store
+
+# DEV
+.tmp/
