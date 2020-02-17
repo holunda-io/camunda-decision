@@ -21,7 +21,7 @@
     <dependencies>
       <dependency>
         <groupId>io.holunda.decision.lib</groupId>
-        <artifactId>camunda-decision-extension-test</artifactId>
+        <artifactId>camunda-decision-lib-test</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -91,7 +91,7 @@
     <!-- Testing -->
     <dependency>
       <groupId>io.holunda.decision.lib</groupId>
-      <artifactId>camunda-decision-extension-test</artifactId>
+      <artifactId>camunda-decision-lib-test</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
