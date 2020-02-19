@@ -1,8 +1,11 @@
-package io.holunda.decision.generator.model
+package io.holunda.decision.model
 
 import java.util.*
 
-enum class ExpressionType(val type: Class<*>) {
+/**
+ * The allowed typeRefs used for input/output columns.
+ */
+enum class DataType(val type: Class<*>) {
   STRING(String::class.java),
   BOOLEAN(Boolean::class.java),
   INTEGER(Integer::class.java),

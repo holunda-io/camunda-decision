@@ -10,17 +10,10 @@
   </parent>
 
   <groupId>io.holunda.decision</groupId>
-  <artifactId>camunda-decision-generator</artifactId>
+  <artifactId>camunda-decision-model</artifactId>
 
   <properties>
     <jacoco.skip>false</jacoco.skip>
   </properties>
-
-  <dependencies>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>camunda-decision-model</artifactId>
-    </dependency>
-  </dependencies>
 
 </project>

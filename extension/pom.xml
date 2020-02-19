@@ -13,12 +13,23 @@
   <packaging>pom</packaging>
 
   <modules>
+    <module>model</module>
     <module>generator</module>
   </modules>
 
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>io.holunda.decision</groupId>
+        <artifactId>camunda-decision-generator</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.holunda.decision</groupId>
+        <artifactId>camunda-decision-model</artifactId>
+        <version>${project.version}</version>
+      </dependency>
       <dependency>
         <groupId>io.holunda.decision.lib</groupId>
         <artifactId>camunda-decision-lib-test</artifactId>

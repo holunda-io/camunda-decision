@@ -1,7 +1,11 @@
 package io.holunda.decision.generator
 
-import io.holunda.decision.generator.model.ColumnHeader
-import io.holunda.decision.generator.model.DmnRule
+import io.holunda.decision.generator.CamundaDecisionGenerator.generateId
+import io.holunda.decision.model.DmnRule
+import io.holunda.decision.model.DmnRule.Companion.distinctOutputs
+import io.holunda.decision.model.DmnRule.Companion.distinctInputs
+import io.holunda.decision.model.InputDefinition
+import io.holunda.decision.model.OutputDefinition
 import org.camunda.bpm.model.dmn.Dmn
 import org.camunda.bpm.model.dmn.DmnModelInstance
 import org.camunda.bpm.model.dmn.HitPolicy
@@ -13,7 +17,7 @@ import kotlin.reflect.KClass
 class DmnModel(val dmn: DmnModelInstance, name: String) {
   companion object {
     fun create(name: String) = DmnModel(Dmn.createEmptyModel(), name)
-    fun <T : DmnModelElementInstance> generateId(elementClass: KClass<T>) = "${elementClass.simpleName}_" + Integer.toString(((2.147483647E9 * Math.random()).toInt()));
+
   }
 
   val definitions = newInstance(Definitions::class).apply {
@@ -26,18 +30,20 @@ class DmnModel(val dmn: DmnModelInstance, name: String) {
 
   private fun <T : DmnModelElementInstance> newInstance(elementClass: KClass<T>): T = newInstance(elementClass, generateId(elementClass))
 
-  private fun input(column: ColumnHeader): Input = newInstance(Input::class).apply {
+  private fun input(column: InputDefinition): Input = newInstance(Input::class).apply {
     this.label = column.label
     val inputExpression: InputExpression = newInstance(InputExpression::class)
     inputExpression.text = newText(column.key)
-    inputExpression.typeRef = column.expressionType.typeRef
+    inputExpression.typeRef = column.type.typeRef
     this.inputExpression = inputExpression
+
+
   }
 
-  private fun output(column: ColumnHeader) = newInstance(Output::class).apply {
+  private fun output(column: OutputDefinition) = newInstance(Output::class).apply {
     this.name = column.key
     this.label = column.label
-    this.typeRef = column.expressionType.typeRef
+    this.typeRef = column.type.typeRef
   }
 
   private fun <T : DmnModelElementInstance> newInstance(elementClass: KClass<T>, id: String): T = dmn.newInstance(elementClass.java, id)
@@ -62,30 +68,30 @@ class DmnModel(val dmn: DmnModelInstance, name: String) {
     }
 
     fun rules(rules: List<DmnRule>) {
-      val inputs = rules.map { it.inputs }.flatMap { it.keys }.distinct().sortedBy { it.key }
-      val outputs = rules.map { it.outputs }.flatMap { it.keys }.distinct().sortedBy { it.key }
+      val inputs = rules.distinctInputs()
+      val outputs = rules.distinctOutputs()
+//
+//      // add headers
+//      inputs.forEach { decisionTable.addChildElement(input(it))}
+//      outputs.forEach{ decisionTable.addChildElement(output(it))}
+//
+//      rules.forEach { dmnRule ->
+//        val rule = newInstance(Rule::class)
+//        decisionTable.addChildElement(rule)
+//
+//        inputs.forEach{ header ->
+//          rule.addChildElement(newInstance(InputEntry::class).apply {
+//            text = newText(dmnRule.inputs[header])
+//          })
+//        }
+//
+//        outputs.forEach { header ->
+//          rule.addChildElement(newInstance(OutputEntry::class).apply {
+//            text = newText(dmnRule.outputs[header])
+//          })
+//        }
 
-      // add headers
-      inputs.forEach { decisionTable.addChildElement(input(it))}
-      outputs.forEach{ decisionTable.addChildElement(output(it))}
 
-      rules.forEach { dmnRule ->
-        val rule = newInstance(Rule::class)
-        decisionTable.addChildElement(rule)
-
-        inputs.forEach{ header ->
-          rule.addChildElement(newInstance(InputEntry::class).apply {
-            text = newText(dmnRule.inputs[header])
-          })
-        }
-
-        outputs.forEach { header ->
-          rule.addChildElement(newInstance(OutputEntry::class).apply {
-            text = newText(dmnRule.outputs[header])
-          })
-        }
-
-      }
     }
   }
 
