@@ -7,4 +7,5 @@ object CamundaDecisionModel {
     val label:String
     val type:DataType
   }
+
 }

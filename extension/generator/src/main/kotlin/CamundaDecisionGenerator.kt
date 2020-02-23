@@ -81,6 +81,13 @@ object CamundaDecisionGenerator {
       }
     }
 
+    fun Rule.inputEntry(value: String?) = this.addChildElement(InputEntry::class).apply {
+      text = textContent(value)
+    }
+
+    fun Rule.outputEntry(value: String?) = this.addChildElement(OutputEntry::class).apply {
+      text = textContent(value)
+    }
 
     fun DmnModelInstance.convertToString() = Dmn.convertToString(this)!!
   }

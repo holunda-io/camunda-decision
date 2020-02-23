@@ -5,6 +5,9 @@ import io.holunda.decision.generator.CamundaDecisionGenerator.ModelExtension.dec
 import io.holunda.decision.generator.CamundaDecisionGenerator.ModelExtension.definitions
 import io.holunda.decision.generator.CamundaDecisionGenerator.ModelExtension.input
 import io.holunda.decision.generator.CamundaDecisionGenerator.ModelExtension.output
+import io.holunda.decision.generator.CamundaDecisionGenerator.ModelExtension.addChildElement
+import io.holunda.decision.generator.CamundaDecisionGenerator.ModelExtension.inputEntry
+import io.holunda.decision.generator.CamundaDecisionGenerator.ModelExtension.outputEntry
 import io.holunda.decision.model.DmnRule
 import io.holunda.decision.model.DmnRule.Companion.distinctInputs
 import io.holunda.decision.model.DmnRule.Companion.distinctOutputs
@@ -12,6 +15,7 @@ import org.apache.commons.lang3.builder.Builder
 import org.camunda.bpm.model.dmn.Dmn
 import org.camunda.bpm.model.dmn.DmnModelInstance
 import org.camunda.bpm.model.dmn.HitPolicy
+import org.camunda.bpm.model.dmn.instance.Rule
 
 class DmnModelBuilder(private val name: String) : Builder<DmnModelInstance> {
 
@@ -49,8 +53,6 @@ class DmnModelBuilder(private val name: String) : Builder<DmnModelInstance> {
     override fun toString(): String {
       return "DecisionTableBuilder(key='$key', name='$name', versionTag=$versionTag, hitPolicy=$hitPolicy, dmnRules=$dmnRules)"
     }
-
-
   }
 
 
@@ -63,10 +65,20 @@ class DmnModelBuilder(private val name: String) : Builder<DmnModelInstance> {
         .decision(builder.key, builder.name, builder.versionTag)
         .decisionTable(builder.hitPolicy)
 
-      builder.dmnRules.distinctInputs().forEach { decisionTable.input(it) }
-      builder.dmnRules.distinctOutputs().forEach { decisionTable.output(it) }
-    }
+      val inputs = builder.dmnRules.distinctInputs()
+      val outputs = builder.dmnRules.distinctOutputs()
 
+      inputs.forEach { decisionTable.input(it) }
+      outputs.forEach { decisionTable.output(it) }
+
+      for (dmnRule in builder.dmnRules) {
+        val rule = decisionTable.addChildElement(Rule::class)
+
+        dmnRule.inputEntries(inputs).forEach { rule.inputEntry(it) }
+        dmnRule.outEntries(outputs).forEach { rule.outputEntry(it) }
+
+      }
+    }
 
     return dmn
   }
