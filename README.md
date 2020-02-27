@@ -16,7 +16,7 @@ Prints ascii table like:
 │                         DMN Example (example) - v666                         │
 ├───────────────────┬───────────────────┬───────────────────┬──────────────────┤
 │     Foo Value     │     Bar Value     │    VIP Status     │                  │
-│   foo (INTEGER)   │   bar (BOOLEAN)   │  status (STRING)  │                  │
+│  'foo' (INTEGER)  │  'bar' (BOOLEAN)  │ 'status' (STRING) │                  │
 ├───────────────────┴───────────────────┼───────────────────┼──────────────────┤
 │                 INPUT                 │      OUTPUT       │   DESCRIPTION    │
 ├┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┤

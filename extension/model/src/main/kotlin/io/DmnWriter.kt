@@ -58,8 +58,8 @@ object DmnWriter {
   private fun rowHeader(header: DmnDecisionTable.Header) : List<String> {
     val row = mutableListOf<String>()
 
-    header.inputs.map { "${it.label}<br/>${it.key} (${it.type})" }.forEach { row.add(it) }
-    header.outputs.map { "${it.label}<br/>${it.key} (${it.type})" }.forEach { row.add(it) }
+    header.inputs.map { "${it.label}<br/>'${it.key}' (${it.type})" }.forEach { row.add(it) }
+    header.outputs.map { "${it.label}<br/>'${it.key}' (${it.type})" }.forEach { row.add(it) }
 
     row.add(" ")
 
