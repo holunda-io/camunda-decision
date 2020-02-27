@@ -13,8 +13,6 @@ object DmnWriter {
     val inputs = table.header.inputs.size
     val outputs = table.header.outputs.size
 
-    val header = rowSpan("spanning wheel", 4)
-
     addRule()
     addRow(rowTitle(table))
     addRule()
@@ -22,7 +20,7 @@ object DmnWriter {
     addRow(rowHeader(table.header))
     addRule()
 
-    addRow(rowSpan("INPUT", inputs) + rowSpan("OUTPUT", outputs))
+    addRow(rowSpan("INPUT", inputs) + rowSpan("OUTPUT", outputs ) + "DESCRIPTION")
 
     addRule()
     addRule()
@@ -39,16 +37,22 @@ object DmnWriter {
 
     val title = "${table.name} (${table.key}) ${Optional.ofNullable(table.versionTag ).map { "- v$it" }.orElse("") }"
 
-    return rowSpan(title, table.header.inputs.size + table.header.outputs.size)
+    return rowSpan(title, table.header.inputs.size + table.header.outputs.size + 1)
   }
 
   private fun rowRule(rule: DmnRule) : List<String> {
     val row = mutableListOf<String>()
 
-    rule.inputs.map { it.expression.getExpression() }.forEach{row.add(it)}
+    rule.inputs.map { blank(it.expression.getExpression()) }.forEach{row.add(it)}
     rule.outputs.map { it.result.getResult() }.forEach{row.add(it)}
 
+    row.add(rule.description?:"-")
+
     return  row
+  }
+
+  private fun blank(value:String?): String {
+    return if (value == null || value.trim() == "") "-" else value
   }
 
   private fun rowHeader(header: DmnDecisionTable.Header) : List<String> {
@@ -56,6 +60,8 @@ object DmnWriter {
 
     header.inputs.map { "${it.label}<br/>${it.key} (${it.type})" }.forEach { row.add(it) }
     header.outputs.map { "${it.label}<br/>${it.key} (${it.type})" }.forEach { row.add(it) }
+
+    row.add(" ")
 
     return row
   }

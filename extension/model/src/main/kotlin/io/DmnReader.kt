@@ -16,9 +16,22 @@ object DmnReader {
 
     val header = decisionTable.toHeader()
 
+    val dmnRules = DmnRules(decisionTable.rules.map { rule ->
+      var dmnRule = DmnRule(description = rule.description?.textContent?:"-")
+      rule.inputEntries.forEachIndexed { i, e ->
+        dmnRule = dmnRule.addInput(header.inputs.get(i), e.textContent)
+      }
+      rule.outputEntries.forEachIndexed { i, e ->
+        dmnRule = dmnRule.addOutput(header.outputs.get(i), e.textContent)
+      }
+      dmnRule
+    })
+
     val foo = InputDefinition.stringInput("foo")
     val bar = InputDefinition.booleanInput("bar")
     val res = OutputDefinition.stringOutput("result")
+
+
 
     return DmnDecisionTable(
       key = decision.id,
@@ -26,12 +39,7 @@ object DmnReader {
       versionTag = decision.versionTag,
       hitPolicy = decisionTable.hitPolicy,
       header = header,
-      rules = DmnRules(
-        DmnRule()
-          .addInput(foo, "TEST")
-          .addInput(foo, "false")
-          .addOutput(res, "bronce")
-      )
+      rules = dmnRules
     )
 
   }

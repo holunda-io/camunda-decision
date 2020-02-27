@@ -28,6 +28,41 @@
           <text>"SILVER"</text>
         </outputEntry>
       </rule>
+      <rule id="DecisionRule_0zxpnut">
+        <description>not so good</description>
+        <inputEntry id="UnaryTests_16gy5fb">
+          <text>&lt; 10</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07znf6l">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_19lieoq">
+          <text>"BRONZE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1z0yr8c">
+        <description>amazing!</description>
+        <inputEntry id="UnaryTests_1q2vi3m">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kt57yh">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0p6xbjh">
+          <text>"GOLD"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1kkqbd3">
+        <inputEntry id="UnaryTests_06yr5gg">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dav7u6">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1v1q9y9">
+          <text>"DEFAULT"</text>
+        </outputEntry>
+      </rule>
     </decisionTable>
   </decision>
 </definitions>
