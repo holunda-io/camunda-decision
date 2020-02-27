@@ -1,5 +1,7 @@
 package io.holunda.decision.model
 
+import org.camunda.bpm.model.dmn.DmnModelInstance
+
 object CamundaDecisionModel {
 
   interface ColumnDefinition {
@@ -8,4 +10,7 @@ object CamundaDecisionModel {
     val type:DataType
   }
 
+  fun readDecisionTable(dmnModelInstance: DmnModelInstance) : DmnDecisionTable {
+    TODO("no implemented")
+  }
 }

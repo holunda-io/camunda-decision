@@ -9,8 +9,8 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <groupId>io.holunda.decision</groupId>
-  <artifactId>camunda-decision-printer</artifactId>
+  <groupId>${extension.groupId}</groupId>
+  <artifactId>camunda-decision-reader</artifactId>
 
   <properties>
     <jacoco.skip>false</jacoco.skip>
@@ -21,11 +21,6 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>camunda-decision-model</artifactId>
     </dependency>
-    
-    <dependency>
-      <groupId>de.vandermeer</groupId>
-      <artifactId>asciitable</artifactId>
-      <version>0.3.2</version>
-    </dependency>
   </dependencies>
+
 </project>

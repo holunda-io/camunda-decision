@@ -2,7 +2,8 @@ package io.holunda.decision.model
 
 data class DmnRule(
   val inputs: List<InputEntry>,
-  val outputs: List<OutputEntry>
+  val outputs: List<OutputEntry>,
+  val annotation: String? = null
 ) {
   companion object {
     operator fun invoke() = DmnRule(listOf(), listOf())
