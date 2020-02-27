@@ -1,5 +1,7 @@
 package io.holunda.decision.model
 
+import io.holunda.decision.model.data.DataType
+
 data class OutputDefinition(
   override val key: String,
   override val label: String,

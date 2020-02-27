@@ -15,8 +15,6 @@
   <modules>
     <module>generator</module>
     <module>model</module>
-    <module>printer</module>
-    <module>reader</module>
   </modules>
 
   <dependencyManagement>
@@ -29,16 +27,6 @@
       <dependency>
         <groupId>io.holunda.decision</groupId>
         <artifactId>camunda-decision-model</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>io.holunda.decision</groupId>
-        <artifactId>camunda-decision-printer</artifactId>
-        <version>${project.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>io.holunda.decision</groupId>
-        <artifactId>camunda-decision-reader</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

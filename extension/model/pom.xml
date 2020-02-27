@@ -16,4 +16,12 @@
     <jacoco.skip>false</jacoco.skip>
   </properties>
 
+  <dependencies>
+    <dependency>
+      <groupId>de.vandermeer</groupId>
+      <artifactId>asciitable</artifactId>
+      <version>0.3.2</version>
+    </dependency>
+  </dependencies>
+
 </project>

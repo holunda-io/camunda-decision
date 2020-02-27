@@ -1,12 +1,13 @@
 package io.holunda.decision.model
 
 data class DmnRule(
-  val inputs: List<InputEntry>,
-  val outputs: List<OutputEntry>,
-  val annotation: String? = null
+  val id : String? = null,
+  val description: String? = null,
+  val inputs: List<InputEntry> = listOf(),
+  val outputs: List<OutputEntry> = listOf()
 ) {
+
   companion object {
-    operator fun invoke() = DmnRule(listOf(), listOf())
 
     private fun <T : Any> add(list: List<T>, entry: T) = list.toMutableList()
       .apply { this.add(entry) }
@@ -44,5 +45,11 @@ data class DmnRule(
   fun outEntries(definitions: List<OutputDefinition>) = definitions.map { header ->
     outputs.find { it.definition == header }?.result?.getResult()
   }
+
+}
+
+data class DmnRules(val rules: List<DmnRule> = listOf()) : List<DmnRule> by rules {
+
+  constructor(vararg rules: DmnRule) : this(rules.asList())
 
 }

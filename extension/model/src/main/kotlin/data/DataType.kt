@@ -1,4 +1,4 @@
-package io.holunda.decision.model
+package io.holunda.decision.model.data
 
 import java.util.*
 
@@ -15,4 +15,5 @@ enum class DataType(val type: Class<*>) {
   ;
 
   val typeRef = name.toLowerCase()
+
 }
