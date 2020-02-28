@@ -2,42 +2,31 @@ package io.holunda.decision.model.io
 
 import de.vandermeer.asciitable.AsciiTable
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment
+import io.holunda.decision.model.CamundaDecisionModel
 import io.holunda.decision.model.DmnDecisionTable
 import io.holunda.decision.model.DmnRule
-import io.holunda.decision.model.DmnRules
 import java.util.*
 
 object DmnWriter {
 
-  fun render(table: DmnDecisionTable) : String = AsciiTable().apply {
-    val inputs = table.header.inputs.size
-    val outputs = table.header.outputs.size
+  fun render(table: DmnDecisionTable): String {
+    var ascii = AsciiDmnTable(table.header.inputs.size, table.header.outputs.size)
 
-    addRule()
-    addRow(rowTitle(table))
-    addRule()
+    ascii.addRow("${table.name} ('${table.key}') ${Optional.ofNullable(table.versionTag ).map { "- v$it" }.orElse("") }" to  ascii.columns)
 
-    addRow(rowHeader(table.header))
-    addRule()
+    ascii.addRow(table.header.allDefinitions().map { "${it.label}<br/>'${it.key}' (${it.type})"  }.toMutableList().apply { add(" ") })
 
-    addRow(rowSpan("INPUT", inputs) + rowSpan("OUTPUT", outputs ) + "DESCRIPTION")
-
-    addRule()
-    addRule()
+    ascii.addRow(
+      "- INPUT -" to ascii.inputs,
+      "- OUTPUT - " to ascii.outputs,
+      "- DESCRIPTION -" to 1
+    )
 
     table.rules.forEach {
-      addRow(rowRule(it))
-      addRule()
+      ascii.addRow(rowRule(it))
     }
 
-    setTextAlignment(TextAlignment.CENTER)
-  }.render()
-
-  private fun rowTitle(table: DmnDecisionTable) : List<String?> {
-
-    val title = "${table.name} (${table.key}) ${Optional.ofNullable(table.versionTag ).map { "- v$it" }.orElse("") }"
-
-    return rowSpan(title, table.header.inputs.size + table.header.outputs.size + 1)
+    return ascii.render()
   }
 
   private fun rowRule(rule: DmnRule) : List<String> {
@@ -51,23 +40,54 @@ object DmnWriter {
     return  row
   }
 
+  private fun DmnDecisionTable.Header.allDefinitions(): MutableList<CamundaDecisionModel.ColumnDefinition> {
+    var definitions = mutableListOf<CamundaDecisionModel.ColumnDefinition>()
+    this.inputs.forEach { definitions.add(it) }
+    this.outputs.forEach { definitions.add(it) }
+
+    return definitions
+  }
+
+
   private fun blank(value:String?): String {
     return if (value == null || value.trim() == "") "-" else value
   }
 
-  private fun rowHeader(header: DmnDecisionTable.Header) : List<String> {
-    val row = mutableListOf<String>()
+  private class AsciiDmnTable( val inputs: Int, val outputs: Int) {
 
-    header.inputs.map { "${it.label}<br/>'${it.key}' (${it.type})" }.forEach { row.add(it) }
-    header.outputs.map { "${it.label}<br/>'${it.key}' (${it.type})" }.forEach { row.add(it) }
+    companion object {
+      fun rowSpan(text:String,  cols: Int) = text to cols
+    }
+    val columns = inputs + outputs + 1
+    val asciiTable = AsciiTable().apply {
+      addRule()
+    }
 
-    row.add(" ")
 
-    return row
-  }
+    fun addRow(vararg rowSpans: Pair<String,Int>, doubleLine: Boolean = false): AsciiDmnTable {
+      require(rowSpans.map { it.second }.sum() == columns) { "columns must have size=$columns, was $rowSpans" }
 
-  private fun rowSpan(text:String, span:Int): MutableList<String?> {
-    val nulls =  arrayOfNulls<String?>(span-1).toMutableList()
-    return (nulls + text).toMutableList()
+      val cols = mutableListOf<String?>()
+
+      rowSpans.forEach { (text, span) ->
+        val nulls =  arrayOfNulls<String?>(span-1).toMutableList()
+        cols.addAll(nulls + text)
+      }
+
+      return addRow(cols, doubleLine)
+    }
+
+    fun addRow(cols: List<String?>, doubleLine: Boolean = false) = apply {
+      require(cols.size == columns) { "columns must have size=$columns, was $cols" }
+      asciiTable.addRow(cols)
+      asciiTable.addRule()
+      if (doubleLine) {
+        asciiTable.addRule()
+      }
+    }
+
+    fun render() = asciiTable.apply {
+      setTextAlignment(TextAlignment.CENTER)
+    }.render()!!
   }
 }
