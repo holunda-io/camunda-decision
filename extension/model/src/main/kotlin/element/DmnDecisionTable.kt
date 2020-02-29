@@ -1,4 +1,4 @@
-package io.holunda.decision.model
+package io.holunda.decision.model.element
 
 import org.camunda.bpm.model.dmn.HitPolicy
 

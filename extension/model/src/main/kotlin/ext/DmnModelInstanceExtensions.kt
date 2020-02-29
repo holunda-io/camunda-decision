@@ -1,7 +1,7 @@
 package io.holunda.decision.model.ext
 
-import io.holunda.decision.model.InputDefinition
-import io.holunda.decision.model.OutputDefinition
+import io.holunda.decision.model.element.InputDefinition
+import io.holunda.decision.model.element.OutputDefinition
 import org.camunda.bpm.model.dmn.Dmn
 import org.camunda.bpm.model.dmn.DmnModelInstance
 import org.camunda.bpm.model.dmn.HitPolicy
@@ -21,38 +21,13 @@ import kotlin.reflect.KClass
 fun <T : DmnModelElementInstance> generateId(elementClass: KClass<T>) = "${elementClass.simpleName}_${(2.147483647E9 * Math.random()).toInt()}"
 
 
-/**
- * Create a new instance of type elementClass on root modelInstance.
- */
-fun <T : DmnModelElementInstance> ModelInstance.newInstance(elementClass: KClass<T>, id: String = generateId(elementClass)): T = this.newInstance(elementClass.java, id)
 
-/**
- * Create a new instance of type elementClass.
- */
-fun <T : DmnModelElementInstance> DmnModelElementInstance.newInstance(elementClass: KClass<T>, id: String = generateId(elementClass)): T = this.modelInstance.newInstance(elementClass.java, id)
-
-/**
- * Creates a new instance of type elementClass and adds it as child element.
- */
-fun <T : DmnModelElementInstance> DmnModelElementInstance.addChildElement(elementClass: KClass<T>, id: String = generateId(elementClass)): T {
-  val element = newInstance(elementClass, id)
-  addChildElement(element)
-  return element
-}
 
 fun DmnModelElementInstance.textContent(value: String?) = newInstance(Text::class).apply {
   textContent = value
 }
 
-fun DmnModelInstance.definitions(name: String): Definitions {
-  val definitions = newInstance(Definitions::class).apply {
-    this.namespace = DmnModelConstants.CAMUNDA_NS
-    this.name = name
-  }
 
-  this.definitions = definitions
-  return definitions
-}
 
 fun Definitions.decision(key: String, name: String, versionTag: String?): Decision {
   val decision = this.modelInstance.newInstance(Decision::class, key).apply {
@@ -81,12 +56,5 @@ fun DecisionTable.input(column: InputDefinition) = addChildElement(Input::class)
   }
 }
 
-fun Rule.inputEntry(value: String?) = this.addChildElement(InputEntry::class).apply {
-  text = textContent(value)
-}
-
-fun Rule.outputEntry(value: String?) = this.addChildElement(OutputEntry::class).apply {
-  text = textContent(value)
-}
 
 fun DmnModelInstance.convertToString() = Dmn.convertToString(this)!!

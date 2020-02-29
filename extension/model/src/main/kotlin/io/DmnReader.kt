@@ -1,10 +1,11 @@
 package io.holunda.decision.model.io
 
-import io.holunda.decision.model.*
+import io.holunda.decision.model.element.DmnDecisionTable
+import io.holunda.decision.model.element.DmnRule
+import io.holunda.decision.model.element.DmnRules
 import io.holunda.decision.model.ext.*
 import org.camunda.bpm.model.dmn.DmnModelInstance
 import org.camunda.bpm.model.dmn.instance.Decision
-import org.camunda.bpm.model.dmn.instance.Rule
 
 object DmnReader {
 
@@ -17,7 +18,7 @@ object DmnReader {
     val header = decisionTable.toHeader()
 
     val dmnRules = DmnRules(decisionTable.rules.map { rule ->
-      var dmnRule = DmnRule(description = rule.description?.textContent?:"-")
+      var dmnRule = DmnRule(description = rule.description?.textContent ?: "-")
       rule.inputEntries.forEachIndexed { i, e ->
         dmnRule = dmnRule.addInput(header.inputs.get(i), e.textContent)
       }
@@ -26,11 +27,6 @@ object DmnReader {
       }
       dmnRule
     })
-
-    val foo = InputDefinition.stringInput("foo")
-    val bar = InputDefinition.booleanInput("bar")
-    val res = OutputDefinition.stringOutput("result")
-
 
 
     return DmnDecisionTable(

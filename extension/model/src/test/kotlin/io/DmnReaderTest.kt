@@ -1,9 +1,9 @@
 package io.holunda.decision.model.io
 
 import io.holunda.decision.lib.test.CamundaDecisionTestLib
-import io.holunda.decision.model.InputDefinition.Companion.booleanInput
-import io.holunda.decision.model.InputDefinition.Companion.integerInput
-import io.holunda.decision.model.OutputDefinition.Companion.stringOutput
+import io.holunda.decision.model.element.InputDefinitionFactory.booleanInput
+import io.holunda.decision.model.element.InputDefinitionFactory.integerInput
+import io.holunda.decision.model.element.OutputDefinitionFactory.stringOutput
 import org.assertj.core.api.Assertions.assertThat
 import org.camunda.bpm.model.dmn.HitPolicy
 import org.junit.Test

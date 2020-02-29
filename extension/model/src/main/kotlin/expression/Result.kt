@@ -1,4 +1,4 @@
-package io.holunda.decision.model
+package io.holunda.decision.model.expression
 
 sealed class Result {
   abstract fun getResult() : String

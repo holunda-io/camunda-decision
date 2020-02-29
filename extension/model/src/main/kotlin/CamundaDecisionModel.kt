@@ -1,17 +1,12 @@
 package io.holunda.decision.model
 
-import io.holunda.decision.model.data.DataType
+import io.holunda.decision.model.element.DmnDecisionTable
+import io.holunda.decision.model.io.DmnReader
 import org.camunda.bpm.model.dmn.DmnModelInstance
 
 object CamundaDecisionModel {
 
-  interface ColumnDefinition {
-    val key:String
-    val label:String
-    val type: DataType
-  }
+  fun readDecisionTable(dmnModelInstance: DmnModelInstance, key:String? = null) : DmnDecisionTable = DmnReader.readDecisionTable(dmnModelInstance, key)
 
-  fun readDecisionTable(dmnModelInstance: DmnModelInstance) : DmnDecisionTable {
-    TODO("no implemented")
-  }
+
 }

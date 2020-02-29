@@ -2,19 +2,46 @@ package io.holunda.decision.model.io
 
 import de.vandermeer.asciitable.AsciiTable
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment
-import io.holunda.decision.model.CamundaDecisionModel
-import io.holunda.decision.model.DmnDecisionTable
-import io.holunda.decision.model.DmnRule
+import io.holunda.decision.model.element.ColumnDefinition
+import io.holunda.decision.model.element.DmnDecisionTable
+import io.holunda.decision.model.element.DmnRule
+import io.holunda.decision.model.element.RuleEntry
+import io.holunda.decision.model.ext.*
+import org.camunda.bpm.model.dmn.Dmn
+import org.camunda.bpm.model.dmn.DmnModelInstance
+import org.camunda.bpm.model.dmn.instance.Rule
 import java.util.*
 
 object DmnWriter {
 
+  fun createDmnModelInstance(table: DmnDecisionTable): DmnModelInstance {
+    val dmn = Dmn.createEmptyModel()
+    val definitions = dmn.definitions("DRD ${table.name}")
+
+    val decisionTable = definitions.decision(key = table.key, name = table.name, versionTag = table.versionTag)
+      .decisionTable(table.hitPolicy)
+
+    table.header.inputs.forEach { decisionTable.input(it) }
+    table.header.outputs.forEach { decisionTable.output(it) }
+
+    for (dmnRule in table.rules) {
+      val rule = decisionTable.addChildElement(Rule::class)
+
+      dmnRule.inputs.map { it.expression }.forEach { rule.inputEntry(it) }
+      dmnRule.outputs.map { it.expression }.forEach { rule.outputEntry(it) }
+
+      rule.description(dmnRule.description)
+    }
+
+    return dmn
+  }
+
   fun render(table: DmnDecisionTable): String {
     var ascii = AsciiDmnTable(table.header.inputs.size, table.header.outputs.size)
 
-    ascii.addRow("${table.name} ('${table.key}') ${Optional.ofNullable(table.versionTag ).map { "- v$it" }.orElse("") }" to  ascii.columns)
+    ascii.addRow("${table.name} ('${table.key}') ${Optional.ofNullable(table.versionTag).map { "- v$it" }.orElse("")}" to ascii.columns)
 
-    ascii.addRow(table.header.allDefinitions().map { "${it.label}<br/>'${it.key}' (${it.type})"  }.toMutableList().apply { add(" ") })
+    ascii.addRow(table.header.allDefinitions().map { "${it.label}<br/>'${it.key}' (${it.type})" }.toMutableList().apply { add(table.hitPolicy.name) })
 
     ascii.addRow(
       "- INPUT -" to ascii.inputs,
@@ -29,19 +56,25 @@ object DmnWriter {
     return ascii.render()
   }
 
-  private fun rowRule(rule: DmnRule) : List<String> {
+  private fun rowRule(rule: DmnRule): List<String> {
     val row = mutableListOf<String>()
+    rule.allEntries().map { it.expression ?: "-" }.map { if (it == "") "-" else it  }.forEach { row.add(it) }
 
-    rule.inputs.map { blank(it.expression.getExpression()) }.forEach{row.add(it)}
-    rule.outputs.map { it.result.getResult() }.forEach{row.add(it)}
+    row.add(rule.description ?: "-")
 
-    row.add(rule.description?:"-")
-
-    return  row
+    return row
   }
 
-  private fun DmnDecisionTable.Header.allDefinitions(): MutableList<CamundaDecisionModel.ColumnDefinition> {
-    var definitions = mutableListOf<CamundaDecisionModel.ColumnDefinition>()
+  private fun DmnRule.allEntries(): List<RuleEntry<*>> {
+    val list = mutableListOf<RuleEntry<*>>()
+    this.inputs.forEach { list.add(it) }
+    this.outputs.forEach { list.add(it) }
+
+    return list
+  }
+
+  private fun DmnDecisionTable.Header.allDefinitions(): MutableList<ColumnDefinition> {
+    val definitions = mutableListOf<ColumnDefinition>()
     this.inputs.forEach { definitions.add(it) }
     this.outputs.forEach { definitions.add(it) }
 
@@ -49,28 +82,29 @@ object DmnWriter {
   }
 
 
-  private fun blank(value:String?): String {
+  private fun blank(value: String?): String {
     return if (value == null || value.trim() == "") "-" else value
   }
 
-  private class AsciiDmnTable( val inputs: Int, val outputs: Int) {
+  private class AsciiDmnTable(val inputs: Int, val outputs: Int) {
 
     companion object {
-      fun rowSpan(text:String,  cols: Int) = text to cols
+      fun rowSpan(text: String, cols: Int) = text to cols
     }
+
     val columns = inputs + outputs + 1
     val asciiTable = AsciiTable().apply {
       addRule()
     }
 
 
-    fun addRow(vararg rowSpans: Pair<String,Int>, doubleLine: Boolean = false): AsciiDmnTable {
+    fun addRow(vararg rowSpans: Pair<String, Int>, doubleLine: Boolean = false): AsciiDmnTable {
       require(rowSpans.map { it.second }.sum() == columns) { "columns must have size=$columns, was $rowSpans" }
 
       val cols = mutableListOf<String?>()
 
       rowSpans.forEach { (text, span) ->
-        val nulls =  arrayOfNulls<String?>(span-1).toMutableList()
+        val nulls = arrayOfNulls<String?>(span - 1).toMutableList()
         cols.addAll(nulls + text)
       }
 
