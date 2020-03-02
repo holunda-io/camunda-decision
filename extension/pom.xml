@@ -14,6 +14,7 @@
 
   <modules>
     <module>model</module>
+    <module>generator</module>
   </modules>
 
   <dependencyManagement>

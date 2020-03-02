@@ -29,10 +29,16 @@ fun DmnModelElementInstance.textContent(value: String?) = newInstance(Text::clas
 
 
 
-fun Definitions.decision(key: String, name: String, versionTag: String?): Decision {
+fun Definitions.decision(key: String, name: String, versionTag: String?, requiredDecision:String?=null): Decision {
   val decision = this.modelInstance.newInstance(Decision::class, key).apply {
     this.name = name
     this.versionTag = versionTag
+    if (requiredDecision != null) {
+      val decision  = this.modelInstance.getModelElementById<Decision>(requiredDecision)
+      this.addChildElement(InformationRequirement::class).apply {
+        this.requiredDecision = decision
+      }
+    }
   }
   addChildElement(decision)
   return decision

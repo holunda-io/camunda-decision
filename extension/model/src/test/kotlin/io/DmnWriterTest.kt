@@ -2,6 +2,7 @@ package io.holunda.decision.model.io
 
 import io.holunda.decision.lib.test.CamundaDecisionTestLib
 import org.assertj.core.api.Assertions.assertThat
+import org.camunda.bpm.model.dmn.Dmn
 import org.junit.Test
 
 
@@ -26,6 +27,8 @@ class DmnWriterTest {
     val orig = DmnWriter.render(decisionTable)
 
     val dmn = DmnWriter.createDmnModelInstance(decisionTable)
+
+    println(Dmn.convertToString(dmn))
 
     assertThat(DmnWriter.render(DmnReader.readDecisionTable(dmn))).isEqualTo(orig)
   }
