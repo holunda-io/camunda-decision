@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="multiple_decisions" name="Multiple Decisions" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
+  <decision id="decision1" name="Decision 1">
+    <extensionElements>
+      <biodi:bounds x="157" y="81" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1" hitPolicy="COLLECT" aggregation="COUNT">
+      <input id="input_1" label="Foo">
+        <inputExpression id="inputExpression_1" typeRef="boolean">
+          <text>foo</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Dec1" name="decision1" typeRef="boolean" />
+      <rule id="DecisionRule_0mgby4j">
+        <inputEntry id="UnaryTests_1rpv4iv">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0buhxp4">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0zly77h">
+        <inputEntry id="UnaryTests_1u26mka">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1o26uoc">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="decision2" name="Decision 2">
+    <extensionElements>
+      <biodi:bounds x="470" y="140" width="180" height="80" />
+      <biodi:edge source="decision1">
+        <biodi:waypoints x="337" y="142" />
+        <biodi:waypoints x="470" y="173" />
+      </biodi:edge>
+    </extensionElements>
+    <informationRequirement>
+      <requiredDecision href="#decision1" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1ahtwm8">
+      <input id="InputClause_0xbuzhi" label="Dec1">
+        <inputExpression id="LiteralExpression_03rzw66" typeRef="integer">
+          <text>decision1</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0jo22r0" label="Bar">
+        <inputExpression id="LiteralExpression_1elhhfb" typeRef="boolean">
+          <text>bar</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0yfq378" label="Dec2" name="decision2" typeRef="string" />
+      <rule id="DecisionRule_02u83tj">
+        <inputEntry id="UnaryTests_1fiyj9m">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jte9lx">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ie4vwn">
+          <text>"hurray"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
