@@ -15,5 +15,4 @@ enum class DataType(val type: Class<*>) {
   ;
 
   val typeRef = name.toLowerCase()
-
 }

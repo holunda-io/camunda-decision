@@ -25,6 +25,7 @@
 
 
   <dependencies>
+    <!--
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
@@ -55,7 +56,7 @@
       <artifactId>camunda-spin-dataformat-json-jackson</artifactId>
     </dependency>
 
-    <!-- Jackson -->
+
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jdk8</artifactId>
@@ -80,7 +81,7 @@
       <artifactId>h2</artifactId>
     </dependency>
 
-    <!-- Testing -->
+
     <dependency>
       <groupId>com.tngtech.jgiven</groupId>
       <artifactId>jgiven-junit</artifactId>
@@ -110,7 +111,7 @@
       <version>0.0.5</version>
       <scope>test</scope>
     </dependency>
-
+-->
   </dependencies>
 
   <build>

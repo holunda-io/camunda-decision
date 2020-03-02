@@ -13,14 +13,6 @@ data class DmnRule(
       .apply { this.add(entry) }
       .toList()
 
-    @Deprecated("see DmnRules#distinctInputs")
-    fun List<DmnRule>.distinctInputs() = this.flatMap { it.inputs }
-      .map { it.definition }.distinct().sortedBy { it.key }
-
-    @Deprecated("see DmnRules#distinctOutputs")
-    fun List<DmnRule>.distinctOutputs() = this.flatMap { it.outputs }
-      .map { it.definition }.distinct().sortedBy { it.key }
-
   }
 
   val inputDefinitions by lazy {

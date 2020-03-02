@@ -17,11 +17,24 @@
   </properties>
 
   <dependencies>
+
+    <dependency>
+      <groupId>org.camunda.bpm.model</groupId>
+      <artifactId>camunda-dmn-model</artifactId>
+    </dependency>
+
+    <!--dependency>
+      <groupId>io.holunda.data</groupId>
+      <artifactId>camunda-bpm-data-kotlin</artifactId>
+      <version>${camunda-bpm-data.version}</version>
+    </dependency-->
+
     <dependency>
       <groupId>de.vandermeer</groupId>
       <artifactId>asciitable</artifactId>
       <version>0.3.2</version>
     </dependency>
+
   </dependencies>
 
 </project>
