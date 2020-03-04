@@ -13,7 +13,7 @@ object DmnReader {
 
   fun readDecisionTable(decision: Decision): DmnDecisionTable {
 
-    val decisionTable = decision.getDecision()
+    val decisionTable = decision.getDecisionTable()
 
     val header = decisionTable.toHeader()
 

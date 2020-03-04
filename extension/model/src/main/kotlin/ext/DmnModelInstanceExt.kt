@@ -1,5 +1,6 @@
 package io.holunda.decision.model.ext
 
+import io.holunda.decision.model.CamundaDecisionModel.CAMUNDA_NS
 import org.camunda.bpm.model.dmn.Dmn
 import org.camunda.bpm.model.dmn.DmnModelInstance
 import org.camunda.bpm.model.dmn.impl.DmnModelConstants
@@ -23,25 +24,27 @@ inline fun <reified T : DmnElement> DmnModelInstance.getModelElementByType(refer
 
 inline fun <reified T : DmnElement> DmnModelInstance.getModelElementsByType(referencingClass: KClass<T>): Collection<T> = this.getModelElementsByType(referencingClass.java)
 
-fun createModel(name:String = "DRD") {
-  val dmn = Dmn.createEmptyModel()
-
-}
-
 /**
  * Create a new instance of type elementClass on root modelInstance.
  */
-fun <T : DmnModelElementInstance> ModelInstance.newInstance(elementClass: KClass<T>, id: String = generateId(elementClass)): T = this.newInstance(elementClass.java, id)
+fun <T : DmnModelElementInstance> ModelInstance.newInstance(elementClass: KClass<T>, id: String? = null): T = this.newInstance(
+  elementClass.java,
+  id ?: generateId(elementClass)
+)
+
 
 /**
  * Create a new instance of type elementClass.
  */
-fun <T : DmnModelElementInstance> DmnModelElementInstance.newInstance(elementClass: KClass<T>, id: String = generateId(elementClass)): T = this.modelInstance.newInstance(elementClass.java, id)
+fun <T : DmnModelElementInstance> DmnModelElementInstance.newInstance(elementClass: KClass<T>, id: String? = null): T = this.modelInstance.newInstance(
+  elementClass.java,
+  id ?: generateId(elementClass)
+)
 
 
-fun DmnModelInstance.definitions(name: String): Definitions {
-  val definitions = newInstance(Definitions::class).apply {
-    this.namespace = DmnModelConstants.CAMUNDA_NS
+fun DmnModelInstance.definitions(name: String = "DRD", id: String? = null): Definitions {
+  val definitions = newInstance(Definitions::class, id).apply {
+    this.namespace = CAMUNDA_NS
     this.name = name
   }
 
@@ -57,3 +60,5 @@ fun <T : DmnModelElementInstance> DmnModelElementInstance.addChildElement(elemen
   addChildElement(element)
   return element
 }
+
+fun DmnModelInstance.toBpmn() = Dmn.convertToString(this)

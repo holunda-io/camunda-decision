@@ -1,5 +1,6 @@
 package io.holunda.decision.model.ext
 
+import io.holunda.decision.model.DecisionDefinitionKey
 import org.camunda.bpm.model.dmn.instance.Decision
 import org.camunda.bpm.model.dmn.instance.Definitions
 
@@ -12,3 +13,8 @@ fun Definitions.decision(key: String, name: String, versionTag: String?): Decisi
   addChildElement(decision)
   return decision
 }
+
+fun Definitions.findDecisionByKey(key: DecisionDefinitionKey): Decision? = this.getChildElementsByType(Decision::class.java)
+  .find { it.id == key }
+
+
