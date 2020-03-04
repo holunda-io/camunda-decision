@@ -9,6 +9,12 @@ data class DmnDiagram(
   val decisionTables: List<DmnDecisionTable>
 ) {
 
+  constructor(decisionTable: DmnDecisionTable) : this(
+    id = "${decisionTable.key}_diagram",
+    name = "${decisionTable.name} (Diagram)",
+    decisionTables = listOf(decisionTable)
+  )
+
   constructor(id: Id, name: Name, vararg decisionTables: DmnDecisionTable) : this(id, name, decisionTables.asList())
 
   val decisionDefinitionKeys = decisionTables.map { it.key }.toSet()
@@ -16,4 +22,6 @@ data class DmnDiagram(
   val requiredDecisions = decisionTables.map { it.key to it.requiredDecisions }
     .filter { it.second.isNotEmpty() }
     .toMap()
+
 }
+

@@ -53,21 +53,17 @@ object CamundaDecisonModelFixtures {
     )
 
     val singleTable = DmnDiagram(
-      id = "single",
-      name = "Single Table",
-      decisionTables = listOf(
-        DmnDecisionTable(
-          key = DECISION_1,
-          name = "Decision ",
-          versionTag = "1",
-          header = DmnDecisionTable.Header(listOf(inputFoo), listOf(outputResult)),
-          hitPolicy = HitPolicy.FIRST,
-          rules = DmnRules(
-            DmnRule(
-              description = "woohoo",
-              inputs = listOf(InputEntry(inputFoo, "< 100")),
-              outputs = listOf(OutputEntry(outputResult, "\"Result\""))
-            )
+      DmnDecisionTable(
+        key = DECISION_1,
+        name = "Decision ",
+        versionTag = "1",
+        header = DmnDecisionTable.Header(listOf(inputFoo), listOf(outputResult)),
+        hitPolicy = HitPolicy.FIRST,
+        rules = DmnRules(
+          DmnRule(
+            description = "woohoo",
+            inputs = listOf(InputEntry(inputFoo, "< 100")),
+            outputs = listOf(OutputEntry(outputResult, "\"Result\""))
           )
         )
       )

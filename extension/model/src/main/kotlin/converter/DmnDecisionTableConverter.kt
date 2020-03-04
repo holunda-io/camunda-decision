@@ -1,6 +1,7 @@
 package io.holunda.decision.model.converter
 
 import io.holunda.decision.model.element.DmnDecisionTable
+import io.holunda.decision.model.element.DmnDiagram
 import io.holunda.decision.model.ext.*
 import org.camunda.bpm.model.dmn.instance.Decision
 import org.camunda.bpm.model.dmn.instance.Definitions
@@ -9,6 +10,7 @@ import org.camunda.bpm.model.dmn.instance.Rule
 
 object DmnDecisionTableConverter {
 
+  fun toModelInstance(table:DmnDecisionTable) = DmnDiagramConverter.toModelInstance(DmnDiagram(table))
 
   fun toModelInstance(definitions: Definitions, table: DmnDecisionTable) : Decision {
     val decision = definitions.decision(key = table.key, name = table.name, versionTag = table.versionTag)

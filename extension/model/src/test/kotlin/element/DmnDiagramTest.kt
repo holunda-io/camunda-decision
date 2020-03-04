@@ -20,4 +20,5 @@ class DmnDiagramTest {
       .hasSize(1)
       .containsEntry(DECISION_2, setOf(DECISION_1))
   }
+
 }
