@@ -1,11 +1,16 @@
 package io.holunda.decision.model.ext
 
 import io.holunda.decision.model.CamundaDecisionModel.BIODI_NS
+import io.holunda.decision.model.converter.DmnDiagramLayout
 import org.camunda.bpm.model.dmn.BuiltinAggregator
 import org.camunda.bpm.model.dmn.HitPolicy
+import org.camunda.bpm.model.dmn.impl.instance.DmnModelElementInstanceImpl
 import org.camunda.bpm.model.dmn.instance.Decision
 import org.camunda.bpm.model.dmn.instance.DecisionTable
+import org.camunda.bpm.model.dmn.instance.DmnModelElementInstance
 import org.camunda.bpm.model.dmn.instance.ExtensionElements
+import org.camunda.bpm.model.xml.impl.instance.DomElementImpl
+import org.camunda.bpm.model.xml.instance.DomElement
 
 fun Decision.getDecisionTable(): DecisionTable = this.expression as DecisionTable
 
@@ -16,13 +21,26 @@ fun Decision.decisionTable(hitPolicy: HitPolicy, aggregation: BuiltinAggregator?
   }
 }
 
-fun Decision.addCoordinates(bounds: Bounds) = this.addChildElement(ExtensionElements::class).apply {
-  addExtensionElement(BIODI_NS, "bounds").apply {
-    setAttributeValue("x", "${bounds.x}")
-    setAttributeValue("y", "${bounds.y}")
-    setAttributeValue("width", "${bounds.width}")
-    setAttributeValue("height", "${bounds.height}")
+fun Decision.extensionElement(box: DmnDiagramLayout.Box) {
+  val extensionElements = this.addChildElement(ExtensionElements::class)
+  extensionElements.addExtensionElement(BIODI_NS, "bounds").apply {
+    setAttributeValue("x", "${box.x}")
+    setAttributeValue("y", "${box.y}")
+    setAttributeValue("width", "${box.width}")
+    setAttributeValue("height", "${box.height}")
+  }
+
+  if (box.edge != null) {
+    val edge = extensionElements.addExtensionElement(BIODI_NS, "edge")
+    edge.setAttributeValue("source", box.edge.source)
+
+    for (waypoint in box.edge.waypoints) {
+
+      val w = edge.domElement.document.createElement(BIODI_NS, "waypoints")
+      w.setAttribute("x", "${waypoint.x}")
+      w.setAttribute("y", "${waypoint.y}")
+      edge.domElement.childElements.add(w)
+    }
   }
 }
 
-data class Bounds(val x: Int, val y: Int, val width: Int = 180, val height: Int = 80)

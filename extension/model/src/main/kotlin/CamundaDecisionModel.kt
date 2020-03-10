@@ -11,7 +11,7 @@ typealias Name = String
 typealias DecisionDefinitionKey = String
 typealias VersionTag = String
 typealias ConstraintMessage = String
-typealias Point = Pair<Int,Int>
+
 
 object CamundaDecisionModel {
 

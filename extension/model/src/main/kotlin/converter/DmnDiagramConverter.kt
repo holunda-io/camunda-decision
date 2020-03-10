@@ -15,10 +15,10 @@ object DmnDiagramConverter  {
       DmnDecisionTableConverter.toModelInstance(definitions, it)
     }
 
-    var bounds = Bounds(100,200)
-    dmnDiagram.decisionDefinitionKeys.forEach {
-      definitions.findDecisionByKey(it)?.addCoordinates(bounds)
-      bounds = bounds.copy(x= bounds.x + 260)
+    val layout = DmnDiagramLayout(dmnDiagram.decisionDefinitionKeys, dmnDiagram.requiredDecisions).layout().values
+
+    for (box in layout) {
+      definitions.findDecisionByKey(box.key)?.extensionElement(box)
     }
 
     dmnDiagram.requiredDecisions.forEach { target ->
