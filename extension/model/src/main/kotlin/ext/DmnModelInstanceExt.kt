@@ -3,7 +3,6 @@ package io.holunda.decision.model.ext
 import io.holunda.decision.model.CamundaDecisionModel.CAMUNDA_NS
 import org.camunda.bpm.model.dmn.Dmn
 import org.camunda.bpm.model.dmn.DmnModelInstance
-import org.camunda.bpm.model.dmn.impl.DmnModelConstants
 import org.camunda.bpm.model.dmn.instance.Definitions
 import org.camunda.bpm.model.dmn.instance.DmnElement
 import org.camunda.bpm.model.dmn.instance.DmnModelElementInstance
@@ -12,7 +11,9 @@ import kotlin.reflect.KClass
 
 
 @JvmOverloads
-inline fun <reified T : DmnElement> DmnModelInstance.getModelElementByType(referencingClass: KClass<T>, id: String? = null): T = with(getModelElementsByType(referencingClass)) {
+inline fun <reified T : DmnElement> DmnModelInstance.getModelElementByType(
+  referencingClass: KClass<T>,
+  id: String? = null): T = with(getModelElementsByType(referencingClass)) {
   require(this.size < 2 || id != null) { "more than one element found, specify 'id'" }
 
   return if (this.size == 1 && id == null) {
@@ -61,4 +62,4 @@ fun <T : DmnModelElementInstance> DmnModelElementInstance.addChildElement(elemen
   return element
 }
 
-fun DmnModelInstance.toBpmn() = Dmn.convertToString(this)
+fun DmnModelInstance.toBpmn(): String = Dmn.convertToString(this)

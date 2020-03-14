@@ -2,6 +2,7 @@ package io.holunda.decision.model.io
 
 import de.vandermeer.asciitable.AsciiTable
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment
+import io.holunda.decision.model.converter.DmnDecisionTableConverter
 import io.holunda.decision.model.element.ColumnDefinition
 import io.holunda.decision.model.element.DmnDecisionTable
 import io.holunda.decision.model.element.DmnRule
@@ -14,27 +15,8 @@ import java.util.*
 
 object DmnWriter {
 
-  fun createDmnModelInstance(table: DmnDecisionTable): DmnModelInstance {
-    val dmn = Dmn.createEmptyModel()
-    val definitions = dmn.definitions("DRD ${table.name}")
-
-    val decisionTable = definitions.decision(key = table.key, name = table.name, versionTag = table.versionTag)
-      .decisionTable(table.hitPolicy)
-
-    table.header.inputs.forEach { decisionTable.input(it) }
-    table.header.outputs.forEach { decisionTable.output(it) }
-
-    for (dmnRule in table.rules) {
-      val rule = decisionTable.addChildElement(Rule::class)
-
-      dmnRule.inputs.map { it.expression }.forEach { rule.inputEntry(it) }
-      dmnRule.outputs.map { it.expression }.forEach { rule.outputEntry(it) }
-
-      rule.description(dmnRule.description)
-    }
-
-    return dmn
-  }
+  @Deprecated(message = "obsolete", replaceWith = ReplaceWith("DmnDecisionTableConverter"))
+  fun createDmnModelInstance(table: DmnDecisionTable): DmnModelInstance = DmnDecisionTableConverter.toModelInstance(table)
 
   fun render(table: DmnDecisionTable): String {
     var ascii = AsciiDmnTable(table.header.inputs.size, table.header.outputs.size)

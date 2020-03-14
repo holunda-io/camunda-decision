@@ -10,10 +10,15 @@ import org.camunda.bpm.model.dmn.instance.Rule
 
 object DmnDecisionTableConverter {
 
-  fun toModelInstance(table:DmnDecisionTable) = DmnDiagramConverter.toModelInstance(DmnDiagram(table))
+  fun toModelInstance(table: DmnDecisionTable) = DmnDiagramConverter.toModelInstance(DmnDiagram(table))
 
-  fun toModelInstance(definitions: Definitions, table: DmnDecisionTable) : Decision {
-    val decision = definitions.decision(key = table.key, name = table.name, versionTag = table.versionTag)
+  fun toModelInstance(definitions: Definitions, table: DmnDecisionTable): Decision {
+    val decision = definitions.decision(
+      key = table.key,
+      name = table.name,
+      versionTag = table.versionTag
+    )
+
     val decisionTable = decision.decisionTable(table.hitPolicy) // TODO: aggregation, maybe Sealed class for DmnHitPolicy?
 
     table.header.inputs.forEach { decisionTable.input(it) }

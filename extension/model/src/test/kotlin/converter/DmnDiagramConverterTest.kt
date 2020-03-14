@@ -1,16 +1,13 @@
 package io.holunda.decision.model.converter
 
 
-import io.holunda.decision.lib.test.CamundaDecisionTestLib
 import io.holunda.decision.model.CamundaDecisonModelFixtures
 import io.holunda.decision.model.element.*
 import io.holunda.decision.model.element.InputDefinitionFactory.integerInput
-import io.holunda.decision.model.ext.findDecisionByKey
 import io.holunda.decision.model.ext.toBpmn
 import io.holunda.decision.model.io.DmnReader
 import io.holunda.decision.model.io.DmnWriter
 import org.camunda.bpm.model.dmn.Dmn
-import org.camunda.bpm.model.dmn.instance.ExtensionElements
 import org.junit.Test
 
 class DmnDiagramConverterTest {
@@ -49,9 +46,8 @@ class DmnDiagramConverterTest {
     val dmnModelInstance = DmnDiagramConverter.toModelInstance(dmnDiagram)
 
     println(Dmn.convertToString(dmnModelInstance))
-
-
     println(DmnWriter.render(DmnReader.readDecisionTable(dmnModelInstance)))
-
   }
+
+
 }
