@@ -7,6 +7,9 @@ import org.camunda.bpm.model.dmn.DmnModelInstance
 import org.camunda.bpm.model.dmn.instance.ExtensionElements
 import org.camunda.bpm.model.dmn.instance.InformationRequirement
 
+/**
+ * The DmnDiagramConverter converts DmnModelInstances to DmnDiagram representations and creates DmnModelInstances from DmnDiagram-
+ */
 object DmnDiagramConverter  {
 
   fun toModelInstance(dmnDiagram: DmnDiagram): DmnModelInstance = Dmn.createEmptyModel().apply {
@@ -25,12 +28,10 @@ object DmnDiagramConverter  {
       val t = requireNotNull(definitions.findDecisionByKey(target.key))
 
       target.value.forEach {sourceKey ->
-        val decision = definitions.findDecisionByKey(sourceKey)
         t.addChildElement(InformationRequirement::class).apply {
           requiredDecision = requireNotNull(definitions.findDecisionByKey(sourceKey))
         }
       }
-
     }
   }
 
