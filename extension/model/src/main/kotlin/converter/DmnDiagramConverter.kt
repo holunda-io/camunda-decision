@@ -1,10 +1,7 @@
 package io.holunda.decision.model.converter
 
 import io.holunda.decision.model.element.DmnDiagram
-import io.holunda.decision.model.ext.addChildElement
-import io.holunda.decision.model.ext.definitions
-import io.holunda.decision.model.ext.extensionElement
-import io.holunda.decision.model.ext.findDecisionByKey
+import io.holunda.decision.model.ext.*
 import org.camunda.bpm.model.dmn.Dmn
 import org.camunda.bpm.model.dmn.DmnModelInstance
 import org.camunda.bpm.model.dmn.instance.InformationRequirement
@@ -12,7 +9,7 @@ import org.camunda.bpm.model.dmn.instance.InformationRequirement
 /**
  * The DmnDiagramConverter converts DmnModelInstances to DmnDiagram representations and creates DmnModelInstances from DmnDiagram-
  */
-object DmnDiagramConverter  {
+object DmnDiagramConverter {
 
   /**
    * Creates a camunda DmnModelInstance from a given DmnDiagram.
@@ -37,7 +34,7 @@ object DmnDiagramConverter  {
     dmnDiagram.requiredDecisions.forEach { target ->
       val decision = requireNotNull(definitions.findDecisionByKey(target.key))
 
-      target.value.forEach {sourceKey ->
+      target.value.forEach { sourceKey ->
         decision.addChildElement(InformationRequirement::class).apply {
           requiredDecision = requireNotNull(definitions.findDecisionByKey(sourceKey))
         }
@@ -45,9 +42,11 @@ object DmnDiagramConverter  {
     }
   }
 
-  fun fromModelInstance(dmnModelInstance: DmnModelInstance) : DmnDiagram {
-    TODO("not implemented")
-  }
-
+  fun fromModelInstance(dmnModelInstance: DmnModelInstance): DmnDiagram = DmnDiagram(
+    id = dmnModelInstance.definitions.id,
+    name = dmnModelInstance.definitions.name,
+    decisionTables = dmnModelInstance.definitions.findDecisions()
+      .map { DmnDecisionTableConverter.fromModelInstance(it) }
+  )
 
 }

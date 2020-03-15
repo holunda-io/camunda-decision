@@ -1,6 +1,6 @@
 package io.holunda.decision.model.ext
 
-import io.holunda.decision.model.CamundaDecisionModel.CAMUNDA_NS
+import io.holunda.decision.model.CAMUNDA_NS
 import org.camunda.bpm.model.dmn.Dmn
 import org.camunda.bpm.model.dmn.DmnModelInstance
 import org.camunda.bpm.model.dmn.instance.Definitions

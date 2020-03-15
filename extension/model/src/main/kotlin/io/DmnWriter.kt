@@ -3,10 +3,7 @@ package io.holunda.decision.model.io
 import de.vandermeer.asciitable.AsciiTable
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment
 import io.holunda.decision.model.converter.DmnDecisionTableConverter
-import io.holunda.decision.model.element.ColumnDefinition
-import io.holunda.decision.model.element.DmnDecisionTable
-import io.holunda.decision.model.element.DmnRule
-import io.holunda.decision.model.element.RuleEntry
+import io.holunda.decision.model.element.*
 import io.holunda.decision.model.ext.*
 import org.camunda.bpm.model.dmn.Dmn
 import org.camunda.bpm.model.dmn.DmnModelInstance
@@ -15,8 +12,7 @@ import java.util.*
 
 object DmnWriter {
 
-  @Deprecated(message = "obsolete", replaceWith = ReplaceWith("DmnDecisionTableConverter"))
-  fun createDmnModelInstance(table: DmnDecisionTable): DmnModelInstance = DmnDecisionTableConverter.toModelInstance(table)
+  fun render(diagram: DmnDiagram) = diagram.decisionTables.map { render(it) }.joinToString("\n\n")
 
   fun render(table: DmnDecisionTable): String {
     var ascii = AsciiDmnTable(table.header.inputs.size, table.header.outputs.size)

@@ -1,6 +1,7 @@
 package io.holunda.decision.model.ext
 
-import io.holunda.decision.model.CamundaDecisionModel.BIODI_NS
+import io.holunda.decision.model.BIODI_NS
+import io.holunda.decision.model.DecisionDefinitionKey
 import io.holunda.decision.model.converter.DmnDiagramLayout
 import org.camunda.bpm.model.dmn.BuiltinAggregator
 import org.camunda.bpm.model.dmn.HitPolicy
@@ -9,6 +10,11 @@ import org.camunda.bpm.model.dmn.instance.DecisionTable
 import org.camunda.bpm.model.dmn.instance.ExtensionElements
 
 fun Decision.getDecisionTable(): DecisionTable = this.expression as DecisionTable
+
+fun Decision.getRequiredDecisions() : Set<DecisionDefinitionKey> = this.informationRequirements
+  .map { it.requiredDecision }
+  .map { it.id }
+  .toSet()
 
 fun Decision.decisionTable(hitPolicy: HitPolicy, aggregation: BuiltinAggregator? = null) = this.addChildElement(DecisionTable::class).apply {
   this.hitPolicy = hitPolicy

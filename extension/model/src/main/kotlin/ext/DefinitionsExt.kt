@@ -17,4 +17,4 @@ fun Definitions.decision(key: String, name: String, versionTag: String?): Decisi
 fun Definitions.findDecisionByKey(key: DecisionDefinitionKey): Decision? = this.getChildElementsByType(Decision::class.java)
   .find { it.id == key }
 
-
+fun Definitions.findDecisions() = this.getChildElementsByType(Decision::class.java).toList()

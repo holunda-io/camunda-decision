@@ -2,6 +2,8 @@ package io.holunda.decision.model.converter
 
 import io.holunda.decision.model.element.DmnDecisionTable
 import io.holunda.decision.model.element.DmnDiagram
+import io.holunda.decision.model.element.DmnRule
+import io.holunda.decision.model.element.DmnRules
 import io.holunda.decision.model.ext.*
 import org.camunda.bpm.model.dmn.instance.Decision
 import org.camunda.bpm.model.dmn.instance.Definitions
@@ -36,4 +38,30 @@ object DmnDecisionTableConverter {
     return decision
   }
 
+  fun fromModelInstance(decision: Decision): DmnDecisionTable {
+    val decisionTable = decision.getDecisionTable()
+
+    val header = decisionTable.toHeader()
+
+    val dmnRules = DmnRules(decisionTable.rules.map { rule ->
+      var dmnRule = DmnRule(description = rule.description?.textContent ?: "-")
+      rule.inputEntries.forEachIndexed { i, e ->
+        dmnRule = dmnRule.addInput(header.inputs.get(i), e.textContent)
+      }
+      rule.outputEntries.forEachIndexed { i, e ->
+        dmnRule = dmnRule.addOutput(header.outputs.get(i), e.textContent)
+      }
+      dmnRule
+    })
+
+    return DmnDecisionTable(
+      key = decision.id,
+      name = decision.name,
+      versionTag = decision.versionTag,
+      hitPolicy = decisionTable.hitPolicy,
+      header = header,
+      rules = dmnRules,
+      requiredDecisions = decision.getRequiredDecisions()
+    )
+  }
 }

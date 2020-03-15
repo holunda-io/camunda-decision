@@ -16,7 +16,7 @@ object CamundaDecisonModelFixtures {
   val inputBar = integerInput("bar", "Bar")
 
   val outputBar = integerOutput("bar", "Bar Result")
-  val outputResult = stringOutput("result", "\"Result\"")
+  val outputResult = stringOutput("result", "Result")
 
   object DmnDiagramFixtures {
 

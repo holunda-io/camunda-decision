@@ -1,13 +1,17 @@
 package io.holunda.decision.model.converter
 
 
+import io.holunda.decision.lib.test.CamundaDecisionTestLib
+import io.holunda.decision.model.CamundaDecisionModel
 import io.holunda.decision.model.CamundaDecisonModelFixtures
 import io.holunda.decision.model.element.*
+import io.holunda.decision.model.element.InputDefinitionFactory.booleanInput
 import io.holunda.decision.model.element.InputDefinitionFactory.integerInput
+import io.holunda.decision.model.element.OutputDefinitionFactory.stringOutput
 import io.holunda.decision.model.ext.toBpmn
-import io.holunda.decision.model.io.DmnReader
 import io.holunda.decision.model.io.DmnWriter
-import org.camunda.bpm.model.dmn.Dmn
+import org.assertj.core.api.Assertions.assertThat
+import org.camunda.bpm.model.dmn.HitPolicy
 import org.junit.Test
 
 class DmnDiagramConverterTest {
@@ -18,7 +22,11 @@ class DmnDiagramConverterTest {
 
     val dmnModelInstance = DmnDiagramConverter.toModelInstance(diagram)
 
-    println(dmnModelInstance.toBpmn())
+    val d2 = DmnDiagramConverter.fromModelInstance(dmnModelInstance)
+
+    println(CamundaDecisionModel.createModelInstance(d2).toBpmn())
+
+    println(DmnWriter.render(d2))
 
   }
 
@@ -45,9 +53,31 @@ class DmnDiagramConverterTest {
 
     val dmnModelInstance = DmnDiagramConverter.toModelInstance(dmnDiagram)
 
-    println(Dmn.convertToString(dmnModelInstance))
-    println(DmnWriter.render(DmnReader.readDecisionTable(dmnModelInstance)))
+    println(dmnModelInstance.toBpmn())
+    println(CamundaDecisionModel.render(CamundaDecisionModel.readDecisionTable(dmnModelInstance)))
   }
 
+
+
+  @Test
+  fun `read dummy_dmn model with single table`() {
+    val dmn = CamundaDecisionTestLib.readModel("example_single_table.dmn")
+
+    val foo = integerInput("foo", "Foo Value")
+    val bar = booleanInput("bar", "Bar Value")
+    val status = stringOutput("status", "VIP Status")
+
+    val diagram = DmnDiagramConverter.fromModelInstance(dmn)
+
+    val decisionTable = diagram.decisionTables.first()
+
+    assertThat(decisionTable.key).isEqualTo("example")
+    assertThat(decisionTable.name).isEqualTo("DMN Example")
+    assertThat(decisionTable.versionTag).isEqualTo("666")
+    assertThat(decisionTable.hitPolicy).isEqualTo(HitPolicy.UNIQUE)
+
+    assertThat(decisionTable.header.inputs).containsExactly(foo,bar)
+    assertThat(decisionTable.header.outputs).containsExactly(status)
+  }
 
 }
