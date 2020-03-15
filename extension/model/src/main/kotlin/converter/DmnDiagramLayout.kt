@@ -31,7 +31,17 @@ class DmnDiagramLayout(
     return boxes
   }
 
-
+  /**
+   * A box represents a decision (table) in a decision graph. It has coordinates to draw the element via bpmn.io and contains edge/waypoints
+   * data if the decision requires another decision.
+   *
+   * @param key the key of the decision
+   * @param x upper left corner x value
+   * @param y upper left corner y value
+   * @param width the width in pixels
+   * @param height the height in pixels
+   * @param edge a connection to another box
+   */
   data class Box(
     val key: DecisionDefinitionKey,
     val x: Int,
@@ -40,21 +50,27 @@ class DmnDiagramLayout(
     val height: Int = 80,
     val edge: Edge? = null
   ) {
-    val tl = Point(x, y)
-    val tr = Point(x + width, y)
-    val bl = Point(x, y + height)
-    val br = Point(x + width, y + height)
+    val points = Points()
 
-    val cl = Point(x, y + height / 2)
-    val cr = Point(x + width, y + height / 2)
-    val ct = Point(x + width / 2, y)
-    val cb = Point(x + width / 2, y + height)
+    inner class Points {
+      val tl = Point(x, y)
+      val tr = Point(x + width, y)
+      val bl = Point(x, y + height)
+      val br = Point(x + width, y + height)
 
-    val corners = setOf(tl, tr, bl, br)
-    val edges = setOf(cl, cr, ct, cb)
+      val cl = Point(x, y + height / 2)
+      val cr = Point(x + width, y + height / 2)
+      val ct = Point(x + width / 2, y)
+      val cb = Point(x + width / 2, y + height)
 
-    fun isCorner(p: Point) = corners.contains(p)
-    fun isEdge(p: Point) = edges.contains(p)
+      val corners = setOf(tl, tr, bl, br)
+      val edges = setOf(cl, cr, ct, cb)
+
+      val all = corners + edges
+    }
+
+    fun isCorner(p: Point) = points.corners.contains(p)
+    fun isEdge(p: Point) = points.edges.contains(p)
   }
 
 
@@ -74,17 +90,21 @@ class DmnDiagramLayout(
 }
 
 internal fun shortest(source: Box, target: Box): Edge {
+
   data class PointAndDistance(val start: Point, val end: Point) : Comparable<PointAndDistance> {
     val numberOfEdges = listOf(source, target).count { it.isEdge(start) || it.isEdge(end) }
     val distance = Point.distance(start, end)
 
-    override fun compareTo(other: PointAndDistance): Int {
-      return if (this.distance != other.distance) this.distance.compareTo(other.distance)
+    /**
+     * When comparing, we first search the connections with shortest distance. For thos with the same distance, we prefer the highest
+     * number of edge-connections (avoiding arrows from corner to corner).
+     */
+    override fun compareTo(other: PointAndDistance): Int =
+      if (this.distance != other.distance) this.distance.compareTo(other.distance)
       else other.numberOfEdges.compareTo(this.numberOfEdges)
-    }
   }
 
-  return lazyCartesianProduct(source.corners + source.edges, target.corners + target.edges)
+  return lazyCartesianProduct(source.points.all, target.points.all)
     .map { PointAndDistance(it.first, it.second) }
     .sorted()
     .first().let { Edge(source = source.key, waypointStart = it.start, waypointEnd = it.end) }

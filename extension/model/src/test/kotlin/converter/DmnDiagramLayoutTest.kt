@@ -19,15 +19,15 @@ class DmnDiagramLayoutTest {
   fun `box coordinates`() {
     val box = Box(key = "foo", x = 100, y = 200)
 
-    assertThat(box.tl).isEqualTo(Point(100 , 200))
-    assertThat(box.tr).isEqualTo(Point(280 , 200))
-    assertThat(box.bl).isEqualTo(Point(100 , 280))
-    assertThat(box.br).isEqualTo(Point(280 , 280))
+    assertThat(box.points.tl).isEqualTo(Point(100 , 200))
+    assertThat(box.points.tr).isEqualTo(Point(280 , 200))
+    assertThat(box.points.bl).isEqualTo(Point(100 , 280))
+    assertThat(box.points.br).isEqualTo(Point(280 , 280))
 
-    assertThat(box.cl).isEqualTo(Point(100 , 240))
-    assertThat(box.cr).isEqualTo(Point(280 , 240))
-    assertThat(box.ct).isEqualTo(Point(190 , 200))
-    assertThat(box.cb).isEqualTo(Point(190 , 280))
+    assertThat(box.points.cl).isEqualTo(Point(100 , 240))
+    assertThat(box.points.cr).isEqualTo(Point(280 , 240))
+    assertThat(box.points.ct).isEqualTo(Point(190 , 200))
+    assertThat(box.points.cb).isEqualTo(Point(190 , 280))
   }
 
   @Test
