@@ -7,7 +7,6 @@ import org.camunda.bpm.model.dmn.HitPolicy
 import org.camunda.bpm.model.dmn.instance.Decision
 import org.camunda.bpm.model.dmn.instance.DecisionTable
 import org.camunda.bpm.model.dmn.instance.ExtensionElements
-import org.camunda.bpm.model.xml.type.ModelElementType
 
 fun Decision.getDecisionTable(): DecisionTable = this.expression as DecisionTable
 
@@ -30,16 +29,14 @@ fun Decision.extensionElement(box: DmnDiagramLayout.Box) {
   }
 
   if (box.edge != null) {
-
     val edge = extensionElements.addExtensionElement(BIODI_NS, "edge")
     edge.setAttributeValue("source", box.edge.source)
 
     for (waypoint in box.edge.waypoints) {
-
-      val w = edge.domElement.document.createElement(BIODI_NS, "waypoints")
-      w.setAttribute("x", "${waypoint.x}")
-      w.setAttribute("y", "${waypoint.y}")
-      edge.domElement.appendChild(w)
+      edge.domElement.appendChild(edge.domElement.document.createElement(BIODI_NS, "waypoints").apply {
+        setAttribute("x", "${waypoint.x}")
+        setAttribute("y", "${waypoint.y}")
+      })
     }
   }
 }
