@@ -10,16 +10,19 @@ class DmnDiagramLayout(
   val requiredDecisions: Map<DecisionDefinitionKey, Set<DecisionDefinitionKey>>
 ) {
 
-
+  companion object {
+    const val X_OFFSET = 300
+  }
 
   init {
     require(decisionDefinitionKeys.isNotEmpty()) { "there must be at least one table" }
     require(decisionDefinitionKeys.size == 1 || requiredDecisions.isNotEmpty()) { "tables must be connected" }
-
   }
 
   fun layout(): Map<DecisionDefinitionKey, Box> {
-    val boxes = decisionDefinitionKeys.mapIndexed { index, s -> Box(key = s, x = index * 300, y = 0) }.associateBy { it.key }.toMutableMap()
+    val boxes = decisionDefinitionKeys
+      .mapIndexed { index, s -> Box(key = s, x = index * X_OFFSET, y = 0) }
+      .associateBy { it.key }.toMutableMap()
 
     for (key in requiredDecisions.keys) {
       for (required in requiredDecisions[key]!!) {
@@ -52,6 +55,9 @@ class DmnDiagramLayout(
   ) {
     val points = Points()
 
+    /**
+     * Representing all corner and edge points of the box specified by x,y,width and height.
+     */
     inner class Points {
       val tl = Point(x, y)
       val tr = Point(x + width, y)
