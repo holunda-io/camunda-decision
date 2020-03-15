@@ -17,11 +17,11 @@
   </properties>
 
   <dependencies>
-    <dependency>
+    <!--dependency>
       <groupId>org.logicng</groupId>
       <artifactId>logicng</artifactId>
       <version>1.6.2</version>
-    </dependency>
+    </dependency-->
 
     <dependency>
       <groupId>${project.groupId}</groupId>

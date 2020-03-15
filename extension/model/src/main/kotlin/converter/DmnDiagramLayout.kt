@@ -9,7 +9,6 @@ class DmnDiagramLayout(
   val decisionDefinitionKeys: Set<DecisionDefinitionKey>,
   val requiredDecisions: Map<DecisionDefinitionKey, Set<DecisionDefinitionKey>>
 ) {
-
   companion object {
     const val X_OFFSET = 300
   }

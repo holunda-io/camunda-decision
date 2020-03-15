@@ -26,14 +26,14 @@
 
     <camunda.version>7.12.0</camunda.version>
 
-    <spring-boot.version>2.2.4.RELEASE</spring-boot.version>
+    <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
     <camunda-spring-boot.version>3.4.1</camunda-spring-boot.version>
     <groovy.version>2.4.5</groovy.version>
     <spin.version>1.7.5</spin.version>
 
     <jgiven.version>0.18.2</jgiven.version>
 
-    <camunda-bpm-data.version>0.0.3</camunda-bpm-data.version>
+    <camunda-bpm-data.version>0.0.4</camunda-bpm-data.version>
 
     <pattern.class.itest>**/*ITest.*</pattern.class.itest>
     <pattern.package.itest>**/itest/**/*.*</pattern.package.itest>
@@ -176,8 +176,8 @@
           <configuration>
             <jvmTarget>${java.version}</jvmTarget>
             <compilerPlugins>
-              <plugin>spring</plugin>
-              <plugin>jpa</plugin>
+              <!--plugin>spring</plugin-->
+              <!--plugin>jpa</plugin-->
               <plugin>no-arg</plugin>
               <plugin>all-open</plugin>
             </compilerPlugins>
@@ -269,16 +269,23 @@
         <plugin>
           <groupId>org.jetbrains.dokka</groupId>
           <artifactId>dokka-maven-plugin</artifactId>
-          <version>0.10.0</version>
+          <version>0.10.1</version>
           <executions>
             <execution>
-              <phase>test</phase>
+              <phase>package</phase>
               <id>attach-javadocs</id>
               <goals>
                 <goal>javadocJar</goal>
               </goals>
             </execution>
           </executions>
+          <configuration>
+            <jdkVersion>8</jdkVersion>
+            <includes>
+              <include>packages.md</include>
+              <include>extra.md</include>
+            </includes>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
