@@ -21,4 +21,8 @@ class DmnDiagramTest {
       .containsEntry(DECISION_2, setOf(DECISION_1))
   }
 
+  @Test
+  fun `resource name`() {
+    assertThat(DmnDiagramFixtures.decision2DependsOnDecision1.resourceName).isEqualTo("diagram-diagram-with-two-tables.dmn")
+  }
 }

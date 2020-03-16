@@ -22,4 +22,7 @@ data class DmnDiagram(
   val requiredDecisions = decisionTables.map { it.decisionDefinitionKey to it.requiredDecisions }
     .filter { it.second.isNotEmpty() }
     .toMap()
+
+
+  val resourceName = "diagram-${name.toLowerCase().replace("\\s".toRegex(), "-")}.dmn"
 }
