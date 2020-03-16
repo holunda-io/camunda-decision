@@ -8,7 +8,7 @@ import io.holunda.decision.model.element.*
 import io.holunda.decision.model.element.InputDefinitionFactory.booleanInput
 import io.holunda.decision.model.element.InputDefinitionFactory.integerInput
 import io.holunda.decision.model.element.OutputDefinitionFactory.stringOutput
-import io.holunda.decision.model.ext.toBpmn
+import io.holunda.decision.model.ext.toXml
 import io.holunda.decision.model.io.DmnWriter
 import org.assertj.core.api.Assertions.assertThat
 import org.camunda.bpm.model.dmn.HitPolicy
@@ -24,7 +24,7 @@ class DmnDiagramConverterTest {
 
     val d2 = DmnDiagramConverter.fromModelInstance(dmnModelInstance)
 
-    println(CamundaDecisionModel.createModelInstance(d2).toBpmn())
+    println(CamundaDecisionModel.createModelInstance(d2).toXml())
 
     println(DmnWriter.render(d2))
 
@@ -39,7 +39,7 @@ class DmnDiagramConverterTest {
       name = "Dmn Diagram",
       decisionTables = listOf(
         DmnDecisionTable(
-          key = "decision1",
+          decisionDefinitionKey = "decision1",
           name = "My Table",
           header = DmnDecisionTable.Header(listOf(foo), listOf(bar)),
           rules = DmnRules(
@@ -53,7 +53,7 @@ class DmnDiagramConverterTest {
 
     val dmnModelInstance = DmnDiagramConverter.toModelInstance(dmnDiagram)
 
-    println(dmnModelInstance.toBpmn())
+    println(dmnModelInstance.toXml())
     println(CamundaDecisionModel.render(CamundaDecisionModel.readDecisionTable(dmnModelInstance)))
   }
 
@@ -71,7 +71,7 @@ class DmnDiagramConverterTest {
 
     val decisionTable = diagram.decisionTables.first()
 
-    assertThat(decisionTable.key).isEqualTo("example")
+    assertThat(decisionTable.decisionDefinitionKey).isEqualTo("example")
     assertThat(decisionTable.name).isEqualTo("DMN Example")
     assertThat(decisionTable.versionTag).isEqualTo("666")
     assertThat(decisionTable.hitPolicy).isEqualTo(HitPolicy.UNIQUE)

@@ -36,7 +36,7 @@ object CamundaDecisionModel {
 
     return requireNotNull(
       if (decisionDefinitionKey == null) diagram.decisionTables.first()
-      else diagram.decisionTables.find { it.key == decisionDefinitionKey }
+      else diagram.decisionTables.find { it.decisionDefinitionKey == decisionDefinitionKey }
     ) { "no table found" }
   }
 

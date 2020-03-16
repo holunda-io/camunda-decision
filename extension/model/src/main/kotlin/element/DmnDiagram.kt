@@ -10,17 +10,16 @@ data class DmnDiagram(
 ) {
 
   constructor(decisionTable: DmnDecisionTable) : this(
-    id = "${decisionTable.key}_diagram",
+    id = "${decisionTable.decisionDefinitionKey}_diagram",
     name = "${decisionTable.name} (Diagram)",
     decisionTables = listOf(decisionTable)
   )
 
   constructor(id: Id, name: Name, vararg decisionTables: DmnDecisionTable) : this(id, name, decisionTables.asList())
 
-  val decisionDefinitionKeys = decisionTables.map { it.key }.toSet()
+  val decisionDefinitionKeys = decisionTables.map { it.decisionDefinitionKey }.toSet()
 
-  val requiredDecisions = decisionTables.map { it.key to it.requiredDecisions }
+  val requiredDecisions = decisionTables.map { it.decisionDefinitionKey to it.requiredDecisions }
     .filter { it.second.isNotEmpty() }
     .toMap()
-
 }

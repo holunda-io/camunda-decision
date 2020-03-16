@@ -25,7 +25,7 @@ object CamundaDecisonModelFixtures {
       name = "Diagram with two tables",
       decisionTables = listOf(
         DmnDecisionTable(
-          key = DECISION_1,
+          decisionDefinitionKey = DECISION_1,
           name = "Decision 1",
           hitPolicy = HitPolicy.FIRST,
           versionTag = "1",
@@ -37,7 +37,7 @@ object CamundaDecisonModelFixtures {
           )
         ),
         DmnDecisionTable(
-          key = DECISION_2,
+          decisionDefinitionKey = DECISION_2,
           name = "Decision 2",
           hitPolicy = HitPolicy.FIRST,
           versionTag = "1",
@@ -54,7 +54,7 @@ object CamundaDecisonModelFixtures {
 
     val singleTable = DmnDiagram(
       DmnDecisionTable(
-        key = DECISION_1,
+        decisionDefinitionKey = DECISION_1,
         name = "Decision ",
         versionTag = "1",
         header = DmnDecisionTable.Header(listOf(inputFoo), listOf(outputResult)),

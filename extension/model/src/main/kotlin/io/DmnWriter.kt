@@ -2,12 +2,7 @@ package io.holunda.decision.model.io
 
 import de.vandermeer.asciitable.AsciiTable
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment
-import io.holunda.decision.model.converter.DmnDecisionTableConverter
 import io.holunda.decision.model.element.*
-import io.holunda.decision.model.ext.*
-import org.camunda.bpm.model.dmn.Dmn
-import org.camunda.bpm.model.dmn.DmnModelInstance
-import org.camunda.bpm.model.dmn.instance.Rule
 import java.util.*
 
 object DmnWriter {
@@ -17,7 +12,7 @@ object DmnWriter {
   fun render(table: DmnDecisionTable): String {
     var ascii = AsciiDmnTable(table.header.inputs.size, table.header.outputs.size)
 
-    ascii.addRow("${table.name} ('${table.key}') ${Optional.ofNullable(table.versionTag).map { "- v$it" }.orElse("")}" to ascii.columns)
+    ascii.addRow("${table.name} ('${table.decisionDefinitionKey}') ${Optional.ofNullable(table.versionTag).map { "- v$it" }.orElse("")}" to ascii.columns)
 
     ascii.addRow(table.header.allDefinitions().map { "${it.label}<br/>'${it.key}' (${it.type})" }.toMutableList().apply { add(table.hitPolicy.name) })
 

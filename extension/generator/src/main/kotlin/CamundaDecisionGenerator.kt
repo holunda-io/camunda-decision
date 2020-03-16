@@ -1,9 +1,15 @@
 package io.holunda.decision.generator
 
+import io.holunda.decision.generator.builder.DmnDiagramBuilder
+
 
 object CamundaDecisionGenerator {
 
+  fun diagram() = DmnDiagramBuilder()
+
 }
+
+
 //
 //fun main() {
 //

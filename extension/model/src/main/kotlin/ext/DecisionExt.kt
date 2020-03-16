@@ -26,7 +26,6 @@ fun Decision.decisionTable(hitPolicy: HitPolicy, aggregation: BuiltinAggregator?
 fun Decision.extensionElement(box: DmnDiagramLayout.Box) {
   val extensionElements = this.addChildElement(ExtensionElements::class)
 
-
   extensionElements.addExtensionElement(BIODI_NS, "bounds").apply {
     setAttributeValue("x", "${box.x}")
     setAttributeValue("y", "${box.y}")

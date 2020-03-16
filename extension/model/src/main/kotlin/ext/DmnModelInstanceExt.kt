@@ -33,7 +33,6 @@ fun <T : DmnModelElementInstance> ModelInstance.newInstance(elementClass: KClass
   id ?: generateId(elementClass)
 )
 
-
 /**
  * Create a new instance of type elementClass.
  */
@@ -41,7 +40,6 @@ fun <T : DmnModelElementInstance> DmnModelElementInstance.newInstance(elementCla
   elementClass.java,
   id ?: generateId(elementClass)
 )
-
 
 fun DmnModelInstance.definitions(name: String = "DRD", id: String? = null): Definitions {
   val definitions = newInstance(Definitions::class, id).apply {
@@ -62,4 +60,4 @@ fun <T : DmnModelElementInstance> DmnModelElementInstance.addChildElement(elemen
   return element
 }
 
-fun DmnModelInstance.toBpmn(): String = Dmn.convertToString(this)
+fun DmnModelInstance.toXml(): String = Dmn.convertToString(this)

@@ -26,3 +26,7 @@ Prints [ascii table](http://www.vandermeer.de/projects/skb/java/asciitable/featu
 │         -         │         -         │     "DEFAULT"     │        -         │
 └───────────────────┴───────────────────┴───────────────────┴──────────────────┘
 ```
+
+## FEEL
+
+* <https://camunda.github.io/feel-scala/feel-data-types>

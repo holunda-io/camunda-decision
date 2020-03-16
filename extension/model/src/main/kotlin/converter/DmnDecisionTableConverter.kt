@@ -16,7 +16,7 @@ object DmnDecisionTableConverter {
 
   fun toModelInstance(definitions: Definitions, table: DmnDecisionTable): Decision {
     val decision = definitions.decision(
-      key = table.key,
+      key = table.decisionDefinitionKey,
       name = table.name,
       versionTag = table.versionTag
     )
@@ -55,7 +55,7 @@ object DmnDecisionTableConverter {
     })
 
     return DmnDecisionTable(
-      key = decision.id,
+      decisionDefinitionKey = decision.id,
       name = decision.name,
       versionTag = decision.versionTag,
       hitPolicy = decisionTable.hitPolicy,

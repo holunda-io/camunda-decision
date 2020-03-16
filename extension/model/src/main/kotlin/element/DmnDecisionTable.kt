@@ -6,7 +6,7 @@ import io.holunda.decision.model.VersionTag
 import org.camunda.bpm.model.dmn.HitPolicy
 
 data class DmnDecisionTable(
-  val key: DecisionDefinitionKey,
+  val decisionDefinitionKey: DecisionDefinitionKey,
   val name: Name,
   val versionTag: VersionTag? = null,
   val hitPolicy: HitPolicy = HitPolicy.FIRST,
@@ -19,5 +19,4 @@ data class DmnDecisionTable(
     val numInputs = inputs.size
     val numOutputs = outputs.size
   }
-
 }
