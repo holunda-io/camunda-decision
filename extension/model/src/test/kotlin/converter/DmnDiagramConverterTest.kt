@@ -74,7 +74,7 @@ class DmnDiagramConverterTest {
     assertThat(decisionTable.decisionDefinitionKey).isEqualTo("example")
     assertThat(decisionTable.name).isEqualTo("DMN Example")
     assertThat(decisionTable.versionTag).isEqualTo("666")
-    assertThat(decisionTable.hitPolicy).isEqualTo(HitPolicy.UNIQUE)
+    assertThat(decisionTable.hitPolicy).isEqualTo(DmnHitPolicy.UNIQUE)
 
     assertThat(decisionTable.header.inputs).containsExactly(foo,bar)
     assertThat(decisionTable.header.outputs).containsExactly(status)

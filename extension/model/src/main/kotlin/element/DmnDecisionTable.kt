@@ -9,7 +9,7 @@ data class DmnDecisionTable(
   val decisionDefinitionKey: DecisionDefinitionKey,
   val name: Name,
   val versionTag: VersionTag? = null,
-  val hitPolicy: HitPolicy = HitPolicy.FIRST,
+  val hitPolicy: DmnHitPolicy = DmnHitPolicy.FIRST,
   val requiredDecisions: Set<DecisionDefinitionKey> = setOf(),
   val header: Header,
   val rules: DmnRules

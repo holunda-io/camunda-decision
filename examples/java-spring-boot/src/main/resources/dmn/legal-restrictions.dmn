@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_0dn5ts7" name="Legal Restrictions" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_0dn5ts7" name="Legal Restrictions" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.1">
   <decision id="legal_restrictions" name="Legal Restrictions">
     <extensionElements>
       <biodi:bounds x="150" y="150" width="180" height="80" />
     </extensionElements>
-    <decisionTable id="decisionTable_1" hitPolicy="COLLECT">
+    <decisionTable id="decisionTable_1" hitPolicy="COLLECT" aggregation="COUNT">
       <input id="input_1" label="Customer Age">
         <inputExpression id="inputExpression_1" typeRef="integer">
           <text>customerAge</text>

@@ -3,24 +3,21 @@ package io.holunda.decision.model.ext
 import io.holunda.decision.model.BIODI_NS
 import io.holunda.decision.model.DecisionDefinitionKey
 import io.holunda.decision.model.converter.DmnDiagramLayout
-import org.camunda.bpm.model.dmn.BuiltinAggregator
-import org.camunda.bpm.model.dmn.HitPolicy
+import io.holunda.decision.model.element.DmnHitPolicy
 import org.camunda.bpm.model.dmn.instance.Decision
 import org.camunda.bpm.model.dmn.instance.DecisionTable
 import org.camunda.bpm.model.dmn.instance.ExtensionElements
 
 fun Decision.getDecisionTable(): DecisionTable = this.expression as DecisionTable
 
-fun Decision.getRequiredDecisions() : Set<DecisionDefinitionKey> = this.informationRequirements
+fun Decision.getRequiredDecisions(): Set<DecisionDefinitionKey> = this.informationRequirements
   .map { it.requiredDecision }
   .map { it.id }
   .toSet()
 
-fun Decision.decisionTable(hitPolicy: HitPolicy, aggregation: BuiltinAggregator? = null) = this.addChildElement(DecisionTable::class).apply {
-  this.hitPolicy = hitPolicy
-  if (hitPolicy == HitPolicy.COLLECT && aggregation != null) { // FIXME: data class for hitPolicy and aggregator
-    this.aggregation = aggregation
-  }
+fun Decision.decisionTable(hitPolicy: DmnHitPolicy) = this.addChildElement(DecisionTable::class).apply {
+  this.hitPolicy = hitPolicy.hitPolicy
+  hitPolicy.aggregator?.let { this.aggregation = it }
 }
 
 fun Decision.extensionElement(box: DmnDiagramLayout.Box) {

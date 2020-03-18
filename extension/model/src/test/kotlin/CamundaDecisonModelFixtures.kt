@@ -27,7 +27,7 @@ object CamundaDecisonModelFixtures {
         DmnDecisionTable(
           decisionDefinitionKey = DECISION_1,
           name = "Decision 1",
-          hitPolicy = HitPolicy.FIRST,
+          hitPolicy = DmnHitPolicy.FIRST,
           versionTag = "1",
           header = DmnDecisionTable.Header(
             listOf(inputFoo), listOf(outputBar)
@@ -39,7 +39,7 @@ object CamundaDecisonModelFixtures {
         DmnDecisionTable(
           decisionDefinitionKey = DECISION_2,
           name = "Decision 2",
-          hitPolicy = HitPolicy.FIRST,
+          hitPolicy = DmnHitPolicy.FIRST,
           versionTag = "1",
           header = DmnDecisionTable.Header(
             listOf(inputBar), listOf(outputResult)
@@ -58,7 +58,7 @@ object CamundaDecisonModelFixtures {
         name = "Decision ",
         versionTag = "1",
         header = DmnDecisionTable.Header(listOf(inputFoo), listOf(outputResult)),
-        hitPolicy = HitPolicy.FIRST,
+        hitPolicy = DmnHitPolicy.FIRST,
         rules = DmnRules(
           DmnRule(
             description = "woohoo",

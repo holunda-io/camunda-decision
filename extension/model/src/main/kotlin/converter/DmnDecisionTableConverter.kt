@@ -1,9 +1,6 @@
 package io.holunda.decision.model.converter
 
-import io.holunda.decision.model.element.DmnDecisionTable
-import io.holunda.decision.model.element.DmnDiagram
-import io.holunda.decision.model.element.DmnRule
-import io.holunda.decision.model.element.DmnRules
+import io.holunda.decision.model.element.*
 import io.holunda.decision.model.ext.*
 import org.camunda.bpm.model.dmn.instance.Decision
 import org.camunda.bpm.model.dmn.instance.Definitions
@@ -21,7 +18,7 @@ object DmnDecisionTableConverter {
       versionTag = table.versionTag
     )
 
-    val decisionTable = decision.decisionTable(table.hitPolicy) // TODO: aggregation, maybe Sealed class for DmnHitPolicy?
+    val decisionTable = decision.decisionTable(table.hitPolicy)
 
     table.header.inputs.forEach { decisionTable.input(it) }
     table.header.outputs.forEach { decisionTable.output(it) }
@@ -58,7 +55,7 @@ object DmnDecisionTableConverter {
       decisionDefinitionKey = decision.id,
       name = decision.name,
       versionTag = decision.versionTag,
-      hitPolicy = decisionTable.hitPolicy,
+      hitPolicy = decisionTable.dmnHitPolicy,
       header = header,
       rules = dmnRules,
       requiredDecisions = decision.getRequiredDecisions()

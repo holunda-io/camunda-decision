@@ -1,8 +1,10 @@
 package io.holunda.decision.model.ext
 
 import io.holunda.decision.model.element.DmnDecisionTable
+import io.holunda.decision.model.element.DmnHitPolicy
 import io.holunda.decision.model.element.InputDefinition
 import io.holunda.decision.model.element.OutputDefinition
+import org.camunda.bpm.model.dmn.HitPolicy
 import org.camunda.bpm.model.dmn.instance.DecisionTable
 import org.camunda.bpm.model.dmn.instance.Input
 import org.camunda.bpm.model.dmn.instance.InputExpression
@@ -13,6 +15,7 @@ fun DecisionTable.toHeader() = DmnDecisionTable.Header(
   outputs = outputs.map { it.toOutputDefinition() }
 )
 
+val DecisionTable.dmnHitPolicy get() = DmnHitPolicy.valueOf(this.hitPolicy, this.aggregation)
 
 fun DecisionTable.output(column: OutputDefinition) = addChildElement(Output::class).apply {
   this.name = column.key
