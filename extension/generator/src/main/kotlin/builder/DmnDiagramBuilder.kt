@@ -11,9 +11,9 @@ import org.apache.commons.lang3.builder.Builder
  */
 class DmnDiagramBuilder : Builder<DmnDiagram> {
 
-  lateinit var diagramId: Id
-  lateinit var diagramName: Name
-  var decisionTableBuilders = mutableListOf<DmnDecisionTableBuilder>()
+  private var diagramId: Id? = null
+  private var diagramName: Name? = null
+  private var decisionTableBuilders = mutableListOf<DmnDecisionTableBuilder>()
 
   /**
    * Set the id.
@@ -39,8 +39,8 @@ class DmnDiagramBuilder : Builder<DmnDiagram> {
     val decisionTables = decisionTableBuilders.map { it.build() }
 
     return DmnDiagram(
-      id = if (::diagramId.isInitialized) diagramId else generateId(DmnDiagram::class),
-      name = if(::diagramName.isInitialized) diagramName else "DRD",
+      id = diagramId ?: generateId(DmnDiagram::class),
+      name = diagramName ?: "DRD",
       decisionTables = decisionTables
     )
   }

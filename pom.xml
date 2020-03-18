@@ -54,6 +54,28 @@
 
   <dependencyManagement>
     <dependencies>
+      <!-- PROJECT -->
+      <dependency>
+        <groupId>io.holunda.decision</groupId>
+        <artifactId>camunda-decision-generator</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.holunda.decision</groupId>
+        <artifactId>camunda-decision-model</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.holunda.decision</groupId>
+        <artifactId>camunda-decision-runtime</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.holunda.decision.lib</groupId>
+        <artifactId>camunda-decision-lib-test</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+
       <!-- CAMUNDA -->
       <dependency>
         <groupId>org.camunda.bpm.dmn</groupId>

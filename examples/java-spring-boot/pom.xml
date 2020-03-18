@@ -5,35 +5,48 @@
 
   <parent>
     <groupId>io.holunda.decision.project</groupId>
-    <artifactId>camunda-decision-root</artifactId>
+    <artifactId>camunda-decision-examples-root</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>camunda-decision-examples-root</artifactId>
-  <packaging>pom</packaging>
-
-  <properties>
-    <jacoco.skip>true</jacoco.skip>
-    <maven.javadoc.skip>true</maven.javadoc.skip>
-    <maven.sources.skip>true</maven.sources.skip>
-    <maven.install.skip>true</maven.install.skip>
-    <gpg.skip>true</gpg.skip>
-  </properties>
-
-  <modules>
-    <module>java-spring-boot</module>
-  </modules>
+  <groupId>io.holunda.decision.example</groupId>
+  <artifactId>camunda-decision-example-java-spring-boot</artifactId>
 
   <dependencies>
+    <!-- PROJECT -->
+    <dependency>
+      <groupId>io.holunda.decision</groupId>
+      <artifactId>camunda-decision-generator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.holunda.decision</groupId>
+      <artifactId>camunda-decision-runtime</artifactId>
+    </dependency>
+
+    <!-- CAMUNDA -->
+    <dependency>
+      <groupId>org.camunda.bpm.springboot</groupId>
+      <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
+      <version>${camunda-spring-boot.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.toolisticon.springboot</groupId>
+      <artifactId>springboot-swagger-starter</artifactId>
+      <version>0.1.0</version>
+    </dependency>
+
+    <!-- BUILD -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
     <!--
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -55,8 +68,6 @@
       <groupId>org.camunda.spin</groupId>
       <artifactId>camunda-spin-dataformat-json-jackson</artifactId>
     </dependency>
-
-
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jdk8</artifactId>
@@ -69,36 +80,10 @@
       <groupId>com.fasterxml.jackson.module</groupId>
       <artifactId>jackson-module-kotlin</artifactId>
     </dependency>
-
-
     <dependency>
       <groupId>org.codehaus.groovy</groupId>
       <artifactId>groovy-all</artifactId>
       <version>${groovy.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-    </dependency>
-
-
-    <dependency>
-      <groupId>com.tngtech.jgiven</groupId>
-      <artifactId>jgiven-junit</artifactId>
-      <version>${jgiven.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.tngtech.jgiven</groupId>
-      <artifactId>jgiven-spring</artifactId>
-      <version>${jgiven.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.tngtech.jgiven</groupId>
-      <artifactId>jgiven-html5-report</artifactId>
-      <version>${jgiven.version}</version>
-      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -116,6 +101,12 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot.version}</version>
+      </plugin>
+      <!-- JGiven Reports -->
       <plugin>
         <groupId>com.tngtech.jgiven</groupId>
         <artifactId>jgiven-maven-plugin</artifactId>

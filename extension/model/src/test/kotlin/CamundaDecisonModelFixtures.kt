@@ -21,7 +21,7 @@ object CamundaDecisonModelFixtures {
   object DmnDiagramFixtures {
 
     val decision2DependsOnDecision1 = DmnDiagram(
-      id = "diagram",
+      id = "table2dependsOnTable1",
       name = "Diagram with two tables",
       decisionTables = listOf(
         DmnDecisionTable(

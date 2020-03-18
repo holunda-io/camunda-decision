@@ -1,0 +1,21 @@
+server:
+  port: 10101
+
+spring:
+  application.name: dmn-example
+
+camunda.bpm:
+  admin-user:
+    id: admin
+
+swagger:
+  apiInfo:
+    title: DMN Example Application API
+    description: Generating and evaluating dmn tables
+    version: 0.0.1-SNAPSHOT
+    lisense: APACHE-2.0
+    licenseUrl: LICENSE.txt
+  dockets:
+    default:
+      path: "/dmn/**"
+

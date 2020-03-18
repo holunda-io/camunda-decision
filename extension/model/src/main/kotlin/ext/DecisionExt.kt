@@ -18,7 +18,7 @@ fun Decision.getRequiredDecisions() : Set<DecisionDefinitionKey> = this.informat
 
 fun Decision.decisionTable(hitPolicy: HitPolicy, aggregation: BuiltinAggregator? = null) = this.addChildElement(DecisionTable::class).apply {
   this.hitPolicy = hitPolicy
-  if (hitPolicy == HitPolicy.COLLECT) {
+  if (hitPolicy == HitPolicy.COLLECT && aggregation != null) { // FIXME: data class for hitPolicy and aggregator
     this.aggregation = aggregation
   }
 }
