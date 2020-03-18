@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_07g6v9s" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.1">
+  <decision id="collect_sum" name="DMN Example" camunda:versionTag="666" camunda:historyTimeToLive="10">
+    <extensionElements>
+      <biodi:bounds x="150" y="150" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1" hitPolicy="COLLECT" aggregation="SUM">
+      <input id="input_1" label="Foo Value">
+        <inputExpression id="inputExpression_1" typeRef="integer">
+          <text>foo</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0s63wzs" label="Bar Value">
+        <inputExpression id="LiteralExpression_13yla5b" typeRef="boolean">
+          <text>bar</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="VIP Status" name="status" typeRef="integer" />
+      <rule id="DecisionRule_144iriq">
+        <description>this is great</description>
+        <inputEntry id="UnaryTests_19w5in7">
+          <text>&gt; 10</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18puy7v">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1hpmiop">
+          <text>100</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0zxpnut">
+        <description>not so good</description>
+        <inputEntry id="UnaryTests_16gy5fb">
+          <text>&lt; 10</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07znf6l">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_19lieoq">
+          <text>200</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1z0yr8c">
+        <description>amazing!</description>
+        <inputEntry id="UnaryTests_1q2vi3m">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kt57yh">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0p6xbjh">
+          <text>300</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1kkqbd3">
+        <inputEntry id="UnaryTests_06yr5gg">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dav7u6">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1v1q9y9">
+          <text>0</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
