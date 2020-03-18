@@ -75,6 +75,9 @@ object CamundaDecisionModel {
   fun render(diagram: DmnDiagram) = DmnWriter.render(diagram)
 
 
+  object Meta {
+    val version = CamundaDecisionModel::class.java.`package`.implementationVersion ?: "n/a"
+  }
 }
 
 typealias Id = String

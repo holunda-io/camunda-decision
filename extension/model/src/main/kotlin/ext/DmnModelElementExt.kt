@@ -1,6 +1,5 @@
 package io.holunda.decision.model.ext
 
-import io.holunda.decision.model.Id
 import org.camunda.bpm.model.dmn.instance.DmnModelElementInstance
 import org.camunda.bpm.model.dmn.instance.Text
 import kotlin.reflect.KClass

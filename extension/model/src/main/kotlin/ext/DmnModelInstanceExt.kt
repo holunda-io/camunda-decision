@@ -1,6 +1,7 @@
 package io.holunda.decision.model.ext
 
 import io.holunda.decision.model.CAMUNDA_NS
+import io.holunda.decision.model.CamundaDecisionModel
 import org.camunda.bpm.model.dmn.Dmn
 import org.camunda.bpm.model.dmn.DmnModelInstance
 import org.camunda.bpm.model.dmn.instance.Definitions
@@ -45,6 +46,11 @@ fun DmnModelInstance.definitions(name: String = "DRD", id: String? = null): Defi
   val definitions = newInstance(Definitions::class, id).apply {
     this.namespace = CAMUNDA_NS
     this.name = name
+  }
+
+  with(definitions.domElement) {
+    setAttribute("exporter", "CamundaDecisionGenerator")
+    setAttribute("exporterVersion", CamundaDecisionModel.Meta.version)
   }
 
   this.definitions = definitions
