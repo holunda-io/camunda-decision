@@ -11,18 +11,24 @@ import org.camunda.bpm.model.xml.ModelInstance
 import kotlin.reflect.KClass
 
 
+/**
+ * Convenience function to get a model element of given type from the model instance.
+ * If only one element exists, the id is optional, if there is more than one, specify the id to select which
+ * element to choose.
+ *
+ * Never returns null, but fails if there is no matching element,
+ */
 @JvmOverloads
-inline fun <reified T : DmnElement> DmnModelInstance.getModelElementByType(
-  referencingClass: KClass<T>,
-  id: String? = null): T = with(getModelElementsByType(referencingClass)) {
-  require(this.size < 2 || id != null) { "more than one element found, specify 'id'" }
+inline fun <reified T : DmnElement> DmnModelInstance.getModelElementByType(referencingClass: KClass<T>, id: String? = null): T =
+  with(getModelElementsByType(referencingClass)) {
+    require(this.size < 2 || id != null) { "more than one element found, specify 'id'" }
 
-  return if (this.size == 1 && id == null) {
-    requireNotNull(this.firstOrNull()) { "no decision found" }
-  } else {
-    requireNotNull(this.find { it.id == id }) { "no element found with id=$id" }
+    return if (this.size == 1 && id == null) {
+      requireNotNull(this.firstOrNull()) { "no element found" }
+    } else {
+      requireNotNull(this.find { it.id == id }) { "no element found with id=$id" }
+    }
   }
-}
 
 inline fun <reified T : DmnElement> DmnModelInstance.getModelElementsByType(referencingClass: KClass<T>): Collection<T> = this.getModelElementsByType(referencingClass.java)
 
