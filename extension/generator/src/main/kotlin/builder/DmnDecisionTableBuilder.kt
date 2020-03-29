@@ -13,7 +13,7 @@ class DmnDecisionTableBuilder : Builder<DmnDecisionTable> {
   private var decisionDefinitionKey: DecisionDefinitionKey? = null
   private var decisionName: Name? = null
   private var decisionTableReference: DecisionTableReference? = null
-  private var versionTag : VersionTag? = null
+  private var versionTag: VersionTag? = null
 
   @JvmOverloads
   fun reference(dmnModelInstance: DmnModelInstance,
@@ -29,21 +29,25 @@ class DmnDecisionTableBuilder : Builder<DmnDecisionTable> {
 
   override fun build(): DmnDecisionTable {
     if (decisionTableReference != null) {
-      var table = CamundaDecisionModel.readDecisionTable(
-        decisionTableReference!!.dmnModelInstance,
-        decisionTableReference!!.decisionDefinitionKey
-      )
+      val table = decisionTableReference!!.decisionTable
 
-      table = table.copy(
+      return table.copy(
         name = decisionName ?: table.name,
         decisionDefinitionKey = decisionDefinitionKey ?: table.decisionDefinitionKey,
         versionTag = versionTag ?: table.versionTag
       )
-
-      return table
     }
     TODO()
   }
 
-  data class DecisionTableReference(val dmnModelInstance: DmnModelInstance, val decisionDefinitionKey: DecisionDefinitionKey? = null)
+  /**
+   * Referencing a table in a given modelInstance.
+   */
+  data class DecisionTableReference(val dmnModelInstance: DmnModelInstance, val decisionDefinitionKey: DecisionDefinitionKey? = null) {
+
+    internal val decisionTable by lazy {
+      CamundaDecisionModel.readDecisionTable(dmnModelInstance, decisionDefinitionKey)
+    }
+
+  }
 }
