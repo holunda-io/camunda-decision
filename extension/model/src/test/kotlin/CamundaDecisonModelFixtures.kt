@@ -4,7 +4,6 @@ import io.holunda.decision.model.element.*
 import io.holunda.decision.model.element.InputDefinitionFactory.integerInput
 import io.holunda.decision.model.element.OutputDefinitionFactory.integerOutput
 import io.holunda.decision.model.element.OutputDefinitionFactory.stringOutput
-import org.camunda.bpm.model.dmn.HitPolicy
 
 
 object CamundaDecisonModelFixtures {
@@ -33,7 +32,7 @@ object CamundaDecisonModelFixtures {
             listOf(inputFoo), listOf(outputBar)
           ),
           rules = DmnRules(
-            DmnRule(description = "amazing", inputs = listOf(InputEntry(inputFoo, ">10")), outputs = listOf(OutputEntry(outputBar, "100")))
+              DmnRule(description = "amazing", inputs = listOf(InputEntry(inputFoo, ">10")), outputs = listOf(OutputEntry(outputBar, "100")))
           )
         ),
         DmnDecisionTable(
@@ -45,7 +44,7 @@ object CamundaDecisonModelFixtures {
             listOf(inputBar), listOf(outputResult)
           ),
           rules = DmnRules(
-            DmnRule(description = "based on decision1", inputs = listOf(InputEntry(inputBar, ">99")), outputs = listOf(OutputEntry(outputResult, "100")))
+              DmnRule(description = "based on decision1", inputs = listOf(InputEntry(inputBar, ">99")), outputs = listOf(OutputEntry(outputResult, "100")))
           ),
           requiredDecisions = setOf(DECISION_1)
         )
@@ -60,11 +59,11 @@ object CamundaDecisonModelFixtures {
         header = DmnDecisionTable.Header(listOf(inputFoo), listOf(outputResult)),
         hitPolicy = DmnHitPolicy.FIRST,
         rules = DmnRules(
-          DmnRule(
-            description = "woohoo",
-            inputs = listOf(InputEntry(inputFoo, "< 100")),
-            outputs = listOf(OutputEntry(outputResult, "\"Result\""))
-          )
+            DmnRule(
+                description = "woohoo",
+                inputs = listOf(InputEntry(inputFoo, "< 100")),
+                outputs = listOf(OutputEntry(outputResult, "\"Result\""))
+            )
         )
       )
     )

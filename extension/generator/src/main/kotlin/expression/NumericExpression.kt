@@ -1,7 +1,4 @@
 package io.holunda.decision.generator.expression
 
-abstract class Expression {
-
-
-
+class NumericExpression : Expression() {
 }

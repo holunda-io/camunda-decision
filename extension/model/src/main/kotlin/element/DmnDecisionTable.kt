@@ -3,7 +3,6 @@ package io.holunda.decision.model.element
 import io.holunda.decision.model.DecisionDefinitionKey
 import io.holunda.decision.model.Name
 import io.holunda.decision.model.VersionTag
-import org.camunda.bpm.model.dmn.HitPolicy
 
 data class DmnDecisionTable(
   val decisionDefinitionKey: DecisionDefinitionKey,

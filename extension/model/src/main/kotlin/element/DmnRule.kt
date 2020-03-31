@@ -41,15 +41,3 @@ data class DmnRule(
   }
 
 }
-
-data class DmnRules(val rules: List<DmnRule> = listOf()) : List<DmnRule> by rules {
-
-  constructor(vararg rules: DmnRule) : this(rules.asList())
-
-  fun distinctInputs() = this.flatMap { it.inputs }
-    .map { it.definition }.distinct().sortedBy { it.key }
-
-  fun distinctOutputs() = this.flatMap { it.outputs }
-    .map { it.definition }.distinct().sortedBy { it.key }
-
-}

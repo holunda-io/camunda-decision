@@ -1,10 +1,7 @@
 package io.holunda.decision.generator
 
-import io.holunda.decision.generator.builder.DmnDecisionTableBuilder
+import io.holunda.decision.generator.builder.DmnDecisionTableReferenceBuilder
 import io.holunda.decision.lib.test.CamundaDecisionTestLib
-import io.holunda.decision.model.converter.DmnDiagramConverter
-import io.holunda.decision.model.ext.toXml
-import io.holunda.decision.model.io.DmnWriter
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
@@ -16,7 +13,7 @@ internal class CamundaDecisionGeneratorTest {
   @Test
   fun `build diagram from existing dmn`() {
     val diagram = CamundaDecisionGenerator.diagram()
-      .addDecisionTableBuilder(DmnDecisionTableBuilder()
+      .addDecisionTableBuilder(DmnDecisionTableReferenceBuilder()
         .reference(exampleSingleDmn)
         .decisionDefinitionKey("fooTable") // change name from "example" to "fooTable"
         .name("Changed Name") // change name from "DMN Example" to "Changed Name"

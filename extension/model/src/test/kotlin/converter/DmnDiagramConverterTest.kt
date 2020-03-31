@@ -11,7 +11,6 @@ import io.holunda.decision.model.element.OutputDefinitionFactory.stringOutput
 import io.holunda.decision.model.ext.toXml
 import io.holunda.decision.model.io.DmnWriter
 import org.assertj.core.api.Assertions.assertThat
-import org.camunda.bpm.model.dmn.HitPolicy
 import org.junit.Test
 
 class DmnDiagramConverterTest {
@@ -43,9 +42,9 @@ class DmnDiagramConverterTest {
           name = "My Table",
           header = DmnDecisionTable.Header(listOf(foo), listOf(bar)),
           rules = DmnRules(
-            listOf(
-              DmnRule(description = "the only one", inputs = listOf(InputEntry(foo, "> 100")), outputs = listOf(OutputEntry(bar, "17")))
-            )
+              listOf(
+                  DmnRule(description = "the only one", inputs = listOf(InputEntry(foo, "> 100")), outputs = listOf(OutputEntry(bar, "17")))
+              )
           )
         )
       )

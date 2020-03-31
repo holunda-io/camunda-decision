@@ -20,6 +20,7 @@ object CamundaDecisionModel {
    * @param dmnModelInstance: camunda model instance
    * @return diagram instance containing all dmn data
    */
+  @JvmStatic
   fun readDiagram(dmnModelInstance: DmnModelInstance) = DmnDiagramConverter.fromModelInstance(dmnModelInstance)
 
   /**
@@ -30,6 +31,7 @@ object CamundaDecisionModel {
    * @see readDiagram
    * @return decisionTable containing all dmn data
    */
+  @JvmStatic
   @JvmOverloads
   fun readDecisionTable(dmnModelInstance: DmnModelInstance, decisionDefinitionKey: DecisionDefinitionKey? = null): DmnDecisionTable {
     val diagram = readDiagram(dmnModelInstance)
@@ -46,6 +48,7 @@ object CamundaDecisionModel {
    * @param diagram the dmn data
    * @return a camunda model instance
    */
+  @JvmStatic
   fun createModelInstance(diagram: DmnDiagram) = DmnDiagramConverter.toModelInstance(diagram)
 
   /**
@@ -54,6 +57,7 @@ object CamundaDecisionModel {
    * @param table: the decision table data
    * @return a camunda model instance
    */
+  @JvmStatic
   fun createModelInstance(table: DmnDecisionTable) = DmnDecisionTableConverter.toModelInstance(table)
 
   /**
@@ -63,6 +67,7 @@ object CamundaDecisionModel {
    * @param table the table to render
    * @return ascii text displaying the table
    */
+  @JvmStatic
   fun render(table: DmnDecisionTable) = DmnWriter.render(table)
 
   /**
@@ -72,11 +77,15 @@ object CamundaDecisionModel {
    * @param diagram the diagram to render
    * @return ascii text displaying all tables.
    */
+  @JvmStatic
   fun render(diagram: DmnDiagram) = DmnWriter.render(diagram)
 
 
   object Meta {
     val version = CamundaDecisionModel::class.java.`package`.implementationVersion ?: "n/a"
+
+    @JvmStatic
+    val DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss"
   }
 }
 

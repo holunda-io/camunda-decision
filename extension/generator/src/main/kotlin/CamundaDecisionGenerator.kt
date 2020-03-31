@@ -5,6 +5,7 @@ import io.holunda.decision.generator.builder.DmnDiagramBuilder
 
 object CamundaDecisionGenerator {
 
+  @JvmStatic
   fun diagram() = DmnDiagramBuilder()
 
 }

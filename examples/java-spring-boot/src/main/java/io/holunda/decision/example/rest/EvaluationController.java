@@ -1,7 +1,7 @@
 package io.holunda.decision.example.rest;
 
 import io.holunda.decision.generator.CamundaDecisionGenerator;
-import io.holunda.decision.generator.builder.DmnDecisionTableBuilder;
+import io.holunda.decision.generator.builder.DmnDecisionTableReferenceBuilder;
 import io.holunda.decision.model.element.DmnDiagram;
 import io.holunda.decision.runtime.deployment.DmnDeploymentService;
 import io.holunda.decision.runtime.query.DmnQueryService;
@@ -41,10 +41,11 @@ public class EvaluationController {
   public ResponseEntity<Deployment> deploy() {
     DmnModelInstance legalRestrictions = dmnQueryService.findModelInstance("legal_restrictions");
 
-    final DmnDiagram diagram = CamundaDecisionGenerator.INSTANCE.diagram()
+    final DmnDiagram diagram = CamundaDecisionGenerator.diagram()
       .name("A copy of legal restrictions")
-      .addDecisionTableBuilder(new DmnDecisionTableBuilder().reference(legalRestrictions))
+      .addDecisionTableBuilder(new DmnDecisionTableReferenceBuilder().reference(legalRestrictions))
       .build();
+
 
     return ResponseEntity.ok(dmnDeploymentService.deploy(diagram));
   }
