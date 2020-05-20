@@ -13,7 +13,7 @@ internal class CamundaDecisionGeneratorTest {
   @Test
   fun `build diagram from existing dmn`() {
     val diagram = CamundaDecisionGenerator.diagram()
-      .addDecisionTableBuilder(DmnDecisionTableReferenceBuilder()
+      .addDecisionTable(DmnDecisionTableReferenceBuilder()
         .reference(exampleSingleDmn)
         .decisionDefinitionKey("fooTable") // change name from "example" to "fooTable"
         .name("Changed Name") // change name from "DMN Example" to "Changed Name"

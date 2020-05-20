@@ -8,16 +8,20 @@ internal class DmnDecisionTableRulesBuilderTest {
 
   @Test
   fun `create table with one rule`() {
-    val table = DmnDecisionTableRulesBuilder()
+    val builder = DmnDecisionTableRulesBuilder()
       .decisionDefinitionKey("decision1")
-      .build()
 
-    with(table) {
+    with(builder.build()) {
       assertThat(decisionDefinitionKey).isEqualTo("decision1")
       assertThat(name).isEqualTo("decision1")
       assertThat(versionTag).isNull()
       assertThat(hitPolicy).isEqualTo(DmnHitPolicy.FIRST)
       assertThat(rules).isEmpty()
+    }
+
+    builder.versionTag("123")
+    with(builder.build()) {
+      assertThat(versionTag).isEqualTo("123")
     }
   }
 }

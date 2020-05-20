@@ -5,9 +5,7 @@ import io.holunda.decision.model.CamundaDecisionModel
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-
 class DmnWriterTest {
-
 
   @Test
   fun name() {
@@ -17,7 +15,6 @@ class DmnWriterTest {
     val ascii = DmnWriter.render(decisionTable)
 
     println(ascii)
-
   }
 
   @Test
@@ -27,8 +24,6 @@ class DmnWriterTest {
     val orig = DmnWriter.render(decisionTable)
 
     val dmn = CamundaDecisionModel.createModelInstance(decisionTable)
-
- //   println(Dmn.convertToString(dmn))
 
     assertThat(DmnWriter.render(CamundaDecisionModel.readDecisionTable(dmn))).isEqualTo(orig)
   }

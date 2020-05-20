@@ -28,7 +28,7 @@ class DmnDiagramBuilder : Builder<DmnDiagram> {
   /**
    * Add builder.
    */
-  fun addDecisionTableBuilder(builder: DmnDecisionTableBuilder) = apply { decisionTableBuilders.add(builder) }
+  fun addDecisionTable(builder: DmnDecisionTableBuilder) = apply { decisionTableBuilders.add(builder) }
 
   /**
    * Build the dmn diagram.

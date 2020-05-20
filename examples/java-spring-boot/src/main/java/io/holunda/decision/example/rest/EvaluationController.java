@@ -43,7 +43,7 @@ public class EvaluationController {
 
     final DmnDiagram diagram = CamundaDecisionGenerator.diagram()
       .name("A copy of legal restrictions")
-      .addDecisionTableBuilder(new DmnDecisionTableReferenceBuilder().reference(legalRestrictions))
+      .addDecisionTable(new DmnDecisionTableReferenceBuilder().reference(legalRestrictions))
       .build();
 
 
