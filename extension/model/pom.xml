@@ -25,7 +25,7 @@
 
     <dependency>
       <groupId>io.holunda.data</groupId>
-      <artifactId>camunda-bpm-data-kotlin</artifactId>
+      <artifactId>camunda-bpm-data</artifactId>
       <version>${camunda-bpm-data.version}</version>
     </dependency>
 

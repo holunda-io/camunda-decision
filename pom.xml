@@ -28,9 +28,9 @@
     <groovy.version>2.4.5</groovy.version>
     <spin.version>1.7.5</spin.version>
 
-    <jgiven.version>0.18.2</jgiven.version>
+    <jgiven.version>1.0.0-RC5</jgiven.version>
 
-    <camunda-bpm-data.version>0.0.5</camunda-bpm-data.version>
+    <camunda-bpm-data.version>1.0.1</camunda-bpm-data.version>
 
     <pattern.class.itest>**/*ITest.*</pattern.class.itest>
     <pattern.package.itest>**/itest/**/*.*</pattern.package.itest>
