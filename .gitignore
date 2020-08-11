@@ -19,3 +19,4 @@ pom.xml.versionsBackup
 
 # DEV
 .tmp/
+.gradle/
