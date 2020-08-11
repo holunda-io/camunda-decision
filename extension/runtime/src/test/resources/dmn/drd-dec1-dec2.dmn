@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="multiple_decisions" name="Multiple Decisions" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="multiple_decisions" name="Multiple Decisions" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.1.1">
   <decision id="decision1" name="Decision 1">
     <decisionTable id="decisionTable_1" hitPolicy="COLLECT" aggregation="COUNT">
       <input id="input_1" label="Foo">
@@ -43,6 +43,7 @@
       </input>
       <output id="OutputClause_0yfq378" label="Dec2" name="decision2" typeRef="string" />
       <rule id="DecisionRule_02u83tj">
+        <description></description>
         <inputEntry id="UnaryTests_1fiyj9m">
           <text>&gt; 0</text>
         </inputEntry>

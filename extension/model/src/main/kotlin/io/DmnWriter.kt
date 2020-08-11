@@ -70,7 +70,6 @@ object DmnWriter {
       addRule()
     }
 
-
     fun addRow(vararg rowSpans: Pair<String, Int>, doubleLine: Boolean = false): AsciiDmnTable {
       require(rowSpans.map { it.second }.sum() == columns) { "columns must have size=$columns, was $rowSpans" }
 

@@ -9,7 +9,6 @@ import org.camunda.bpm.model.dmn.DmnModelInstance
 
 class DmnDecisionTableReferenceBuilder : DmnDecisionTableBuilder() {
 
-
   lateinit var decisionTableReference: DecisionTableReference
 
   @JvmOverloads
@@ -31,7 +30,7 @@ class DmnDecisionTableReferenceBuilder : DmnDecisionTableBuilder() {
   override fun build(): DmnDecisionTable {
     require(this::decisionTableReference.isInitialized) { "reference must be set!" }
 
-    val table = decisionTableReference!!.decisionTable
+    val table = decisionTableReference.decisionTable
 
     return table.copy(
       name = decisionName ?: table.name,
