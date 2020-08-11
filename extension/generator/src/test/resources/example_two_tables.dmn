@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_07g6v9s" name="DRD 2" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.1">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_07g6v9s" name="DRD 2" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.1">
   <decision id="example" name="Decision 1" camunda:versionTag="666" camunda:historyTimeToLive="10">
-    <extensionElements>
-      <biodi:bounds x="150" y="90" width="180" height="80" />
-    </extensionElements>
     <decisionTable id="decisionTable_1">
       <input id="input_1" label="Foo Value">
         <inputExpression id="inputExpression_1" typeRef="integer">
@@ -66,14 +63,7 @@
     </decisionTable>
   </decision>
   <decision id="Decision_0fy0llp" name="Decision 2">
-    <extensionElements>
-      <biodi:bounds x="450" y="90" width="180" height="80" />
-      <biodi:edge source="example">
-        <biodi:waypoints x="330" y="126" />
-        <biodi:waypoints x="450" y="120" />
-      </biodi:edge>
-    </extensionElements>
-    <informationRequirement>
+    <informationRequirement id="InformationRequirement_1ci951q">
       <requiredDecision href="#example" />
     </informationRequirement>
     <decisionTable id="DecisionTable_0ak2afv">
@@ -91,4 +81,18 @@
       </rule>
     </decisionTable>
   </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_0uxg7t1">
+      <dmndi:DMNShape id="DMNShape_14aj07x" dmnElementRef="example">
+        <dc:Bounds height="80" width="180" x="150" y="90" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0jq9v8y" dmnElementRef="Decision_0fy0llp">
+        <dc:Bounds height="80" width="180" x="450" y="90" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1bhlczh" dmnElementRef="InformationRequirement_1ci951q">
+        <di:waypoint x="330" y="126" />
+        <di:waypoint x="450" y="120" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
 </definitions>
