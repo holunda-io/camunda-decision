@@ -12,7 +12,6 @@ data class DmnRule(
     private fun <T : Any> add(list: List<T>, entry: T) = list.toMutableList()
       .apply { this.add(entry) }
       .toList()
-
   }
 
   val inputDefinitions by lazy {

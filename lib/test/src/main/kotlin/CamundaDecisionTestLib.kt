@@ -11,15 +11,15 @@ import org.camunda.bpm.model.dmn.DmnModelInstance
 
 object CamundaDecisionTestLib {
   fun readModel(resource: String): DmnModelInstance {
-    val inputStream = CamundaDecisionTestLib::class.java.getResourceAsStream(
-      if (resource.startsWith("/"))
-        resource
-      else
-        "/$resource"
-    )
+    val inputStream = CamundaDecisionTestLib::class.java.getResourceAsStream(resource.trailingSlash())
 
     return Dmn.readModelFromStream(inputStream)!!
   }
+
+  fun readText(resource:String) : String = CamundaDecisionTestLib::class.java
+    .getResource(resource.trailingSlash())
+    .readText()
+    .trim()
 
   fun camunda() = ProcessEngineRule(
     StandaloneInMemProcessEngineConfiguration()
@@ -33,4 +33,7 @@ object CamundaDecisionTestLib {
       }
       .buildProcessEngine()
   )
+
+  private fun String.trailingSlash() = if (this.startsWith("/")) this else "/$this"
+
 }

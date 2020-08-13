@@ -36,12 +36,13 @@ class DmnDiagramBuilder : Builder<DmnDiagram> {
   override fun build(): DmnDiagram {
     require(decisionTableBuilders.isNotEmpty()) { "Diagram needs to have at least one table." }
 
-    val decisionTables = decisionTableBuilders.map { it.build() }
-
     return DmnDiagram(
       id = diagramId ?: generateId(DmnDiagram::class),
       name = diagramName ?: "DRD",
-      decisionTables = decisionTables
+      decisionTables = decisionTableBuilders.map { it.build() }
     )
   }
+
+  override fun toString() = "DmnDiagramBuilder(diagramId=$diagramId, diagramName=$diagramName, decisionTableBuilders=$decisionTableBuilders)"
+
 }

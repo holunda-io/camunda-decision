@@ -10,7 +10,9 @@ object DmnWriter {
   fun render(diagram: DmnDiagram) = diagram.decisionTables.map { render(it) }.joinToString("\n\n")
 
   fun render(table: DmnDecisionTable): String {
-    var ascii = AsciiDmnTable(table.header.inputs.size, table.header.outputs.size)
+    require(table.header.inputs.isNotEmpty()) { "table '${table.decisionDefinitionKey}' has no inputs" }
+    require(table.header.outputs.isNotEmpty()) { "table '${table.decisionDefinitionKey}' has no outputs" }
+    val ascii = AsciiDmnTable(table.header.inputs.size, table.header.outputs.size)
 
     ascii.addRow("${table.name} ('${table.decisionDefinitionKey}') ${Optional.ofNullable(table.versionTag).map { "- v$it" }.orElse("")}" to ascii.columns)
 

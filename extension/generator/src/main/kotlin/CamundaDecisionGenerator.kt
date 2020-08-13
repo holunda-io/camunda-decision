@@ -1,29 +1,18 @@
 package io.holunda.decision.generator
 
+import io.holunda.decision.generator.builder.DmnDecisionTableRulesBuilder
 import io.holunda.decision.generator.builder.DmnDiagramBuilder
-
+import io.holunda.decision.generator.builder.DmnRulesBuilder
+import io.holunda.decision.model.DecisionDefinitionKey
 
 object CamundaDecisionGenerator {
 
   @JvmStatic
   fun diagram() = DmnDiagramBuilder()
 
+  @JvmStatic
+  fun table() = DmnDecisionTableRulesBuilder()
+
+  @JvmStatic
+  fun rule() = DmnRulesBuilder()
 }
-
-
-//
-//fun main() {
-//
-//  val f = FormulaFactory()
-//
-//  val a = f.variable("A")
-//  val b = f.variable("B")
-//  val c = f.variable("C")
-//
-//  val g = f.and(a, f.or(b,f.and(b,c)))
-//  println(g)
-//  println(g.cnf())
-//  println(g.nnf())
-//
-//
-//}

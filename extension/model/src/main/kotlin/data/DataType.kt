@@ -1,6 +1,8 @@
 package io.holunda.decision.model.data
 
 import io.holunda.camunda.bpm.data.CamundaBpmData
+import io.holunda.camunda.bpm.data.factory.BasicVariableFactory
+import io.holunda.camunda.bpm.data.factory.VariableFactory
 import java.util.*
 
 /**
@@ -15,7 +17,12 @@ enum class DataType(val type: Class<*>) {
   DATE(Date::class.java),
   ;
 
+  companion object {
+    private val BY_TYPE = values().map { it.type to it }.toMap()
+  }
+
   val typeRef = name.toLowerCase()
 
   fun variableFactory(name: String) = CamundaBpmData.customVariable(name, type)
 }
+
