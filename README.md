@@ -30,5 +30,4 @@ Prints [ascii table](http://www.vandermeer.de/projects/skb/java/asciitable/featu
 ## FEEL
 
 * <https://camunda.github.io/feel-scala/feel-data-types>
-* <https://docs.camunda.org/manual/7.12/reference/dmn11/feel/data-types/>
-* <https://docs.camunda.org/manual/7.12/reference/dmn11/feel/language-elements/>
+* <https://docs.camunda.org/manual/7.13/reference/dmn/>

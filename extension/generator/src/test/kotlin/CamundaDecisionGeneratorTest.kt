@@ -4,11 +4,16 @@ import io.holunda.camunda.bpm.data.CamundaBpmData
 import io.holunda.decision.generator.CamundaDecisionGenerator.rule
 import io.holunda.decision.generator.CamundaDecisionGenerator.table
 import io.holunda.decision.generator.builder.DmnDecisionTableReferenceBuilder
+import io.holunda.decision.generator.builder.manageDmnDeployment
 import io.holunda.decision.lib.test.CamundaDecisionTestLib
+import io.holunda.decision.model.CamundaDecisionModel.InputDefinitions.booleanInput
+import io.holunda.decision.model.CamundaDecisionModel.InputDefinitions.integerInput
+import io.holunda.decision.model.CamundaDecisionModel.OutputDefinitions.integerOutput
+import io.holunda.decision.model.CamundaDecisionModel.OutputDefinitions.stringOutput
 import io.holunda.decision.model.converter.DmnDiagramConverter
-import io.holunda.decision.model.element.*
-import io.holunda.decision.model.element.InputDefinitionFactory.booleanInput
-import io.holunda.decision.model.element.OutputDefinitionFactory.stringOutput
+import io.holunda.decision.model.element.DmnHitPolicy
+import io.holunda.decision.model.element.InputEntry
+import io.holunda.decision.model.element.OutputEntry
 import io.holunda.decision.model.ext.toXml
 import io.holunda.decision.model.io.DmnWriter
 import org.assertj.core.api.Assertions.assertThat
@@ -40,15 +45,11 @@ internal class CamundaDecisionGeneratorTest {
       )
 
     val diagram = diagramBuilder.build()
-
     val dmn = DmnDiagramConverter.toModelInstance(diagram)
 
     println(DmnWriter.render(DmnDiagramConverter.fromModelInstance(dmn)))
 
-    camunda.manageDeployment(camunda.repositoryService.createDeployment()
-      .addModelInstance("foo.dmn", DmnDiagramConverter.toModelInstance(diagram))
-      .deploy()
-    )
+    camunda.manageDmnDeployment(diagram)
 
     val resultValue = camunda.decisionService.evaluateDecisionByKey("theKey")
       .variables(
@@ -85,6 +86,48 @@ internal class CamundaDecisionGeneratorTest {
     assertThat(table.decisionDefinitionKey).isEqualTo("fooTable")
     assertThat(table.name).isEqualTo("Changed Name")
     assertThat(table.versionTag).isEqualTo("667")
+
+  }
+
+
+  @Test
+  fun `sum results`() {
+    val input = integerInput("input")
+    val output = integerOutput("output")
+
+    camunda.manageDmnDeployment(CamundaDecisionGenerator.diagram()
+      .addDecisionTable(
+        table().decisionDefinitionKey("foo")
+          .versionTag("1")
+          .hitPolicy(DmnHitPolicy.COLLECT_SUM)
+          .addRule(
+            rule()
+              .condition(InputEntry(input, "> 1"))
+              .outputs(OutputEntry(output, "2"))
+          )
+          .addRule(
+            rule()
+              .condition(InputEntry(input, "> 10"))
+              .outputs(OutputEntry(output, "3"))
+          )
+      )
+      .build())
+
+    // 1 < input < 11 should sum only "2"
+    val sum5 = camunda.decisionService.evaluateDecisionByKey("foo")
+      .variables(CamundaBpmData.builder()
+        .set(CamundaBpmData.intVariable(input.key), 5)
+        .build())
+      .evaluate().singleResult.getEntry<Int>(output.key)
+    assertThat(sum5).isEqualTo(2)
+
+    //  input > 10 should sum "5"
+    val sum11 = camunda.decisionService.evaluateDecisionByKey("foo")
+      .variables(CamundaBpmData.builder()
+        .set(CamundaBpmData.intVariable(input.key), 11)
+        .build())
+      .evaluate().singleResult.getEntry<Int>(output.key)
+    assertThat(sum11).isEqualTo(5)
 
   }
 }

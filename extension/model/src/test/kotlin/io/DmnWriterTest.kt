@@ -17,7 +17,7 @@ class DmnWriterTest {
 
     val ascii = DmnWriter.render(decisionTable)
 
-    //println(ascii)
+    println(ascii)
 
     assertThat(ascii).isEqualTo(readText("example_single_table.txt"))
   }

@@ -16,7 +16,7 @@ object DmnWriter {
 
     ascii.addRow("${table.name} ('${table.decisionDefinitionKey}') ${Optional.ofNullable(table.versionTag).map { "- v$it" }.orElse("")}" to ascii.columns)
 
-    ascii.addRow(table.header.allDefinitions().map { "${it.label}<br/>'${it.key}' (${it.type})" }.toMutableList().apply { add(table.hitPolicy.name) })
+    ascii.addRow(table.header.allDefinitions().map { "${it.label}<br/>'${it.key}' (${it.dataType.name})" }.toMutableList().apply { add(table.hitPolicy.name) })
 
     ascii.addRow(
       "- INPUT -" to ascii.inputs,
@@ -48,8 +48,8 @@ object DmnWriter {
     return list
   }
 
-  private fun DmnDecisionTable.Header.allDefinitions(): MutableList<ColumnDefinition> {
-    val definitions = mutableListOf<ColumnDefinition>()
+  private fun DmnDecisionTable.Header.allDefinitions(): MutableList<ColumnDefinition<*>> {
+    val definitions = mutableListOf<ColumnDefinition<*>>()
     this.inputs.forEach { definitions.add(it) }
     this.outputs.forEach { definitions.add(it) }
 

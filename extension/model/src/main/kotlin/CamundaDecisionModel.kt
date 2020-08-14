@@ -2,8 +2,7 @@ package io.holunda.decision.model
 
 import io.holunda.decision.model.converter.DmnDecisionTableConverter
 import io.holunda.decision.model.converter.DmnDiagramConverter
-import io.holunda.decision.model.element.DmnDecisionTable
-import io.holunda.decision.model.element.DmnDiagram
+import io.holunda.decision.model.element.*
 import io.holunda.decision.model.io.DmnWriter
 import org.camunda.bpm.model.dmn.DmnModelInstance
 import org.camunda.bpm.model.dmn.impl.DmnModelConstants
@@ -80,6 +79,60 @@ object CamundaDecisionModel {
   @JvmStatic
   fun render(diagram: DmnDiagram) = DmnWriter.render(diagram)
 
+  object InputDefinitions {
+
+    @JvmStatic
+    @JvmOverloads
+    fun stringInput(key: String, label: String = key) = StringInputDefinition(key, label)
+
+    @JvmStatic
+    @JvmOverloads
+    fun booleanInput(key: String, label: String = key) = BooleanInputDefinition(key, label)
+
+    @JvmStatic
+    @JvmOverloads
+    fun integerInput(key: String, label: String = key) = IntegerInputDefinition(key, label)
+
+    @JvmStatic
+    @JvmOverloads
+    fun longInput(key: String, label: String = key) = LongInputDefinition(key, label)
+
+    @JvmStatic
+    @JvmOverloads
+    fun doubleInput(key: String, label: String = key) = DoubleInputDefinition(key, label)
+
+    @JvmStatic
+    @JvmOverloads
+    fun dateInput(key: String, label: String = key) = DateInputDefinition(key, label)
+
+  }
+
+  object OutputDefinitions {
+    @JvmStatic
+    @JvmOverloads
+    fun stringOutput(key: String, label: String = key) = StringOutputDefinition(key, label)
+
+    @JvmStatic
+    @JvmOverloads
+    fun booleanOutput(key: String, label: String = key) = BooleanOutputDefinition(key, label)
+
+    @JvmStatic
+    @JvmOverloads
+    fun integerOutput(key: String, label: String = key) = IntegerOutputDefinition(key, label)
+
+    @JvmStatic
+    @JvmOverloads
+    fun longOutput(key: String, label: String = key) = LongOutputDefinition(key, label)
+
+    @JvmStatic
+    @JvmOverloads
+    fun doubleOutput(key: String, label: String = key) = DoubleOutputDefinition(key, label)
+
+    @JvmStatic
+    @JvmOverloads
+    fun dateOutput(key: String, label: String = key) = DateOutputDefinition(key, label)
+
+  }
 
   object Meta {
     val version = CamundaDecisionModel::class.java.`package`.implementationVersion ?: "n/a"
@@ -94,6 +147,7 @@ typealias Id = String
 typealias Name = String
 typealias DecisionDefinitionKey = String
 typealias VersionTag = String
+
 
 const val BIODI_NS = "http://bpmn.io/schema/dmn/biodi/1.0"
 const val CAMUNDA_NS = DmnModelConstants.CAMUNDA_NS

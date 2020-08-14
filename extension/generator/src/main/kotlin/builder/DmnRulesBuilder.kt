@@ -13,20 +13,20 @@ import org.apache.commons.lang3.builder.Builder
 class DmnRulesBuilder : Builder<DmnRules> {
 
   private var description : String? = null
-  private val inputs = mutableListOf<InputEntry>()
-  private val outputs = mutableListOf<OutputEntry>()
+  private val inputs = mutableListOf<InputEntry<*>>()
+  private val outputs = mutableListOf<OutputEntry<*>>()
 
   fun description(description:String) = apply {
     this.description = description
   }
 
-  fun condition(input : InputEntry) = apply {
+  fun <T:Any> condition(input : InputEntry<T>) = apply {
     this.inputs.add(input)
   }
 
-  fun and(input : InputEntry) = condition(input)
+  fun <T:Any> and(input : InputEntry<T>) = condition(input)
 
-  fun outputs(vararg outputs:OutputEntry) = apply {
+  fun <T:Any> outputs(vararg outputs: OutputEntry<T>) = apply {
     this.outputs.addAll(outputs.toList())
   }
 

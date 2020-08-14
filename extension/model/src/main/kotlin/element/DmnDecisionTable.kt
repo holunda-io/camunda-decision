@@ -14,7 +14,7 @@ data class DmnDecisionTable(
   val rules: DmnRules
 ) {
 
-  data class Header(val inputs: List<InputDefinition>, val outputs: List<OutputDefinition>) {
+  data class Header(val inputs: List< InputDefinition<*>>, val outputs: List<OutputDefinition<*>>) {
     val numInputs = inputs.size
     val numOutputs = outputs.size
   }

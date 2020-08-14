@@ -17,16 +17,16 @@ fun DecisionTable.toHeader() = DmnDecisionTable.Header(
 
 val DecisionTable.dmnHitPolicy get() = DmnHitPolicy.valueOf(this.hitPolicy, this.aggregation)
 
-fun DecisionTable.output(column: OutputDefinition) = addChildElement(Output::class).apply {
+fun DecisionTable.output(column: OutputDefinition<*>) = addChildElement(Output::class).apply {
   this.name = column.key
   this.label = column.label
-  this.typeRef = column.type.typeRef
+  this.typeRef = column.typeRef
 }
 
-fun DecisionTable.input(column: InputDefinition) = addChildElement(Input::class).apply {
+fun DecisionTable.input(column: InputDefinition<*>) = addChildElement(Input::class).apply {
   this.label = column.label
   inputExpression = newInstance(InputExpression::class).apply {
     text = textContent(column.key)
-    typeRef = column.type.typeRef
+    typeRef = column.typeRef
   }
 }

@@ -3,17 +3,18 @@ package io.holunda.decision.model.converter
 
 import io.holunda.decision.lib.test.CamundaDecisionTestLib
 import io.holunda.decision.model.CamundaDecisionModel
+import io.holunda.decision.model.CamundaDecisionModel.InputDefinitions.booleanInput
+import io.holunda.decision.model.CamundaDecisionModel.InputDefinitions.integerInput
+import io.holunda.decision.model.CamundaDecisionModel.OutputDefinitions.integerOutput
+import io.holunda.decision.model.CamundaDecisionModel.OutputDefinitions.stringOutput
 import io.holunda.decision.model.CamundaDecisonModelFixtures
 import io.holunda.decision.model.element.*
-import io.holunda.decision.model.element.InputDefinitionFactory.booleanInput
-import io.holunda.decision.model.element.InputDefinitionFactory.integerInput
-import io.holunda.decision.model.element.OutputDefinitionFactory.stringOutput
 import io.holunda.decision.model.ext.toXml
 import io.holunda.decision.model.io.DmnWriter
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class DmnDiagramConverterTest {
+internal class DmnDiagramConverterTest {
 
   @Test
   fun `generate graph`() {
@@ -32,7 +33,7 @@ class DmnDiagramConverterTest {
   @Test
   fun `create model from diagram`() {
     val foo = integerInput("foo", "input foo")
-    val bar = OutputDefinitionFactory.integerOutput("bar", "Result")
+    val bar = integerOutput("bar", "Result")
     val dmnDiagram = DmnDiagram(
       id = "my_diagram",
       name = "Dmn Diagram",
@@ -43,7 +44,7 @@ class DmnDiagramConverterTest {
           header = DmnDecisionTable.Header(listOf(foo), listOf(bar)),
           rules = DmnRules(
               listOf(
-                  DmnRule(description = "the only one", inputs = listOf(InputEntry(foo, "> 100")), outputs = listOf(OutputEntry(bar, "17")))
+                  DmnRule(description = "the only one", inputs = listOf(InputEntry<Int>(foo, "> 100")), outputs = listOf(OutputEntry<Int>(bar, "17")))
               )
           )
         )

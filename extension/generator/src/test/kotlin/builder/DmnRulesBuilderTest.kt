@@ -1,8 +1,9 @@
 package io.holunda.decision.generator.builder
 
-import io.holunda.decision.model.element.*
-import io.holunda.decision.model.element.InputDefinitionFactory.stringInput
-import io.holunda.decision.model.element.OutputDefinitionFactory.stringOutput
+import io.holunda.decision.model.CamundaDecisionModel.InputDefinitions.stringInput
+import io.holunda.decision.model.CamundaDecisionModel.OutputDefinitions.stringOutput
+import io.holunda.decision.model.element.InputEntry
+import io.holunda.decision.model.element.OutputEntry
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
@@ -12,7 +13,7 @@ internal class DmnRulesBuilderTest {
   fun `create simple and rule`() {
     val rules = DmnRulesBuilder()
       .description("my first rule")
-      .outputs(OutputEntry(stringOutput("bar"),"\"hello\""))
+      .outputs(OutputEntry(stringOutput("bar"), "\"hello\""))
       .condition(InputEntry(stringInput("foo"), "\"xxx\""))
       .build()
 

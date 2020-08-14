@@ -10,6 +10,7 @@ import io.holunda.decision.model.element.DmnRules
 class DmnDecisionTableRulesBuilder : AbstractDmnDecisionTableBuilder() {
 
   private val dmnRuleBuilders = mutableListOf<DmnRulesBuilder>()
+  private var hitPolicy : DmnHitPolicy? = null
 
   fun decisionDefinitionKey(decisionDefinitionKey: DecisionDefinitionKey) = apply { this.decisionDefinitionKey = decisionDefinitionKey }
 
@@ -17,7 +18,10 @@ class DmnDecisionTableRulesBuilder : AbstractDmnDecisionTableBuilder() {
 
   fun versionTag(versionTag: VersionTag) = apply { this.versionTag = versionTag }
 
+  fun hitPolicy(hitPolicy: DmnHitPolicy) = apply { this.hitPolicy = hitPolicy }
+
   fun addRule(dmnRulesBuilder: DmnRulesBuilder) = apply { dmnRuleBuilders.add(dmnRulesBuilder) }
+
 
   override fun build(): DmnDecisionTable {
     requireNotNull(decisionDefinitionKey) { "must set decisionDefinitionKey" }
@@ -31,9 +35,9 @@ class DmnDecisionTableRulesBuilder : AbstractDmnDecisionTableBuilder() {
       decisionDefinitionKey = requireNotNull(decisionDefinitionKey) { "must set decisionDefinitionKey" },
       name = decisionName ?: decisionDefinitionKey as Name,
       versionTag = versionTag,
-      hitPolicy = DmnHitPolicy.FIRST, // TODO deal with default
+      hitPolicy = hitPolicy ?: DmnHitPolicy.FIRST,
       requiredDecisions = setOf(), // TODO deal with default
-      header = DmnDecisionTable.Header(combinedRules.distinctInputs, combinedRules.distinctOutputs), // TODO non empty headers
+      header = DmnDecisionTable.Header(combinedRules.distinctInputs, combinedRules.distinctOutputs),
       rules = combinedRules
     )
   }
@@ -42,6 +46,7 @@ class DmnDecisionTableRulesBuilder : AbstractDmnDecisionTableBuilder() {
     "decisionDefinitionKey=$decisionDefinitionKey, " +
     "decisionName=$decisionName, " +
     "versionTag=$versionTag, " +
+    "hitPolicy=$hitPolicy, " +
     "dmnRuleBuilders=$dmnRuleBuilders, " +
     ")"
 

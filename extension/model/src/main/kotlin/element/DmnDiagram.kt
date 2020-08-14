@@ -17,12 +17,13 @@ data class DmnDiagram(
 
   constructor(id: Id, name: Name, vararg decisionTables: DmnDecisionTable) : this(id, name, decisionTables.asList())
 
+  val resourceName = "diagram-${name.toLowerCase().replace("\\s".toRegex(), "-")}.dmn"
+
   val decisionDefinitionKeys = decisionTables.map { it.decisionDefinitionKey }.toSet()
 
-  val requiredDecisions = decisionTables.map { it.decisionDefinitionKey to it.requiredDecisions }
-    .filter { it.second.isNotEmpty() }
-    .toMap()
-
-
-  val resourceName = "diagram-${name.toLowerCase().replace("\\s".toRegex(), "-")}.dmn"
+  val requiredDecisions by lazy {
+    decisionTables.map { it.decisionDefinitionKey to it.requiredDecisions }
+      .filter { it.second.isNotEmpty() }
+      .toMap()
+  }
 }
