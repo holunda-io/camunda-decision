@@ -84,6 +84,7 @@ object CamundaDecisionModel {
   object Meta {
     val version = CamundaDecisionModel::class.java.`package`.implementationVersion ?: "n/a"
 
+    @Suppress("SpellCheckingInspection")
     @JvmStatic
     val DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss"
   }
