@@ -16,7 +16,6 @@ internal class DmnDecisionTableRulesBuilderTest {
         .outputs(OutputEntry(definition = OutputDefinitionFactory.stringOutput("bar"), expression = "\"xyz\""))
       )
 
-
     with(builder.build()) {
       assertThat(decisionDefinitionKey).isEqualTo("decision1")
       assertThat(name).isEqualTo("decision1")

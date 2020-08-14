@@ -9,7 +9,7 @@ import org.apache.commons.lang3.builder.Builder
 /**
  * Common superclass of reference builder and rules builder defining shared properties.
  */
-abstract class DmnDecisionTableBuilder : Builder<DmnDecisionTable> {
+abstract class AbstractDmnDecisionTableBuilder : Builder<DmnDecisionTable> {
 
   internal var decisionDefinitionKey: DecisionDefinitionKey? = null
   internal var decisionName: Name? = null

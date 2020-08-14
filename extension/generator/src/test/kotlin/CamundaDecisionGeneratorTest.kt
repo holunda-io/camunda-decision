@@ -3,10 +3,8 @@ package io.holunda.decision.generator
 import io.holunda.camunda.bpm.data.CamundaBpmData
 import io.holunda.decision.generator.CamundaDecisionGenerator.rule
 import io.holunda.decision.generator.CamundaDecisionGenerator.table
-import io.holunda.decision.generator.builder.DmnDecisionTableBuilder
 import io.holunda.decision.generator.builder.DmnDecisionTableReferenceBuilder
 import io.holunda.decision.lib.test.CamundaDecisionTestLib
-import io.holunda.decision.model.CamundaDecisionModel
 import io.holunda.decision.model.converter.DmnDiagramConverter
 import io.holunda.decision.model.element.*
 import io.holunda.decision.model.element.InputDefinitionFactory.booleanInput

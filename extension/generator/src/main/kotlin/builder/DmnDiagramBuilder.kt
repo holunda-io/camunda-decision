@@ -13,7 +13,7 @@ class DmnDiagramBuilder : Builder<DmnDiagram> {
 
   private var diagramId: Id? = null
   private var diagramName: Name? = null
-  private var decisionTableBuilders = mutableListOf<DmnDecisionTableBuilder>()
+  private var decisionTableBuilders = mutableListOf<AbstractDmnDecisionTableBuilder>()
 
   /**
    * Set the id.
@@ -28,7 +28,7 @@ class DmnDiagramBuilder : Builder<DmnDiagram> {
   /**
    * Add builder.
    */
-  fun addDecisionTable(builder: DmnDecisionTableBuilder) = apply { decisionTableBuilders.add(builder) }
+  fun addDecisionTable(builder: AbstractDmnDecisionTableBuilder) = apply { decisionTableBuilders.add(builder) }
 
   /**
    * Build the dmn diagram.

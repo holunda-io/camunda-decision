@@ -7,7 +7,7 @@ import io.holunda.decision.model.element.DmnDecisionTable
 import io.holunda.decision.model.element.DmnHitPolicy
 import io.holunda.decision.model.element.DmnRules
 
-class DmnDecisionTableRulesBuilder : DmnDecisionTableBuilder() {
+class DmnDecisionTableRulesBuilder : AbstractDmnDecisionTableBuilder() {
 
   private val dmnRuleBuilders = mutableListOf<DmnRulesBuilder>()
 

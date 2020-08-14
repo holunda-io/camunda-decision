@@ -7,7 +7,7 @@ import io.holunda.decision.model.VersionTag
 import io.holunda.decision.model.element.DmnDecisionTable
 import org.camunda.bpm.model.dmn.DmnModelInstance
 
-class DmnDecisionTableReferenceBuilder : DmnDecisionTableBuilder() {
+class DmnDecisionTableReferenceBuilder : AbstractDmnDecisionTableBuilder() {
 
   lateinit var decisionTableReference: DecisionTableReference
 
@@ -26,7 +26,6 @@ class DmnDecisionTableReferenceBuilder : DmnDecisionTableBuilder() {
 
   fun versionTag(versionTag: VersionTag) = apply { this.versionTag = versionTag }
 
-
   override fun build(): DmnDecisionTable {
     require(this::decisionTableReference.isInitialized) { "reference must be set!" }
 
@@ -42,11 +41,12 @@ class DmnDecisionTableReferenceBuilder : DmnDecisionTableBuilder() {
   /**
    * Referencing a table in a given modelInstance.
    */
-  data class DecisionTableReference(val dmnModelInstance: DmnModelInstance, val decisionDefinitionKey: DecisionDefinitionKey? = null) {
+  data class DecisionTableReference(
+    val dmnModelInstance: DmnModelInstance,
+    val decisionDefinitionKey: DecisionDefinitionKey? = null) {
 
     internal val decisionTable by lazy {
       CamundaDecisionModel.readDecisionTable(dmnModelInstance, decisionDefinitionKey)
     }
-
   }
 }
