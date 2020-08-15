@@ -31,3 +31,5 @@ Prints [ascii table](http://www.vandermeer.de/projects/skb/java/asciitable/featu
 
 * <https://camunda.github.io/feel-scala/feel-data-types>
 * <https://docs.camunda.org/manual/7.13/reference/dmn/>
+
+* <https://consulting.camunda.com/dmn-simulator/>

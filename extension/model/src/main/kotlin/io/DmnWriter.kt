@@ -5,10 +5,19 @@ import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment
 import io.holunda.decision.model.element.*
 import java.util.*
 
+/**
+ * Prints decision tables to ascii.
+ */
 object DmnWriter {
 
+  /**
+   * @return ascii table containing the diagrams decison tables.
+   */
   fun render(diagram: DmnDiagram) = diagram.decisionTables.map { render(it) }.joinToString("\n\n")
 
+  /**
+   * @return ascii table representing a single decision table.
+   */
   fun render(table: DmnDecisionTable): String {
     require(table.header.inputs.isNotEmpty()) { "table '${table.decisionDefinitionKey}' has no inputs" }
     require(table.header.outputs.isNotEmpty()) { "table '${table.decisionDefinitionKey}' has no outputs" }
@@ -55,7 +64,6 @@ object DmnWriter {
 
     return definitions
   }
-
 
   private fun blank(value: String?): String {
     return if (value == null || value.trim() == "") "-" else value

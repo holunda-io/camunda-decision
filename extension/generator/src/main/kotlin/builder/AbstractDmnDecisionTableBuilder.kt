@@ -14,5 +14,6 @@ abstract class AbstractDmnDecisionTableBuilder : Builder<DmnDecisionTable> {
   internal var decisionDefinitionKey: DecisionDefinitionKey? = null
   internal var decisionName: Name? = null
   internal var versionTag: VersionTag? = null
+  internal var requiredDecision: DecisionDefinitionKey? = null
 
 }

@@ -1,4 +1,4 @@
-package io.holunda.decision.model.data
+package io.holunda.decision.model
 
 import io.holunda.camunda.bpm.data.factory.BasicVariableFactory
 import io.holunda.decision.model.element.*
@@ -11,7 +11,7 @@ sealed class DataType<T : Any>(
 ) {
 
   companion object {
-    fun valueOf(typeRef: String): DataType<*> = when (typeRef) {
+    fun valueByTypeRef(typeRef: String): DataType<*> = when (typeRef) {
       "string" -> StringDataType
       "boolean" -> BooleanDataType
       "integer" -> IntegerDataType
@@ -34,6 +34,7 @@ sealed class DataType<T : Any>(
   fun outputEntry(key: String, label: String, expression: String?) = OutputEntry<T>(outputDefinition(key, label), expression)
 
   override fun toString() = """DataType(name="$name", typeRef="$typeRef", type=$type)"""
+
   override fun equals(other: Any?): Boolean {
     if (this === other) return true
     if (javaClass != other?.javaClass) return false

@@ -1,5 +1,6 @@
 package io.holunda.decision.model.data
 
+import io.holunda.decision.model.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import java.util.*
@@ -35,12 +36,12 @@ internal class DataTypeTest {
 
   @Test
   fun `look up by typeref`() {
-    assertThat(DataType.valueOf(BooleanDataType.typeRef)).isEqualTo(BooleanDataType)
-    assertThat(DataType.valueOf(IntegerDataType.typeRef)).isEqualTo(IntegerDataType)
-    assertThat(DataType.valueOf(LongDataType.typeRef)).isEqualTo(LongDataType)
-    assertThat(DataType.valueOf(DoubleDataType.typeRef)).isEqualTo(DoubleDataType)
-    assertThat(DataType.valueOf(DateDataType.typeRef)).isEqualTo(DateDataType)
-    assertThat(DataType.valueOf(StringDataType.typeRef)).isEqualTo(StringDataType)
+    assertThat(DataType.valueByTypeRef(BooleanDataType.typeRef)).isEqualTo(BooleanDataType)
+    assertThat(DataType.valueByTypeRef(IntegerDataType.typeRef)).isEqualTo(IntegerDataType)
+    assertThat(DataType.valueByTypeRef(LongDataType.typeRef)).isEqualTo(LongDataType)
+    assertThat(DataType.valueByTypeRef(DoubleDataType.typeRef)).isEqualTo(DoubleDataType)
+    assertThat(DataType.valueByTypeRef(DateDataType.typeRef)).isEqualTo(DateDataType)
+    assertThat(DataType.valueByTypeRef(StringDataType.typeRef)).isEqualTo(StringDataType)
 
   }
 }

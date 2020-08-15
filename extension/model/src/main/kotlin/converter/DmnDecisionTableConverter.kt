@@ -2,16 +2,22 @@ package io.holunda.decision.model.converter
 
 import io.holunda.decision.model.element.*
 import io.holunda.decision.model.ext.*
+import org.camunda.bpm.model.dmn.DmnModelInstance
 import org.camunda.bpm.model.dmn.instance.Decision
 import org.camunda.bpm.model.dmn.instance.Definitions
 import org.camunda.bpm.model.dmn.instance.Rule
 
+interface DmnDecisionTableConverter {
+  fun toModelInstance(table: DmnDecisionTable): DmnModelInstance
+  fun toModelInstance(definitions: Definitions, table: DmnDecisionTable): Decision
+  fun fromModelInstance(decision: Decision): DmnDecisionTable
+}
 
-object DmnDecisionTableConverter {
+object DmnDecisionTableConverterBean : DmnDecisionTableConverter{
 
-  fun toModelInstance(table: DmnDecisionTable) = DmnDiagramConverter.toModelInstance(DmnDiagram(table))
+  override fun toModelInstance(table: DmnDecisionTable) = DmnDiagramConverterBean.toModelInstance(DmnDiagram(table))
 
-  fun toModelInstance(definitions: Definitions, table: DmnDecisionTable): Decision {
+  override fun toModelInstance(definitions: Definitions, table: DmnDecisionTable): Decision {
     val decision = definitions.decision(
       key = table.decisionDefinitionKey,
       name = table.name,
@@ -23,11 +29,15 @@ object DmnDecisionTableConverter {
     table.header.inputs.forEach { decisionTable.input(it) }
     table.header.outputs.forEach { decisionTable.output(it) }
 
+
     for (dmnRule in table.rules) {
       val rule = decisionTable.addChildElement(Rule::class)
 
-      dmnRule.inputs.map { it.expression }.forEach { rule.inputEntry(it) }
-      dmnRule.outputs.map { it.expression }.forEach { rule.outputEntry(it) }
+      val inputMap = dmnRule.inputs.associateBy { it.definition }
+      table.header.inputs.map { inputMap[it]!! }.map { it.expression }.forEach{ rule.inputEntry(it) }
+
+      val outputMap = dmnRule.outputs.associateBy { it.definition }
+      table.header.outputs.map { outputMap[it]!! }.map { it.expression }.forEach { rule.outputEntry(it) }
 
       rule.description(dmnRule.description)
     }
@@ -35,10 +45,10 @@ object DmnDecisionTableConverter {
     return decision
   }
 
-  fun fromModelInstance(decision: Decision): DmnDecisionTable {
+  override fun fromModelInstance(decision: Decision): DmnDecisionTable {
     val decisionTable = decision.getDecisionTable()
 
-    val header = decisionTable.toHeader()
+    val header = decisionTable.header
 
     val dmnRules = DmnRules(decisionTable.rules.map { rule ->
       var dmnRule = DmnRule(description = rule.description?.textContent ?: "-")

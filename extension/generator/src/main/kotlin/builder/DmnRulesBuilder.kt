@@ -12,21 +12,21 @@ import org.apache.commons.lang3.builder.Builder
  */
 class DmnRulesBuilder : Builder<DmnRules> {
 
-  private var description : String? = null
+  private var description: String? = null
   private val inputs = mutableListOf<InputEntry<*>>()
   private val outputs = mutableListOf<OutputEntry<*>>()
 
-  fun description(description:String) = apply {
+  fun description(description: String) = apply {
     this.description = description
   }
 
-  fun <T:Any> condition(input : InputEntry<T>) = apply {
+  fun <T : Any> condition(input: InputEntry<T>) = apply {
     this.inputs.add(input)
   }
 
-  fun <T:Any> and(input : InputEntry<T>) = condition(input)
+  fun <T : Any> and(input: InputEntry<T>) = condition(input)
 
-  fun <T:Any> outputs(vararg outputs: OutputEntry<T>) = apply {
+  fun <T : Any> outputs(vararg outputs: OutputEntry<T>) = apply {
     this.outputs.addAll(outputs.toList())
   }
 
@@ -43,10 +43,10 @@ class DmnRulesBuilder : Builder<DmnRules> {
     return DmnRules(rule)
   }
 
-  override fun toString() = "DmnRulesBuilder(" +
-    "description=$description, " +
-    "inputs=$inputs, " +
-    "outputs=$outputs" +
-    ")"
+  override fun toString() = """DmnRulesBuilder(
+    description=$description,
+    inputs=$inputs,
+    outputs=$outputs
+    )"""
 
 }

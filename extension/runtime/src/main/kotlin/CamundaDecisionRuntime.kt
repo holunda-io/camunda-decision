@@ -1,3 +1,5 @@
 package io.holunda.decision.runtime
 
-// empty
+object CamundaDecisionRuntime {
+
+}

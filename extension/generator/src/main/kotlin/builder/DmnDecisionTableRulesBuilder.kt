@@ -18,16 +18,15 @@ class DmnDecisionTableRulesBuilder : AbstractDmnDecisionTableBuilder() {
 
   fun versionTag(versionTag: VersionTag) = apply { this.versionTag = versionTag }
 
+  fun requiredDecision(requiredDecision: DecisionDefinitionKey) = apply { this.requiredDecision = requiredDecision }
+
   fun hitPolicy(hitPolicy: DmnHitPolicy) = apply { this.hitPolicy = hitPolicy }
 
   fun addRule(dmnRulesBuilder: DmnRulesBuilder) = apply { dmnRuleBuilders.add(dmnRulesBuilder) }
 
-
   override fun build(): DmnDecisionTable {
     requireNotNull(decisionDefinitionKey) { "must set decisionDefinitionKey" }
     require(dmnRuleBuilders.isNotEmpty()) { "must set at least one rule" }
-
-    println("tableBuilder: $this")
 
     val combinedRules = DmnRules(dmnRuleBuilders.map { it.build() }.flatMap { it.rules })
 
@@ -36,7 +35,7 @@ class DmnDecisionTableRulesBuilder : AbstractDmnDecisionTableBuilder() {
       name = decisionName ?: decisionDefinitionKey as Name,
       versionTag = versionTag,
       hitPolicy = hitPolicy ?: DmnHitPolicy.FIRST,
-      requiredDecisions = setOf(), // TODO deal with default
+      requiredDecisions = if (requiredDecision != null) setOf(requiredDecision!!) else setOf(),
       header = DmnDecisionTable.Header(combinedRules.distinctInputs, combinedRules.distinctOutputs),
       rules = combinedRules
     )

@@ -14,15 +14,15 @@ import io.holunda.decision.model.io.DmnWriter
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-internal class DmnDiagramConverterTest {
+internal class DmnDiagramConverterBeanTest {
 
   @Test
   fun `generate graph`() {
     val diagram = CamundaDecisonModelFixtures.DmnDiagramFixtures.decision2DependsOnDecision1
 
-    val dmnModelInstance = DmnDiagramConverter.toModelInstance(diagram)
+    val dmnModelInstance = DmnDiagramConverterBean.toModelInstance(diagram)
 
-    val d2 = DmnDiagramConverter.fromModelInstance(dmnModelInstance)
+    val d2 = DmnDiagramConverterBean.fromModelInstance(dmnModelInstance)
 
     println(CamundaDecisionModel.createModelInstance(d2).toXml())
 
@@ -51,7 +51,7 @@ internal class DmnDiagramConverterTest {
       )
     )
 
-    val dmnModelInstance = DmnDiagramConverter.toModelInstance(dmnDiagram)
+    val dmnModelInstance = DmnDiagramConverterBean.toModelInstance(dmnDiagram)
 
     println(dmnModelInstance.toXml())
     println(CamundaDecisionModel.render(CamundaDecisionModel.readDecisionTable(dmnModelInstance)))
@@ -67,7 +67,7 @@ internal class DmnDiagramConverterTest {
     val bar = booleanInput("bar", "Bar Value")
     val status = stringOutput("status", "VIP Status")
 
-    val diagram = DmnDiagramConverter.fromModelInstance(dmn)
+    val diagram = DmnDiagramConverterBean.fromModelInstance(dmn)
 
     val decisionTable = diagram.decisionTables.first()
 

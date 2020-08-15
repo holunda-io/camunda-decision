@@ -4,15 +4,29 @@ import io.holunda.decision.generator.builder.DmnDecisionTableRulesBuilder
 import io.holunda.decision.generator.builder.DmnDiagramBuilder
 import io.holunda.decision.generator.builder.DmnRulesBuilder
 import io.holunda.decision.model.DecisionDefinitionKey
+import io.holunda.decision.model.Name
+import io.holunda.decision.model.element.InputEntry
 
 object CamundaDecisionGenerator {
 
   @JvmStatic
-  fun diagram() = DmnDiagramBuilder()
+  @JvmOverloads
+  fun diagram(name : Name? = null) = DmnDiagramBuilder().apply {
+    if(name != null) name(name)
+  }
 
   @JvmStatic
-  fun table() = DmnDecisionTableRulesBuilder()
+  @JvmOverloads
+  fun table(decisionDefinitionKey: DecisionDefinitionKey? = null) = DmnDecisionTableRulesBuilder()
+    .apply {
+      if (decisionDefinitionKey != null ) decisionDefinitionKey(decisionDefinitionKey)
+    }
 
   @JvmStatic
-  fun rule() = DmnRulesBuilder()
+  fun  rule() = DmnRulesBuilder()
+
+  @JvmStatic
+  fun  <T:Any> rule(condition: InputEntry<T>? = null) = rule().apply {
+    if (condition != null) condition(condition)
+  }
 }

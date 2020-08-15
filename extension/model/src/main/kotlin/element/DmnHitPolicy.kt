@@ -3,6 +3,9 @@ package io.holunda.decision.model.element
 import org.camunda.bpm.model.dmn.BuiltinAggregator
 import org.camunda.bpm.model.dmn.HitPolicy
 
+/**
+ * Tuple combining camundas HitPolicy and the BuiltinAggregator (optional, for collection operations).
+ */
 enum class DmnHitPolicy(val hitPolicy: HitPolicy, val aggregator: BuiltinAggregator? = null) {
   UNIQUE(HitPolicy.UNIQUE),
   FIRST(HitPolicy.FIRST),

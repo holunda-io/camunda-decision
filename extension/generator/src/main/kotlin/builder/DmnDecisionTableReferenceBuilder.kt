@@ -7,6 +7,9 @@ import io.holunda.decision.model.VersionTag
 import io.holunda.decision.model.element.DmnDecisionTable
 import org.camunda.bpm.model.dmn.DmnModelInstance
 
+/**
+ * Builds a decision table based on a given existing reference. Allows modification of meta data.
+ */
 class DmnDecisionTableReferenceBuilder : AbstractDmnDecisionTableBuilder() {
 
   lateinit var decisionTableReference: DecisionTableReference
@@ -21,6 +24,8 @@ class DmnDecisionTableReferenceBuilder : AbstractDmnDecisionTableBuilder() {
   }
 
   fun decisionDefinitionKey(decisionDefinitionKey: DecisionDefinitionKey) = apply { this.decisionDefinitionKey = decisionDefinitionKey }
+
+  fun requiredDecision(requiredDecision: DecisionDefinitionKey) = apply { this.requiredDecision = requiredDecision }
 
   fun name(name: Name) = apply { this.decisionName = name }
 

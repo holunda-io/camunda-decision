@@ -10,7 +10,7 @@ import org.camunda.bpm.model.dmn.instance.Input
 import org.camunda.bpm.model.dmn.instance.InputExpression
 import org.camunda.bpm.model.dmn.instance.Output
 
-fun DecisionTable.toHeader() = DmnDecisionTable.Header(
+val DecisionTable.header : DmnDecisionTable.Header get() = DmnDecisionTable.Header(
   inputs = inputs.map { it.toInputDefinition() },
   outputs = outputs.map { it.toOutputDefinition() }
 )

@@ -1,5 +1,8 @@
 package io.holunda.decision.model.element
 
+/**
+ * Represents one row in a decision table.
+ */
 data class DmnRule(
   val id: String? = null,
   val description: String? = null,
@@ -14,10 +17,16 @@ data class DmnRule(
       .toList()
   }
 
+  /**
+   * All input definitions.
+   */
   val inputDefinitions by lazy {
     inputs.map { it.definition }
   }
 
+  /**
+   * All output definitions.
+   */
   val outputDefinitions by lazy {
     outputs.map { it.definition }
   }
@@ -35,7 +44,7 @@ data class DmnRule(
     inputs.find { it.definition == header }?.expression
   }
 
-  fun outEntries(definitions: List<OutputDefinition<*>>) = definitions.map { header ->
+  fun outputEntries(definitions: List<OutputDefinition<*>>) = definitions.map { header ->
     outputs.find { it.definition == header }?.expression
   }
 

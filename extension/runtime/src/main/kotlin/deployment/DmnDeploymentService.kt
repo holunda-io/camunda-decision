@@ -1,6 +1,6 @@
 package io.holunda.decision.runtime.deployment
 
-import io.holunda.decision.model.converter.DmnDiagramConverter
+import io.holunda.decision.model.converter.DmnDiagramConverterBean
 import io.holunda.decision.model.element.DmnDiagram
 import org.camunda.bpm.engine.RepositoryService
 import org.camunda.bpm.engine.repository.Deployment
@@ -24,7 +24,7 @@ class DmnDeploymentService(
   fun deploy(diagrams: List<DmnDiagram>) : Deployment {
     val deploymentBuilder = repositoryService.createDeployment()
 
-    diagrams.map { it.resourceName to DmnDiagramConverter.toModelInstance(it) }
+    diagrams.map { it.resourceName to DmnDiagramConverterBean.toModelInstance(it) }
       .forEach {
         deploymentBuilder.addModelInstance(it.first, it.second)
       }

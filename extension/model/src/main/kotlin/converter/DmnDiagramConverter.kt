@@ -9,17 +9,27 @@ import org.camunda.bpm.model.dmn.instance.InformationRequirement
 /**
  * The DmnDiagramConverter converts DmnModelInstances to DmnDiagram representations and creates DmnModelInstances from DmnDiagram-
  */
-object DmnDiagramConverter {
+interface DmnDiagramConverter {
 
   /**
    * Creates a camunda DmnModelInstance from a given DmnDiagram.
    */
-  fun toModelInstance(dmnDiagram: DmnDiagram): DmnModelInstance = Dmn.createEmptyModel().apply {
+  fun toModelInstance(dmnDiagram: DmnDiagram): DmnModelInstance
+
+  /**
+   * Parses a camunda DmnModelInstance to diagram pojo.
+   */
+  fun fromModelInstance(dmnModelInstance: DmnModelInstance): DmnDiagram
+}
+
+object DmnDiagramConverterBean : DmnDiagramConverter {
+
+  override fun toModelInstance(dmnDiagram: DmnDiagram): DmnModelInstance = Dmn.createEmptyModel().apply {
     val definitions = definitions(dmnDiagram.name, dmnDiagram.id)
 
     // first, create all decision (tables) to the model instance.
     dmnDiagram.decisionTables.forEach {
-      DmnDecisionTableConverter.toModelInstance(definitions, it)
+      DmnDecisionTableConverterBean.toModelInstance(definitions, it)
     }
 
     // then: calculate the layout ...
@@ -42,11 +52,11 @@ object DmnDiagramConverter {
     }
   }
 
-  fun fromModelInstance(dmnModelInstance: DmnModelInstance): DmnDiagram = DmnDiagram(
+  override fun fromModelInstance(dmnModelInstance: DmnModelInstance): DmnDiagram = DmnDiagram(
     id = dmnModelInstance.definitions.id,
     name = dmnModelInstance.definitions.name,
     decisionTables = dmnModelInstance.definitions.findDecisions()
-      .map { DmnDecisionTableConverter.fromModelInstance(it) }
+      .map { DmnDecisionTableConverterBean.fromModelInstance(it) }
   )
 
 }

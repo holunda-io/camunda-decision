@@ -14,7 +14,20 @@ data class DmnDecisionTable(
   val rules: DmnRules
 ) {
 
-  data class Header(val inputs: List< InputDefinition<*>>, val outputs: List<OutputDefinition<*>>) {
+  /**
+   * Creates a new instance using only one required decision instead of a set.
+   */
+  @JvmOverloads
+  constructor(decisionDefinitionKey: DecisionDefinitionKey,
+              name: Name,
+              versionTag: VersionTag? = null,
+              hitPolicy: DmnHitPolicy = DmnHitPolicy.FIRST,
+              requiredDecision: DecisionDefinitionKey,
+              header: Header,
+              rules: DmnRules
+  ) : this(decisionDefinitionKey, name, versionTag, hitPolicy, setOf(requiredDecision), header, rules)
+
+  data class Header(val inputs: List<InputDefinition<*>>, val outputs: List<OutputDefinition<*>>) {
     val numInputs = inputs.size
     val numOutputs = outputs.size
   }

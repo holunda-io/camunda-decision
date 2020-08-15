@@ -1,7 +1,7 @@
 package io.holunda.decision.model
 
-import io.holunda.decision.model.converter.DmnDecisionTableConverter
-import io.holunda.decision.model.converter.DmnDiagramConverter
+import io.holunda.decision.model.converter.DmnDecisionTableConverterBean
+import io.holunda.decision.model.converter.DmnDiagramConverterBean
 import io.holunda.decision.model.element.*
 import io.holunda.decision.model.io.DmnWriter
 import org.camunda.bpm.model.dmn.DmnModelInstance
@@ -15,12 +15,12 @@ object CamundaDecisionModel {
   /**
    * Reads a DMN Model instance and converts it to diagram DTO.
    *
-   * @see DmnDiagramConverter.fromModelInstance
+   * @see DmnDiagramConverterBean.fromModelInstance
    * @param dmnModelInstance: camunda model instance
    * @return diagram instance containing all dmn data
    */
   @JvmStatic
-  fun readDiagram(dmnModelInstance: DmnModelInstance) = DmnDiagramConverter.fromModelInstance(dmnModelInstance)
+  fun readDiagram(dmnModelInstance: DmnModelInstance) = DmnDiagramConverterBean.fromModelInstance(dmnModelInstance)
 
   /**
    * Reads a given decision table from the DMN Model Instance.
@@ -48,7 +48,7 @@ object CamundaDecisionModel {
    * @return a camunda model instance
    */
   @JvmStatic
-  fun createModelInstance(diagram: DmnDiagram) = DmnDiagramConverter.toModelInstance(diagram)
+  fun createModelInstance(diagram: DmnDiagram) = DmnDiagramConverterBean.toModelInstance(diagram)
 
   /**
    * Creates a camunda model instance based on data provided by table.
@@ -57,7 +57,7 @@ object CamundaDecisionModel {
    * @return a camunda model instance
    */
   @JvmStatic
-  fun createModelInstance(table: DmnDecisionTable) = DmnDecisionTableConverter.toModelInstance(table)
+  fun createModelInstance(table: DmnDecisionTable) = DmnDecisionTableConverterBean.toModelInstance(table)
 
   /**
    * Renders a given decision table to ASCII.

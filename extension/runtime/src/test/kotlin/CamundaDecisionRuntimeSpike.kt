@@ -10,7 +10,7 @@ import org.junit.Test
 @Deployment(resources = ["dmn/drd-dec1-dec2.dmn"])
 class CamundaDecisionRuntimeSpike {
 
-  val drd = "multiple_decisions";
+  val drd = "multiple_decisions"
 
   @get:Rule
   val camunda = CamundaDecisionTestLib.camunda()
@@ -24,7 +24,6 @@ class CamundaDecisionRuntimeSpike {
     assertThat(camunda.repositoryService.createDecisionDefinitionQuery().decisionDefinitionKey("decision1").list()).isNotNull
     assertThat(camunda.repositoryService.createDecisionDefinitionQuery().decisionDefinitionKey("decision2").singleResult()).isNotNull
 
-
     val result = decisionService.evaluateDecisionTableByKey("decision1", Variables.putValue("foo", true)).singleResult
 
     println(result)
@@ -33,8 +32,5 @@ class CamundaDecisionRuntimeSpike {
       Variables.putValue("foo", true).putValue("bar", true)).singleResult
 
     println("" + r.getSingleEntry())
-
-
-
   }
 }
