@@ -3,6 +3,7 @@ package io.holunda.decision.model
 import io.holunda.decision.model.converter.DmnDecisionTableConverterBean
 import io.holunda.decision.model.converter.DmnDiagramConverterBean
 import io.holunda.decision.model.element.*
+import io.holunda.decision.model.element.column.*
 import io.holunda.decision.model.io.DmnWriter
 import org.camunda.bpm.model.dmn.DmnModelInstance
 import org.camunda.bpm.model.dmn.impl.DmnModelConstants

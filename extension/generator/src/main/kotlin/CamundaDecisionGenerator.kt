@@ -5,7 +5,7 @@ import io.holunda.decision.generator.builder.DmnDiagramBuilder
 import io.holunda.decision.generator.builder.DmnRulesBuilder
 import io.holunda.decision.model.DecisionDefinitionKey
 import io.holunda.decision.model.Name
-import io.holunda.decision.model.element.InputEntry
+import io.holunda.decision.model.element.row.InputEntry
 
 object CamundaDecisionGenerator {
 

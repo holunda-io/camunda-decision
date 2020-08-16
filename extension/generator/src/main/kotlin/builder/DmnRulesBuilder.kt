@@ -1,9 +1,9 @@
 package io.holunda.decision.generator.builder
 
-import io.holunda.decision.model.element.DmnRule
+import io.holunda.decision.model.element.row.DmnRule
 import io.holunda.decision.model.element.DmnRules
-import io.holunda.decision.model.element.InputEntry
-import io.holunda.decision.model.element.OutputEntry
+import io.holunda.decision.model.element.row.InputEntry
+import io.holunda.decision.model.element.row.OutputEntry
 import org.apache.commons.lang3.builder.Builder
 
 /**

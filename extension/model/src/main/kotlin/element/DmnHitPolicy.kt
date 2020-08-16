@@ -1,11 +1,14 @@
 package io.holunda.decision.model.element
 
+import org.apiguardian.api.API
+import org.apiguardian.api.API.Status.STABLE
 import org.camunda.bpm.model.dmn.BuiltinAggregator
 import org.camunda.bpm.model.dmn.HitPolicy
 
 /**
  * Tuple combining camundas HitPolicy and the BuiltinAggregator (optional, for collection operations).
  */
+@API(status = STABLE)
 enum class DmnHitPolicy(val hitPolicy: HitPolicy, val aggregator: BuiltinAggregator? = null) {
   UNIQUE(HitPolicy.UNIQUE),
   FIRST(HitPolicy.FIRST),

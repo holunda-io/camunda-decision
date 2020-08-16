@@ -2,9 +2,8 @@ package io.holunda.decision.model.ext
 
 import io.holunda.decision.model.element.DmnDecisionTable
 import io.holunda.decision.model.element.DmnHitPolicy
-import io.holunda.decision.model.element.InputDefinition
-import io.holunda.decision.model.element.OutputDefinition
-import org.camunda.bpm.model.dmn.HitPolicy
+import io.holunda.decision.model.element.column.InputDefinition
+import io.holunda.decision.model.element.column.OutputDefinition
 import org.camunda.bpm.model.dmn.instance.DecisionTable
 import org.camunda.bpm.model.dmn.instance.Input
 import org.camunda.bpm.model.dmn.instance.InputExpression

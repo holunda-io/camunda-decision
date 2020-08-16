@@ -2,8 +2,8 @@ package io.holunda.decision.generator.builder
 
 import io.holunda.decision.model.CamundaDecisionModel.InputDefinitions.stringInput
 import io.holunda.decision.model.CamundaDecisionModel.OutputDefinitions.stringOutput
-import io.holunda.decision.model.element.InputEntry
-import io.holunda.decision.model.element.OutputEntry
+import io.holunda.decision.model.element.row.InputEntry
+import io.holunda.decision.model.element.row.OutputEntry
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

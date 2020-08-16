@@ -1,4 +1,8 @@
-package io.holunda.decision.model.element
+package io.holunda.decision.model.element.row
+
+import io.holunda.decision.model.element.column.ColumnDefinition
+import io.holunda.decision.model.element.column.InputDefinition
+import io.holunda.decision.model.element.column.OutputDefinition
 
 
 /**

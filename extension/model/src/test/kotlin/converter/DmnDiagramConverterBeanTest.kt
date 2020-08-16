@@ -9,6 +9,9 @@ import io.holunda.decision.model.CamundaDecisionModel.OutputDefinitions.integerO
 import io.holunda.decision.model.CamundaDecisionModel.OutputDefinitions.stringOutput
 import io.holunda.decision.model.CamundaDecisonModelFixtures
 import io.holunda.decision.model.element.*
+import io.holunda.decision.model.element.row.DmnRule
+import io.holunda.decision.model.element.row.InputEntry
+import io.holunda.decision.model.element.row.OutputEntry
 import io.holunda.decision.model.ext.toXml
 import io.holunda.decision.model.io.DmnWriter
 import org.assertj.core.api.Assertions.assertThat
@@ -44,7 +47,7 @@ internal class DmnDiagramConverterBeanTest {
           header = DmnDecisionTable.Header(listOf(foo), listOf(bar)),
           rules = DmnRules(
               listOf(
-                  DmnRule(description = "the only one", inputs = listOf(InputEntry<Int>(foo, "> 100")), outputs = listOf(OutputEntry<Int>(bar, "17")))
+                DmnRule(description = "the only one", inputs = listOf(InputEntry<Int>(foo, "> 100")), outputs = listOf(OutputEntry<Int>(bar, "17")))
               )
           )
         )

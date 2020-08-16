@@ -3,6 +3,9 @@ package io.holunda.decision.model.io
 import de.vandermeer.asciitable.AsciiTable
 import de.vandermeer.skb.interfaces.transformers.textformat.TextAlignment
 import io.holunda.decision.model.element.*
+import io.holunda.decision.model.element.column.ColumnDefinition
+import io.holunda.decision.model.element.row.DmnRule
+import io.holunda.decision.model.element.row.RuleEntry
 import java.util.*
 
 /**

@@ -4,6 +4,9 @@ import io.holunda.decision.model.CamundaDecisionModel.InputDefinitions.integerIn
 import io.holunda.decision.model.CamundaDecisionModel.OutputDefinitions.integerOutput
 import io.holunda.decision.model.CamundaDecisionModel.OutputDefinitions.stringOutput
 import io.holunda.decision.model.element.*
+import io.holunda.decision.model.element.row.DmnRule
+import io.holunda.decision.model.element.row.InputEntry
+import io.holunda.decision.model.element.row.OutputEntry
 
 
 object CamundaDecisonModelFixtures {

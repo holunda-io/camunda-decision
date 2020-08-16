@@ -1,7 +1,7 @@
 package io.holunda.decision.model
 
 import io.holunda.decision.model.CamundaDecisionModel.InputDefinitions.stringInput
-import io.holunda.decision.model.element.DmnRule
+import io.holunda.decision.model.element.row.DmnRule
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

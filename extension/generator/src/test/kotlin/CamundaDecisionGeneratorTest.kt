@@ -1,7 +1,6 @@
 package io.holunda.decision.generator
 
 import io.holunda.camunda.bpm.data.CamundaBpmData
-import io.holunda.camunda.bpm.data.CamundaBpmDataKotlin
 import io.holunda.decision.generator.CamundaDecisionGenerator.diagram
 import io.holunda.decision.generator.CamundaDecisionGenerator.rule
 import io.holunda.decision.generator.CamundaDecisionGenerator.table
@@ -9,7 +8,6 @@ import io.holunda.decision.generator.CamundaDecisionGeneratorHelper.addModelInst
 import io.holunda.decision.generator.builder.DmnDecisionTableReferenceBuilder
 import io.holunda.decision.lib.test.CamundaDecisionTestLib
 import io.holunda.decision.lib.test.CamundaDecisionTestLib.manageDmnDeployment
-import io.holunda.decision.model.CamundaDecisionModel
 import io.holunda.decision.model.CamundaDecisionModel.InputDefinitions.booleanInput
 import io.holunda.decision.model.CamundaDecisionModel.InputDefinitions.integerInput
 import io.holunda.decision.model.CamundaDecisionModel.InputDefinitions.longInput
@@ -19,9 +17,9 @@ import io.holunda.decision.model.CamundaDecisionModel.OutputDefinitions.longOutp
 import io.holunda.decision.model.CamundaDecisionModel.OutputDefinitions.stringOutput
 import io.holunda.decision.model.converter.DmnDiagramConverterBean
 import io.holunda.decision.model.element.DmnHitPolicy
-import io.holunda.decision.model.element.InputEntry
-import io.holunda.decision.model.element.OutputEntry
-import io.holunda.decision.model.element.toEntry
+import io.holunda.decision.model.element.row.InputEntry
+import io.holunda.decision.model.element.row.OutputEntry
+import io.holunda.decision.model.element.row.toEntry
 import io.holunda.decision.model.ext.toXml
 import io.holunda.decision.model.io.DmnWriter
 import org.assertj.core.api.Assertions.assertThat

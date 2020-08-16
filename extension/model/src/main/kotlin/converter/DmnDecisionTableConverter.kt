@@ -1,6 +1,7 @@
 package io.holunda.decision.model.converter
 
 import io.holunda.decision.model.element.*
+import io.holunda.decision.model.element.row.DmnRule
 import io.holunda.decision.model.ext.*
 import org.camunda.bpm.model.dmn.DmnModelInstance
 import org.camunda.bpm.model.dmn.instance.Decision

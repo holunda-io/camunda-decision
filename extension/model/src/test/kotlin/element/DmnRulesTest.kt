@@ -2,6 +2,9 @@ package io.holunda.decision.model.element
 
 import io.holunda.decision.model.CamundaDecisionModel.InputDefinitions.stringInput
 import io.holunda.decision.model.CamundaDecisionModel.OutputDefinitions.stringOutput
+import io.holunda.decision.model.element.row.DmnRule
+import io.holunda.decision.model.element.row.InputEntry
+import io.holunda.decision.model.element.row.OutputEntry
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

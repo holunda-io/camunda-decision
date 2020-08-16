@@ -1,7 +1,6 @@
 package io.holunda.decision.generator.builder
 
 import io.holunda.decision.lib.test.CamundaDecisionTestLib.readModel
-import io.holunda.decision.model.CamundaDecisionModel
 import io.holunda.decision.model.element.DmnHitPolicy
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test

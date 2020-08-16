@@ -3,6 +3,9 @@ package io.holunda.decision.model.element
 import io.holunda.decision.model.DecisionDefinitionKey
 import io.holunda.decision.model.Name
 import io.holunda.decision.model.VersionTag
+import io.holunda.decision.model.element.column.InputDefinition
+import io.holunda.decision.model.element.column.OutputDefinition
+import io.holunda.decision.model.element.row.DmnRule
 
 data class DmnDecisionTable(
   val decisionDefinitionKey: DecisionDefinitionKey,
@@ -11,7 +14,7 @@ data class DmnDecisionTable(
   val hitPolicy: DmnHitPolicy = DmnHitPolicy.FIRST,
   val requiredDecisions: Set<DecisionDefinitionKey> = setOf(),
   val header: Header,
-  val rules: DmnRules
+  val rules: List<DmnRule>
 ) {
 
   /**

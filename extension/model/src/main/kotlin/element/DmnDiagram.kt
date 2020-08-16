@@ -3,6 +3,10 @@ package io.holunda.decision.model.element
 import io.holunda.decision.model.Id
 import io.holunda.decision.model.Name
 
+/**
+ * The diagram, corresponds to the dmn-xml resp. the DmnModelInstance.
+ * Contains at least one DmnDecisionTable. If it contains more than one table, these must form a graph.
+ */
 data class DmnDiagram(
   val id: Id,
   val name: Name,

@@ -1,7 +1,9 @@
 package io.holunda.decision.model
 
 import io.holunda.camunda.bpm.data.factory.BasicVariableFactory
-import io.holunda.decision.model.element.*
+import io.holunda.decision.model.element.column.*
+import io.holunda.decision.model.element.row.InputEntry
+import io.holunda.decision.model.element.row.OutputEntry
 import java.util.*
 
 sealed class DataType<T : Any>(
