@@ -1,15 +1,15 @@
 package io.holunda.decision.generator.builder
 
-import io.holunda.decision.model.DecisionDefinitionKey
-import io.holunda.decision.model.Name
-import io.holunda.decision.model.VersionTag
-import io.holunda.decision.model.element.DmnDecisionTable
-import io.holunda.decision.model.element.DmnHitPolicy
-import io.holunda.decision.model.element.DmnRules
+import io.holunda.decision.model.api.DecisionDefinitionKey
+import io.holunda.decision.model.api.Name
+import io.holunda.decision.model.api.VersionTag
+import io.holunda.decision.model.api.data.DmnHitPolicy
+import io.holunda.decision.model.api.element.DmnDecisionTable
+import io.holunda.decision.model.api.element.DmnRuleList
 
 class DmnDecisionTableRulesBuilder : AbstractDmnDecisionTableBuilder() {
 
-  private val dmnRuleBuilders = mutableListOf<DmnRulesBuilder>()
+  private val dmnRuleBuilders = mutableListOf<DmnBusinessRuleBuilder>()
   private var hitPolicy : DmnHitPolicy? = null
 
   fun decisionDefinitionKey(decisionDefinitionKey: DecisionDefinitionKey) = apply { this.decisionDefinitionKey = decisionDefinitionKey }
@@ -22,13 +22,13 @@ class DmnDecisionTableRulesBuilder : AbstractDmnDecisionTableBuilder() {
 
   fun hitPolicy(hitPolicy: DmnHitPolicy) = apply { this.hitPolicy = hitPolicy }
 
-  fun addRule(dmnRulesBuilder: DmnRulesBuilder) = apply { dmnRuleBuilders.add(dmnRulesBuilder) }
+  fun addRule(dmnBusinessRuleBuilder: DmnBusinessRuleBuilder) = apply { dmnRuleBuilders.add(dmnBusinessRuleBuilder) }
 
   override fun build(): DmnDecisionTable {
     requireNotNull(decisionDefinitionKey) { "must set decisionDefinitionKey" }
     require(dmnRuleBuilders.isNotEmpty()) { "must set at least one rule" }
 
-    val combinedRules = DmnRules(dmnRuleBuilders.map { it.build() }.flatMap { it.rules })
+    val combinedRules = DmnRuleList(dmnRuleBuilders.map { it.build() }.flatMap { it })
 
     return DmnDecisionTable(
       decisionDefinitionKey = requireNotNull(decisionDefinitionKey) { "must set decisionDefinitionKey" },

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:ns0="http://camunda.org/schema/1.0/dmn" id="DmnDiagram_1858245642" name="Foo Bar Diagram" namespace="http://camunda.org/schema/1.0/dmn" exporter="CamundaDecisionGenerator" exporterVersion="n/a">
+  <decision id="decision1" name="decision1" ns0:versionTag="">
+    <decisionTable id="DecisionTable_165745260" hitPolicy="FIRST">
+      <input id="Input_1511695817" label="Foo Number">
+        <inputExpression id="InputExpression_1398215449" typeRef="long">
+          <text>foo</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1115155168" label="Bar Number" name="bar" typeRef="long" />
+      <rule id="Rule_330073651">
+        <description></description>
+        <inputEntry id="InputEntry_1994996997">
+          <text>&gt; 5</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_1752013672">
+          <text>100</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_1716889821">
+        <description></description>
+        <inputEntry id="InputEntry_111654141">
+          <text>&gt; 20</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_478552062">
+          <text>200</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="decision2" name="decision2" ns0:versionTag="">
+    <informationRequirement id="InformationRequirement_0tr87lw">
+      <requiredDecision href="#decision1" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1786724997" hitPolicy="FIRST">
+      <input id="Input_1059524564" label="is Active?">
+        <inputExpression id="InputExpression_858772112" typeRef="boolean">
+          <text>active</text>
+        </inputExpression>
+      </input>
+      <input id="Input_1227950679" label="Bar Number">
+        <inputExpression id="InputExpression_898724222" typeRef="long">
+          <text>bar</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1257742697" label="final result" name="result" typeRef="boolean" />
+      <rule id="Rule_795783409">
+        <description></description>
+        <inputEntry id="InputEntry_1080238379">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_1172656743">
+          <text>100</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_856158135">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_1750968067">
+        <description></description>
+        <inputEntry id="InputEntry_749294089">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_1142883079">
+          <text>100</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_114022868">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_1833844518">
+        <description></description>
+        <inputEntry id="InputEntry_109802823">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_1852355636">
+          <text>200</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_713521127">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_535253891">
+        <description></description>
+        <inputEntry id="InputEntry_1085237921">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="InputEntry_1395302935">
+          <text>200</text>
+        </inputEntry>
+        <outputEntry id="OutputEntry_1145152429">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_12ma1wf">
+      <dmndi:DMNShape id="DMNShape_06rg4gp" dmnElementRef="decision1">
+        <dc:Bounds height="80" width="180" x="0" y="0" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0c11sra" dmnElementRef="decision2">
+        <dc:Bounds height="80" width="180" x="300" y="0" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0my2f3m" dmnElementRef="InformationRequirement_0tr87lw">
+        <di:waypoint x="180" y="40" />
+        <di:waypoint x="300" y="40" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

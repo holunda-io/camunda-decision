@@ -1,11 +1,12 @@
 package io.holunda.decision.generator.builder
 
 import io.holunda.decision.model.CamundaDecisionModel
-import io.holunda.decision.model.DecisionDefinitionKey
-import io.holunda.decision.model.Name
-import io.holunda.decision.model.VersionTag
-import io.holunda.decision.model.element.DmnDecisionTable
+import io.holunda.decision.model.api.DecisionDefinitionKey
+import io.holunda.decision.model.api.Name
+import io.holunda.decision.model.api.VersionTag
+import io.holunda.decision.model.api.element.DmnDecisionTable
 import org.camunda.bpm.model.dmn.DmnModelInstance
+import org.camunda.bpm.model.dmn.instance.DecisionTable
 
 /**
  * Builds a decision table based on a given existing reference. Allows modification of meta data.
@@ -36,7 +37,7 @@ class DmnDecisionTableReferenceBuilder : AbstractDmnDecisionTableBuilder() {
 
     val table = decisionTableReference.decisionTable
 
-    return table.copy(
+    return table!!.copy(
       name = decisionName ?: table.name,
       decisionDefinitionKey = decisionDefinitionKey ?: table.decisionDefinitionKey,
       versionTag = versionTag ?: table.versionTag
@@ -50,8 +51,11 @@ class DmnDecisionTableReferenceBuilder : AbstractDmnDecisionTableBuilder() {
     val dmnModelInstance: DmnModelInstance,
     val decisionDefinitionKey: DecisionDefinitionKey? = null) {
 
-    internal val decisionTable by lazy {
-      CamundaDecisionModel.readDecisionTable(dmnModelInstance, decisionDefinitionKey)
-    }
+    // TODO
+    internal val decisionTable : DmnDecisionTable? = null
+
+//      by lazy {
+//      CamundaDecisionModel.readDecisionTable(dmnModelInstance, decisionDefinitionKey)
+//    }
   }
 }

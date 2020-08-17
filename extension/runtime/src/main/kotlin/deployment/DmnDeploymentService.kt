@@ -1,7 +1,7 @@
 package io.holunda.decision.runtime.deployment
 
-import io.holunda.decision.model.converter.DmnDiagramConverterBean
-import io.holunda.decision.model.element.DmnDiagram
+import io.holunda.decision.model.api.DmnDiagramConverter
+import io.holunda.decision.model.api.element.DmnDiagram
 import org.camunda.bpm.engine.RepositoryService
 import org.camunda.bpm.engine.repository.Deployment
 
@@ -9,7 +9,8 @@ import org.camunda.bpm.engine.repository.Deployment
  * Deploys DmnDiagram using RepositoryService.
  */
 class DmnDeploymentService(
-  private val repositoryService: RepositoryService
+  private val repositoryService: RepositoryService,
+  private val diagramConverter: DmnDiagramConverter
 ) {
 
   /**
@@ -21,12 +22,14 @@ class DmnDeploymentService(
   /**
    * Deploys all given diagrams in one deployment.
    */
-  fun deploy(diagrams: List<DmnDiagram>) : Deployment {
+  fun deploy(diagrams: List<DmnDiagram>): Deployment {
     val deploymentBuilder = repositoryService.createDeployment()
 
-    diagrams.map { it.resourceName to DmnDiagramConverterBean.toModelInstance(it) }
+
+
+    diagrams.map { it.resourceName to diagramConverter.toXml(it) }
       .forEach {
-        deploymentBuilder.addModelInstance(it.first, it.second)
+        deploymentBuilder.addString(it.first, it.second)
       }
 
     return deploymentBuilder.deploy()!!

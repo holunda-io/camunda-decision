@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1kwany6" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.2.0">
+  <decision id="Decision_0mzena9" name="Decision 1">
+    <decisionTable id="DecisionTable_02z0h60" hitPolicy="FIRST">
+      <input id="Input_1" label="Foo">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>foo</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0vlp8zh" label="Baz">
+        <inputExpression id="LiteralExpression_1475m0z" typeRef="integer">
+          <text>baz</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Bar" name="bar" typeRef="string" />
+      <rule id="DecisionRule_1p3o4hi">
+        <inputEntry id="UnaryTests_01qkpi8">
+          <text>"A"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xz7fzy">
+          <text>&gt; 5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_188qn0q">
+          <text>"B"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ck8xvl">
+        <inputEntry id="UnaryTests_18cl4ot">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lcmqdw">
+          <text>&lt;20</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1j0hsao">
+          <text>"C"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="Decision_17vsvsk" name="Decision 2">
+    <informationRequirement id="InformationRequirement_08egezp">
+      <requiredDecision href="#Decision_0mzena9" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_18o3dkf">
+      <input id="InputClause_1o4kd9c" label="Bar">
+        <inputExpression id="LiteralExpression_18uw0ik" typeRef="string">
+          <text>bar</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1ig01ef" label="Active">
+        <inputExpression id="LiteralExpression_02d2iq7" typeRef="boolean">
+          <text>active</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0soemz2" label="Result" name="result" typeRef="string" />
+      <rule id="DecisionRule_19q76z0">
+        <inputEntry id="UnaryTests_0zfubpi">
+          <text>"B"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1f9enot">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0sakkgh">
+          <text>"Fantastic"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_0mzena9">
+        <dc:Bounds height="80" width="180" x="160" y="110" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_172j9vb" dmnElementRef="Decision_17vsvsk">
+        <dc:Bounds height="80" width="180" x="540" y="110" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_04ji7bu" dmnElementRef="InformationRequirement_08egezp">
+        <di:waypoint x="340" y="150" />
+        <di:waypoint x="520" y="150" />
+        <di:waypoint x="540" y="150" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

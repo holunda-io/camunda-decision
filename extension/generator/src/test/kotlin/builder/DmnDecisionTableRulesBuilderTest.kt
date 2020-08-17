@@ -1,11 +1,11 @@
 package io.holunda.decision.generator.builder
 
 import io.holunda.decision.generator.CamundaDecisionGenerator.rule
-import io.holunda.decision.model.CamundaDecisionModel.InputDefinitions.stringInput
-import io.holunda.decision.model.CamundaDecisionModel.OutputDefinitions.stringOutput
-import io.holunda.decision.model.element.DmnHitPolicy
-import io.holunda.decision.model.element.row.InputEntry
-import io.holunda.decision.model.element.row.OutputEntry
+import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.stringInput
+import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
+import io.holunda.decision.model.api.data.DmnHitPolicy
+import io.holunda.decision.model.api.element.InputEntry
+import io.holunda.decision.model.api.element.OutputEntry
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

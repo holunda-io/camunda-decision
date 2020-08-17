@@ -1,9 +1,9 @@
 package io.holunda.decision.generator.builder
 
-import io.holunda.decision.model.DecisionDefinitionKey
-import io.holunda.decision.model.Name
-import io.holunda.decision.model.VersionTag
-import io.holunda.decision.model.element.DmnDecisionTable
+import io.holunda.decision.model.api.DecisionDefinitionKey
+import io.holunda.decision.model.api.Name
+import io.holunda.decision.model.api.VersionTag
+import io.holunda.decision.model.api.element.DmnDecisionTable
 import org.apache.commons.lang3.builder.Builder
 
 /**

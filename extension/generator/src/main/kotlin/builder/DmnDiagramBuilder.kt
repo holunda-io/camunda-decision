@@ -1,9 +1,9 @@
 package io.holunda.decision.generator.builder
 
-import io.holunda.decision.model.Id
-import io.holunda.decision.model.Name
-import io.holunda.decision.model.element.DmnDiagram
-import io.holunda.decision.model.ext.generateId
+import io.holunda.decision.model.api.CamundaDecisionModelApi.generateId
+import io.holunda.decision.model.api.Id
+import io.holunda.decision.model.api.Name
+import io.holunda.decision.model.api.element.DmnDiagram
 import org.apache.commons.lang3.builder.Builder
 
 /**

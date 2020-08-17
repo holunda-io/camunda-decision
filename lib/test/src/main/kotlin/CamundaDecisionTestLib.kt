@@ -11,14 +11,24 @@ import org.camunda.bpm.model.dmn.DmnModelInstance
 
 
 object CamundaDecisionTestLib {
+
+  enum class DmnTestResource(val fileName:String) {
+    FOUR_TABLES("dmn/four-tables.dmn"),
+    DISHES_AND_DRINKS("dmn/simulation.dmn"),
+    ;
+
+    fun load() : String = readText(fileName)
+  }
+
+
   fun readModel(resource: String): DmnModelInstance {
-    val inputStream = CamundaDecisionTestLib::class.java.getResourceAsStream(resource.trailingSlash())
+    val inputStream = CamundaDecisionTestLib::class.java.getResourceAsStream(resource.addTrailingSlash())
 
     return Dmn.readModelFromStream(inputStream)!!
   }
 
   fun readText(resource:String) : String = CamundaDecisionTestLib::class.java
-    .getResource(resource.trailingSlash())
+    .getResource(resource.addTrailingSlash())
     .readText()
     .trim()
 
@@ -41,5 +51,5 @@ object CamundaDecisionTestLib {
       .deploy()
   )
 
-  private fun String.trailingSlash() = if (this.startsWith("/")) this else "/$this"
+  private fun String.addTrailingSlash() = if (this.startsWith("/")) this else "/$this"
 }

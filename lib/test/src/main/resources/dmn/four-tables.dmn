@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="diagram_4tables" name="4 Tables" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.2.0">
+  <decision id="decision_1" name="Decision 1" camunda:versionTag="1" camunda:historyTimeToLive="1">
+    <decisionTable id="DecisionTable_0wr96yi" hitPolicy="COLLECT" aggregation="SUM">
+      <input id="Input_1" label="A1" biodi:width="192">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>a1</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1sphtap" label="A2" biodi:width="192">
+        <inputExpression id="LiteralExpression_1ooqsol" typeRef="integer">
+          <text>a2</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Result 1" name="res1" typeRef="boolean" biodi:width="192" />
+      <rule id="DecisionRule_1xmbjrx">
+        <description>Das ist A</description>
+        <inputEntry id="UnaryTests_0tyzu9b">
+          <text>"A"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_149380e">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1oj1ixb">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0d1hsbf">
+        <description>Das ist kleiner 200</description>
+        <inputEntry id="UnaryTests_1a857e7">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1440d0t">
+          <text>&lt; 200</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13jp661">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="decision_2_1" name="Decision 2.1" camunda:versionTag="2" camunda:historyTimeToLive="2">
+    <informationRequirement id="graph_decision1_decision21">
+      <requiredDecision href="#decision_1" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0e4pgyr">
+      <input id="InputClause_1pvygjv" label="Result 1">
+        <inputExpression id="LiteralExpression_0jjdcgl" typeRef="long">
+          <text>result 1</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0dno65g" label="A2">
+        <inputExpression id="LiteralExpression_146ge8a" typeRef="boolean">
+          <text>a2</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_1gfw1mw" label="Result 2.1" name="r21" typeRef="boolean" />
+      <output id="OutputClause_14llrvi" label="Result 2.2" name="r22" typeRef="integer" />
+      <rule id="DecisionRule_1uwzfdf">
+        <description>hi</description>
+        <inputEntry id="UnaryTests_08c0o7g">
+          <text>17</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1izeomd">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1x2kkij">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0qt3agv">
+          <text>4</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="decision_2_2" name="Decision 2.2" camunda:versionTag="3" camunda:historyTimeToLive="3">
+    <informationRequirement id="graph_decision1_decision22">
+      <requiredDecision href="#decision_1" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0fb656w">
+      <input id="InputClause_1dba8vj" label="Result 1">
+        <inputExpression id="LiteralExpression_0m9uxh2" typeRef="integer">
+          <text>r1</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0j05psb" label="Result 2.2" name="r22" typeRef="string" />
+      <rule id="DecisionRule_0bgkfcn">
+        <inputEntry id="UnaryTests_0k6a0uv">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1dh4nmf">
+          <text>"CCCC"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="decision_3" name="Decision 3" camunda:versionTag="4" camunda:historyTimeToLive="4">
+    <informationRequirement id="graph_decision21_decision3">
+      <requiredDecision href="#decision_2_1" />
+    </informationRequirement>
+    <informationRequirement id="graph_decision22_decision3">
+      <requiredDecision href="#decision_2_2" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1i1zzus" hitPolicy="FIRST">
+      <input id="InputClause_1tzsuaw" label="A3">
+        <inputExpression id="LiteralExpression_0du8m2p" typeRef="long">
+          <text>a3</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0fq9eve" label="Result 3" name="r31" typeRef="string" />
+      <output id="OutputClause_149pj1d" label="Result 32" name="r32" typeRef="integer" />
+      <rule id="DecisionRule_11ju25d">
+        <inputEntry id="UnaryTests_09r4370">
+          <text>&gt;= 8</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0fce76u">
+          <text>"hhh"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0b5w974">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_17i1kjd">
+        <description>check</description>
+        <inputEntry id="UnaryTests_1fuuh5w">
+          <text>&lt;= 20</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13hszyj">
+          <text>"iii"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_00hx648">
+          <text>1</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="decision_1">
+        <dc:Bounds height="80" width="180" x="190" y="150" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1l2jfhv" dmnElementRef="decision_2_1">
+        <dc:Bounds height="80" width="180" x="440" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1oql2ej" dmnElementRef="decision_2_2">
+        <dc:Bounds height="80" width="180" x="440" y="210" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_05nb2nw" dmnElementRef="decision_3">
+        <dc:Bounds height="80" width="180" x="680" y="150" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0yje65l" dmnElementRef="graph_decision1_decision21">
+        <di:waypoint x="370" y="190" />
+        <di:waypoint x="420" y="120" />
+        <di:waypoint x="440" y="120" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0kqdb9o" dmnElementRef="graph_decision1_decision22">
+        <di:waypoint x="370" y="190" />
+        <di:waypoint x="420" y="250" />
+        <di:waypoint x="440" y="250" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1etb4xp" dmnElementRef="graph_decision21_decision3">
+        <di:waypoint x="620" y="120" />
+        <di:waypoint x="660" y="177" />
+        <di:waypoint x="680" y="177" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_19699kr" dmnElementRef="graph_decision22_decision3">
+        <di:waypoint x="620" y="250" />
+        <di:waypoint x="660" y="203" />
+        <di:waypoint x="680" y="203" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

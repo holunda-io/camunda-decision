@@ -1,6 +1,6 @@
 package io.holunda.decision.runtime.query
 
-import io.holunda.decision.model.DecisionDefinitionKey
+import io.holunda.decision.model.api.DecisionDefinitionKey
 import org.camunda.bpm.engine.RepositoryService
 import org.camunda.bpm.model.dmn.DmnModelInstance
 

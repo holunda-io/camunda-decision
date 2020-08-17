@@ -1,12 +1,10 @@
 package io.holunda.decision.model
 
-import io.holunda.decision.model.CamundaDecisionModel.InputDefinitions.integerInput
-import io.holunda.decision.model.CamundaDecisionModel.OutputDefinitions.integerOutput
-import io.holunda.decision.model.CamundaDecisionModel.OutputDefinitions.stringOutput
-import io.holunda.decision.model.element.*
-import io.holunda.decision.model.element.row.DmnRule
-import io.holunda.decision.model.element.row.InputEntry
-import io.holunda.decision.model.element.row.OutputEntry
+import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.integerInput
+import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.integerOutput
+import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
+import io.holunda.decision.model.api.data.DmnHitPolicy
+import io.holunda.decision.model.api.element.*
 
 
 object CamundaDecisonModelFixtures {
@@ -34,8 +32,13 @@ object CamundaDecisonModelFixtures {
           header = DmnDecisionTable.Header(
             listOf(inputFoo), listOf(outputBar)
           ),
-          rules = DmnRules(
-            DmnRule(description = "amazing", inputs = listOf(InputEntry<Int>(inputFoo, ">10")), outputs = listOf(OutputEntry<Int>(outputBar, "100")))
+          rules = DmnRuleList(
+            DmnRule(
+              id = "r1",
+              description = "amazing",
+              inputs = listOf(InputEntry<Int>(inputFoo, ">10")),
+              outputs = listOf(OutputEntry<Int>(outputBar, "100"))
+            )
           )
         ),
         DmnDecisionTable(
@@ -46,8 +49,13 @@ object CamundaDecisonModelFixtures {
           header = DmnDecisionTable.Header(
             listOf(inputBar), listOf(outputResult)
           ),
-          rules = DmnRules(
-            DmnRule(description = "based on decision1", inputs = listOf(InputEntry(inputBar, ">99")), outputs = listOf(OutputEntry(outputResult, "100")))
+          rules = DmnRuleList(
+            DmnRule(
+              id = "r5",
+              description = "based on decision1",
+              inputs = listOf(InputEntry(inputBar, ">99")),
+              outputs = listOf(OutputEntry(outputResult, "100"))
+            )
           ),
           requiredDecisions = setOf(DECISION_1)
         )
@@ -61,8 +69,9 @@ object CamundaDecisonModelFixtures {
         versionTag = "1",
         header = DmnDecisionTable.Header(listOf(inputFoo), listOf(outputResult)),
         hitPolicy = DmnHitPolicy.FIRST,
-        rules = DmnRules(
+        rules = DmnRuleList(
           DmnRule(
+            id = "r5",
             description = "woohoo",
             inputs = listOf(InputEntry(inputFoo, "< 100")),
             outputs = listOf(OutputEntry(outputResult, "\"Result\""))
