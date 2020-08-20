@@ -1,6 +1,9 @@
 package io.holunda.decision.model.converter
 
-import io.holunda.decision.model.api.element.DmnDecisionTable
+import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.booleanInput
+import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.longOutput
+import io.holunda.decision.model.api.data.DmnHitPolicy
+import io.holunda.decision.model.api.element.*
 import io.holunda.decision.model.layout.DmnDiagramLayoutWorker
 import io.holunda.decision.model.layout.DmnDiagramLayoutWorker.*
 import io.holunda.decision.model.layout.DmnDiagramLayoutWorker.Point.Companion.distance
@@ -12,7 +15,36 @@ class DmnDiagramLayoutWorkerTest {
 
   @Test
   fun `layout for single table`() {
-    TODO("Not yet implemented")
+    val fooIn = booleanInput("foo", "Foo")
+    val barOut = longOutput("bar", "The Result")
+
+    val diagram = DmnDiagram(
+      DmnDecisionTable(
+        decisionDefinitionKey = "oneTable",
+        name = "One Table",
+        hitPolicy = DmnHitPolicy.COLLECT_SUM,
+        header = DmnDecisionTable.Header(
+          inputs = listOf(fooIn),
+          outputs = listOf(barOut)
+        ),
+        rules = DmnRuleList(
+          DmnRule(id = "r1", inputs = listOf(fooIn.toEntry("true")), outputs = listOf(barOut.toEntry("1"))),
+          DmnRule(id = "r2", inputs = listOf(fooIn.toEntry("true")), outputs = listOf(barOut.toEntry("2"))),
+          DmnRule(id = "r3", inputs = listOf(fooIn.toEntry("true")), outputs = listOf(barOut.toEntry("3"))),
+          DmnRule(id = "r4", inputs = listOf(fooIn.toEntry("false")), outputs = listOf(barOut.toEntry("4")))
+        )
+      )
+    )
+
+    val layout = DmnDiagramLayoutWorker(diagram.decisionDefinitionKeys, diagram.informationRequirements).layout()
+
+    assertThat(layout.informationRequirementLayouts).isEmpty()
+    assertThat(layout.decisionTableLayouts).isNotEmpty().hasSize(1)
+
+    val tableLayout = layout.decisionTableLayouts.first()
+
+    assertThat(tableLayout.decisionDefinitionKey).isEqualTo("oneTable")
+    assertThat(tableLayout.box).isEqualTo(Box(key = "oneTable", x=160, y= 160, width = 180, height = 80))
   }
 
   @Test
