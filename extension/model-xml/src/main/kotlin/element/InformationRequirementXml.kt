@@ -8,7 +8,7 @@ data class InformationRequirementXml(
   val id: String,
 
   @JacksonXmlProperty(namespace = Namespaces.NS_DMN_13)
-  val requiredDecision: RequiredDecisionXml
+  val requiredDecision: RequiredDecisionXml?
 ) {
   companion object {
     const val NAMESPACE = Namespaces.NS_DMN_13

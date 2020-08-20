@@ -1,7 +1,7 @@
 package io.holunda.decision.model.xml.element
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
-import entry.DecisionTableXml
+import io.holunda.decision.model.xml.element.DecisionTableXml
 import io.holunda.decision.model.xml.CamundaDecisionXml.Namespaces
 
 data class DecisionXml(

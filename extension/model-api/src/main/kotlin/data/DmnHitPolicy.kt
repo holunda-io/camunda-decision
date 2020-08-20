@@ -22,7 +22,7 @@ enum class DmnHitPolicy {
 
   companion object {
     fun valueOf(hitPolicy: HitPolicyName, aggregator: AggregatorName?): DmnHitPolicy = valueOf(
-      hitPolicy + if (aggregator != null) "_$aggregator" else ""
+      hitPolicy + if (aggregator != null) "_${aggregator}" else ""
     )
   }
 

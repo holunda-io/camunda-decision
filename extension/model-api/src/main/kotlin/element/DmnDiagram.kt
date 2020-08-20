@@ -23,6 +23,10 @@ data class DmnDiagram(
 
   constructor(id: Id, name: Name, vararg decisionTables: DmnDecisionTable) : this(id, name, decisionTables.asList())
 
+  init {
+      require(decisionTables.isNotEmpty()) { "diagram must contain at least one decisionTable."}
+  }
+
   val resourceName = "diagram-${name.toLowerCase().replace("\\s".toRegex(), "-")}.dmn"
 
   val decisionDefinitionKeys = decisionTables.map { it.decisionDefinitionKey }.toSet()

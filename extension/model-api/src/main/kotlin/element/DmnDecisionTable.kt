@@ -18,21 +18,9 @@ data class DmnDecisionTable(
   val rules: DmnRuleList
 ) {
 
-  /**
-   * Creates a new instance using only one required decision instead of a set.
-   */
-  @JvmOverloads
-  constructor(decisionDefinitionKey: DecisionDefinitionKey,
-              name: Name,
-              versionTag: VersionTag? = null,
-              hitPolicy: DmnHitPolicy = DmnHitPolicy.FIRST,
-              requiredDecision: DecisionDefinitionKey,
-              header: Header,
-              rules: DmnRuleList
-  ) : this(decisionDefinitionKey, name, versionTag, hitPolicy, setOf(requiredDecision), header, rules)
-
   init {
     require(requiredDecisions.size < 2) { "currently, only 0 or one required decisions are supported." }
+    require(rules.isNotEmpty()) { "a decision table must contain rules" }
   }
 
   val informationRequirement: InformationRequirement? = if (requiredDecisions.isNotEmpty())

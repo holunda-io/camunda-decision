@@ -1,22 +1,41 @@
-package io.holunda.decision.model.converter
+package io.holunda.decision.model.layout
 
-import io.holunda.decision.model.DecisionDefinitionKey
-import io.holunda.decision.model.converter.DmnDiagramLayout.*
-import io.holunda.decision.model.element.DmnDecisionTable
+import io.holunda.decision.model.api.DecisionDefinitionKey
+import io.holunda.decision.model.api.Id
+import io.holunda.decision.model.api.element.DmnDecisionTable
+import io.holunda.decision.model.layout.DmnDiagramLayoutWorker.*
 import kotlin.math.abs
 import kotlin.math.hypot
 
-class DmnDiagramLayout(
+
+data class DmnDecisionTableLayout(
+  val decisionDefinitionKey: DecisionDefinitionKey,
+  val box: Box
+)
+
+data class InformationRequirementLayout(
+  val informationRequirementId: Id,
+  val waypoints: List<Point>
+)
+
+data class DmnDiagramLayout(
+  val decisionTableLayouts: List<DmnDecisionTableLayout>,
+  val informationRequirementLayouts: List<InformationRequirementLayout>
+)
+
+class DmnDiagramLayoutWorker(
   val decisionDefinitionKeys: Set<DecisionDefinitionKey>,
   val informationRequirements: Set<DmnDecisionTable.InformationRequirement>
 ) {
   companion object {
     const val BOX_HEIGHT = 80
     const val BOX_WIDTH = 180
-    const val X_OFFSET = 300
+    const val X_OFFSET = 160
+    const val Y_OFFSET = 160
   }
 
-  private val requiredDecisions : Map<DecisionDefinitionKey, List<DecisionDefinitionKey>> = informationRequirements.groupBy( { it.decisionTable   }, {it.requiredDecisionTable })
+
+  private val requiredDecisions: Map<DecisionDefinitionKey, List<DecisionDefinitionKey>> = informationRequirements.groupBy({ it.decisionTable }, { it.requiredDecisionTable })
 
 
   init {
@@ -24,7 +43,38 @@ class DmnDiagramLayout(
     require(decisionDefinitionKeys.size == 1 || informationRequirements.isNotEmpty()) { "tables must be connected" }
   }
 
-  fun layout(): Map<DecisionDefinitionKey, Box> {
+  fun layout(): DmnDiagramLayout {
+    val tableLayouts = decisionDefinitionKeys.mapIndexed { index, s ->
+      DmnDecisionTableLayout(
+        decisionDefinitionKey = s,
+        box = Box(key = s, x = X_OFFSET + (index *2) * X_OFFSET , y = Y_OFFSET)
+      )
+    }
+
+    fun findInLayout(decisionDefinitionKey: DecisionDefinitionKey) = tableLayouts.find {
+      it.decisionDefinitionKey == decisionDefinitionKey
+    }
+
+    val informationRequirementLayouts = informationRequirements.map {
+      it to (findInLayout(it.decisionTable) to findInLayout(it.requiredDecisionTable))
+    }.map {
+      val edge = shortest(it.second.second!!.box, it.second.first!!.box)
+
+      InformationRequirementLayout(
+        informationRequirementId = it.first.id,
+        waypoints = listOf(edge.waypointStart, edge.waypointEnd)
+      )
+    }
+
+
+    return DmnDiagramLayout(
+      decisionTableLayouts = tableLayouts,
+      informationRequirementLayouts = informationRequirementLayouts
+    )
+  }
+
+
+  fun layout_Old(): Map<DecisionDefinitionKey, Box> {
     val boxes = decisionDefinitionKeys
       .mapIndexed { index, s -> Box(key = s, x = index * X_OFFSET, y = 0) }
       .associateBy { it.key }.toMutableMap()
@@ -32,7 +82,7 @@ class DmnDiagramLayout(
     for (key in requiredDecisions.keys) {
       for (required in requiredDecisions[key]!!) {
         val edge = shortest(boxes[required]!!, boxes[key]!!)
-        boxes.compute(key) { _, box -> box!!.copy(edge = edge) }
+        // boxes.compute(key) { _, box -> box!!.copy(edge = edge) }
       }
     }
 
@@ -55,8 +105,7 @@ class DmnDiagramLayout(
     val x: Int,
     val y: Int,
     val width: Int = BOX_WIDTH,
-    val height: Int = BOX_HEIGHT,
-    val edge: Edge? = null
+    val height: Int = BOX_HEIGHT
   ) {
     val points = Points()
 
@@ -83,6 +132,22 @@ class DmnDiagramLayout(
     fun isCorner(p: Point) = points.corners.contains(p)
     fun isEdge(p: Point) = points.edges.contains(p)
   }
+
+//  <dmndi:DMNDI>
+//  <dmndi:DMNDiagram>
+//  <dmndi:DMNShape dmnElementRef="d1">
+//  <dc:Bounds height="80" width="180" x="160" y="100" />
+//  </dmndi:DMNShape>
+//  <dmndi:DMNShape id="DMNShape_1lypf5z" dmnElementRef="d2">
+//  <dc:Bounds height="80" width="180" x="400" y="100" />
+//  </dmndi:DMNShape>
+//  <dmndi:DMNEdge id="DMNEdge_06vmsj8" dmnElementRef="InformationRequirement_033c2p0">
+//  <di:waypoint x="340" y="140" />
+//  <di:waypoint x="380" y="140" />
+//  <di:waypoint x="400" y="140" />
+//  </dmndi:DMNEdge>
+//  </dmndi:DMNDiagram>
+//  </dmndi:DMNDI>
 
 
   data class Edge(

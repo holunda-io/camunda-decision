@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="multiple_decisions" name="Multiple Decisions" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.2.0">
+  <decision id="decision1" name="Decision 1">
+    <decisionTable id="decisionTable_1" hitPolicy="COLLECT" aggregation="COUNT">
+      <input id="input_1" label="Foo">
+        <inputExpression id="inputExpression_1" typeRef="boolean">
+          <text>foo</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Dec1" name="decision1" typeRef="boolean" />
+      <rule id="DecisionRule_0mgby4j">
+        <description></description>
+        <inputEntry id="UnaryTests_1rpv4iv">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0buhxp4">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0zly77h">
+        <inputEntry id="UnaryTests_1u26mka">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1o26uoc">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="decision2" name="Decision 2">
+    <informationRequirement id="graph_decision1_decision2">
+      <requiredDecision href="#decision1" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1ahtwm8">
+      <input id="InputClause_0xbuzhi" label="Dec1">
+        <inputExpression id="LiteralExpression_03rzw66" typeRef="integer">
+          <text>decision1</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0jo22r0" label="Bar">
+        <inputExpression id="LiteralExpression_1elhhfb" typeRef="boolean">
+          <text>bar</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0yfq378" label="Dec2" name="decision2" typeRef="string" />
+      <rule id="DecisionRule_02u83tj">
+        <description></description>
+        <inputEntry id="UnaryTests_1fiyj9m">
+          <text>&gt; 0</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jte9lx">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ie4vwn">
+          <text>"hurray"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_0ymbrzr">
+      <dmndi:DMNShape id="DMNShape_177q3xd" dmnElementRef="decision1">
+        <dc:Bounds height="80" width="180" x="157" y="81" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_12sxbg6" dmnElementRef="decision2">
+        <dc:Bounds height="80" width="180" x="470" y="140" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1ga78g6" dmnElementRef="graph_decision1_decision2">
+        <di:waypoint x="337" y="142" />
+        <di:waypoint x="470" y="173" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

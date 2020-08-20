@@ -18,7 +18,8 @@ object CamundaDecisionModelApi {
    *
    * There is no guarantee that the id is unique, but it is very unlikely, so good enough.
    */
-  fun <T : Any> generateId(elementClass: KClass<T>) : Id = "${elementClass.simpleName}_${(2.147483647E9 * Math.random()).toInt()}"
+  fun generateId(prefix: String) : Id = "${prefix}_${(2.147483647E9 * Math.random()).toInt()}"
+  fun <T : Any> generateId(elementClass: KClass<T>) : Id = generateId("${elementClass.simpleName}")
 
 
   object InputDefinitions {

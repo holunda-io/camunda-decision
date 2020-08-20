@@ -1,7 +1,7 @@
 package io.holunda.decision.xml
 
-import entry.DecisionTableXml
-import entry.RuleXml
+import io.holunda.decision.model.xml.element.DecisionTableXml
+import io.holunda.decision.model.xml.element.RuleXml
 import io.holunda.decision.lib.test.CamundaDecisionTestLib
 import io.holunda.decision.lib.test.CamundaDecisionTestLib.readText
 import io.holunda.decision.model.xml.CamundaDecisionXml
@@ -109,10 +109,7 @@ internal class CamundaDecisionXmlTest {
     val d2 = CamundaDecisionXml.fromXml(xml)
 
     println("object: $definitions")
-    println("""
-<?xml version="1.0" encoding="UTF-8"?>
-$xml
-    """)
+    println(CamundaDecisionXml.toXml(definitions))
 
     assertThat(d2).isEqualTo(definitions)
   }
@@ -155,5 +152,10 @@ $xml
 ${CamundaDecisionXml.toXml(dmn)}
 
     """.trimIndent())
+  }
+
+  @Test
+  fun `read simulation`() {
+    CamundaDecisionXml.fromXml(CamundaDecisionTestLib.DmnTestResource.DISHES_AND_DRINKS.load())
   }
 }

@@ -15,6 +15,7 @@ object CamundaDecisionTestLib {
   enum class DmnTestResource(val fileName:String) {
     FOUR_TABLES("dmn/four-tables.dmn"),
     DISHES_AND_DRINKS("dmn/simulation.dmn"),
+    DRD_DEC1_DEC2("dmn/drd-dec1-dec2.dmn")
     ;
 
     fun load() : String = readText(fileName)

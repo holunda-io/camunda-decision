@@ -1,4 +1,4 @@
-package entry
+package io.holunda.decision.model.xml.element
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 import io.holunda.decision.model.xml.CamundaDecisionXml.Namespaces

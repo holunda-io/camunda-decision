@@ -1,18 +1,24 @@
 package io.holunda.decision.model.converter
 
-import io.holunda.decision.model.converter.DmnDiagramLayout.*
-import io.holunda.decision.model.converter.DmnDiagramLayout.Point.Companion.distance
-import io.holunda.decision.model.element.DmnDecisionTable
+import io.holunda.decision.model.api.element.DmnDecisionTable
+import io.holunda.decision.model.layout.DmnDiagramLayoutWorker
+import io.holunda.decision.model.layout.DmnDiagramLayoutWorker.*
+import io.holunda.decision.model.layout.DmnDiagramLayoutWorker.Point.Companion.distance
+import io.holunda.decision.model.layout.shortest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-class DmnDiagramLayoutTest {
+class DmnDiagramLayoutWorkerTest {
 
+  @Test
+  fun `layout for single table`() {
+    TODO("Not yet implemented")
+  }
 
   @Test
   fun `foo depends on bar`() {
     val ir = DmnDecisionTable.InformationRequirement("bar", "foo")
-    val layout = DmnDiagramLayout(setOf("foo", "bar"), setOf(ir)).layout()
+    val layout = DmnDiagramLayoutWorker(setOf("foo", "bar"), setOf(ir)).layout_Old()
 
     println(layout)
   }
@@ -21,7 +27,7 @@ class DmnDiagramLayoutTest {
   fun `box coordinates`() {
     val box = Box(key = "foo", x = 100, y = 200)
 
-    assertThat(box.points.tl).isEqualTo(Point(100 , 200))
+    assertThat(box.points.tl).isEqualTo(Point(100, 200))
     assertThat(box.points.tr).isEqualTo(Point(280 , 200))
     assertThat(box.points.bl).isEqualTo(Point(100 , 280))
     assertThat(box.points.br).isEqualTo(Point(280 , 280))
@@ -47,7 +53,7 @@ class DmnDiagramLayoutTest {
     val foo = Box(key = "foo", x = 0, y = 0, width = 10, height = 10)
     val bar = Box(key = "bar", x = 20, y = 20, width = 10, height = 10)
 
-    assertThat(shortest(foo,bar)).isEqualTo(Edge("foo", Point(10, 10), Point(20,20)))
+    assertThat(shortest(foo,bar)).isEqualTo(Edge("foo", Point(10, 10), Point(20, 20)))
   }
 
   @Test
