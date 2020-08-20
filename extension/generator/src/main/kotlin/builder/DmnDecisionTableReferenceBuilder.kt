@@ -7,6 +7,7 @@ import io.holunda.decision.model.api.VersionTag
 import io.holunda.decision.model.api.element.DmnDecisionTable
 import org.camunda.bpm.model.dmn.DmnModelInstance
 import org.camunda.bpm.model.dmn.instance.DecisionTable
+import java.lang.IllegalArgumentException
 
 /**
  * Builds a decision table based on a given existing reference. Allows modification of meta data.
@@ -51,11 +52,16 @@ class DmnDecisionTableReferenceBuilder : AbstractDmnDecisionTableBuilder() {
     val dmnModelInstance: DmnModelInstance,
     val decisionDefinitionKey: DecisionDefinitionKey? = null) {
 
-    // TODO
-    internal val decisionTable : DmnDecisionTable? = null
+    internal val decisionTable : DmnDecisionTable by lazy {
+      val diagram = CamundaDecisionModel.readDmnModelInstance(dmnModelInstance)
+      require(decisionDefinitionKey != null || diagram.decisionTables.size == 1) { "more than one table in diagram: provide definitionKey"}
 
-//      by lazy {
-//      CamundaDecisionModel.readDecisionTable(dmnModelInstance, decisionDefinitionKey)
-//    }
+
+      if (decisionDefinitionKey == null && diagram.decisionTables.size == 1) {
+        diagram.decisionTables.first()
+      } else {
+        diagram.findDecistionTable(decisionDefinitionKey!!) ?: throw IllegalArgumentException("no table found with key: $decisionDefinitionKey")
+      }
+    }
   }
 }

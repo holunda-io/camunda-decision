@@ -35,4 +35,8 @@ data class DmnDecisionTable(
   data class InformationRequirement(val decisionTable: DecisionDefinitionKey, val requiredDecisionTable: DecisionDefinitionKey) {
     val id: Id = "graph_${requiredDecisionTable}_$decisionTable"
   }
+
+  fun inputEntry(row:Int, col:Int): String? {
+    return rules[row].inputs[col].expression;
+  }
 }

@@ -1,6 +1,7 @@
 package io.holunda.decision.model.api.element
 
 import io.holunda.decision.model.api.CamundaDecisionModelApi
+import io.holunda.decision.model.api.DecisionDefinitionKey
 import io.holunda.decision.model.api.Id
 import io.holunda.decision.model.api.Name
 
@@ -26,6 +27,8 @@ data class DmnDiagram(
   init {
       require(decisionTables.isNotEmpty()) { "diagram must contain at least one decisionTable."}
   }
+
+  fun findDecistionTable(decisionDefinitionKey: DecisionDefinitionKey) : DmnDecisionTable? = decisionTables.find { it.decisionDefinitionKey == decisionDefinitionKey }
 
   val resourceName = "diagram-${name.toLowerCase().replace("\\s".toRegex(), "-")}.dmn"
 

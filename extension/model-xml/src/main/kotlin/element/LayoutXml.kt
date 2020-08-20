@@ -5,7 +5,7 @@ import io.holunda.decision.model.xml.CamundaDecisionXml.Namespaces
 
 data class LayoutXml(
   @JacksonXmlProperty(localName = DiagramLayoutXml.LOCAL_NAME, namespace = NAMESPACE)
-  val dmnDiagram: DiagramLayoutXml
+  val dmnDiagram: DiagramLayoutXml = DiagramLayoutXml()
 ) {
   companion object {
     const val LOCAL_NAME = "DMNDI"
@@ -14,10 +14,10 @@ data class LayoutXml(
 
   data class DiagramLayoutXml(
     @JacksonXmlProperty(localName = "DMNShape", namespace = NAMESPACE)
-    val dmnShapes: List<DmnShapeXml>,
+    val dmnShapes: List<DmnShapeXml> = listOf(),
 
     @JacksonXmlProperty(localName = "DMNEdge", namespace = NAMESPACE)
-    val dmnEdges: List<DmnEdgeXml>
+    val dmnEdges: List<DmnEdgeXml> = listOf()
   ) {
     companion object {
       const val LOCAL_NAME = "DMNDiagram"
