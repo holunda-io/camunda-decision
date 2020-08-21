@@ -16,7 +16,7 @@
     <module>generator</module>
     <module>model</module>
     <module>model-api</module>
-    <module>model-xml</module>
+    <module>model-jackson</module>
     <module>runtime</module>
   </modules>
 

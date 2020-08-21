@@ -24,7 +24,7 @@
 
     <dependency>
       <groupId>io.holunda.decision</groupId>
-      <artifactId>camunda-decision-model-xml</artifactId>
+      <artifactId>camunda-decision-model-jackson</artifactId>
     </dependency>
 
     <dependency>

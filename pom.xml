@@ -69,7 +69,7 @@
       </dependency>
       <dependency>
         <groupId>io.holunda.decision</groupId>
-        <artifactId>camunda-decision-model-xml</artifactId>
+        <artifactId>camunda-decision-model-jackson</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

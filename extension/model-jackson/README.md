@@ -1,4 +1,4 @@
-# camunda-decision-model-xml
+# camunda-decision-model-jackson
 
 Uses jackson-xml-databind to read/write DMN 1.3 conform
 decison-tables and -graphs.
