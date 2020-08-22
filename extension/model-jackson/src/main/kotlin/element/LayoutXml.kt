@@ -1,7 +1,7 @@
-package io.holunda.decision.model.xml.element
+package io.holunda.decision.model.jackson.element
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
-import io.holunda.decision.model.xml.CamundaDecisionXml.Namespaces
+import io.holunda.decision.model.jackson.CamundaDecisionJackson.Namespaces
 
 data class LayoutXml(
   @JacksonXmlProperty(localName = DiagramLayoutXml.LOCAL_NAME, namespace = NAMESPACE)

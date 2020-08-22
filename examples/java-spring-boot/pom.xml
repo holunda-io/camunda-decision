@@ -16,10 +16,6 @@
     <!-- PROJECT -->
     <dependency>
       <groupId>io.holunda.decision</groupId>
-      <artifactId>camunda-decision-generator</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.holunda.decision</groupId>
       <artifactId>camunda-decision-runtime</artifactId>
     </dependency>
 

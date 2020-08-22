@@ -4,7 +4,7 @@ import io.holunda.decision.model.api.DmnXml
 import io.holunda.decision.model.api.element.DmnDecisionTable
 import io.holunda.decision.model.api.element.DmnDiagram
 import io.holunda.decision.model.ascii.DmnWriter
-import io.holunda.decision.model.converter.JacksonDiagramConverter
+import io.holunda.decision.model.jackson.converter.JacksonDiagramConverter
 import org.camunda.bpm.model.dmn.Dmn
 import org.camunda.bpm.model.dmn.DmnModelInstance
 
@@ -13,10 +13,10 @@ import org.camunda.bpm.model.dmn.DmnModelInstance
  */
 object CamundaDecisionModel {
 
-  fun createDmnXml(dmnDiagram: DmnDiagram) = JacksonDiagramConverter().toXml(dmnDiagram)
+  fun createXml(dmnDiagram: DmnDiagram) = JacksonDiagramConverter.toXml(dmnDiagram)
 
-  fun readDmnModelInstance(modelInstance: DmnModelInstance):DmnDiagram = readDmnXml(Dmn.convertToString(modelInstance))
-  fun readDmnXml(xml: DmnXml) :DmnDiagram = JacksonDiagramConverter().fromXml(xml)
+  fun readDiagram(modelInstance: DmnModelInstance):DmnDiagram = readDiagram(Dmn.convertToString(modelInstance))
+  fun readDiagram(xml: DmnXml) :DmnDiagram = JacksonDiagramConverter.fromXml(xml)
 
   /**
    * Reads a DMN Model instance and converts it to diagram DTO.

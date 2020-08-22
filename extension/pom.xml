@@ -13,7 +13,6 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>generator</module>
     <module>model</module>
     <module>model-api</module>
     <module>model-jackson</module>

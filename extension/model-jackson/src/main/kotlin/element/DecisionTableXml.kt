@@ -1,8 +1,7 @@
-package io.holunda.decision.model.xml.element
+package io.holunda.decision.model.jackson.element
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
-import io.holunda.decision.model.xml.CamundaDecisionXml.Namespaces
-import io.holunda.decision.model.xml.element.HeaderXml
+import io.holunda.decision.model.jackson.CamundaDecisionJackson.Namespaces
 import org.camunda.bpm.model.dmn.BuiltinAggregator
 import org.camunda.bpm.model.dmn.HitPolicy
 

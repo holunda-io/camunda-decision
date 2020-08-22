@@ -1,8 +1,8 @@
-package io.holunda.decision.model.xml.element
+package io.holunda.decision.model.jackson.element
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement
-import io.holunda.decision.model.xml.CamundaDecisionXml.Namespaces
+import io.holunda.decision.model.jackson.CamundaDecisionJackson.Namespaces
 
 @JacksonXmlRootElement(
   localName = "definitions",

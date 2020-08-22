@@ -1,8 +1,8 @@
-package io.holunda.decision.model.xml.element
+package io.holunda.decision.model.jackson.element
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
-import io.holunda.decision.model.xml.CamundaDecisionXml
-import io.holunda.decision.model.xml.CamundaDecisionXml.Namespaces
+import io.holunda.decision.model.jackson.CamundaDecisionJackson
+import io.holunda.decision.model.jackson.CamundaDecisionJackson.Namespaces
 
 object HeaderXml {
 
@@ -22,7 +22,7 @@ object HeaderXml {
       val id: String,
 
       @JacksonXmlProperty(isAttribute = true)
-      val typeRef: CamundaDecisionXml.TypeRef,
+      val typeRef: CamundaDecisionJackson.TypeRef,
 
       @JacksonXmlProperty(namespace = Namespaces.NS_DMN_13)
       val text: String
@@ -40,6 +40,6 @@ object HeaderXml {
     val name: String,
 
     @JacksonXmlProperty(isAttribute = true)
-    val typeRef: CamundaDecisionXml.TypeRef
+    val typeRef: CamundaDecisionJackson.TypeRef
   )
 }

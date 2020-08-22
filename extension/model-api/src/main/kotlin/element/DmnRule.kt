@@ -14,7 +14,7 @@ data class DmnRule(
   /**
    * A rule has an id, which is unique for the diagram. It's best to have this generated.
    */
-  val id: Id = generateId(DmnRule::class),
+  val id: Id = idGenerator(),
 
   /**
    * A rule might have a description, which (if present) is displayed in the "annotations" column next to the outputs.
@@ -39,6 +39,10 @@ data class DmnRule(
   val outputs: List<OutputEntry<*>>
 ) {
 
+  companion object {
+    val idGenerator = { generateId("DecisionRule") }
+  }
+
   /**
    * All input definitions.
    */
@@ -62,3 +66,11 @@ data class DmnRule(
   }
 
 }
+
+/**
+ * Assuming that a rule contains all definition entries, we can derive the header fields from it.
+ */
+fun DmnRule.toHeader() = DmnDecisionTable.Header(
+  inputs = this.inputs.map { it.definition },
+  outputs = this.outputs.map { it.definition }
+)

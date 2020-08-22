@@ -11,10 +11,13 @@ import io.holunda.decision.model.api.Name
  * Contains at least one DmnDecisionTable. If it contains more than one table, these must form a graph.
  */
 data class DmnDiagram(
-  val id: Id = CamundaDecisionModelApi.generateId(DmnDiagram::class),
+  val id: Id = idGenerator(),
   val name: Name,
   val decisionTables: List<DmnDecisionTable>
 ) {
+  companion object {
+    val idGenerator = { CamundaDecisionModelApi.generateId(DmnDiagram::class) }
+  }
 
   constructor(decisionTable: DmnDecisionTable) : this(
     id = "${decisionTable.decisionDefinitionKey}_diagram",
