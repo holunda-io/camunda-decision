@@ -69,22 +69,13 @@ object DmnWriter {
     return definitions
   }
 
-  private fun blank(value: String?): String {
-    return if (value == null || value.trim() == "") "-" else value
-  }
-
   private class AsciiDmnTable(val inputs: Int, val outputs: Int) {
-
-    companion object {
-      fun rowSpan(text: String, cols: Int) = text to cols
-    }
-
     val columns = inputs + outputs + 1
     val asciiTable = AsciiTable().apply {
       addRule()
     }
 
-    fun addRow(vararg rowSpans: Pair<String, Int>, doubleLine: Boolean = false): AsciiDmnTable {
+    fun addRow(vararg rowSpans: Pair<String, Int>): AsciiDmnTable {
       require(rowSpans.map { it.second }.sum() == columns) { "columns must have size=$columns, was $rowSpans" }
 
       val cols = mutableListOf<String?>()
@@ -94,16 +85,13 @@ object DmnWriter {
         cols.addAll(nulls + text)
       }
 
-      return addRow(cols, doubleLine)
+      return addRow(cols)
     }
 
-    fun addRow(cols: List<String?>, doubleLine: Boolean = false) = apply {
+    fun addRow(cols: List<String?>) = apply {
       require(cols.size == columns) { "columns must have size=$columns, was $cols" }
       asciiTable.addRow(cols)
       asciiTable.addRule()
-      if (doubleLine) {
-        asciiTable.addRule()
-      }
     }
 
     fun render() = asciiTable.apply {
