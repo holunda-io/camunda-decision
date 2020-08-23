@@ -12,21 +12,18 @@ object CamundaDecisionGenerator {
   @JvmStatic
   @JvmOverloads
   fun diagram(name: Name? = null) = DmnDiagramBuilder().apply {
-    if (name != null) name(name)
+    name?.let { name(it) }
   }
 
   @JvmStatic
   @JvmOverloads
   fun table(decisionDefinitionKey: DecisionDefinitionKey? = null) = DmnDecisionTableRulesBuilder()
-    .apply {
-      if (decisionDefinitionKey != null) decisionDefinitionKey(decisionDefinitionKey)
-    }
+    .apply { decisionDefinitionKey?.let { decisionDefinitionKey(it) } }
 
   @JvmStatic
   fun rule() = DmnBusinessRuleBuilder()
 
   @JvmStatic
-  fun <T : Any> rule(condition: InputEntry<T>? = null) = rule().apply {
-    if (condition != null) condition(condition)
-  }
+  fun <T : Any> rule(condition: InputEntry<T>? = null) = rule()
+    .apply { condition?.let { condition(it) } }
 }
