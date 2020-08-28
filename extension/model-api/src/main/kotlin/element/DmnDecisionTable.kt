@@ -1,6 +1,9 @@
 package io.holunda.decision.model.api.element
 
-import io.holunda.decision.model.api.*
+import io.holunda.decision.model.api.DecisionDefinitionKey
+import io.holunda.decision.model.api.Id
+import io.holunda.decision.model.api.Name
+import io.holunda.decision.model.api.VersionTag
 import io.holunda.decision.model.api.data.DmnHitPolicy
 import io.holunda.decision.model.api.definition.InputDefinition
 import io.holunda.decision.model.api.definition.OutputDefinition

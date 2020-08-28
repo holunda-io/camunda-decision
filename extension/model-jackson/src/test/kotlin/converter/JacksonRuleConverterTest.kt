@@ -3,7 +3,6 @@ package converter
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.booleanInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.longInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
-import io.holunda.decision.model.api.element.DmnDecisionTable
 import io.holunda.decision.model.api.element.DmnRule
 import io.holunda.decision.model.api.element.toEntry
 import io.holunda.decision.model.api.element.toHeader

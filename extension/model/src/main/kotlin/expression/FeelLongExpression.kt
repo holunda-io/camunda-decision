@@ -1,6 +1,5 @@
 package io.holunda.decision.model.expression
 
-import io.holunda.decision.model.api.definition.IntegerInputDefinition
 import io.holunda.decision.model.api.definition.LongInputDefinition
 import io.holunda.decision.model.api.element.toEntry
 

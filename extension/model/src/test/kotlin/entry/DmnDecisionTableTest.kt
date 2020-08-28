@@ -1,7 +1,6 @@
 package io.holunda.decision.model.element
 
 import io.holunda.decision.lib.test.CamundaDecisionTestLib.readModel
-import io.holunda.decision.model.CamundaDecisionModel
 import io.holunda.decision.model.api.data.DmnHitPolicy
 import io.holunda.decision.model.api.element.DmnDecisionTable
 import org.assertj.core.api.Assertions.assertThat

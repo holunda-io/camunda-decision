@@ -7,7 +7,6 @@ import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.s
 import io.holunda.decision.model.api.data.DmnHitPolicy
 import io.holunda.decision.model.api.element.OutputEntry
 import io.holunda.decision.model.api.element.toEntry
-import io.holunda.decision.model.builder.DmnDecisionTableRulesBuilder
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

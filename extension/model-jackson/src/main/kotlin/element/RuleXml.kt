@@ -1,7 +1,6 @@
 package io.holunda.decision.model.jackson.element
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
-import io.holunda.decision.model.jackson.CamundaDecisionJackson
 import io.holunda.decision.model.jackson.CamundaDecisionJackson.Namespaces
 
 data class RuleXml(

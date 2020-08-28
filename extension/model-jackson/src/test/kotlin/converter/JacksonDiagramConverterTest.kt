@@ -1,7 +1,6 @@
 package io.holunda.decision.model.jackson.converter
 
 import io.holunda.decision.lib.test.CamundaDecisionTestLib
-import io.holunda.decision.model.jackson.converter.JacksonDiagramConverter
 import org.junit.Test
 
 internal class JacksonDiagramConverterTest {

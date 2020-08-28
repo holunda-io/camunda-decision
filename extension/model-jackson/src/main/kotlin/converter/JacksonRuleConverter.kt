@@ -1,8 +1,5 @@
 package io.holunda.decision.model.jackson.converter
 
-import io.holunda.decision.model.api.CamundaDecisionModelApi
-import io.holunda.decision.model.api.CamundaDecisionModelApi.generateId
-import io.holunda.decision.model.api.definition.InputDefinition
 import io.holunda.decision.model.api.element.DmnDecisionTable
 import io.holunda.decision.model.api.element.DmnRule
 import io.holunda.decision.model.api.element.DmnRuleList

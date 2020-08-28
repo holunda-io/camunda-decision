@@ -6,7 +6,6 @@ import io.holunda.decision.model.api.Name
 import io.holunda.decision.model.api.VersionTag
 import io.holunda.decision.model.api.element.DmnDecisionTable
 import org.camunda.bpm.model.dmn.DmnModelInstance
-import java.lang.IllegalArgumentException
 
 /**
  * Builds a decision table based on a given existing reference. Allows modification of meta data.

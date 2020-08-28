@@ -5,7 +5,6 @@ import io.holunda.decision.model.api.HitPolicyName
 import io.holunda.decision.model.api.data.DmnHitPolicy
 import org.camunda.bpm.model.dmn.BuiltinAggregator
 import org.camunda.bpm.model.dmn.HitPolicy
-import java.lang.IllegalArgumentException
 
 internal object HitPolicyConverter {
 

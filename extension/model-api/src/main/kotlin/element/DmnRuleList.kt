@@ -1,7 +1,6 @@
 package io.holunda.decision.model.api.element
 
 import io.holunda.decision.model.api.CamundaDecisionModelApi
-import io.holunda.decision.model.api.Id
 
 data class DmnRuleList(
   private val list: List<DmnRule>

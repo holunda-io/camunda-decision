@@ -1,9 +1,7 @@
 package expression
 
-import io.holunda.decision.model.api.CamundaDecisionModelApi
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.booleanInput
 import io.holunda.decision.model.expression.FeelBooleanExpression
-import io.holunda.decision.model.expression.FeelExpressions
 import io.holunda.decision.model.expression.FeelExpressions.exprFalse
 import io.holunda.decision.model.expression.FeelExpressions.exprTrue
 import io.holunda.decision.model.expression.FeelExpressions.not

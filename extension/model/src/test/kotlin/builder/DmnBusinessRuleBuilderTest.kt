@@ -4,7 +4,6 @@ import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.st
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
 import io.holunda.decision.model.api.element.InputEntry
 import io.holunda.decision.model.api.element.OutputEntry
-import io.holunda.decision.model.builder.DmnBusinessRuleBuilder
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

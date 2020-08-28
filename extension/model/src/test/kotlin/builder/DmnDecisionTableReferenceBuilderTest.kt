@@ -2,7 +2,6 @@ package io.holunda.decision.model.builder
 
 import io.holunda.decision.lib.test.CamundaDecisionTestLib.readModel
 import io.holunda.decision.model.api.data.DmnHitPolicy
-import io.holunda.decision.model.builder.DmnDecisionTableReferenceBuilder
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Ignore
 import org.junit.Test

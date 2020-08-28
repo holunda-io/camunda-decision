@@ -1,14 +1,11 @@
 package io.holunda.decision.model
 
 import io.holunda.camunda.bpm.data.CamundaBpmData
+import io.holunda.decision.lib.test.CamundaDecisionTestLib
+import io.holunda.decision.lib.test.CamundaDecisionTestLib.manageDmnDeployment
 import io.holunda.decision.model.CamundaDecisionGenerator.diagram
 import io.holunda.decision.model.CamundaDecisionGenerator.rule
 import io.holunda.decision.model.CamundaDecisionGenerator.table
-import io.holunda.decision.model.builder.DmnDecisionTableReferenceBuilder
-import io.holunda.decision.lib.test.CamundaDecisionTestLib
-import io.holunda.decision.lib.test.CamundaDecisionTestLib.manageDmnDeployment
-import io.holunda.decision.model.CamundaDecisionGenerator
-import io.holunda.decision.model.CamundaDecisionModel
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.booleanInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.integerInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.longInput
@@ -18,6 +15,7 @@ import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.l
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
 import io.holunda.decision.model.api.data.DmnHitPolicy
 import io.holunda.decision.model.api.element.toEntry
+import io.holunda.decision.model.builder.DmnDecisionTableReferenceBuilder
 import org.assertj.core.api.Assertions.assertThat
 import org.camunda.bpm.engine.variable.Variables
 import org.junit.Rule

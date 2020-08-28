@@ -7,7 +7,6 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import io.holunda.decision.model.api.DmnXml
-import io.holunda.decision.model.api.element.DmnDiagram
 import io.holunda.decision.model.jackson.element.DefinitionsXml
 import org.camunda.bpm.model.dmn.Dmn
 import org.camunda.bpm.model.dmn.DmnModelInstance

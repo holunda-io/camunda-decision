@@ -1,7 +1,6 @@
 package io.holunda.decision.model.expression
 
 import io.holunda.decision.model.api.definition.StringInputDefinition
-import io.holunda.decision.model.api.element.InputEntry
 import io.holunda.decision.model.api.element.toEntry
 
 data class FeelStringExpression(

@@ -3,7 +3,7 @@ package io.holunda.decision.model.jackson.converter
 import io.holunda.decision.model.api.CamundaDecisionModelApi.generateId
 import io.holunda.decision.model.api.DecisionDefinitionKey
 import io.holunda.decision.model.api.data.DataType
-import io.holunda.decision.model.api.element.*
+import io.holunda.decision.model.api.element.DmnDecisionTable
 import io.holunda.decision.model.jackson.CamundaDecisionJackson
 import io.holunda.decision.model.jackson.element.*
 

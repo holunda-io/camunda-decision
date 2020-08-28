@@ -1,6 +1,5 @@
 package io.holunda.decision.model.api.element
 
-import io.holunda.decision.model.api.CamundaDecisionModelApi
 import io.holunda.decision.model.api.CamundaDecisionModelApi.generateId
 import io.holunda.decision.model.api.Id
 import io.holunda.decision.model.api.definition.InputDefinition
