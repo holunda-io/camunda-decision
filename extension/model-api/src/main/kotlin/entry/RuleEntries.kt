@@ -4,7 +4,6 @@ import io.holunda.decision.model.api.definition.ColumnDefinition
 import io.holunda.decision.model.api.definition.InputDefinition
 import io.holunda.decision.model.api.definition.OutputDefinition
 
-
 /**
  * Common super class of input- and output entries.
  */
