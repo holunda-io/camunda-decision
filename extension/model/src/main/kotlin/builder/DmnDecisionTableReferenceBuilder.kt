@@ -58,7 +58,7 @@ class DmnDecisionTableReferenceBuilder : AbstractDmnDecisionTableBuilder() {
       if (decisionDefinitionKey == null && diagram.decisionTables.size == 1) {
         diagram.decisionTables.first()
       } else {
-        diagram.findDecistionTable(decisionDefinitionKey!!) ?: throw IllegalArgumentException("no table found with key: $decisionDefinitionKey")
+        diagram.findDecisionTable(decisionDefinitionKey!!) ?: throw IllegalArgumentException("no table found with key: $decisionDefinitionKey")
       }
     }
   }

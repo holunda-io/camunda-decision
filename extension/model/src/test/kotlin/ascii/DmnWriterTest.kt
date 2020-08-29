@@ -15,7 +15,7 @@ class DmnWriterTest {
 
     val decisionTable = CamundaDecisionModel.readDiagram(dmnExampleSingleTable)
 
-    assertThat(decisionTable.findDecistionTable("example")?.versionTag).isEqualTo("666")
+    assertThat(decisionTable.findDecisionTable("example")?.versionTag).isEqualTo("666")
 
     val ascii = DmnWriter.render(decisionTable)
 

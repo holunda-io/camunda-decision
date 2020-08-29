@@ -190,8 +190,8 @@ internal class CamundaDecisionGeneratorTest {
 
   @Test
   fun `correct order of inputEntries`() {
-    assertThat(diagramFooBar.findDecistionTable("decision1")?.inputEntry(0,0)).isEqualTo("> 20");
-    assertThat(diagramFooBar.findDecistionTable("decision2")?.inputEntry(0,0)).isEqualTo("100");
+    assertThat(diagramFooBar.findDecisionTable("decision1")?.inputEntry(0,0)).isEqualTo("> 20");
+    assertThat(diagramFooBar.findDecisionTable("decision2")?.inputEntry(0,0)).isEqualTo("100");
 
 
   }

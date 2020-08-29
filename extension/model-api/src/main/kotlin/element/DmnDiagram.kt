@@ -31,7 +31,7 @@ data class DmnDiagram(
       require(decisionTables.isNotEmpty()) { "diagram must contain at least one decisionTable."}
   }
 
-  fun findDecistionTable(decisionDefinitionKey: DecisionDefinitionKey) : DmnDecisionTable? = decisionTables.find { it.decisionDefinitionKey == decisionDefinitionKey }
+  fun findDecisionTable(decisionDefinitionKey: DecisionDefinitionKey) : DmnDecisionTable? = decisionTables.find { it.decisionDefinitionKey == decisionDefinitionKey }
 
   val resourceName = "diagram-${name.toLowerCase().replace("\\s".toRegex(), "-")}.dmn"
 
