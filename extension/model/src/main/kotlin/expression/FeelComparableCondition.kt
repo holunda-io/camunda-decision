@@ -42,7 +42,6 @@ sealed class FeelComparableCondition<T : Comparable<T>> {
       LessOrEqual("<= "),
       Greater("> "),
       GreaterOrEqual(">= ")
-
     }
   }
 
@@ -50,6 +49,11 @@ sealed class FeelComparableCondition<T : Comparable<T>> {
    * Declare that the input has to be in a given range/interval.
    */
   data class Interval<T : Comparable<T>>(val start: T, val end: T, val type: RangeType = RangeType.Include) : FeelComparableCondition<T>() {
+
+    init {
+      require(start < end) { "Interval requires start < end, was ($start,$end)" }
+    }
+
     override val expression by lazy {
       (toFeelString(start) to toFeelString(end))
         .let { (s, e) -> "${type.prefix}$s..$e${type.suffix}" }
@@ -79,7 +83,10 @@ sealed class FeelComparableCondition<T : Comparable<T>> {
   abstract val expression: Expression?
 
   fun toFeelString(negate: Boolean) = with(expression) {
-    if (negate) negateExpression(this) else this
+    if (negate)
+      negateExpression(this)
+    else
+      this
   }
 
 }
