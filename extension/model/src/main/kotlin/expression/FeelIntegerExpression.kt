@@ -10,15 +10,13 @@ data class FeelIntegerExpression(
 ) : FeelExpression<Int, FeelIntegerExpression> {
 
   override val inputEntry by lazy {
-    this.input.toEntry(
-      if (negate)
-        condition.notExpression
-      else
-        condition.expression
-    )
+    this.input.toEntry(expression)
+  }
+
+  override val expression by lazy {
+    condition.toFeelString(negate)
   }
 
   override fun not(): FeelIntegerExpression = copy(negate = !negate)
 
 }
-

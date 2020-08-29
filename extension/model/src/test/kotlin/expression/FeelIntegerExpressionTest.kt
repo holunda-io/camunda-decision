@@ -1,19 +1,19 @@
 package expression
 
+import io.holunda.decision.model.FeelExpressions.exprBetween
+import io.holunda.decision.model.FeelExpressions.exprBetweenExclude
+import io.holunda.decision.model.FeelExpressions.exprEquals
+import io.holunda.decision.model.FeelExpressions.exprGreaterThan
+import io.holunda.decision.model.FeelExpressions.exprGreaterThanOrEqual
+import io.holunda.decision.model.FeelExpressions.exprInterval
+import io.holunda.decision.model.FeelExpressions.exprLessThan
+import io.holunda.decision.model.FeelExpressions.exprLessThanOrEqual
+import io.holunda.decision.model.FeelExpressions.exprOneOf
+import io.holunda.decision.model.FeelExpressions.not
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.integerInput
 import io.holunda.decision.model.expression.FeelComparableCondition
-import io.holunda.decision.model.expression.FeelExpressions.exprBetween
-import io.holunda.decision.model.expression.FeelExpressions.exprBetweenExclude
-import io.holunda.decision.model.expression.FeelExpressions.exprEquals
-import io.holunda.decision.model.expression.FeelExpressions.exprGreaterThan
-import io.holunda.decision.model.expression.FeelExpressions.exprGreaterThanOrEqual
-import io.holunda.decision.model.expression.FeelExpressions.exprInterval
-import io.holunda.decision.model.expression.FeelExpressions.exprLessThan
-import io.holunda.decision.model.expression.FeelExpressions.exprLessThanOrEqual
-import io.holunda.decision.model.expression.FeelExpressions.exprOneOf
-import io.holunda.decision.model.expression.FeelExpressions.not
+import io.holunda.decision.model.expression.FeelComparableCondition.Interval.RangeType
 import io.holunda.decision.model.expression.FeelIntegerExpression
-import io.holunda.decision.model.expression.RangeType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

@@ -10,6 +10,7 @@ typealias Name = String
 typealias DecisionDefinitionKey = String
 typealias VersionTag = String
 typealias DmnXml = String
+typealias Expression = String
 
 object CamundaDecisionModelApi {
 

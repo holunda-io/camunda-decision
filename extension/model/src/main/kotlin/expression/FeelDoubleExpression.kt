@@ -10,15 +10,13 @@ data class FeelDoubleExpression(
 ) : FeelExpression<Double, FeelDoubleExpression> {
 
   override val inputEntry by lazy {
-    this.input.toEntry(
-      if (negate)
-        condition.notExpression
-      else
-        condition.expression
-    )
+    this.input.toEntry(expression)
+  }
+
+  override val expression by lazy {
+    condition.toFeelString(negate)
   }
 
   override fun not(): FeelDoubleExpression = copy(negate = !negate)
 
 }
-

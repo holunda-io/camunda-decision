@@ -1,6 +1,11 @@
-package io.holunda.decision.model.expression
+package io.holunda.decision.model
 
 import io.holunda.decision.model.api.definition.*
+import io.holunda.decision.model.expression.*
+import io.holunda.decision.model.expression.FeelComparableCondition.Comparison
+import io.holunda.decision.model.expression.FeelComparableCondition.Comparison.ComparisonType
+import io.holunda.decision.model.expression.FeelComparableCondition.Interval.RangeType
+import java.util.*
 
 object FeelExpressions {
 
@@ -28,7 +33,7 @@ object FeelExpressions {
   fun IntegerInputDefinition.exprLessThanOrEqual(value: Int) = exprComparison(value, ComparisonType.LessOrEqual)
   fun IntegerInputDefinition.exprComparison(value: Int, type: ComparisonType) = FeelIntegerExpression(
     input = this,
-    condition = FeelComparableCondition.Comparison(value, type)
+    condition = Comparison(value, type)
   )
 
   fun IntegerInputDefinition.exprBetween(begin: Int, end: Int) = exprInterval(begin, end, RangeType.Include)
@@ -50,7 +55,7 @@ object FeelExpressions {
   fun LongInputDefinition.exprLessThanOrEqual(value: Long) = exprComparison(value, ComparisonType.LessOrEqual)
   fun LongInputDefinition.exprComparison(value: Long, type: ComparisonType) = FeelLongExpression(
     input = this,
-    condition = FeelComparableCondition.Comparison(value, type)
+    condition = Comparison(value, type)
   )
 
   fun LongInputDefinition.exprBetween(begin: Long, end: Long) = exprInterval(begin, end, RangeType.Include)
@@ -73,7 +78,7 @@ object FeelExpressions {
   fun DoubleInputDefinition.exprLessThanOrEqual(value: Double) = exprComparison(value, ComparisonType.LessOrEqual)
   fun DoubleInputDefinition.exprComparison(value: Double, type: ComparisonType) = FeelDoubleExpression(
     input = this,
-    condition = FeelComparableCondition.Comparison(value, type)
+    condition = Comparison(value, type)
   )
 
   fun DoubleInputDefinition.exprBetween(begin: Double, end: Double) = exprInterval(begin, end, RangeType.Include)
@@ -81,6 +86,15 @@ object FeelExpressions {
   fun DoubleInputDefinition.exprInterval(begin: Double, end: Double, type: RangeType) = FeelDoubleExpression(
     input = this,
     condition = FeelComparableCondition.Interval(begin, end, type)
+  )
+
+  fun DateInputDefinition.exprExactly(value: Date) = exprComparison(value, ComparisonType.Equals)
+  fun DateInputDefinition.exprBefore(value: Date) = exprComparison(value, ComparisonType.Less)
+  fun DateInputDefinition.exprAfter(value: Date) = exprComparison(value, ComparisonType.Greater)
+  fun DateInputDefinition.exprBetween(start: Date, end: Date) = FeelDateExpression(input = this, condition = FeelComparableCondition.Interval(start, end))
+  fun DateInputDefinition.exprComparison(value: Date, type: ComparisonType) = FeelDateExpression(
+    input = this,
+    condition = Comparison(value, type)
   )
 
 }

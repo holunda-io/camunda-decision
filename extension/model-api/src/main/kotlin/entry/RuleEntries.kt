@@ -1,5 +1,6 @@
 package io.holunda.decision.model.api.element
 
+import io.holunda.decision.model.api.Expression
 import io.holunda.decision.model.api.definition.ColumnDefinition
 import io.holunda.decision.model.api.definition.InputDefinition
 import io.holunda.decision.model.api.definition.OutputDefinition
@@ -17,7 +18,7 @@ sealed class RuleEntry<T : Any>(
  */
 data class InputEntry<T : Any>(
   override val definition: InputDefinition<T>,
-  override val expression: String?
+  override val expression: Expression?
 ) : RuleEntry<T>(definition, expression)
 
 /**
@@ -25,9 +26,9 @@ data class InputEntry<T : Any>(
  */
 data class OutputEntry<T : Any>(
   override val definition: OutputDefinition<T>,
-  override val expression: String?
+  override val expression: Expression?
 ) : RuleEntry<T>(definition, expression)
 
 
-fun <T : Any> InputDefinition<T>.toEntry(expression: String?) = InputEntry<T>(this, expression)
-fun <T : Any> OutputDefinition<T>.toEntry(expression: String?) = OutputEntry<T>(this, expression)
+fun <T : Any> InputDefinition<T>.toEntry(expression: Expression?) = InputEntry<T>(this, expression)
+fun <T : Any> OutputDefinition<T>.toEntry(expression: Expression?) = OutputEntry<T>(this, expression)

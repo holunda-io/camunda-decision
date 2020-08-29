@@ -1,10 +1,10 @@
 package expression
 
+import io.holunda.decision.model.FeelExpressions.exprFalse
+import io.holunda.decision.model.FeelExpressions.exprTrue
+import io.holunda.decision.model.FeelExpressions.not
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.booleanInput
 import io.holunda.decision.model.expression.FeelBooleanExpression
-import io.holunda.decision.model.expression.FeelExpressions.exprFalse
-import io.holunda.decision.model.expression.FeelExpressions.exprTrue
-import io.holunda.decision.model.expression.FeelExpressions.not
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
@@ -41,4 +41,5 @@ internal class FeelBooleanExpressionTest {
     assertThat(not(not(inBoolean.exprTrue())).inputEntry.expression)
       .isEqualTo("true")
   }
+
 }

@@ -1,10 +1,10 @@
 package expression
 
+import io.holunda.decision.model.FeelExpressions.exprEquals
+import io.holunda.decision.model.FeelExpressions.exprMatchNone
+import io.holunda.decision.model.FeelExpressions.exprMatchOne
+import io.holunda.decision.model.FeelExpressions.not
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.stringInput
-import io.holunda.decision.model.expression.FeelExpressions.exprEquals
-import io.holunda.decision.model.expression.FeelExpressions.exprMatchNone
-import io.holunda.decision.model.expression.FeelExpressions.exprMatchOne
-import io.holunda.decision.model.expression.FeelExpressions.not
 import io.holunda.decision.model.expression.FeelStringExpression
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -46,4 +46,3 @@ internal class FeelStringExpressionTest {
       .isEqualTo("not(\"A\")")
   }
 }
-
