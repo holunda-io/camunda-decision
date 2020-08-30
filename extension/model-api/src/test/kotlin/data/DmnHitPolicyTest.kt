@@ -17,9 +17,7 @@ class DmnHitPolicyTest {
     "ANY, null, ANY",
     "FIRST, null, FIRST",
     "COLLECT, null, COLLECT",
-    //"OUTPUT_ORDER, null, OUTPUT_ORDER", see #24
     "RULE_ORDER, null, RULE_ORDER",
-    //"PRIORITY, null, PRIORITY", # see #25
     "COLLECT, COUNT, COLLECT_COUNT",
     "COLLECT, SUM, COLLECT_SUM",
     "COLLECT, MAX, COLLECT_MAX",

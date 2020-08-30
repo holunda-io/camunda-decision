@@ -26,12 +26,6 @@ enum class DmnHitPolicy(val determineResultType: (Int) -> ResultType) {
   FIRST({ if (it > 1) TUPLE else SINGLE }),
 
   /**
-   * TODO: documentation? What is this good for?
-   * see #25
-   */
-  //  PRIORITY({ TODO("implement") }),
-
-  /**
    * Multiple rules can be satisfied. However, all satisfied rules must generate the same output. The decision table result contains only the output of one of the satisfied rules.
    *
    * If multiple rules are satisfied which generate different outputs, the hit policy is violated.
@@ -43,12 +37,6 @@ enum class DmnHitPolicy(val determineResultType: (Int) -> ResultType) {
    * the order of the rules in the decision table.
    */
   RULE_ORDER({ if (it > 1) LIST else TUPLE_LIST }),
-
-  /**
-   * TODO: documentation? What is this good for?
-   * see #24
-   */
-//  OUTPUT_ORDER({ TODO("implement") }),
 
   /**
    * Multiple rules can be satisfied.

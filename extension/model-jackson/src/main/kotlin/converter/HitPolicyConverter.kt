@@ -11,16 +11,13 @@ internal object HitPolicyConverter {
   private val FROM = mapOf(
     HitPolicyPair(HitPolicy.UNIQUE) to DmnHitPolicy.UNIQUE,
     HitPolicyPair(HitPolicy.FIRST) to DmnHitPolicy.FIRST,
-    // HitPolicyPair(HitPolicy.PRIORITY) to DmnHitPolicy.PRIORITY, see #25
     HitPolicyPair(HitPolicy.ANY) to DmnHitPolicy.ANY,
     HitPolicyPair(HitPolicy.RULE_ORDER) to DmnHitPolicy.RULE_ORDER,
-    // HitPolicyPair(HitPolicy.OUTPUT_ORDER) to DmnHitPolicy.OUTPUT_ORDER, see #24
     HitPolicyPair(HitPolicy.COLLECT) to DmnHitPolicy.COLLECT,
     HitPolicyPair(HitPolicy.COLLECT, BuiltinAggregator.SUM) to DmnHitPolicy.COLLECT_SUM,
     HitPolicyPair(HitPolicy.COLLECT, BuiltinAggregator.COUNT) to DmnHitPolicy.COLLECT_COUNT,
     HitPolicyPair(HitPolicy.COLLECT, BuiltinAggregator.MAX) to DmnHitPolicy.COLLECT_MAX,
     HitPolicyPair(HitPolicy.COLLECT, BuiltinAggregator.MIN) to DmnHitPolicy.COLLECT_MIN
-
   )
 
   private val TO = FROM.map { it.value to it.key }.toMap()
