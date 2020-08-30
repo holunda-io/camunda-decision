@@ -6,6 +6,10 @@ import io.holunda.decision.lib.test.CamundaDecisionTestLib.manageDmnDeployment
 import io.holunda.decision.model.CamundaDecisionGenerator.diagram
 import io.holunda.decision.model.CamundaDecisionGenerator.rule
 import io.holunda.decision.model.CamundaDecisionGenerator.table
+import io.holunda.decision.model.FeelExpressions.exprEquals
+import io.holunda.decision.model.FeelExpressions.exprFalse
+import io.holunda.decision.model.FeelExpressions.exprGreaterThan
+import io.holunda.decision.model.FeelExpressions.exprTrue
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.booleanInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.integerInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.longInput
@@ -51,7 +55,7 @@ internal class CamundaDecisionGeneratorTest {
         .versionTag("1")
         .addRule(rule()
           .description("test")
-          .condition(input = inActive.toEntry("false"))
+          .condition(condition = inActive.exprFalse())
           .outputs(outputValue.toEntry("\"FOO\""))
         )
       )
@@ -77,7 +81,7 @@ internal class CamundaDecisionGeneratorTest {
       )
       .evaluate()
 
-    val resultValue = evalResult  .firstResult
+    val resultValue = evalResult.firstResult
       .getEntry<String>("value")
 
     assertThat(resultValue).isEqualTo("FOO")
@@ -85,7 +89,7 @@ internal class CamundaDecisionGeneratorTest {
 
   @Test
   fun `build diagram from existing dmn`() {
-     val exampleSingleDmn = CamundaDecisionTestLib.readModel("dmn/example_single_table.dmn")
+    val exampleSingleDmn = CamundaDecisionTestLib.readModel("dmn/example_single_table.dmn")
 
     val diagram = CamundaDecisionGenerator.diagram()
       .addDecisionTable(DmnDecisionTableReferenceBuilder()
@@ -120,11 +124,11 @@ internal class CamundaDecisionGeneratorTest {
             .hitPolicy(DmnHitPolicy.COLLECT_SUM)
             .addRule(
               rule()
-                .condition(input.toEntry("> 1"))
-                .outputs(output.toEntry( "2"))
+                .condition(input.exprGreaterThan(1))
+                .outputs(output.toEntry("2"))
             )
             .addRule(
-              rule(input.toEntry("> 10"))
+              rule(input.exprGreaterThan(10))
                 .outputs(output.toEntry("3"))
             )
         )
@@ -153,11 +157,11 @@ internal class CamundaDecisionGeneratorTest {
     .addDecisionTable(
       table("decision1")
         .addRule(
-          rule(inFoo.toEntry("> 20"))
+          rule(inFoo.exprGreaterThan(20))
             .outputs(outBar.toEntry("200"))
         )
         .addRule(
-          rule(inFoo.toEntry("> 5"))
+          rule(inFoo.exprGreaterThan(5))
             .outputs(outBar.toEntry("100"))
         )
 
@@ -167,31 +171,31 @@ internal class CamundaDecisionGeneratorTest {
       table("decision2")
         .requiredDecision("decision1")
         .addRule(
-          rule(inBar.toEntry("100"))
-            .and(inActive.toEntry("true"))
+          rule(inBar.exprEquals(100))
+            .and(inActive.exprTrue())
             .outputs(outResult.toEntry("false"))
         )
         .addRule(
-          rule(inBar.toEntry("100"))
-            .and(inActive.toEntry("false"))
+          rule(inBar.exprEquals(100))
+            .and(inActive.exprFalse())
             .outputs(outResult.toEntry("true"))
         )
         .addRule(
-          rule(inBar.toEntry("200"))
-            .and(inActive.toEntry("true"))
+          rule(inBar.exprEquals(200))
+            .and(inActive.exprTrue())
             .outputs(outResult.toEntry("true"))
         )
         .addRule(
-          rule(inBar.toEntry("200"))
-            .and(inActive.toEntry("false"))
+          rule(inBar.exprEquals(200))
+            .and(inActive.exprFalse())
             .outputs(outResult.toEntry("false"))
         )
     ).build().apply { println(CamundaDecisionModel.render(this)) }
 
   @Test
   fun `correct order of inputEntries`() {
-    assertThat(diagramFooBar.findDecisionTable("decision1")?.inputEntry(0,0)).isEqualTo("> 20");
-    assertThat(diagramFooBar.findDecisionTable("decision2")?.inputEntry(0,0)).isEqualTo("100");
+    assertThat(diagramFooBar.findDecisionTable("decision1")?.inputEntry(0, 0)).isEqualTo("> 20");
+    assertThat(diagramFooBar.findDecisionTable("decision2")?.inputEntry(0, 0)).isEqualTo("100");
 
 
   }
@@ -234,11 +238,11 @@ internal class CamundaDecisionGeneratorTest {
       .addDecisionTable(
         table("decision1")
           .addRule(
-            rule(inFoo.toEntry("> 20"))
+            rule(inFoo.exprGreaterThan(20))
               .outputs(outBar.toEntry("200"))
           )
           .addRule(
-            rule(inFoo.toEntry("> 5"))
+            rule(inFoo.exprGreaterThan(5))
               .outputs(outBar.toEntry("100"))
           )
 
@@ -248,23 +252,23 @@ internal class CamundaDecisionGeneratorTest {
         table("decision2")
           .requiredDecision("decision1")
           .addRule(
-            rule(inBar.toEntry("100"))
-              .and(inActive.toEntry("true"))
+            rule(inBar.exprEquals(100))
+              .and(inActive.exprTrue())
               .outputs(outResult.toEntry("false"))
           )
           .addRule(
-            rule(inBar.toEntry("100"))
-              .and(inActive.toEntry("false"))
+            rule(inBar.exprEquals(100))
+              .and(inActive.exprFalse())
               .outputs(outResult.toEntry("true"))
           )
           .addRule(
-            rule(inBar.toEntry("200"))
-              .and(inActive.toEntry("true"))
+            rule(inBar.exprEquals(200))
+              .and(inActive.exprTrue())
               .outputs(outResult.toEntry("true"))
           )
           .addRule(
-            rule(inBar.toEntry("200"))
-              .and(inActive.toEntry("false"))
+            rule(inBar.exprEquals(200))
+              .and(inActive.exprFalse())
               .outputs(outResult.toEntry("false"))
           )
       )

@@ -2,8 +2,8 @@ package io.holunda.decision.model.builder
 
 import io.holunda.decision.model.api.element.DmnRule
 import io.holunda.decision.model.api.element.DmnRuleList
-import io.holunda.decision.model.api.element.InputEntry
 import io.holunda.decision.model.api.element.OutputEntry
+import io.holunda.decision.model.expression.FeelExpression
 import org.apache.commons.lang3.builder.Builder
 
 /**
@@ -13,18 +13,18 @@ import org.apache.commons.lang3.builder.Builder
 class DmnBusinessRuleBuilder : Builder<DmnRuleList> {
 
   private var description: String? = null
-  private val inputs = mutableListOf<InputEntry<*>>()
+  private val inputs = mutableListOf<FeelExpression<*,*>>()
   private val outputs = mutableListOf<OutputEntry<*>>()
 
   fun description(description: String) = apply {
     this.description = description
   }
 
-  fun <T : Any> condition(input: InputEntry<T>) = apply {
-    this.inputs.add(input)
+  fun <T : Any, SELF: FeelExpression<T, SELF>> condition(condition: FeelExpression<T, SELF>) = apply {
+    this.inputs.add(condition)
   }
 
-  fun <T : Any> and(input: InputEntry<T>) = condition(input)
+  fun <T : Any, SELF: FeelExpression<T, SELF>> and(condition: FeelExpression<T, SELF>) = condition(condition)
 
   fun <T : Any> outputs(vararg outputs: OutputEntry<T>) = apply {
     this.outputs.addAll(outputs.toList())
@@ -36,7 +36,7 @@ class DmnBusinessRuleBuilder : Builder<DmnRuleList> {
 
     val rule = DmnRule(
       description = description,
-      inputs = inputs,
+      inputs = inputs.map { it.inputEntry },
       outputs = outputs
     )
     return DmnRuleList(rule)

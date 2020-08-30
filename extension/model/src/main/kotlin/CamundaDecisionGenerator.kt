@@ -2,10 +2,10 @@ package io.holunda.decision.model
 
 import io.holunda.decision.model.api.DecisionDefinitionKey
 import io.holunda.decision.model.api.Name
-import io.holunda.decision.model.api.element.InputEntry
 import io.holunda.decision.model.builder.DmnBusinessRuleBuilder
 import io.holunda.decision.model.builder.DmnDecisionTableRulesBuilder
 import io.holunda.decision.model.builder.DmnDiagramBuilder
+import io.holunda.decision.model.expression.FeelExpression
 
 object CamundaDecisionGenerator {
 
@@ -24,6 +24,6 @@ object CamundaDecisionGenerator {
   fun rule() = DmnBusinessRuleBuilder()
 
   @JvmStatic
-  fun <T : Any> rule(condition: InputEntry<T>? = null) = rule()
+  fun <T : Any, SELF: FeelExpression<T, SELF>> rule(condition: FeelExpression<T,SELF>? = null) = rule()
     .apply { condition?.let { condition(it) } }
 }

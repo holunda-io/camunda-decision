@@ -1,12 +1,12 @@
 package io.holunda.decision.model.builder
 
 import io.holunda.decision.model.CamundaDecisionGenerator.rule
+import io.holunda.decision.model.FeelExpressions.exprEquals
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.longInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.stringInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
 import io.holunda.decision.model.api.data.DmnHitPolicy
 import io.holunda.decision.model.api.element.OutputEntry
-import io.holunda.decision.model.api.element.toEntry
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
@@ -22,8 +22,8 @@ internal class DmnDecisionTableRulesBuilderTest {
       .decisionDefinitionKey("decision1")
       .name("Decision One")
       .addRule(rule()
-        .condition(inFoo.toEntry("\"abc\""))
-        .and(inBaz.toEntry("5"))
+        .condition(inFoo.exprEquals("abc"))
+        .and(inBaz.exprEquals(5))
         .outputs(OutputEntry(definition = stringOutput("bar"), expression = "\"xyz\""))
       )
 
