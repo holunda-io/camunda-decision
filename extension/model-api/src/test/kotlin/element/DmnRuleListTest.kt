@@ -1,10 +1,6 @@
-package element
+package io.holunda.decision.model.api.element
 
 import io.holunda.decision.model.api.CamundaDecisionModelApi
-import io.holunda.decision.model.api.element.DmnRule
-import io.holunda.decision.model.api.element.DmnRuleList
-import io.holunda.decision.model.api.element.InputEntry
-import io.holunda.decision.model.api.element.OutputEntry
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

@@ -1,0 +1,54 @@
+package io.holunda.decision.model.api
+
+import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.integerInput
+import io.holunda.decision.model.api.data.DmnHitPolicy
+import io.holunda.decision.model.api.element.*
+
+object DmnDiagramTestFixtures {
+  const val DECISION_1 = "decision1"
+  const val DECISION_2 = "decision2"
+
+  val inputFoo = integerInput("foo", "Foo")
+  val inputBar = integerInput("bar", "Bar")
+
+  val outputBar = inputBar.toOutputDefinition().copy(label = "Bar Result")
+  val outputResult = CamundaDecisionModelApi.OutputDefinitions.stringOutput("result", "Result")
+
+
+  val singleTable = DmnDiagram(
+    DmnDecisionTable(
+      decisionDefinitionKey = "singleTable",
+      name = "Decision ",
+      versionTag = "1",
+      header = DmnDecisionTable.Header(listOf(inputFoo), listOf(outputResult)),
+      hitPolicy = DmnHitPolicy.FIRST,
+      rules = DmnRuleList(
+        DmnRule(
+          id = "r5",
+          description = "woohoo",
+          inputs = listOf(InputEntry(inputFoo, "< 100")),
+          outputs = listOf(OutputEntry(outputResult, "\"Result\""))
+        )
+      )
+    )
+  )
+
+  val singleTable2Outputs = DmnDiagram(
+    DmnDecisionTable(
+      decisionDefinitionKey = "singleTable",
+      name = "Decision ",
+      versionTag = "1",
+      header = DmnDecisionTable.Header(listOf(inputFoo), listOf(outputResult, outputBar)),
+      hitPolicy = DmnHitPolicy.FIRST,
+      rules = DmnRuleList(
+        DmnRule(
+          id = "r5",
+          description = "woohoo",
+          inputs = listOf(inputFoo.toEntry("< 100")),
+          outputs = listOf(outputResult.toEntry("\"Result\""), outputBar.toEntry("5"))
+        )
+      )
+    )
+  )
+
+}

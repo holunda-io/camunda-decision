@@ -5,6 +5,7 @@ import io.holunda.decision.model.api.Id
 import io.holunda.decision.model.api.Name
 import io.holunda.decision.model.api.VersionTag
 import io.holunda.decision.model.api.data.DmnHitPolicy
+import io.holunda.decision.model.api.data.ResultType
 import io.holunda.decision.model.api.definition.InputDefinition
 import io.holunda.decision.model.api.definition.OutputDefinition
 
@@ -27,6 +28,11 @@ data class DmnDecisionTable(
     InformationRequirement(this.decisionDefinitionKey, requiredDecisions.first())
   else null
 
+  val resultType : ResultType = if (header.numOutputs > 1)
+    ResultType.TupleResult
+  else
+    ResultType.SingleResult
+
   data class Header(val inputs: List<InputDefinition<*>>, val outputs: List<OutputDefinition<*>>) {
     init {
         require(inputs.isNotEmpty()) { "table header must contain inputs"}
@@ -43,4 +49,5 @@ data class DmnDecisionTable(
   fun inputEntry(row:Int, col:Int): String? {
     return rules[row].inputs[col].expression;
   }
+
 }

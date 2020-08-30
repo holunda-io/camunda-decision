@@ -1,4 +1,4 @@
-package io.holunda.decision.model.element
+package io.holunda.decision.model.api.data
 
 import io.holunda.decision.model.api.AggregatorName
 import io.holunda.decision.model.api.HitPolicyName
@@ -38,6 +38,10 @@ class DmnHitPolicyTest(
     assertThat(DmnHitPolicy.valueOf(hitPolicy, aggregator)).isEqualTo(expected);
   }
 
-
+  @Test
+  fun determineResultType() {
+    assertThat(DmnHitPolicy.UNIQUE.determineResultType(1)).isEqualTo(ResultType.SingleResult)
+    assertThat(DmnHitPolicy.UNIQUE.determineResultType(2)).isEqualTo(ResultType.TupleResult)
+  }
 }
 
