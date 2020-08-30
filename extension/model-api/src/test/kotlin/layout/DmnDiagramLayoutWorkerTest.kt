@@ -1,4 +1,4 @@
-package io.holunda.decision.model.converter
+package io.holunda.decision.model.api.layout
 
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.booleanInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.longOutput

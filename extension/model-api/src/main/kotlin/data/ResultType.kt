@@ -1,6 +1,6 @@
 package io.holunda.decision.model.api.data
 
-sealed class ResultType {
+enum class ResultType {
 
   /**
    * The result is one single value.
@@ -9,7 +9,7 @@ sealed class ResultType {
    * * 1 output column, HitPolicy: FIRST
    * * HitPolicy COLLECT_SUM
    */
-  object SingleResult : ResultType()
+  SINGLE,
 
   /**
    * The result is a list of single values.
@@ -17,7 +17,7 @@ sealed class ResultType {
    * Examples:
    * * 1 outputColumn, HitPolicy COLLECT
    */
-  object ListResult : ResultType()
+  LIST,
 
   /**
    * The result represents one single row, but has multiple values.
@@ -25,7 +25,7 @@ sealed class ResultType {
    * Examples:
    * * 2 or more outputColumns, HitPolicy: FIRST
    */
-  object TupleResult : ResultType()
+  TUPLE,
 
   /**
    * The result is a list of tuples (aka maps)
@@ -33,5 +33,5 @@ sealed class ResultType {
    * Examples:
    * * 2 or more outputColumns, HitPolicy: COLLECT
    */
-  object TupleListResult: ResultType()
+  TUPLE_LIST
 }

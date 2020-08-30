@@ -51,4 +51,45 @@ object DmnDiagramTestFixtures {
     )
   )
 
+  val decision2DependsOnDecision1 = DmnDiagram(
+    id = "table2dependsOnTable1",
+    name = "Diagram with two tables",
+    decisionTables = listOf(
+      DmnDecisionTable(
+        decisionDefinitionKey = DECISION_1,
+        name = "Decision 1",
+        hitPolicy = DmnHitPolicy.FIRST,
+        versionTag = "1",
+        header = DmnDecisionTable.Header(
+          listOf(inputFoo), listOf(outputBar)
+        ),
+        rules = DmnRuleList(
+          DmnRule(
+            id = "r1",
+            description = "amazing",
+            inputs = listOf(inputFoo.toEntry(">10")),
+            outputs = listOf(outputBar.toEntry("100"))
+          )
+        )
+      ),
+      DmnDecisionTable(
+        decisionDefinitionKey = DECISION_2,
+        name = "Decision 2",
+        hitPolicy = DmnHitPolicy.FIRST,
+        versionTag = "1",
+        header = DmnDecisionTable.Header(
+          listOf(inputBar), listOf(outputResult)
+        ),
+        rules = DmnRuleList(
+          DmnRule(
+            id = "r5",
+            description = "based on decision1",
+            inputs = listOf(inputBar.toEntry(">99")),
+            outputs = listOf(outputResult.toEntry("100"))
+          )
+        ),
+        requiredDecisions = setOf(DECISION_1)
+      )
+    )
+  )
 }

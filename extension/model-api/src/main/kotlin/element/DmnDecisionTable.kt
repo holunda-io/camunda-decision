@@ -29,9 +29,9 @@ data class DmnDecisionTable(
   else null
 
   val resultType : ResultType = if (header.numOutputs > 1)
-    ResultType.TupleResult
+    ResultType.TUPLE
   else
-    ResultType.SingleResult
+    ResultType.SINGLE
 
   data class Header(val inputs: List<InputDefinition<*>>, val outputs: List<OutputDefinition<*>>) {
     init {

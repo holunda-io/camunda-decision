@@ -1,4 +1,4 @@
-package element
+package io.holunda.decision.model.api.element
 
 import io.holunda.decision.model.api.DmnDiagramTestFixtures
 import io.holunda.decision.model.api.data.ResultType
@@ -9,11 +9,11 @@ internal class DmnDecisionTableTest {
 
   @Test
   fun `hitpolicy UNIQUE, one output`() {
-    assertThat(DmnDiagramTestFixtures.singleTable.resultTable.resultType).isEqualTo(ResultType.SingleResult)
+    assertThat(DmnDiagramTestFixtures.singleTable.resultTable.resultType).isEqualTo(ResultType.SINGLE)
   }
 
   @Test
   fun `hitpolicy UNIQUE, two outputs`() {
-    assertThat(DmnDiagramTestFixtures.singleTable2Outputs.resultTable.resultType).isEqualTo(ResultType.TupleResult)
+    assertThat(DmnDiagramTestFixtures.singleTable2Outputs.resultTable.resultType).isEqualTo(ResultType.TUPLE)
   }
 }
