@@ -1,10 +1,12 @@
 package io.holunda.decision.model
 
 import io.holunda.decision.model.api.definition.*
+import io.holunda.decision.model.api.element.toEntry
 import io.holunda.decision.model.expression.*
 import io.holunda.decision.model.expression.FeelComparableCondition.Comparison
 import io.holunda.decision.model.expression.FeelComparableCondition.Comparison.ComparisonType
 import io.holunda.decision.model.expression.FeelComparableCondition.Interval.RangeType
+import io.holunda.decision.model.expression.FeelExpression.Companion.toFeelString
 import java.util.*
 
 object FeelExpressions {
@@ -97,4 +99,12 @@ object FeelExpressions {
     condition = Comparison(value, type)
   )
 
+  fun BooleanOutputDefinition.resultValue(value: Boolean) = this.toEntry(toFeelString(value))
+  fun BooleanOutputDefinition.resultTrue() = resultValue(true)
+  fun BooleanOutputDefinition.resultFalse() = resultValue(false)
+  fun StringOutputDefinition.resultValue(value: String) = this.toEntry(toFeelString(value))
+  fun IntegerOutputDefinition.resultValue(value: Int) = this.toEntry(toFeelString(value))
+  fun LongOutputDefinition.resultValue(value: Long) = this.toEntry(toFeelString(value))
+  fun DoubleOutputDefinition.resultValue(value: Double) = this.toEntry(toFeelString(value))
+  fun DateOutputDefinition.resultValue(value: Date) = this.toEntry(toFeelString(value))
 }

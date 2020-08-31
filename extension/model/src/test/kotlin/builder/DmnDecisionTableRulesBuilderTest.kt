@@ -2,19 +2,19 @@ package io.holunda.decision.model.builder
 
 import io.holunda.decision.model.CamundaDecisionGenerator.rule
 import io.holunda.decision.model.FeelExpressions.exprEquals
+import io.holunda.decision.model.FeelExpressions.resultValue
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.longInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.stringInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
 import io.holunda.decision.model.api.data.DmnHitPolicy
-import io.holunda.decision.model.api.element.OutputEntry
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
 internal class DmnDecisionTableRulesBuilderTest {
 
-  val inFoo = stringInput("foo")
-  val inBaz = longInput("baz")
-  val outBar = stringOutput("bar")
+  private val inFoo = stringInput("foo")
+  private val inBaz = longInput("baz")
+  private val outBar = stringOutput("bar")
 
   @Test
   fun `create table with one rule`() {
@@ -24,7 +24,7 @@ internal class DmnDecisionTableRulesBuilderTest {
       .addRule(rule()
         .condition(inFoo.exprEquals("abc"))
         .and(inBaz.exprEquals(5))
-        .outputs(OutputEntry(definition = stringOutput("bar"), expression = "\"xyz\""))
+        .outputs( outBar.resultValue("xyz"))
       )
 
     with(builder.build()) {
