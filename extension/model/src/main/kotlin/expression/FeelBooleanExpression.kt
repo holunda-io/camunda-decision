@@ -22,4 +22,6 @@ data class FeelBooleanExpression(
   }
 
   override fun not(): FeelBooleanExpression = copy(negate = !negate)
+
+
 }

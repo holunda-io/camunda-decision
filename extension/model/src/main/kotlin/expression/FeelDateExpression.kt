@@ -1,6 +1,6 @@
 package io.holunda.decision.model.expression
 
-import io.holunda.decision.model.api.Expression
+import io.holunda.decision.model.api.FeelString
 import io.holunda.decision.model.api.definition.DateInputDefinition
 import io.holunda.decision.model.api.element.toEntry
 import java.util.*
@@ -14,7 +14,7 @@ data class FeelDateExpression(
   private val negate: Boolean = false
 ) : FeelExpression<Date, FeelDateExpression> {
 
-  override val expression: Expression? by lazy {
+  override val expression: FeelString? by lazy {
     condition.toFeelString(negate)
   }
 
@@ -23,5 +23,4 @@ data class FeelDateExpression(
   }
 
   override fun not(): FeelDateExpression = copy(negate = !negate)
-
 }

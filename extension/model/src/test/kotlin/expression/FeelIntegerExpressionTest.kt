@@ -1,14 +1,14 @@
 package expression
 
-import io.holunda.decision.model.FeelExpressions.exprBetween
-import io.holunda.decision.model.FeelExpressions.exprBetweenExclude
-import io.holunda.decision.model.FeelExpressions.exprEquals
-import io.holunda.decision.model.FeelExpressions.exprGreaterThan
-import io.holunda.decision.model.FeelExpressions.exprGreaterThanOrEqual
-import io.holunda.decision.model.FeelExpressions.exprInterval
-import io.holunda.decision.model.FeelExpressions.exprLessThan
-import io.holunda.decision.model.FeelExpressions.exprLessThanOrEqual
-import io.holunda.decision.model.FeelExpressions.exprOneOf
+import io.holunda.decision.model.FeelExpressions.exprBetween_old
+import io.holunda.decision.model.FeelExpressions.exprBetweenExclude_old
+import io.holunda.decision.model.FeelExpressions.exprEquals_old
+import io.holunda.decision.model.FeelExpressions.exprGreaterThan_old
+import io.holunda.decision.model.FeelExpressions.exprGreaterThanOrEqual_old
+import io.holunda.decision.model.FeelExpressions.exprInterval_old
+import io.holunda.decision.model.FeelExpressions.exprLessThan_old
+import io.holunda.decision.model.FeelExpressions.exprLessThanOrEqual_old
+import io.holunda.decision.model.FeelExpressions.exprOneOf_old
 import io.holunda.decision.model.FeelExpressions.not
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.integerInput
 import io.holunda.decision.model.expression.FeelComparableCondition
@@ -29,49 +29,49 @@ internal class FeelIntegerExpressionTest {
 
   @Test
   fun `one of`() {
-    assertThat(inInt.exprOneOf(2, 1).inputEntry.expression)
+    assertThat(inInt.exprOneOf_old(2, 1).inputEntry.expression)
       .isEqualTo("1,2")
-    assertThat(inInt.exprOneOf(1).inputEntry.expression)
+    assertThat(inInt.exprOneOf_old(1).inputEntry.expression)
       .isEqualTo("1")
   }
 
   @Test
   fun comparison() {
-    assertThat(inInt.exprEquals(1).inputEntry.expression)
+    assertThat(inInt.exprEquals_old(1).inputEntry.expression)
       .isEqualTo("1")
 
-    assertThat(not(inInt.exprEquals(1)).inputEntry.expression)
+    assertThat(not(inInt.exprEquals_old(1)).inputEntry.expression)
       .isEqualTo("not(1)")
 
-    assertThat(inInt.exprGreaterThan(1).inputEntry.expression)
+    assertThat(inInt.exprGreaterThan_old(1).inputEntry.expression)
       .isEqualTo("> 1")
 
-    assertThat(inInt.exprGreaterThanOrEqual(1).inputEntry.expression)
+    assertThat(inInt.exprGreaterThanOrEqual_old(1).inputEntry.expression)
       .isEqualTo(">= 1")
 
-    assertThat(inInt.exprLessThan(1).inputEntry.expression)
+    assertThat(inInt.exprLessThan_old(1).inputEntry.expression)
       .isEqualTo("< 1")
 
-    assertThat(inInt.exprLessThanOrEqual(1).inputEntry.expression)
+    assertThat(inInt.exprLessThanOrEqual_old(1).inputEntry.expression)
       .isEqualTo("<= 1")
   }
 
   @Test
   fun interval() {
-    assertThat(inInt.exprBetween(1, 10).inputEntry.expression)
+    assertThat(inInt.exprBetween_old(1, 10).inputEntry.expression)
       .isEqualTo("[1..10]")
-    assertThat(inInt.exprBetweenExclude(1, 10).inputEntry.expression)
+    assertThat(inInt.exprBetweenExclude_old(1, 10).inputEntry.expression)
       .isEqualTo("]1..10[")
 
-    assertThat(inInt.exprInterval(1, 10, RangeType.Include).inputEntry.expression)
+    assertThat(inInt.exprInterval_old(1, 10, RangeType.Include).inputEntry.expression)
       .isEqualTo("[1..10]")
-    assertThat(inInt.exprInterval(1, 10, RangeType.Exclude).inputEntry.expression)
+    assertThat(inInt.exprInterval_old(1, 10, RangeType.Exclude).inputEntry.expression)
       .isEqualTo("]1..10[")
-    assertThat(inInt.exprInterval(1, 10, RangeType.IncludeExclude).inputEntry.expression)
+    assertThat(inInt.exprInterval_old(1, 10, RangeType.IncludeExclude).inputEntry.expression)
       .isEqualTo("[1..10[")
-    assertThat(inInt.exprInterval(1, 10, RangeType.ExcludeInclude).inputEntry.expression)
+    assertThat(inInt.exprInterval_old(1, 10, RangeType.ExcludeInclude).inputEntry.expression)
       .isEqualTo("]1..10]")
-    assertThat(not(inInt.exprInterval(1, 10, RangeType.ExcludeInclude)).inputEntry.expression)
+    assertThat(not(inInt.exprInterval_old(1, 10, RangeType.ExcludeInclude)).inputEntry.expression)
       .isEqualTo("not(]1..10])")
   }
 }

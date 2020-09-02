@@ -6,6 +6,7 @@ import io.holunda.decision.model.builder.DmnBusinessRuleBuilder
 import io.holunda.decision.model.builder.DmnDecisionTableRulesBuilder
 import io.holunda.decision.model.builder.DmnDiagramBuilder
 import io.holunda.decision.model.expression.FeelExpression
+import io.holunda.decision.model.expression.jbool.JBoolExpressionSupplier
 
 object CamundaDecisionGenerator {
 
@@ -24,6 +25,9 @@ object CamundaDecisionGenerator {
   fun rule() = DmnBusinessRuleBuilder()
 
   @JvmStatic
-  fun <T : Any, SELF: FeelExpression<T, SELF>> rule(condition: FeelExpression<T,SELF>? = null) = rule()
-    .apply { condition?.let { condition(it) } }
+  fun rule(expression: JBoolExpressionSupplier, vararg expressions: JBoolExpressionSupplier) : DmnBusinessRuleBuilder= rule()
+    .let {
+      val list = listOf(expression) + expressions.toList()
+      it.condition(*list.toTypedArray())
+    }
 }

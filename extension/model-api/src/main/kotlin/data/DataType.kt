@@ -33,11 +33,11 @@ sealed class DataType<T : Any>(
   abstract fun inputDefinition(key: String, label: String): InputDefinition<T>
   abstract fun outputDefinition(key: String, label: String): OutputDefinition<T>
 
-  fun inputEntry(definition: InputDefinition<T>, expression: String?) = InputEntry<T>(definition, expression)
-  fun inputEntry(key: String, label: String, expression: String?) = InputEntry<T>(inputDefinition(key, label), expression)
+  fun inputEntry(definition: InputDefinition<T>, expression: String?) = InputEntry(definition, expression)
+  fun inputEntry(key: String, label: String, expression: String?) = InputEntry(inputDefinition(key, label), expression)
 
-  fun outputEntry(definition: OutputDefinition<T>, expression: String?) = OutputEntry<T>(definition, expression)
-  fun outputEntry(key: String, label: String, expression: String?) = OutputEntry<T>(outputDefinition(key, label), expression)
+  fun outputEntry(definition: OutputDefinition<T>, expression: String?) = OutputEntry(definition, expression)
+  fun outputEntry(key: String, label: String, expression: String?) = OutputEntry(outputDefinition(key, label), expression)
 
   override fun toString() = """DataType(name="$name", typeRef="$typeRef", type=$type)"""
 

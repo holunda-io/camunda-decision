@@ -1,7 +1,7 @@
 package expression
 
-import io.holunda.decision.model.FeelExpressions.exprFalse
-import io.holunda.decision.model.FeelExpressions.exprTrue
+import io.holunda.decision.model.FeelExpressions.exprFalse_old
+import io.holunda.decision.model.FeelExpressions.exprTrue_old
 import io.holunda.decision.model.FeelExpressions.not
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.booleanInput
 import io.holunda.decision.model.expression.FeelBooleanExpression
@@ -20,25 +20,25 @@ internal class FeelBooleanExpressionTest {
 
   @Test
   fun `check for true`() {
-    assertThat(inBoolean.exprTrue().inputEntry.expression)
+    assertThat(inBoolean.exprTrue_old().inputEntry.expression)
       .isEqualTo("true")
   }
 
   @Test
   fun `check for false`() {
-    assertThat(inBoolean.exprFalse().inputEntry.expression)
+    assertThat(inBoolean.exprFalse_old().inputEntry.expression)
       .isEqualTo("false")
   }
 
   @Test
   fun negate() {
-    assertThat(not(inBoolean.exprFalse()).inputEntry.expression)
+    assertThat(not(inBoolean.exprFalse_old()).inputEntry.expression)
       .isEqualTo("true")
 
-    assertThat(not(inBoolean.exprTrue()).inputEntry.expression)
+    assertThat(not(inBoolean.exprTrue_old()).inputEntry.expression)
       .isEqualTo("false")
 
-    assertThat(not(not(inBoolean.exprTrue())).inputEntry.expression)
+    assertThat(not(not(inBoolean.exprTrue_old())).inputEntry.expression)
       .isEqualTo("true")
   }
 

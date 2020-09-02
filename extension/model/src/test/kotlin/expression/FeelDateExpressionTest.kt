@@ -3,7 +3,7 @@ package io.holunda.decision.model.expression
 import io.holunda.decision.model.CamundaDecisionModel
 import io.holunda.decision.model.FeelExpressions.exprAfter
 import io.holunda.decision.model.FeelExpressions.exprBefore
-import io.holunda.decision.model.FeelExpressions.exprBetween
+import io.holunda.decision.model.FeelExpressions.exprBetween_old
 import io.holunda.decision.model.FeelExpressions.exprExactly
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.dateInput
 import org.assertj.core.api.Assertions.assertThat
@@ -40,7 +40,7 @@ internal class FeelDateExpressionTest {
 
   @Test
   fun interval() {
-    assertThat(inDate.exprBetween(DATE_START, DATE_END).inputEntry.expression)
+    assertThat(inDate.exprBetween_old(DATE_START, DATE_END).inputEntry.expression)
       .isEqualTo("[date and time(\"2020-08-29T19:57:22\")..date and time(\"2020-09-30T08:57:22\")]")
   }
 

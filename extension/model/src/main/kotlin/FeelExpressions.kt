@@ -7,94 +7,140 @@ import io.holunda.decision.model.expression.FeelComparableCondition.Comparison
 import io.holunda.decision.model.expression.FeelComparableCondition.Comparison.ComparisonType
 import io.holunda.decision.model.expression.FeelComparableCondition.Interval.RangeType
 import io.holunda.decision.model.expression.FeelExpression.Companion.toFeelString
+import io.holunda.decision.model.expression.condition.FeelComparisonCondition
+import io.holunda.decision.model.expression.condition.FeelComparisonCondition.ComparisonType.*
+import io.holunda.decision.model.expression.condition.FeelDisjunctionCondition
+import io.holunda.decision.model.expression.jbool.FeelInputVariable
 import java.util.*
 
 object FeelExpressions {
+
+  @JvmStatic
+  fun not(variable: FeelInputVariable) = variable.negate()
+
+  // boolean
+
+  fun BooleanInputDefinition.feelTrue() = feelEqual(true)
+  fun BooleanInputDefinition.feelFalse() = feelEqual(false)
+  fun BooleanInputDefinition.feelEqual(value: Boolean) = FeelInputVariable(this, FeelComparisonCondition(value, Equal))
+
+  // string
+
+  fun StringInputDefinition.feelEqual(value: String) = FeelInputVariable(this, FeelComparisonCondition(value, Equal))
+  fun StringInputDefinition.feelMatchOne(vararg values: String) = FeelInputVariable(this, FeelDisjunctionCondition(values.toSet()))
+  fun StringInputDefinition.feelMatchNone(vararg values: String) = FeelInputVariable(this, FeelDisjunctionCondition(values.toSet())).negate()
+
+  // integer
+
+  fun IntegerInputDefinition.feelEqual(value: Int) = feelComparison(value, Equal)
+  fun IntegerInputDefinition.feelGreaterThan(value: Int) = feelComparison(value, Greater)
+  fun IntegerInputDefinition.feelGreaterThanOrEqual(value: Int) = feelComparison(value, GreaterOrEqual)
+  fun IntegerInputDefinition.feelLessThan(value: Int) = feelComparison(value, Less)
+  fun IntegerInputDefinition.feelLessThanOrEqual(value: Int) = feelComparison(value, LessOrEqual)
+  fun IntegerInputDefinition.feelComparison(value: Int, type: FeelComparisonCondition.ComparisonType) = FeelInputVariable(this, FeelComparisonCondition(value, type))
+
+  // long
+
+  fun LongInputDefinition.feelEqual(value: Long) = feelComparison(value, Equal)
+  fun LongInputDefinition.feelGreaterThan(value: Long) = feelComparison(value, Greater)
+  fun LongInputDefinition.feelGreaterThanOrEqual(value: Long) = feelComparison(value, GreaterOrEqual)
+  fun LongInputDefinition.feelLessThan(value: Long) = feelComparison(value, Less)
+  fun LongInputDefinition.feelLessThanOrEqual(value: Long) = feelComparison(value, LessOrEqual)
+  fun LongInputDefinition.feelComparison(value: Long, type: FeelComparisonCondition.ComparisonType) = FeelInputVariable(this, FeelComparisonCondition(value, type))
+
+  // double
+
+  fun DoubleInputDefinition.feelEqual(value: Double) = feelComparison(value, Equal)
+  fun DoubleInputDefinition.feelGreaterThan(value: Double) = feelComparison(value, Greater)
+  fun DoubleInputDefinition.feelGreaterThanOrEqual(value: Double) = feelComparison(value, GreaterOrEqual)
+  fun DoubleInputDefinition.feelLessThan(value: Double) = feelComparison(value, Less)
+  fun DoubleInputDefinition.feelLessThanOrEqual(value: Double) = feelComparison(value, LessOrEqual)
+  fun DoubleInputDefinition.feelComparison(value: Double, type: FeelComparisonCondition.ComparisonType) = FeelInputVariable(this, FeelComparisonCondition(value, type))
 
   // negates the given expression.
   @JvmStatic
   fun <F : FeelExpression<T, F>, T : Any> not(expression: F) = expression.not()
 
-  fun StringInputDefinition.exprEquals(value: String) = exprMatchOne(value)
-  fun StringInputDefinition.exprMatchOne(vararg values: String) = FeelStringExpression(input = this, values = values.toSet())
-  fun StringInputDefinition.exprMatchNone(vararg values: String) = FeelStringExpression(input = this, values = values.toSet(), negate = true)
+  fun StringInputDefinition.exprEquals_old(value: String) = exprMatchOne_old(value)
+  fun StringInputDefinition.exprMatchOne_old(vararg values: String) = FeelStringExpression(input = this, values = values.toSet())
+  fun StringInputDefinition.exprMatchNone_old(vararg values: String) = FeelStringExpression(input = this, values = values.toSet(), negate = true)
 
-  fun BooleanInputDefinition.exprTrue() = exprEquals(true)
-  fun BooleanInputDefinition.exprFalse() = exprEquals(false)
-  fun BooleanInputDefinition.exprEquals(value: Boolean) = FeelBooleanExpression(input = this, value = value)
+  fun BooleanInputDefinition.exprTrue_old() = exprEquals_old(true)
+  fun BooleanInputDefinition.exprFalse_old() = exprEquals_old(false)
+  fun BooleanInputDefinition.exprEquals_old(value: Boolean) = FeelBooleanExpression(input = this, value = value)
 
-  fun IntegerInputDefinition.exprOneOf(vararg values: Int) = FeelIntegerExpression(
+  fun IntegerInputDefinition.exprOneOf_old(vararg values: Int) = FeelIntegerExpression(
     input = this,
     condition = FeelComparableCondition.Disjunction(values = values.toSet())
   )
 
-  fun IntegerInputDefinition.exprEquals(value: Int) = exprComparison(value, ComparisonType.Equals)
-  fun IntegerInputDefinition.exprGreaterThan(value: Int) = exprComparison(value, ComparisonType.Greater)
-  fun IntegerInputDefinition.exprGreaterThanOrEqual(value: Int) = exprComparison(value, ComparisonType.GreaterOrEqual)
-  fun IntegerInputDefinition.exprLessThan(value: Int) = exprComparison(value, ComparisonType.Less)
-  fun IntegerInputDefinition.exprLessThanOrEqual(value: Int) = exprComparison(value, ComparisonType.LessOrEqual)
-  fun IntegerInputDefinition.exprComparison(value: Int, type: ComparisonType) = FeelIntegerExpression(
+  fun IntegerInputDefinition.exprEquals_old(value: Int) = exprComparison_old(value, ComparisonType.Equals)
+  fun IntegerInputDefinition.exprGreaterThan_old(value: Int) = exprComparison_old(value, ComparisonType.Greater)
+  fun IntegerInputDefinition.exprGreaterThanOrEqual_old(value: Int) = exprComparison_old(value, ComparisonType.GreaterOrEqual)
+  fun IntegerInputDefinition.exprLessThan_old(value: Int) = exprComparison_old(value, ComparisonType.Less)
+  fun IntegerInputDefinition.exprLessThanOrEqual_old(value: Int) = exprComparison_old(value, ComparisonType.LessOrEqual)
+  fun IntegerInputDefinition.exprComparison_old(value: Int, type: ComparisonType) = FeelIntegerExpression(
     input = this,
     condition = Comparison(value, type)
   )
 
-  fun IntegerInputDefinition.exprBetween(begin: Int, end: Int) = exprInterval(begin, end, RangeType.Include)
-  fun IntegerInputDefinition.exprBetweenExclude(begin: Int, end: Int) = exprInterval(begin, end, RangeType.Exclude)
-  fun IntegerInputDefinition.exprInterval(begin: Int, end: Int, type: RangeType) = FeelIntegerExpression(
+  fun IntegerInputDefinition.exprBetween_old(begin: Int, end: Int) = exprInterval_old(begin, end, RangeType.Include)
+  fun IntegerInputDefinition.exprBetweenExclude_old(begin: Int, end: Int) = exprInterval_old(begin, end, RangeType.Exclude)
+  fun IntegerInputDefinition.exprInterval_old(begin: Int, end: Int, type: RangeType) = FeelIntegerExpression(
     input = this,
     condition = FeelComparableCondition.Interval(begin, end, type)
   )
 
-  fun LongInputDefinition.exprOneOf(vararg values: Long) = FeelLongExpression(
+  fun LongInputDefinition.exprOneOf_old(vararg values: Long) = FeelLongExpression(
     input = this,
     condition = FeelComparableCondition.Disjunction(values = values.toSet())
   )
 
-  fun LongInputDefinition.exprEquals(value: Long) = exprComparison(value, ComparisonType.Equals)
-  fun LongInputDefinition.exprGreaterThan(value: Long) = exprComparison(value, ComparisonType.Greater)
-  fun LongInputDefinition.exprGreaterThanOrEqual(value: Long) = exprComparison(value, ComparisonType.GreaterOrEqual)
-  fun LongInputDefinition.exprLessThan(value: Long) = exprComparison(value, ComparisonType.Less)
-  fun LongInputDefinition.exprLessThanOrEqual(value: Long) = exprComparison(value, ComparisonType.LessOrEqual)
-  fun LongInputDefinition.exprComparison(value: Long, type: ComparisonType) = FeelLongExpression(
+  fun LongInputDefinition.exprEquals_old(value: Long) = exprComparison_old(value, ComparisonType.Equals)
+  fun LongInputDefinition.exprGreaterThan_old(value: Long) = exprComparison_old(value, ComparisonType.Greater)
+  fun LongInputDefinition.exprGreaterThanOrEqual_old(value: Long) = exprComparison_old(value, ComparisonType.GreaterOrEqual)
+  fun LongInputDefinition.exprLessThan_old(value: Long) = exprComparison_old(value, ComparisonType.Less)
+  fun LongInputDefinition.exprLessThanOrEqual_old(value: Long) = exprComparison_old(value, ComparisonType.LessOrEqual)
+  fun LongInputDefinition.exprComparison_old(value: Long, type: ComparisonType) = FeelLongExpression(
     input = this,
     condition = Comparison(value, type)
   )
 
-  fun LongInputDefinition.exprBetween(begin: Long, end: Long) = exprInterval(begin, end, RangeType.Include)
-  fun LongInputDefinition.exprBetweenExclude(begin: Long, end: Long) = exprInterval(begin, end, RangeType.Exclude)
-  fun LongInputDefinition.exprInterval(begin: Long, end: Long, type: RangeType) = FeelLongExpression(
+  fun LongInputDefinition.exprBetween_old(begin: Long, end: Long) = exprInterval_old(begin, end, RangeType.Include)
+  fun LongInputDefinition.exprBetweenExclude_old(begin: Long, end: Long) = exprInterval_old(begin, end, RangeType.Exclude)
+  fun LongInputDefinition.exprInterval_old(begin: Long, end: Long, type: RangeType) = FeelLongExpression(
     input = this,
     condition = FeelComparableCondition.Interval(begin, end, type)
   )
 
 
-  fun DoubleInputDefinition.exprOneOf(vararg values: Double) = FeelDoubleExpression(
+  fun DoubleInputDefinition.exprOneOf_old(vararg values: Double) = FeelDoubleExpression(
     input = this,
     condition = FeelComparableCondition.Disjunction(values = values.toSet())
   )
 
-  fun DoubleInputDefinition.exprEquals(value: Double) = exprComparison(value, ComparisonType.Equals)
-  fun DoubleInputDefinition.exprGreaterThan(value: Double) = exprComparison(value, ComparisonType.Greater)
-  fun DoubleInputDefinition.exprGreaterThanOrEqual(value: Double) = exprComparison(value, ComparisonType.GreaterOrEqual)
-  fun DoubleInputDefinition.exprLessThan(value: Double) = exprComparison(value, ComparisonType.Less)
-  fun DoubleInputDefinition.exprLessThanOrEqual(value: Double) = exprComparison(value, ComparisonType.LessOrEqual)
-  fun DoubleInputDefinition.exprComparison(value: Double, type: ComparisonType) = FeelDoubleExpression(
+  fun DoubleInputDefinition.exprEquals_old(value: Double) = exprComparison_old(value, ComparisonType.Equals)
+  fun DoubleInputDefinition.exprGreaterThan_old(value: Double) = exprComparison_old(value, ComparisonType.Greater)
+  fun DoubleInputDefinition.exprGreaterThanOrEqual_old(value: Double) = exprComparison_old(value, ComparisonType.GreaterOrEqual)
+  fun DoubleInputDefinition.exprLessThan_old(value: Double) = exprComparison_old(value, ComparisonType.Less)
+  fun DoubleInputDefinition.exprLessThanOrEqual_old(value: Double) = exprComparison_old(value, ComparisonType.LessOrEqual)
+  fun DoubleInputDefinition.exprComparison_old(value: Double, type: ComparisonType) = FeelDoubleExpression(
     input = this,
     condition = Comparison(value, type)
   )
 
-  fun DoubleInputDefinition.exprBetween(begin: Double, end: Double) = exprInterval(begin, end, RangeType.Include)
-  fun DoubleInputDefinition.exprBetweenExclude(begin: Double, end: Double) = exprInterval(begin, end, RangeType.Exclude)
-  fun DoubleInputDefinition.exprInterval(begin: Double, end: Double, type: RangeType) = FeelDoubleExpression(
+  fun DoubleInputDefinition.exprBetween_old(begin: Double, end: Double) = exprInterval_old(begin, end, RangeType.Include)
+  fun DoubleInputDefinition.exprBetweenExclude_old(begin: Double, end: Double) = exprInterval_old(begin, end, RangeType.Exclude)
+  fun DoubleInputDefinition.exprInterval_old(begin: Double, end: Double, type: RangeType) = FeelDoubleExpression(
     input = this,
     condition = FeelComparableCondition.Interval(begin, end, type)
   )
 
-  fun DateInputDefinition.exprExactly(value: Date) = exprComparison(value, ComparisonType.Equals)
-  fun DateInputDefinition.exprBefore(value: Date) = exprComparison(value, ComparisonType.Less)
-  fun DateInputDefinition.exprAfter(value: Date) = exprComparison(value, ComparisonType.Greater)
-  fun DateInputDefinition.exprBetween(start: Date, end: Date) = FeelDateExpression(input = this, condition = FeelComparableCondition.Interval(start, end))
-  fun DateInputDefinition.exprComparison(value: Date, type: ComparisonType) = FeelDateExpression(
+  fun DateInputDefinition.exprExactly(value: Date) = exprComparison_old(value, ComparisonType.Equals)
+  fun DateInputDefinition.exprBefore(value: Date) = exprComparison_old(value, ComparisonType.Less)
+  fun DateInputDefinition.exprAfter(value: Date) = exprComparison_old(value, ComparisonType.Greater)
+  fun DateInputDefinition.exprBetween_old(start: Date, end: Date) = FeelDateExpression(input = this, condition = FeelComparableCondition.Interval(start, end))
+  fun DateInputDefinition.exprComparison_old(value: Date, type: ComparisonType) = FeelDateExpression(
     input = this,
     condition = Comparison(value, type)
   )

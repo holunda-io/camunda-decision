@@ -1,11 +1,12 @@
 package io.holunda.decision.model.expression
 
-import io.holunda.decision.model.api.Expression
+import io.holunda.decision.model.api.FeelString
 import io.holunda.decision.model.api.definition.StringInputDefinition
 import io.holunda.decision.model.api.element.toEntry
 import io.holunda.decision.model.expression.FeelExpression.Companion.negateExpression
 import io.holunda.decision.model.expression.FeelExpression.Companion.toFeelString
 
+@Deprecated("see JBoolVariable")
 data class FeelStringExpression(
   val input: StringInputDefinition,
   val values: Set<String> = setOf(),
@@ -14,7 +15,7 @@ data class FeelStringExpression(
 
   override val inputEntry by lazy { input.toEntry(expression) }
 
-  override val expression: Expression? by lazy {
+  override val expression: FeelString? by lazy {
     if (values.isEmpty())
       null
     else {

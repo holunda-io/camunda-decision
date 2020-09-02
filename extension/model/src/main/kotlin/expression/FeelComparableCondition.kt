@@ -1,12 +1,13 @@
 package io.holunda.decision.model.expression
 
-import io.holunda.decision.model.api.Expression
+import io.holunda.decision.model.api.FeelString
 import io.holunda.decision.model.expression.FeelExpression.Companion.negateExpression
 import io.holunda.decision.model.expression.FeelExpression.Companion.toFeelString
 
 /**
  * Feel expressions that can be appllied on the number and date DataTypes.
  */
+@Deprecated("moved to separate classes in `condition`")
 sealed class FeelComparableCondition<T : Comparable<T>> {
 
   /**
@@ -14,6 +15,7 @@ sealed class FeelComparableCondition<T : Comparable<T>> {
    *
    * Example for Long: `1,2,3` is true if the input value is 1,2 or 3.
    */
+  @Deprecated("see FeelDisjunctionCondition")
   data class Disjunction<T : Comparable<T>>(val values: Set<T>) : FeelComparableCondition<T>() {
 
     override val expression: String? by lazy {
@@ -25,6 +27,7 @@ sealed class FeelComparableCondition<T : Comparable<T>> {
   /**
    * Compares input with given value, can be `=,<,<=,>,>=`
    */
+  @Deprecated("see FeelComparisonCondition")
   data class Comparison<T : Comparable<T>>(
     val value: T,
     val type: ComparisonType = ComparisonType.Equals
@@ -48,6 +51,7 @@ sealed class FeelComparableCondition<T : Comparable<T>> {
   /**
    * Declare that the input has to be in a given range/interval.
    */
+  @Deprecated("see FeelIntervalCondition")
   data class Interval<T : Comparable<T>>(val start: T, val end: T, val type: RangeType = RangeType.Include) : FeelComparableCondition<T>() {
 
     init {
@@ -80,7 +84,7 @@ sealed class FeelComparableCondition<T : Comparable<T>> {
     }
   }
 
-  abstract val expression: Expression?
+  abstract val expression: FeelString?
 
   fun toFeelString(negate: Boolean) = with(expression) {
     if (negate)

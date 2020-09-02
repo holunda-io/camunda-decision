@@ -1,7 +1,7 @@
 package io.holunda.decision.model.builder
 
 import io.holunda.decision.model.CamundaDecisionGenerator.rule
-import io.holunda.decision.model.FeelExpressions.exprEquals
+import io.holunda.decision.model.FeelExpressions.feelEqual
 import io.holunda.decision.model.FeelExpressions.resultValue
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.longInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.stringInput
@@ -22,9 +22,11 @@ internal class DmnDecisionTableRulesBuilderTest {
       .decisionDefinitionKey("decision1")
       .name("Decision One")
       .addRule(rule()
-        .condition(inFoo.exprEquals("abc"))
-        .and(inBaz.exprEquals(5))
-        .outputs( outBar.resultValue("xyz"))
+        .condition(
+          inFoo.feelEqual("abc"),
+          inBaz.feelEqual(5)
+        )
+        .result( outBar.resultValue("xyz"))
       )
 
     with(builder.build()) {
@@ -36,8 +38,8 @@ internal class DmnDecisionTableRulesBuilderTest {
 
       assertThat(header.numInputs).isEqualTo(2)
       assertThat(header.numOutputs).isEqualTo(1)
-      assertThat(header.inputs[0]).isEqualTo(inFoo)
-      assertThat(header.inputs[1]).isEqualTo(inBaz)
+      assertThat(header.inputs[0]).isEqualTo(inBaz)
+      assertThat(header.inputs[1]).isEqualTo(inFoo)
 
     }
 
