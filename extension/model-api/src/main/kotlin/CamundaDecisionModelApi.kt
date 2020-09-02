@@ -12,6 +12,9 @@ typealias VersionTag = String
 typealias DmnXml = String
 typealias FeelString = String
 
+/**
+ * Static convenience methods to access all relevant model-api methods in one single import.
+ */
 object CamundaDecisionModelApi {
 
   /**
@@ -20,6 +23,15 @@ object CamundaDecisionModelApi {
    * There is no guarantee that the id is unique, but it is very unlikely, so good enough.
    */
   fun generateId(prefix: String) : Id = "${prefix}_${(2.147483647E9 * Math.random()).toInt()}"
+
+  /**
+   * Creates a random id in the form `DecisionTable_123456`.
+   *
+   * There is no guarantee that the id is unique, but it is very unlikely, so good enough.
+   *
+   * @see generateId
+   * @param elementClass the klass to se (simpleName)
+   */
   fun <T : Any> generateId(elementClass: KClass<T>) : Id = generateId("${elementClass.simpleName}")
 
 
