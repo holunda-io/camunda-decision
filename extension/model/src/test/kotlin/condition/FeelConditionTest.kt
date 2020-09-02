@@ -1,13 +1,12 @@
-package io.holunda.decision.model.expression
+package io.holunda.decision.model.condition
 
-import io.holunda.decision.model.CamundaDecisionModel
-import io.holunda.decision.model.expression.FeelExpression.Companion.negateExpression
-import io.holunda.decision.model.expression.FeelExpression.Companion.toFeelString
+import io.holunda.decision.model.condition.FeelCondition.Companion.DATE_FORMAT
+import io.holunda.decision.model.condition.FeelCondition.Companion.negateExpression
+import io.holunda.decision.model.condition.FeelCondition.Companion.toFeelString
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
-import java.text.SimpleDateFormat
 
-internal class FeelExpressionTest {
+internal class FeelConditionTest {
 
 
   @Test
@@ -38,7 +37,7 @@ internal class FeelExpressionTest {
 
   @Test
   fun `toFeelString Date`() {
-    val date = SimpleDateFormat(CamundaDecisionModel.Meta.DATE_TIME_FORMAT).parse("2020-08-29T20:08:34")
+    val date = DATE_FORMAT.parse("2020-08-29T20:08:34")
     assertThat(toFeelString(date)).isEqualTo("date and time(\"2020-08-29T20:08:34\")")
   }
 

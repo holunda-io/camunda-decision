@@ -6,7 +6,7 @@ import io.holunda.decision.model.api.definition.ColumnDefinition
 import io.holunda.decision.model.api.element.DmnDecisionTable
 import io.holunda.decision.model.api.element.DmnDiagram
 import io.holunda.decision.model.api.element.DmnRule
-import io.holunda.decision.model.api.element.RuleEntry
+import io.holunda.decision.model.api.entry.RuleEntry
 import java.util.*
 
 /**

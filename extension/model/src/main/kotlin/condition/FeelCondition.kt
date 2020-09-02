@@ -1,4 +1,4 @@
-package io.holunda.decision.model.expression.condition
+package io.holunda.decision.model.condition
 
 import io.holunda.decision.model.CamundaDecisionModel
 import io.holunda.decision.model.api.FeelString
@@ -24,7 +24,7 @@ interface FeelCondition<T : Comparable<T>> {
 
   fun toFeelString(negate: Boolean): FeelString? = with(expression) {
     if (negate)
-      io.holunda.decision.model.expression.FeelExpression.negateExpression(this)
+      negateExpression(this)
     else
       this
   }

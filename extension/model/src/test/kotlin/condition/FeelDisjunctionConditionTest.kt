@@ -1,4 +1,4 @@
-package io.holunda.decision.model.expression.condition
+package io.holunda.decision.model.condition
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test

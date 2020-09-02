@@ -1,12 +1,12 @@
-package io.holunda.decision.model.expression.jbool
+package io.holunda.decision.model.condition.jbool
 
-import io.holunda.decision.model.FeelExpressions.feelEqual
-import io.holunda.decision.model.FeelExpressions.feelGreaterThan
-import io.holunda.decision.model.FeelExpressions.feelLessThan
+import io.holunda.decision.model.FeelConditions.feelEqual
+import io.holunda.decision.model.FeelConditions.feelGreaterThan
+import io.holunda.decision.model.FeelConditions.feelLessThan
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.longInput
-import io.holunda.decision.model.expression.jbool.JBoolExpressionConverter.convert
-import io.holunda.decision.model.expression.jbool.JBoolExpressionSupplier.Companion.and
-import io.holunda.decision.model.expression.jbool.JBoolExpressionSupplier.Companion.or
+import io.holunda.decision.model.condition.jbool.JBoolExpressionConverter.convert
+import io.holunda.decision.model.condition.jbool.JBoolExpressionSupplier.Companion.and
+import io.holunda.decision.model.condition.jbool.JBoolExpressionSupplier.Companion.or
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

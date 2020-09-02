@@ -4,10 +4,15 @@ import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.in
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.integerOutput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
 import io.holunda.decision.model.api.data.DmnHitPolicy
-import io.holunda.decision.model.api.element.*
+import io.holunda.decision.model.api.element.DmnDecisionTable
+import io.holunda.decision.model.api.element.DmnDiagram
+import io.holunda.decision.model.api.element.DmnRule
+import io.holunda.decision.model.api.element.DmnRuleList
+import io.holunda.decision.model.api.entry.InputEntry
+import io.holunda.decision.model.api.entry.OutputEntry
 
 
-object CamundaDecisonModelFixtures {
+object CamundaDecisionModelFixtures {
 
   const val DECISION_1 = "decision1"
   const val DECISION_2 = "decision2"

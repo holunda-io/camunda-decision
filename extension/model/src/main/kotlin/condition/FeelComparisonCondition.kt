@@ -1,4 +1,4 @@
-package io.holunda.decision.model.expression.condition
+package io.holunda.decision.model.condition
 
 data class FeelComparisonCondition<T : Comparable<T>>(
   val value: T,

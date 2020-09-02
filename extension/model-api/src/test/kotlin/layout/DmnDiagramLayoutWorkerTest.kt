@@ -3,11 +3,13 @@ package io.holunda.decision.model.api.layout
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.booleanInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.longOutput
 import io.holunda.decision.model.api.data.DmnHitPolicy
-import io.holunda.decision.model.api.element.*
-import io.holunda.decision.model.api.layout.DmnDiagramLayoutWorker
+import io.holunda.decision.model.api.element.DmnDecisionTable
+import io.holunda.decision.model.api.element.DmnDiagram
+import io.holunda.decision.model.api.element.DmnRule
+import io.holunda.decision.model.api.element.DmnRuleList
+import io.holunda.decision.model.api.entry.toEntry
 import io.holunda.decision.model.api.layout.DmnDiagramLayoutWorker.*
 import io.holunda.decision.model.api.layout.DmnDiagramLayoutWorker.Point.Companion.distance
-import io.holunda.decision.model.api.layout.shortest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package io.holunda.decision.model.api.element
+package io.holunda.decision.model.api.entry
 
 import io.holunda.decision.model.api.FeelString
 import io.holunda.decision.model.api.definition.ColumnDefinition

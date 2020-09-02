@@ -1,4 +1,4 @@
-package io.holunda.decision.model.expression.jbool
+package io.holunda.decision.model.condition.jbool
 
 import com.bpodgursky.jbool_expressions.Expression
 import com.bpodgursky.jbool_expressions.rules.RuleSet

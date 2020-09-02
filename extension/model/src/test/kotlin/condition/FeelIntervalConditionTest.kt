@@ -1,10 +1,14 @@
-package expression.condition
+package io.holunda.decision.model.condition
 
-import io.holunda.decision.model.expression.condition.FeelIntervalCondition
-import io.holunda.decision.model.expression.condition.FeelIntervalCondition.RangeType
+import io.holunda.decision.model.CamundaDecisionModel
+import io.holunda.decision.model.FeelConditions.feelBetween
+import io.holunda.decision.model.api.CamundaDecisionModelApi
+import io.holunda.decision.model.condition.FeelIntervalCondition.RangeType
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.Test
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 internal class FeelIntervalConditionTest {
@@ -51,6 +55,20 @@ internal class FeelIntervalConditionTest {
 
     assertThat(FeelIntervalCondition(1, 10, RangeType.ExcludeInclude).expression)
       .isEqualTo("]1..10]")
+  }
+
+  @Test
+  fun `date interval`() {
+    fun date(value: String): Date = SimpleDateFormat(CamundaDecisionModel.Meta.DATE_TIME_FORMAT).parse(value)
+    fun date(value: Date): String = SimpleDateFormat(CamundaDecisionModel.Meta.DATE_TIME_FORMAT).format(value)
+
+    val DATE_START = date("2020-08-29T19:57:22")
+    val DATE_END = date("2020-09-30T08:57:22")
+    val inDate = CamundaDecisionModelApi.InputDefinitions.dateInput("fooDate", "The Foo Date")
+
+
+    assertThat(inDate.feelBetween(DATE_START, DATE_END).condition.expression)
+      .isEqualTo("[date and time(\"2020-08-29T19:57:22\")..date and time(\"2020-09-30T08:57:22\")]")
   }
 
   @Test

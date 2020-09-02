@@ -5,7 +5,6 @@ import io.holunda.decision.model.jackson.element.InformationRequirementXml
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-
 internal class JacksonDecisionTableConverterTest {
 
 

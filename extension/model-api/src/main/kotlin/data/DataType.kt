@@ -2,8 +2,8 @@ package io.holunda.decision.model.api.data
 
 import io.holunda.camunda.bpm.data.factory.BasicVariableFactory
 import io.holunda.decision.model.api.definition.*
-import io.holunda.decision.model.api.element.InputEntry
-import io.holunda.decision.model.api.element.OutputEntry
+import io.holunda.decision.model.api.entry.InputEntry
+import io.holunda.decision.model.api.entry.OutputEntry
 import java.util.*
 
 sealed class DataType<T : Any>(

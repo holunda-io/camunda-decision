@@ -1,8 +1,8 @@
 package io.holunda.decision.model.builder
 
 import io.holunda.decision.model.CamundaDecisionGenerator.rule
-import io.holunda.decision.model.FeelExpressions.feelEqual
-import io.holunda.decision.model.FeelExpressions.resultValue
+import io.holunda.decision.model.FeelConditions.feelEqual
+import io.holunda.decision.model.FeelConditions.resultValue
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.longInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.stringInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput

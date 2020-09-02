@@ -1,16 +1,12 @@
 package io.holunda.decision.model.builder
 
-import com.bpodgursky.jbool_expressions.And
-import com.bpodgursky.jbool_expressions.Expression
-import com.bpodgursky.jbool_expressions.Variable
-import io.holunda.decision.model.api.element.*
-import io.holunda.decision.model.expression.FeelExpression
-import io.holunda.decision.model.expression.jbool.FeelInputVariable
-import io.holunda.decision.model.expression.jbool.JBoolExpressionConverter
-import io.holunda.decision.model.expression.jbool.JBoolExpressionSupplier
+import io.holunda.decision.model.api.element.DmnRule
+import io.holunda.decision.model.api.element.DmnRuleList
+import io.holunda.decision.model.api.entry.OutputEntry
+import io.holunda.decision.model.api.entry.toEntry
+import io.holunda.decision.model.condition.jbool.JBoolExpressionConverter
+import io.holunda.decision.model.condition.jbool.JBoolExpressionSupplier
 import org.apache.commons.lang3.builder.Builder
-import java.lang.IllegalStateException
-import kotlin.math.E
 
 /**
  * Though this will generally just create a list containing a single "and" connected rule,

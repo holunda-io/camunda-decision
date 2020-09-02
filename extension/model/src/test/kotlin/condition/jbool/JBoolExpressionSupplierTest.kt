@@ -1,11 +1,10 @@
-package io.holunda.decision.model.expression.jbool
+package io.holunda.decision.model.condition.jbool
 
-import com.bpodgursky.jbool_expressions.rules.RuleSet
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.integerInput
-import io.holunda.decision.model.expression.condition.FeelDisjunctionCondition
-import io.holunda.decision.model.expression.jbool.JBoolExpressionSupplier.Companion.and
-import io.holunda.decision.model.expression.jbool.JBoolExpressionSupplier.Companion.not
-import io.holunda.decision.model.expression.jbool.JBoolExpressionSupplier.Companion.or
+import io.holunda.decision.model.condition.FeelDisjunctionCondition
+import io.holunda.decision.model.condition.jbool.JBoolExpressionSupplier.Companion.and
+import io.holunda.decision.model.condition.jbool.JBoolExpressionSupplier.Companion.not
+import io.holunda.decision.model.condition.jbool.JBoolExpressionSupplier.Companion.or
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
@@ -67,7 +66,7 @@ internal class JBoolExpressionSupplierTest {
 
   @Test
   fun `and with only one or element`() {
-    assertThat(and(or(fooFeel,barFeel)).jboolDnf().toLexicographicString())
+    assertThat(and(or(fooFeel, barFeel)).jboolDnf().toLexicographicString())
       .isEqualTo("($barString | $fooString)")
   }
 
@@ -93,6 +92,4 @@ internal class JBoolExpressionSupplierTest {
     ).jboolDnf().toLexicographicString())
       .isEqualTo("(('bar{2}' & 'baz{3}') | ('baz{3}' & 'foo{1}'))")
   }
-
-
 }

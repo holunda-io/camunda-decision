@@ -1,12 +1,11 @@
-package converter
+package io.holunda.decision.model.jackson.converter
 
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.booleanInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.longInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
 import io.holunda.decision.model.api.element.DmnRule
-import io.holunda.decision.model.api.element.toEntry
 import io.holunda.decision.model.api.element.toHeader
-import io.holunda.decision.model.jackson.converter.JacksonRuleConverter
+import io.holunda.decision.model.api.entry.toEntry
 import io.holunda.decision.model.jackson.element.RuleXml
 import io.holunda.decision.model.jackson.element.RuleXml.EntryXml
 import org.assertj.core.api.Assertions.assertThat

@@ -1,17 +1,15 @@
 package io.holunda.decision.model.builder
 
-import io.holunda.decision.model.FeelExpressions.feelEqual
-import io.holunda.decision.model.FeelExpressions.not
-import io.holunda.decision.model.FeelExpressions.resultValue
+import io.holunda.decision.model.FeelConditions.feelEqual
+import io.holunda.decision.model.FeelConditions.resultValue
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.doubleInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.integerInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.longInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.stringInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.booleanOutput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
-import io.holunda.decision.model.expression.jbool.JBoolExpressionSupplier
-import io.holunda.decision.model.expression.jbool.JBoolExpressionSupplier.Companion.and
-import io.holunda.decision.model.expression.jbool.JBoolExpressionSupplier.Companion.or
+import io.holunda.decision.model.condition.jbool.JBoolExpressionSupplier.Companion.and
+import io.holunda.decision.model.condition.jbool.JBoolExpressionSupplier.Companion.or
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
@@ -50,7 +48,7 @@ internal class DmnBusinessRuleBuilderTest {
       .build()
 
     assertThat(rules).hasSize(1)
-    assertThat(rules.distinctInputs).containsExactlyInAnyOrder(a,b,c)
+    assertThat(rules.distinctInputs).containsExactlyInAnyOrder(a, b, c)
   }
 
   @Test

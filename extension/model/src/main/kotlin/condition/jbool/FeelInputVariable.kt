@@ -1,10 +1,10 @@
-package io.holunda.decision.model.expression.jbool
+package io.holunda.decision.model.condition.jbool
 
 import com.bpodgursky.jbool_expressions.Expression
 import com.bpodgursky.jbool_expressions.Not
 import com.bpodgursky.jbool_expressions.Variable
 import io.holunda.decision.model.api.definition.InputDefinition
-import io.holunda.decision.model.expression.condition.FeelCondition
+import io.holunda.decision.model.condition.FeelCondition
 
 data class FeelInputVariable(
   val definition: InputDefinition<*>,

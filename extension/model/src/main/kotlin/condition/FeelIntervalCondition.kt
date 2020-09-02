@@ -1,20 +1,19 @@
-package io.holunda.decision.model.expression.condition
-
-import io.holunda.decision.model.expression.FeelExpression
+package io.holunda.decision.model.condition
 
 /**
  * Declare that the input has to be in a given range/interval.
  */
 data class FeelIntervalCondition<T : Comparable<T>>(
-  val start: T,
+  val begin: T,
   val end: T,
-  val type: RangeType = RangeType.Include) : FeelCondition<T> {
+  val type: RangeType = RangeType.Include
+) : FeelCondition<T> {
 
   init {
-    require(start < end) { "Interval requires start < end, was ($start,$end)" }
+    require(begin < end) { "Interval requires start < end, was ($begin,$end)" }
   }
 
-  override val expression = (FeelCondition.toFeelString(start) to FeelExpression.toFeelString(end))
+  override val expression = (FeelCondition.toFeelString(begin) to FeelCondition.toFeelString(end))
     .let { (s, e) -> "${type.prefix}$s..$e${type.suffix}" }
 
   /**

@@ -6,6 +6,7 @@ import io.holunda.decision.model.api.DmnDiagramTestFixtures
 import io.holunda.decision.model.api.DmnDiagramTestFixtures.DECISION_1
 import io.holunda.decision.model.api.DmnDiagramTestFixtures.DECISION_2
 import io.holunda.decision.model.api.DmnDiagramTestFixtures.inputFoo
+import io.holunda.decision.model.api.entry.toEntry
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
@@ -16,7 +17,7 @@ internal class DmnDiagramTest {
     assertThat(DmnDiagramTestFixtures.singleTable.resultTable.decisionDefinitionKey).isEqualTo("singleTable")
   }
 
- @Test
+  @Test
   fun `required inputs from singleTable`() {
     assertThat(DmnDiagramTestFixtures.singleTable.requiredInputs).containsOnly(inputFoo)
   }
@@ -102,5 +103,22 @@ internal class DmnDiagramTest {
 
     )
   )
-}
 
+  @Test
+  fun `get all decisionDefinitionKeys 2`() {
+    assertThat(DmnDiagramTestFixtures.decision2DependsOnDecision1.decisionDefinitionKeys)
+      .containsExactlyInAnyOrder(DECISION_1, DECISION_2)
+  }
+
+  @Test
+  fun `get required decision mapping 2`() {
+    assertThat(DmnDiagramTestFixtures.decision2DependsOnDecision1.informationRequirements)
+      .hasSize(1)
+      .contains(DmnDecisionTable.InformationRequirement(DECISION_2, DECISION_1))
+  }
+
+  @Test
+  fun `resource name 2`() {
+    assertThat(DmnDiagramTestFixtures.decision2DependsOnDecision1.resourceName).isEqualTo("diagram-diagram-with-two-tables.dmn")
+  }
+}

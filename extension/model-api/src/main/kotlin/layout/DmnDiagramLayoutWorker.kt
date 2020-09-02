@@ -7,7 +7,6 @@ import io.holunda.decision.model.api.layout.DmnDiagramLayoutWorker.*
 import kotlin.math.abs
 import kotlin.math.hypot
 
-
 data class DmnDecisionTableLayout(
   val decisionDefinitionKey: DecisionDefinitionKey,
   val box: Box

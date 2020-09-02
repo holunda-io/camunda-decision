@@ -1,8 +1,7 @@
-package expression.jbool
+package io.holunda.decision.model.condition.jbool
 
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.stringInput
-import io.holunda.decision.model.expression.condition.FeelComparisonCondition
-import io.holunda.decision.model.expression.jbool.FeelInputVariable
+import io.holunda.decision.model.condition.FeelComparisonCondition
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 

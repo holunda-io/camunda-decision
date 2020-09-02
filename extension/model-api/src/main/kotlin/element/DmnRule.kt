@@ -4,6 +4,8 @@ import io.holunda.decision.model.api.CamundaDecisionModelApi.generateId
 import io.holunda.decision.model.api.Id
 import io.holunda.decision.model.api.definition.InputDefinition
 import io.holunda.decision.model.api.definition.OutputDefinition
+import io.holunda.decision.model.api.entry.InputEntry
+import io.holunda.decision.model.api.entry.OutputEntry
 
 /**
  * Immutable representation of single row in a decision table.
