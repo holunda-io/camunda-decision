@@ -1,12 +1,16 @@
 package io.holunda.decision.model.builder
 
 import io.holunda.decision.model.CamundaDecisionGenerator.rule
+import io.holunda.decision.model.CamundaDecisionGenerator.table
 import io.holunda.decision.model.FeelConditions.feelEqual
+import io.holunda.decision.model.FeelConditions.feelGreaterThan
 import io.holunda.decision.model.FeelConditions.resultValue
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.longInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.stringInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
 import io.holunda.decision.model.api.data.DmnHitPolicy
+import io.holunda.decision.model.condition.FeelCondition.Companion.toFeelString
+import io.holunda.decision.model.condition.jbool.JBoolExpressionSupplier.Companion.or
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
@@ -26,7 +30,7 @@ internal class DmnDecisionTableRulesBuilderTest {
           inFoo.feelEqual("abc"),
           inBaz.feelEqual(5)
         )
-        .result( outBar.resultValue("xyz"))
+        .result(outBar.resultValue("xyz"))
       )
 
     with(builder.build()) {
@@ -47,5 +51,24 @@ internal class DmnDecisionTableRulesBuilderTest {
     with(builder.build()) {
       assertThat(versionTag).isEqualTo("123")
     }
+  }
+
+  @Test
+  fun `create table with or rules`() {
+    val table = table("decision2")
+      .addRule(
+        rule(
+          or(
+            inFoo.feelEqual("A"),
+            inBaz.feelGreaterThan(3)
+          )
+        ).result(outBar.resultValue("xxx"))
+      )
+      .build()
+
+    assertThat(table.inputEntry(0, 0)).isEqualTo("> 3")
+    assertThat(table.inputEntry(0, 1)).isNull()
+    assertThat(table.inputEntry(1, 0)).isNull()
+    assertThat(table.inputEntry(1, 1)).isEqualTo(toFeelString("A"))
   }
 }

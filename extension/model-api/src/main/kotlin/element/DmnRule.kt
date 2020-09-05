@@ -58,12 +58,18 @@ data class DmnRule(
     outputs.map { it.definition }
   }
 
-  fun inputEntries(definitions: List<InputDefinition<*>>) = definitions.map { header ->
-    inputs.find { it.definition == header }?.expression
+  /**
+   * Groups entries by definition.
+   */
+  val inputMap : Map<InputDefinition<*>, List<InputEntry<*>>> by lazy {
+    inputs.groupBy { it.definition }
   }
 
-  fun outputEntries(definitions: List<OutputDefinition<*>>) = definitions.map { header ->
-    outputs.find { it.definition == header }?.expression
+  /**
+   * Groups entries by definition.
+   */
+  val outputMap : Map<OutputDefinition<*>, List<OutputEntry<*>>> by lazy {
+    outputs.groupBy { it.definition }
   }
 
 }

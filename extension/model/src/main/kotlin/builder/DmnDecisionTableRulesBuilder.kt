@@ -5,12 +5,14 @@ import io.holunda.decision.model.api.Name
 import io.holunda.decision.model.api.VersionTag
 import io.holunda.decision.model.api.data.DmnHitPolicy
 import io.holunda.decision.model.api.element.DmnDecisionTable
+import io.holunda.decision.model.api.element.DmnRule
 import io.holunda.decision.model.api.element.DmnRuleList
+import io.holunda.decision.model.api.entry.toEntry
 
 class DmnDecisionTableRulesBuilder : AbstractDmnDecisionTableBuilder() {
 
   private val dmnRuleBuilders = mutableListOf<DmnBusinessRuleBuilder>()
-  private var hitPolicy : DmnHitPolicy? = null
+  private var hitPolicy: DmnHitPolicy? = null
 
   fun decisionDefinitionKey(decisionDefinitionKey: DecisionDefinitionKey) = apply { this.decisionDefinitionKey = decisionDefinitionKey }
 
@@ -28,7 +30,16 @@ class DmnDecisionTableRulesBuilder : AbstractDmnDecisionTableBuilder() {
     requireNotNull(decisionDefinitionKey) { "must set decisionDefinitionKey" }
     require(dmnRuleBuilders.isNotEmpty()) { "must set at least one rule" }
 
-    val combinedRules = DmnRuleList(dmnRuleBuilders.map { it.build() }.flatMap { it })
+    val combinedRules = DmnRuleList(dmnRuleBuilders
+      .map { it.build() }
+      .flatMap { it }
+    )
+
+    val header = DmnDecisionTable.Header(
+      combinedRules.distinctInputs,
+      combinedRules.distinctOutputs
+    )
+
 
     return DmnDecisionTable(
       decisionDefinitionKey = requireNotNull(decisionDefinitionKey) { "must set decisionDefinitionKey" },
@@ -36,8 +47,8 @@ class DmnDecisionTableRulesBuilder : AbstractDmnDecisionTableBuilder() {
       versionTag = versionTag,
       hitPolicy = hitPolicy ?: DmnHitPolicy.FIRST,
       requiredDecisions = if (requiredDecision != null) setOf(requiredDecision!!) else setOf(),
-      header = DmnDecisionTable.Header(combinedRules.distinctInputs, combinedRules.distinctOutputs),
-      rules = combinedRules
+      header = header,
+      rules = DmnRuleList(combinedRules.map { it.fillRule(header) })
     )
   }
 
@@ -46,7 +57,17 @@ class DmnDecisionTableRulesBuilder : AbstractDmnDecisionTableBuilder() {
     "decisionName=$decisionName, " +
     "versionTag=$versionTag, " +
     "hitPolicy=$hitPolicy, " +
-    "dmnRuleBuilders=$dmnRuleBuilders, " +
+    "dmnRuleBuilders=$dmnRuleBuilders" +
     ")"
-
 }
+
+/**
+ * Sorts in- and outputs of the rule row by the order defined of header in- and outputs.
+ * If a rule does not contain an entry for a header element, a new empty record is created.
+ */
+internal fun DmnRule.fillRule(header: DmnDecisionTable.Header): DmnRule = copy(
+  id = id,
+  description = description,
+  inputs = header.inputs.map { def -> inputMap[def]?.single() ?: def.toEntry(null) },
+  outputs = header.outputs.map { def -> outputMap[def]?.single() ?: def.toEntry(null) }
+)

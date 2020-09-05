@@ -22,7 +22,6 @@ class DmnBusinessRuleBuilder : Builder<DmnRuleList> {
   private lateinit var expression: JBoolExpressionSupplier
   private val result = mutableListOf<OutputEntry<*>>()
 
-
   fun description(description: String) = apply {
     this.description = description
   }
