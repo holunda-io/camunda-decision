@@ -201,8 +201,8 @@
           <configuration>
             <jvmTarget>${java.version}</jvmTarget>
             <compilerPlugins>
-              <!--plugin>spring</plugin-->
-              <!--plugin>jpa</plugin-->
+              <plugin>spring</plugin>
+              <plugin>jpa</plugin>
               <plugin>no-arg</plugin>
               <plugin>all-open</plugin>
             </compilerPlugins>
