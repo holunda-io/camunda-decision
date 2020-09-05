@@ -10,7 +10,4 @@ data class JBoolAndExpressionSupplier(
   override fun jbool(): Expression<FeelInputVariable> = And.of(
     expressions.map { it.jbool() }.toList()
   )
-
-
-
 }
