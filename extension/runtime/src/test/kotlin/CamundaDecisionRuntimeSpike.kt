@@ -1,22 +1,128 @@
 package io.holunda.decision.runtime
 
+import io.holunda.camunda.bpm.data.CamundaBpmData
+import io.holunda.camunda.bpm.data.CamundaBpmDataKotlin
 import io.holunda.decision.lib.test.CamundaDecisionTestLib
+import io.holunda.decision.model.CamundaDecisionGenerator
+import io.holunda.decision.model.CamundaDecisionGenerator.rule
+import io.holunda.decision.model.CamundaDecisionGenerator.table
+import io.holunda.decision.model.FeelConditions.feelFalse
+import io.holunda.decision.model.FeelConditions.feelGreaterThan
+import io.holunda.decision.model.FeelConditions.feelLessThan
+import io.holunda.decision.model.FeelConditions.feelTrue
+import io.holunda.decision.model.FeelConditions.resultFalse
+import io.holunda.decision.model.FeelConditions.resultTrue
+import io.holunda.decision.model.FeelConditions.resultValue
+import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.integerInput
+import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.booleanOutput
+import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.integerOutput
+import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
+import io.holunda.decision.model.api.Name
+import io.holunda.decision.model.ascii.DmnWriter
+import mu.KLogging
 import org.assertj.core.api.Assertions.assertThat
 import org.camunda.bpm.engine.test.Deployment
 import org.camunda.bpm.engine.variable.Variables
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-@Deployment(resources = ["dmn/drd-dec1-dec2.dmn"])
+//@Deployment(resources = ["dmn/drd-dec1-dec2.dmn"])
 class CamundaDecisionRuntimeSpike {
+  companion object : KLogging()
+
+  object DmnDiagrams {
+    val inD11 = integerInput("inD11")
+    val outD11 = booleanOutput("outD11")
+
+    val inD21 = outD11.toInputDefinition()
+    val inD22 = integerInput("inD22")
+
+    val outD21 = stringOutput("outD21")
+
+    fun generate(name: Name) =  CamundaDecisionGenerator.diagram(name)
+      .addDecisionTable(
+        table("decision1")
+          .addRule(
+            rule()
+              .condition(inD11.feelGreaterThan(17))
+              .result(outD11.resultTrue())
+          )
+          .addRule(
+            rule()
+              .condition(inD11.feelGreaterThan(30))
+              .result(outD11.resultFalse())
+          )
+      )
+      .addDecisionTable(
+        table("decision2")
+          .requiredDecision("decision1")
+          .addRule(
+            rule()
+              .condition(inD21.feelTrue(), inD22.feelGreaterThan(10))
+              .result(outD21.resultValue("A"))
+          )
+          .addRule(
+            rule()
+              .condition(inD21.feelFalse(), inD22.feelLessThan(100))
+              .result(outD21.resultValue("B"))
+          )
+      )
+      .build()
+
+
+    val diagram = generate("My Diagram")
+  }
+
 
   val drd = "multiple_decisions"
 
   @get:Rule
   val camunda = CamundaDecisionTestLib.camunda()
 
+  val runtimeContext by lazy {
+    CamundaDecisionRuntimeContext.builder()
+      .withProcessEngineServices(camunda)
+      .build()
+  }
+
+  val camundaDecisionService by lazy {
+    runtimeContext.camundaDecisionService
+  }
+
   val decisionService by lazy {
     camunda.decisionService
+  }
+
+  @Before
+  fun setUp() {
+    // no deployments at engine start
+    assertThat(camunda.repositoryService.createDecisionDefinitionQuery().list()).isEmpty()
+  }
+
+  @Test
+  fun `deploy and load diagram`() {
+
+    assertThat(camundaDecisionService.findAllModels()).isEmpty()
+    logger.info { "\n${DmnWriter.render(DmnDiagrams.diagram)}" }
+
+    val deploy = camundaDecisionService.deploy(DmnDiagrams.diagram)
+
+    logger.info { deploy }
+
+    val model = deploy.deployedDiagrams.first()
+
+    val result = camunda.decisionService.evaluateDecisionTableById(model.decisionDefinitionId, Variables
+      .putValue(DmnDiagrams.inD11.key, 18)
+      .putValue(DmnDiagrams.inD22.key, 11))
+
+    val o22:String = result.getSingleEntry()
+
+    assertThat(o22).isEqualTo("A")
+
+    val diagrams = camundaDecisionService.findAllModels()
+    assertThat(diagrams).hasSize(1)
+    logger.info { diagrams }
   }
 
   @Test

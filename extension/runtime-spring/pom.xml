@@ -10,7 +10,7 @@
   </parent>
 
   <groupId>io.holunda.decision</groupId>
-  <artifactId>camunda-decision-runtime</artifactId>
+  <artifactId>camunda-decision-runtime-spring</artifactId>
 
   <properties>
     <jacoco.skip>false</jacoco.skip>
@@ -18,18 +18,19 @@
 
   <dependencies>
     <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>camunda-decision-runtime</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>org.camunda.bpm</groupId>
       <artifactId>camunda-engine</artifactId>
       <scope>provided</scope>
     </dependency>
+
     <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>camunda-decision-model</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.github.microutils</groupId>
-      <artifactId>kotlin-logging</artifactId>
-      <scope>test</scope>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
     </dependency>
   </dependencies>
 

@@ -17,6 +17,7 @@
     <module>model-api</module>
     <module>model-jackson</module>
     <module>runtime</module>
+    <module>runtime-spring</module>
   </modules>
 
   <properties>

@@ -16,7 +16,7 @@
     <!-- PROJECT -->
     <dependency>
       <groupId>io.holunda.decision</groupId>
-      <artifactId>camunda-decision-runtime</artifactId>
+      <artifactId>camunda-decision-runtime-spring</artifactId>
     </dependency>
 
     <!-- CAMUNDA -->
@@ -29,12 +29,12 @@
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
     </dependency>
-    <dependency>
-      <groupId>io.toolisticon.springboot</groupId>
-      <artifactId>springboot-swagger-starter</artifactId>
-      <version>0.1.0</version>
-    </dependency>
 
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
+      <version>1.4.6</version>
+    </dependency>
 
     <dependency>
       <groupId>io.github.microutils</groupId>

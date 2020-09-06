@@ -66,9 +66,12 @@ internal class DmnDecisionTableRulesBuilderTest {
       )
       .build()
 
-    assertThat(table.inputEntry(0, 0)).isEqualTo("> 3")
-    assertThat(table.inputEntry(0, 1)).isNull()
-    assertThat(table.inputEntry(1, 0)).isNull()
-    assertThat(table.inputEntry(1, 1)).isEqualTo(toFeelString("A"))
+    val expressions = table.rules.map { it.inputs }.map { it.map { it.expression } }
+
+    assertThat(expressions).containsExactlyInAnyOrder(
+      listOf("> 3", null),
+      listOf(null, toFeelString("A"))
+    )
+
   }
 }

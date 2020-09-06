@@ -31,6 +31,7 @@
     <jgiven.version>1.0.0-RC5</jgiven.version>
 
     <camunda-bpm-data.version>1.0.2</camunda-bpm-data.version>
+    <kotlin-logging.version>1.8.3</kotlin-logging.version>
 
     <pattern.class.itest>**/*ITest.*</pattern.class.itest>
     <pattern.package.itest>**/itest/**/*.*</pattern.package.itest>
@@ -70,6 +71,11 @@
       <dependency>
         <groupId>io.holunda.decision</groupId>
         <artifactId>camunda-decision-runtime</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.holunda.decision</groupId>
+        <artifactId>camunda-decision-runtime-spring</artifactId>
         <version>${project.version}</version>
       </dependency>
 
@@ -119,6 +125,11 @@
         <version>${kotlin.version}</version>
         <scope>import</scope>
         <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>io.github.microutils</groupId>
+        <artifactId>kotlin-logging</artifactId>
+        <version>${kotlin-logging.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
