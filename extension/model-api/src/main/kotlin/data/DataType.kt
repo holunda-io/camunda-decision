@@ -6,6 +6,10 @@ import io.holunda.decision.model.api.entry.InputEntry
 import io.holunda.decision.model.api.entry.OutputEntry
 import java.util.*
 
+/**
+ * Defines the 6 basic types that can be used (string, boolean, date, integer, long, double).
+ * Used as defined in camunda modeler.
+ */
 sealed class DataType<T : Any>(
   typeRefEnum: TypeRefEnum,
   val type: Class<T>

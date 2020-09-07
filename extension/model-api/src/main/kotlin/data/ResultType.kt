@@ -1,5 +1,9 @@
 package io.holunda.decision.model.api.data
 
+/**
+ * The result type of a dmn decision table evaluation.
+ * Can be either single value, struct value, list or list of struct.
+ */
 enum class ResultType {
 
   /**

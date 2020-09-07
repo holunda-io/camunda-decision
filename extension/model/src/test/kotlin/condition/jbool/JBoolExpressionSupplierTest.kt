@@ -13,6 +13,7 @@ internal class JBoolExpressionSupplierTest {
   private val inFoo = integerInput("foo")
   private val fooFeel = FeelInputVariable(inFoo, FeelDisjunctionCondition(1))
   private val fooString = "'foo{1}'"
+  private val literalFooString = "('foo{1}')"
 
   private val inBar = integerInput("bar")
   private val barFeel = FeelInputVariable(inBar, FeelDisjunctionCondition(2))
@@ -20,7 +21,7 @@ internal class JBoolExpressionSupplierTest {
 
   private val inBaz = integerInput("baz")
   private val bazFeel = FeelInputVariable(inBaz, FeelDisjunctionCondition(3))
-  private val bazString = "'baz{3}'"
+
 
   @Test
   fun `feelInputVariable to Variable`() {
@@ -29,7 +30,7 @@ internal class JBoolExpressionSupplierTest {
 
   @Test
   fun `single variable - and`() {
-    assertThat(and(fooFeel).jbool().toLexicographicString()).isEqualTo("($fooString)")
+    assertThat(and(fooFeel).jbool().toLexicographicString()).isEqualTo(literalFooString)
   }
 
   @Test
@@ -45,7 +46,7 @@ internal class JBoolExpressionSupplierTest {
 
   @Test
   fun `or with single variable`() {
-    assertThat(or(fooFeel).jbool().toLexicographicString()).isEqualTo("($fooString)")
+    assertThat(or(fooFeel).jbool().toLexicographicString()).isEqualTo(literalFooString)
   }
 
   @Test
