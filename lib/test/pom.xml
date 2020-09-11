@@ -15,6 +15,7 @@
 
   <properties>
     <junitparams.version>1.1.1</junitparams.version>
+    <awaitility.version>3.0.0</awaitility.version>
 
     <jacoco.skip>true</jacoco.skip>
     <maven.javadoc.skip>true</maven.javadoc.skip>
@@ -105,6 +106,12 @@
       <artifactId>JUnitParams</artifactId>
       <version>${junitparams.version}</version>
       <scope>compile</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.awaitility</groupId>
+      <artifactId>awaitility</artifactId>
+      <version>${awaitility.version}</version>
     </dependency>
   </dependencies>
 </project>
