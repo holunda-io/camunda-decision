@@ -17,15 +17,33 @@ import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.in
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.booleanOutput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.integerOutput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
+import io.holunda.decision.model.api.CamundaDecisionRepositoryService
+import io.holunda.decision.model.api.DmnDiagramConverter
 import io.holunda.decision.model.api.Name
 import io.holunda.decision.model.ascii.DmnWriter
+import io.holunda.decision.model.jackson.converter.JacksonDiagramConverter
+import io.holunda.decision.runtime.cache.DmnDiagramEvaluationModelInMemoryRepository
+import io.holunda.decision.runtime.cache.RefreshDmnDiagramEvaluationModelCacheJobHandler
+import io.holunda.decision.runtime.cache.TransformListener
+import io.holunda.decision.runtime.deployment.CamundaDecisionRepositoryServiceBean
 import mu.KLogging
 import org.assertj.core.api.Assertions.assertThat
+import org.awaitility.Awaitility
+import org.awaitility.Awaitility.*
+import org.camunda.bpm.dmn.engine.DmnEngineConfiguration
+import org.camunda.bpm.dmn.engine.impl.DefaultDmnEngineConfiguration
+import org.camunda.bpm.engine.ProcessEngineConfiguration
+import org.camunda.bpm.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration
+import org.camunda.bpm.engine.impl.jobexecutor.JobHandler
 import org.camunda.bpm.engine.test.Deployment
+import org.camunda.bpm.engine.test.ProcessEngineRule
+import org.camunda.bpm.engine.test.mock.MockExpressionManager
 import org.camunda.bpm.engine.variable.Variables
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import java.util.concurrent.TimeUnit
 
 //@Deployment(resources = ["dmn/drd-dec1-dec2.dmn"])
 class CamundaDecisionRuntimeSpike {
@@ -40,7 +58,7 @@ class CamundaDecisionRuntimeSpike {
 
     val outD21 = stringOutput("outD21")
 
-    fun generate(name: Name) =  CamundaDecisionGenerator.diagram(name)
+    fun generate(name: Name) = CamundaDecisionGenerator.diagram(name)
       .addDecisionTable(
         table("decision1")
           .addRule(
@@ -77,12 +95,30 @@ class CamundaDecisionRuntimeSpike {
 
   val drd = "multiple_decisions"
 
+  val dmnDiagramEvaluationModelInMemoryRepository = DmnDiagramEvaluationModelInMemoryRepository()
+
   @get:Rule
-  val camunda = CamundaDecisionTestLib.camunda()
+  val camunda =
+    ProcessEngineRule(
+      StandaloneInMemProcessEngineConfiguration()
+        .apply {
+          history = ProcessEngineConfiguration.HISTORY_FULL
+          databaseSchemaUpdate = ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE
+          isJobExecutorActivate = true
+          expressionManager = MockExpressionManager()
+          this.customPostBPMNParseListeners = mutableListOf()
+          customJobHandlers = mutableListOf(RefreshDmnDiagramEvaluationModelCacheJobHandler(dmnDiagramEvaluationModelInMemoryRepository, JacksonDiagramConverter) as JobHandler<*>)
+          val conf = DefaultDmnEngineConfiguration()
+          conf.transformer.transformListeners.add(TransformListener(this))
+          dmnEngineConfiguration = conf
+        }
+        .buildProcessEngine()
+    )
 
   val runtimeContext by lazy {
     CamundaDecisionRuntimeContext.builder()
       .withProcessEngineServices(camunda)
+      .withDmnDiagramEvaluationModelRepository(dmnDiagramEvaluationModelInMemoryRepository)
       .build()
   }
 
@@ -97,7 +133,7 @@ class CamundaDecisionRuntimeSpike {
   @Before
   fun setUp() {
     // no deployments at engine start
-    assertThat(camunda.repositoryService.createDecisionDefinitionQuery().list()).isEmpty()
+    // assertThat(camunda.repositoryService.createDecisionDefinitionQuery().list()).isEmpty()
   }
 
   @Test
@@ -116,13 +152,23 @@ class CamundaDecisionRuntimeSpike {
       .putValue(DmnDiagrams.inD11.key, 18)
       .putValue(DmnDiagrams.inD22.key, 11))
 
-    val o22:String = result.getSingleEntry()
+    val o22: String = result.getSingleEntry()
 
     assertThat(o22).isEqualTo("A")
 
     val diagrams = camundaDecisionService.findAllModels()
     assertThat(diagrams).hasSize(1)
     logger.info { diagrams }
+  }
+
+  @Test
+  @Deployment(resources = ["dmn/drd-dec1-dec2.dmn"])
+  fun `deploy and get diagram from cache`() {
+    await().untilAsserted { assertThat(dmnDiagramEvaluationModelInMemoryRepository.findAll()).hasSize(1) }
+
+    camundaDecisionService.deploy(DmnDiagrams.diagram)
+
+    await().untilAsserted { assertThat(dmnDiagramEvaluationModelInMemoryRepository.findAll()).hasSize(2) }
   }
 
   @Test
