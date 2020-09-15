@@ -19,7 +19,7 @@ class RefreshDmnDiagramEvaluationModelCacheJobHandler (
 ) : JobHandler<RefreshDmnDiagramEvaluationModelCacheConfiguration> {
 
   companion object {
-    const val TYPE = "RefreshDmnDiagramEvaluationModelCacheJobHandler"
+    const val TYPE = "refreshDmnDiagramEvaluationModelCacheJobHandler"
     private val logger = LoggerFactory.getLogger(RefreshDmnDiagramEvaluationModelCacheJobHandler::class.java)
   }
 

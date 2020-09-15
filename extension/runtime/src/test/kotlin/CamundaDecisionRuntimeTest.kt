@@ -27,12 +27,12 @@ import org.camunda.bpm.dmn.engine.impl.DefaultDmnEngineConfiguration
 import org.camunda.bpm.engine.impl.jobexecutor.JobHandler
 import org.camunda.bpm.engine.test.Deployment
 import org.camunda.bpm.engine.variable.Variables
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-//@Deployment(resources = ["dmn/drd-dec1-dec2.dmn"])
-class CamundaDecisionRuntimeSpike {
+class CamundaDecisionRuntimeTest {
   companion object : KLogging()
 
   object DmnDiagrams {
@@ -78,7 +78,6 @@ class CamundaDecisionRuntimeSpike {
     val diagram = generate("My Diagram")
   }
 
-
   val drd = "multiple_decisions"
 
   val dmnDiagramEvaluationModelInMemoryRepository = DmnDiagramEvaluationModelInMemoryRepository()
@@ -95,7 +94,7 @@ class CamundaDecisionRuntimeSpike {
 
   val runtimeContext by lazy {
     CamundaDecisionRuntimeContext.builder()
-      .withProcessEngineServices(camunda)
+      .withProcessEngineConfiguration(camunda.processEngineConfiguration)
       .withDmnDiagramEvaluationModelRepository(dmnDiagramEvaluationModelInMemoryRepository)
       .build()
   }
@@ -111,7 +110,16 @@ class CamundaDecisionRuntimeSpike {
   @Before
   fun setUp() {
     // no deployments at engine start
-    // assertThat(camunda.repositoryService.createDecisionDefinitionQuery().list()).isEmpty()
+    assertThat(camunda.repositoryService.createDecisionDefinitionQuery().list()).isEmpty()
+  }
+
+  @After
+  fun tearDown() {
+    camunda.repositoryService.createDeploymentQuery().list()
+      .forEach {
+        camunda.repositoryService.deleteDeployment(it.id, true)
+      }
+
   }
 
   @Test
@@ -140,9 +148,14 @@ class CamundaDecisionRuntimeSpike {
   }
 
   @Test
-  @Deployment(resources = ["dmn/drd-dec1-dec2.dmn"])
   fun `deploy and get diagram from cache`() {
-    await().untilAsserted { assertThat(dmnDiagramEvaluationModelInMemoryRepository.findAll()).hasSize(1) }
+    assertThat(dmnDiagramEvaluationModelInMemoryRepository.findAll()).isEmpty()
+    camunda.repositoryService.createDeployment().addClasspathResource("dmn/drd-dec1-dec2.dmn").deploy()
+
+
+    await().untilAsserted {
+      assertThat(dmnDiagramEvaluationModelInMemoryRepository.findAll()).hasSize(1)
+    }
 
     camundaDecisionService.deploy(DmnDiagrams.diagram)
 
@@ -151,16 +164,18 @@ class CamundaDecisionRuntimeSpike {
 
   @Test
   fun `evaluate decision`() {
+    camunda.repositoryService.createDeployment()
+      .addClasspathResource("dmn/drd-dec1-dec2.dmn")
+      .deploy()
+
     assertThat(camunda.repositoryService.createDecisionDefinitionQuery().decisionDefinitionKey("decision1").list()).isNotNull
     assertThat(camunda.repositoryService.createDecisionDefinitionQuery().decisionDefinitionKey("decision2").singleResult()).isNotNull
 
     val result = decisionService.evaluateDecisionTableByKey("decision1", Variables.putValue("foo", true)).singleResult
 
-    println(result)
-
     val r = decisionService.evaluateDecisionTableByKey("decision2",
       Variables.putValue("foo", true).putValue("bar", true)).singleResult
 
-    println("" + r.getSingleEntry())
+    assertThat("" + r.getSingleEntry()).isEqualTo("hurray")
   }
 }

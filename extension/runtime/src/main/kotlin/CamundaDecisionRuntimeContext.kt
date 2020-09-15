@@ -8,11 +8,10 @@ import io.holunda.decision.runtime.cache.DmnDiagramEvaluationModelRepository
 import io.holunda.decision.runtime.deployment.CamundaDecisionRepositoryServiceBean
 import io.holunda.decision.runtime.query.CamundaDecisionQueryServiceBean
 import org.apache.commons.lang3.builder.Builder
-import org.camunda.bpm.engine.ProcessEngineServices
-import org.camunda.bpm.engine.RepositoryService
+import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl
 
 open class CamundaDecisionRuntimeContext(
-  val repositoryService: RepositoryService,
+  val processEngineConfiguration: ProcessEngineConfigurationImpl,
   val dmnDiagramConverter: DmnDiagramConverter,
   val dmnDiagramEvaluationModelRepository: DmnDiagramEvaluationModelRepository
 ) {
@@ -22,36 +21,42 @@ open class CamundaDecisionRuntimeContext(
   }
 
   val camundaDecisionQueryService = CamundaDecisionQueryServiceBean(
-    repositoryService,
-    dmnDiagramConverter
+    repositoryService = processEngineConfiguration.repositoryService,
+    diagramConverter = dmnDiagramConverter
   )
 
   val camundaDecisionEvaluationService = object : CamundaDecisionEvaluationService {}
 
-  val camundaDecisionDeploymentService = CamundaDecisionRepositoryServiceBean(repositoryService, dmnDiagramConverter)
-
-  val camundaDecisionService = CamundaDecisionServiceBean(
-    camundaDecisionDeploymentService, camundaDecisionQueryService, camundaDecisionEvaluationService
-  )
-
-  val camundaDecisionProcessEnginePlugin = CamundaDecisionProcessEnginePlugin(
-    dmnDiagramEvaluationModelRepository,
+  val camundaDecisionRepositoryService = CamundaDecisionRepositoryServiceBean(
+    processEngineConfiguration.repositoryService,
     dmnDiagramConverter
   )
 
-  class CamundaDecisionRuntimeContextBuilder : Builder<CamundaDecisionRuntimeContext>{
+  val camundaDecisionService = CamundaDecisionServiceBean(
+    repositoryService = camundaDecisionRepositoryService,
+    queryService = camundaDecisionQueryService,
+    evaluationService = camundaDecisionEvaluationService
+  )
 
-    private lateinit var repositoryService: RepositoryService
-    private var diagramConverter : DmnDiagramConverter = JacksonDiagramConverter
+  val camundaDecisionProcessEnginePlugin = CamundaDecisionProcessEnginePlugin(
+    evaluationModelRepository = dmnDiagramEvaluationModelRepository,
+    diagramConverter = dmnDiagramConverter
+  )
+
+  val commandExecutorAdapter by lazy {
+    CamundaDecisionRuntime.CommandExecutorAdapter(processEngineConfiguration)
+  }
+
+  class CamundaDecisionRuntimeContextBuilder : Builder<CamundaDecisionRuntimeContext> {
+
+    private lateinit var processEngineConfiguration: ProcessEngineConfigurationImpl
+    private var diagramConverter: DmnDiagramConverter = JacksonDiagramConverter
     private var dmnDiagramEvaluationModelRepository: DmnDiagramEvaluationModelRepository = DmnDiagramEvaluationModelInMemoryRepository()
 
-    fun withProcessEngineServices(processEngineServices: ProcessEngineServices) = apply {
-      withRepositoryService(processEngineServices.repositoryService)
+    fun withProcessEngineConfiguration(processEngineConfiguration: ProcessEngineConfigurationImpl) = apply {
+      this.processEngineConfiguration = processEngineConfiguration
     }
 
-    fun withRepositoryService(repositoryService: RepositoryService) = apply {
-      this.repositoryService = repositoryService
-    }
 
     fun withDmnDiagramEvaluationModelRepository(dmnDiagramEvaluationModelRepository: DmnDiagramEvaluationModelRepository) = apply {
       this.dmnDiagramEvaluationModelRepository = dmnDiagramEvaluationModelRepository;
@@ -59,7 +64,7 @@ open class CamundaDecisionRuntimeContext(
 
     override fun build(): CamundaDecisionRuntimeContext {
       return CamundaDecisionRuntimeContext(
-        repositoryService = repositoryService,
+        processEngineConfiguration = processEngineConfiguration,
         dmnDiagramConverter = diagramConverter,
         dmnDiagramEvaluationModelRepository = dmnDiagramEvaluationModelRepository
       )

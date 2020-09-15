@@ -2,23 +2,23 @@ package io.holunda.decision.runtime.spring
 
 import io.holunda.decision.model.api.CamundaDecisionRepositoryService
 import io.holunda.decision.model.api.CamundaDecisionService
-import io.holunda.decision.model.api.DmnDiagramConverter
 import io.holunda.decision.model.jackson.converter.JacksonDiagramConverter
 import io.holunda.decision.runtime.CamundaDecisionProcessEnginePlugin
 import io.holunda.decision.runtime.CamundaDecisionRuntimeContext
 import io.holunda.decision.runtime.cache.DmnDiagramEvaluationModelInMemoryRepository
 import io.holunda.decision.runtime.cache.DmnDiagramEvaluationModelRepository
+import org.camunda.bpm.engine.ProcessEngineConfiguration
 import org.camunda.bpm.engine.RepositoryService
+import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Lazy
 
 class CamundaDecisionConfiguration {
 
   @Bean
   fun camundaDecisionRuntimeContext(
-    repositoryService: RepositoryService,
+    processEngineConfiguration: ProcessEngineConfigurationImpl,
     dmnDiagramEvaluationModelRepository: DmnDiagramEvaluationModelRepository) = CamundaDecisionRuntimeContext.builder()
-    .withRepositoryService(repositoryService)
+    .withProcessEngineConfiguration(processEngineConfiguration)
     .withDmnDiagramEvaluationModelRepository(dmnDiagramEvaluationModelRepository)
     .build()
 
@@ -29,7 +29,7 @@ class CamundaDecisionConfiguration {
   fun camundaDecisionDiagramConverter(runtimeContext: CamundaDecisionRuntimeContext) = runtimeContext.dmnDiagramConverter
 
   @Bean
-  fun camundaDecisionDeploymentService(runtimeContext: CamundaDecisionRuntimeContext): CamundaDecisionRepositoryService = runtimeContext.camundaDecisionDeploymentService
+  fun camundaDecisionDeploymentService(runtimeContext: CamundaDecisionRuntimeContext): CamundaDecisionRepositoryService = runtimeContext.camundaDecisionRepositoryService
 
   @Bean
   fun camundaDecisionQueryService(runtimeContext: CamundaDecisionRuntimeContext) = runtimeContext.camundaDecisionQueryService
