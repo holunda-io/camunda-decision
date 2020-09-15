@@ -32,4 +32,4 @@ jobs:
       - name: Prepare Maven Wrapper
         run: chmod +x ./mvnw
       - name: Build with Maven
-        run: ./mvn clean package -B -U -T4
+        run: ./mvnw clean package -B -U -T4
