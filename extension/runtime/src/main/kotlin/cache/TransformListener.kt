@@ -1,5 +1,6 @@
 package io.holunda.decision.runtime.cache
 
+import io.holunda.decision.runtime.cache.RefreshDmnDiagramEvaluationModelCacheConfiguration.ModelType
 import org.camunda.bpm.dmn.engine.DmnDecision
 import org.camunda.bpm.dmn.engine.DmnDecisionRequirementsGraph
 import org.camunda.bpm.dmn.engine.impl.DmnDecisionTableInputImpl
@@ -25,7 +26,12 @@ class TransformListener(
   }
 
   override fun transformDecisionRequirementsGraph(definitions: Definitions, dmnDecisionRequirementsGraph: DmnDecisionRequirementsGraph) {
-    processEngineConfigurationImpl.commandExecutorTxRequired.execute(RefreshDmnDiagramEvaluationModelCacheCommand(dmnDecisionRequirementsGraph.key))
+    val command = if (dmnDecisionRequirementsGraph.decisions.size == 1) {
+      RefreshDmnDiagramEvaluationModelCacheCommand(dmnDecisionRequirementsGraph.decisionKeys.first(), ModelType.TABLE)
+    } else {
+      RefreshDmnDiagramEvaluationModelCacheCommand(dmnDecisionRequirementsGraph.key, ModelType.GRAPH)
+    }
+    processEngineConfigurationImpl.commandExecutorTxRequired.execute(command)
   }
 
 }

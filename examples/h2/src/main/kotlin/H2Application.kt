@@ -9,18 +9,15 @@ import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.web.bind.annotation.RestController
 
-fun main(args: Array<String>) {
-  runApplication<H2Application>(*args)
-}
+fun main(args: Array<String>) = runApplication<H2Application>(*args).let { Unit }
+
 
 @SpringBootApplication
 @RestController // should be data-rest, but see https://github.com/springfox/springfox/issues/1957
-class H2Application(
-  @Value("\${ranked.h2.port:9092}") val port: String
-) {
+class H2Application {
 
   @Bean(initMethod = "start", destroyMethod = "stop")
-  fun h2Server(): Server = Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", port)
+  fun h2Server(): Server = Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9092")
 
 
 }

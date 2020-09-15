@@ -1,8 +1,6 @@
 package io.holunda.decision.runtime
 
 import io.holunda.decision.model.api.DmnDiagramConverter
-import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModel
-import io.holunda.decision.model.jackson.converter.JacksonDiagramConverter
 import io.holunda.decision.runtime.cache.DmnDiagramEvaluationModelRepository
 import io.holunda.decision.runtime.cache.RefreshDmnDiagramEvaluationModelCacheJobHandler
 import io.holunda.decision.runtime.cache.TransformListener

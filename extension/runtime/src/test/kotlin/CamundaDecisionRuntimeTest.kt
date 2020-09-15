@@ -178,4 +178,30 @@ class CamundaDecisionRuntimeTest {
 
     assertThat("" + r.getSingleEntry()).isEqualTo("hurray")
   }
+
+  @Test
+  fun `can deploy and find a single table`() {
+    assertNoDeployedDmn()
+
+    camunda.repositoryService.createDeployment().addClasspathResource(CamundaDecisionTestLib.DmnTestResource.SINGLE_TABLE.fileName).deploy()
+
+
+
+    await().untilAsserted {
+      assertThat(dmnDiagramEvaluationModelInMemoryRepository.findById("Definitions_07g6v9s")).isNotEmpty()
+    }
+
+    assertThat(camunda.repositoryService.createDecisionRequirementsDefinitionQuery().list()).isEmpty()
+    assertThat(dmnDiagramEvaluationModelInMemoryRepository.findAll()).isNotEmpty
+    assertThat(dmnDiagramEvaluationModelInMemoryRepository.findAll().first().decisionDefinitionId).startsWith("example")
+  }
+
+
+  private fun assertNoDeployedDmn() {
+    assertThat(camunda.repositoryService.createDeploymentQuery().list()).isEmpty()
+    assertThat(camunda.repositoryService.createDecisionDefinitionQuery().list()).isEmpty()
+    assertThat(camunda.repositoryService.createDecisionRequirementsDefinitionQuery().list()).isEmpty()
+
+    assertThat(dmnDiagramEvaluationModelInMemoryRepository.findAll()).isEmpty()
+  }
 }
