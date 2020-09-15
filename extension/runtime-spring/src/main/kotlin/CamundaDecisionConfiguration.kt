@@ -2,11 +2,15 @@ package io.holunda.decision.runtime.spring
 
 import io.holunda.decision.model.api.CamundaDecisionRepositoryService
 import io.holunda.decision.model.api.CamundaDecisionService
+import io.holunda.decision.model.api.DmnDiagramConverter
+import io.holunda.decision.model.jackson.converter.JacksonDiagramConverter
+import io.holunda.decision.runtime.CamundaDecisionProcessEnginePlugin
 import io.holunda.decision.runtime.CamundaDecisionRuntimeContext
 import io.holunda.decision.runtime.cache.DmnDiagramEvaluationModelInMemoryRepository
 import io.holunda.decision.runtime.cache.DmnDiagramEvaluationModelRepository
 import org.camunda.bpm.engine.RepositoryService
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Lazy
 
 class CamundaDecisionConfiguration {
 
@@ -18,9 +22,8 @@ class CamundaDecisionConfiguration {
     .withDmnDiagramEvaluationModelRepository(dmnDiagramEvaluationModelRepository)
     .build()
 
-
   @Bean
-  fun DmnDiagramEvaluationModelRepository() = DmnDiagramEvaluationModelInMemoryRepository()
+  fun dmnDiagramEvaluationModelRepository() = DmnDiagramEvaluationModelInMemoryRepository()
 
   @Bean
   fun camundaDecisionDiagramConverter(runtimeContext: CamundaDecisionRuntimeContext) = runtimeContext.dmnDiagramConverter
@@ -34,4 +37,9 @@ class CamundaDecisionConfiguration {
   @Bean
   fun camundaDecisionService(runtimeContext: CamundaDecisionRuntimeContext): CamundaDecisionService = runtimeContext.camundaDecisionService
 
+  @Bean
+  fun camundaDecisionPlugin() = CamundaDecisionProcessEnginePlugin(
+    dmnDiagramEvaluationModelRepository(),
+    JacksonDiagramConverter
+  )
 }

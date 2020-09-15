@@ -11,20 +11,29 @@ import org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity
 import org.camunda.bpm.engine.impl.persistence.entity.JobEntity
 import org.camunda.bpm.engine.impl.persistence.entity.MessageEntity
 import org.camunda.bpm.model.dmn.Dmn
+import org.slf4j.LoggerFactory
 
 class RefreshDmnDiagramEvaluationModelCacheJobHandler (
-  private val cache: DmnDiagramEvaluationModelRepository,
+  private val evaluationModelRepository: DmnDiagramEvaluationModelRepository,
   private val diagramConverter: DmnDiagramConverter
 ) : JobHandler<RefreshDmnDiagramEvaluationModelCacheConfiguration> {
 
   companion object {
     const val TYPE = "RefreshDmnDiagramEvaluationModelCacheJobHandler"
+    private val logger = LoggerFactory.getLogger(RefreshDmnDiagramEvaluationModelCacheJobHandler::class.java)
   }
 
   override fun execute(configuration: RefreshDmnDiagramEvaluationModelCacheConfiguration, execution: ExecutionEntity?, commandContext: CommandContext, tenantId: String?) {
     val repositoryService =  commandContext.processEngineConfiguration.repositoryService
 
-    val def = repositoryService.createDecisionRequirementsDefinitionQuery().decisionRequirementsDefinitionKey(configuration.decisionRequirementDefinitionKey).singleResult()
+    val def = repositoryService.createDecisionRequirementsDefinitionQuery()
+      .decisionRequirementsDefinitionKey(configuration.decisionRequirementDefinitionKey)
+      .singleResult()
+
+    if (def == null) {
+      logger.warn("No definition found for $configuration")
+      return
+    }
 
     val tableKeysToDefinitionIds = repositoryService.createDecisionDefinitionQuery()
       .decisionRequirementsDefinitionId(def.id)
@@ -33,7 +42,7 @@ class RefreshDmnDiagramEvaluationModelCacheJobHandler (
     val diagram = diagramConverter.fromXml(Dmn.convertToString(repositoryService.getDmnModelInstance(tableKeysToDefinitionIds.values.first())))
     val decisionDefinitionId: DecisionDefinitionId = tableKeysToDefinitionIds[diagram.resultTable.decisionDefinitionKey]!!
 
-    cache.save(DmnDiagramEvaluationModel(
+    evaluationModelRepository.save(DmnDiagramEvaluationModel(
       diagramId = diagram.id,
       name = diagram.name,
       resourceName = diagram.resourceName,
@@ -46,7 +55,7 @@ class RefreshDmnDiagramEvaluationModelCacheJobHandler (
     ))
   }
 
-  override fun getType(): String = TYPE
+  override fun getType() = TYPE
   override fun onDelete(configuration: RefreshDmnDiagramEvaluationModelCacheConfiguration?, jobEntity: JobEntity?) {}
   override fun newConfiguration(canonicalString: String) = RefreshDmnDiagramEvaluationModelCacheConfiguration(canonicalString)
 

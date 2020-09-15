@@ -2,6 +2,7 @@ package io.holunda.decision.lib.test
 
 import org.camunda.bpm.engine.ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE
 import org.camunda.bpm.engine.ProcessEngineConfiguration.HISTORY_FULL
+import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl
 import org.camunda.bpm.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration
 import org.camunda.bpm.engine.repository.DeploymentBuilder
 import org.camunda.bpm.engine.test.ProcessEngineRule
@@ -34,16 +35,18 @@ object CamundaDecisionTestLib {
     .readText()
     .trim()
 
-  fun camunda() = ProcessEngineRule(
+  fun camunda(init: ProcessEngineConfigurationImpl.() -> Unit = {}) = ProcessEngineRule(
     StandaloneInMemProcessEngineConfiguration()
       .apply {
         history = HISTORY_FULL
         databaseSchemaUpdate = DB_SCHEMA_UPDATE_TRUE
         isJobExecutorActivate = false
         expressionManager = MockExpressionManager()
-        this.customPostBPMNParseListeners = mutableListOf()
+        customPostBPMNParseListeners = mutableListOf()
         customJobHandlers = mutableListOf()
+        processEnginePlugins = mutableListOf()
       }
+      .apply(init)
       .buildProcessEngine()
   )
 

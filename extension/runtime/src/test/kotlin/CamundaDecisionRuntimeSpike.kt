@@ -1,7 +1,5 @@
 package io.holunda.decision.runtime
 
-import io.holunda.camunda.bpm.data.CamundaBpmData
-import io.holunda.camunda.bpm.data.CamundaBpmDataKotlin
 import io.holunda.decision.lib.test.CamundaDecisionTestLib
 import io.holunda.decision.model.CamundaDecisionGenerator
 import io.holunda.decision.model.CamundaDecisionGenerator.rule
@@ -15,35 +13,23 @@ import io.holunda.decision.model.FeelConditions.resultTrue
 import io.holunda.decision.model.FeelConditions.resultValue
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.integerInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.booleanOutput
-import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.integerOutput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
-import io.holunda.decision.model.api.CamundaDecisionRepositoryService
-import io.holunda.decision.model.api.DmnDiagramConverter
 import io.holunda.decision.model.api.Name
 import io.holunda.decision.model.ascii.DmnWriter
 import io.holunda.decision.model.jackson.converter.JacksonDiagramConverter
 import io.holunda.decision.runtime.cache.DmnDiagramEvaluationModelInMemoryRepository
 import io.holunda.decision.runtime.cache.RefreshDmnDiagramEvaluationModelCacheJobHandler
 import io.holunda.decision.runtime.cache.TransformListener
-import io.holunda.decision.runtime.deployment.CamundaDecisionRepositoryServiceBean
 import mu.KLogging
 import org.assertj.core.api.Assertions.assertThat
-import org.awaitility.Awaitility
-import org.awaitility.Awaitility.*
-import org.camunda.bpm.dmn.engine.DmnEngineConfiguration
+import org.awaitility.Awaitility.await
 import org.camunda.bpm.dmn.engine.impl.DefaultDmnEngineConfiguration
-import org.camunda.bpm.engine.ProcessEngineConfiguration
-import org.camunda.bpm.engine.impl.cfg.StandaloneInMemProcessEngineConfiguration
 import org.camunda.bpm.engine.impl.jobexecutor.JobHandler
 import org.camunda.bpm.engine.test.Deployment
-import org.camunda.bpm.engine.test.ProcessEngineRule
-import org.camunda.bpm.engine.test.mock.MockExpressionManager
 import org.camunda.bpm.engine.variable.Variables
-import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import java.util.concurrent.TimeUnit
 
 //@Deployment(resources = ["dmn/drd-dec1-dec2.dmn"])
 class CamundaDecisionRuntimeSpike {
@@ -98,22 +84,14 @@ class CamundaDecisionRuntimeSpike {
   val dmnDiagramEvaluationModelInMemoryRepository = DmnDiagramEvaluationModelInMemoryRepository()
 
   @get:Rule
-  val camunda =
-    ProcessEngineRule(
-      StandaloneInMemProcessEngineConfiguration()
-        .apply {
-          history = ProcessEngineConfiguration.HISTORY_FULL
-          databaseSchemaUpdate = ProcessEngineConfiguration.DB_SCHEMA_UPDATE_TRUE
-          isJobExecutorActivate = true
-          expressionManager = MockExpressionManager()
-          this.customPostBPMNParseListeners = mutableListOf()
-          customJobHandlers = mutableListOf(RefreshDmnDiagramEvaluationModelCacheJobHandler(dmnDiagramEvaluationModelInMemoryRepository, JacksonDiagramConverter) as JobHandler<*>)
-          val conf = DefaultDmnEngineConfiguration()
-          conf.transformer.transformListeners.add(TransformListener(this))
-          dmnEngineConfiguration = conf
-        }
-        .buildProcessEngine()
+  val camunda = CamundaDecisionTestLib.camunda {
+    isJobExecutorActivate = true
+
+    processEnginePlugins.add(CamundaDecisionProcessEnginePlugin(
+      dmnDiagramEvaluationModelInMemoryRepository,
+      JacksonDiagramConverter)
     )
+  }
 
   val runtimeContext by lazy {
     CamundaDecisionRuntimeContext.builder()

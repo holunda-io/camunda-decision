@@ -66,6 +66,10 @@ class CamundaDecisionRepositoryServiceBean(
     }
   }
 
+  override fun findModel(diagramId: Id): Optional<DmnDiagramEvaluationModel> {
+    TODO("Not yet implemented")
+  }
+
   private fun loadDeployedDiagram(diagram: DmnDiagram, deployment: Deployment): DmnDiagramEvaluationModel {
     // finds all tables included in one diagram xml
     val resultDecisionDefinion = repositoryService.createDecisionDefinitionQuery()

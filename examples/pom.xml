@@ -21,6 +21,7 @@
   </properties>
 
   <modules>
+    <module>h2</module>
     <module>java-spring-boot</module>
     <module>kotlin-spring-boot</module>
   </modules>

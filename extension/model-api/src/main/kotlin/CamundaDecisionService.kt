@@ -20,6 +20,10 @@ interface CamundaDecisionRepositoryService {
    */
   fun deploy(diagrams: List<DmnDiagram>): DmnDiagramDeployment
 
+  fun loadModel(diagramId: Id) : DmnDiagramEvaluationModel = findModel(diagramId).orElseThrow()
+
+  fun findModel(diagramId: Id) : Optional<DmnDiagramEvaluationModel>
+
   fun findAllModels() : List<DmnDiagramEvaluationModel>
 
 }

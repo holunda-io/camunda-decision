@@ -11,7 +11,7 @@ import org.apache.commons.lang3.builder.Builder
 import org.camunda.bpm.engine.ProcessEngineServices
 import org.camunda.bpm.engine.RepositoryService
 
-class CamundaDecisionRuntimeContext(
+open class CamundaDecisionRuntimeContext(
   val repositoryService: RepositoryService,
   val dmnDiagramConverter: DmnDiagramConverter,
   val dmnDiagramEvaluationModelRepository: DmnDiagramEvaluationModelRepository
@@ -32,6 +32,11 @@ class CamundaDecisionRuntimeContext(
 
   val camundaDecisionService = CamundaDecisionServiceBean(
     camundaDecisionDeploymentService, camundaDecisionQueryService, camundaDecisionEvaluationService
+  )
+
+  val camundaDecisionProcessEnginePlugin = CamundaDecisionProcessEnginePlugin(
+    dmnDiagramEvaluationModelRepository,
+    dmnDiagramConverter
   )
 
   class CamundaDecisionRuntimeContextBuilder : Builder<CamundaDecisionRuntimeContext>{

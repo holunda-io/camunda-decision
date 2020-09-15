@@ -8,15 +8,25 @@ import io.holunda.decision.model.CamundaDecisionGenerator.table
 import io.holunda.decision.model.FeelConditions.feelGreaterThanOrEqual
 import io.holunda.decision.model.FeelConditions.resultValue
 import io.holunda.decision.model.api.CamundaDecisionRepositoryService
+import io.holunda.decision.model.api.CamundaDecisionService
 import io.holunda.decision.model.api.DmnDiagramDeployment
+import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModel
+import io.holunda.decision.runtime.CamundaDecisionProcessEnginePlugin
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/dmn")
-class DmnDeploymentController(private val repositoryService: CamundaDecisionRepositoryService) {
+class DmnDeploymentController(
+  private val repositoryService: CamundaDecisionService,
+  private val pl: CamundaDecisionProcessEnginePlugin
+) {
+
+  @GetMapping
+  fun getEvaluationModels() : ResponseEntity<List<DmnDiagramEvaluationModel>> = ResponseEntity.ok(repositoryService.findAllModels())
 
   @PostMapping
   fun deploy() : ResponseEntity<DmnDiagramDeployment> {
