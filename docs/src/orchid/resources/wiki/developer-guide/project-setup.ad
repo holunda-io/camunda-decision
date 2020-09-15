@@ -1,0 +1,133 @@
+---
+title: Project Setup
+pageId: 'project-setup'
+---
+
+== {{ page.title }}
+
+If you are interested in developing and building the project please follow the following instruction.
+
+=== Version control
+
+To checkout sources of the project, please execute from your command line:
+
+[source,bash]
+----
+git clone https://github.com/holunda-io/camunda-decision.git
+cd camunda-decision
+----
+
+We are using gitflow in our git SCM. That means that you should start from `develop` branch,
+create a `feature/<name>` out of it and once it is completed create a pull request containing
+it. Please squash your commits before submitting and use semantic commit messages, if possible.
+
+=== Project Build
+
+Perform the following steps to get a development setup up and running.
+
+[source,bash]
+----
+./mvnw clean install
+----
+
+=== Project build modes and profiles
+
+==== Examples
+
+If you want to skip the build of examples, please specify the `-DskipExamples` switch in your command line.
+
+==== Documentation
+
+We are using https://github.com/orchidhq/Orchid[JavaEden Orchid] for generation of a static site documentation and rely on AsciiDoc as much as possible.
+
+TIP: If you want to develop your docs in 'live' mode, run `./mvnw -f docs -Pserve-docs` and access
+the http://localhost:8080/ from your browser.
+
+For creation of documentation, please run:
+
+[source,bash]
+----
+./mvnw -f docs
+----
+
+WARNING: This operation requires special permissions. You need to replace `GITHUB_TOKEN` by the token of
+the github pages repository, allowing to publish the pages.
+
+In order to publish documentation to github pages, please run from command line
+
+[source,bash]
+----
+./mvnw -f docs -Pdeploy-docs -DgithubToken=GITHUB_TOKEN
+----
+
+=== Continuous Integration
+
+Github Actions is building all branches on commit hook. In addition, a special action
+is building releases from master branch.
+
+=== Release Management
+
+Release management has been set-up for use of Sonatype Nexus (= Maven Central).
+
+==== What modules get deployed to repository
+
+Currently, the following modules are released to OSS Maven Central:
+
+* camunda-decision
+
+==== Trigger new release
+
+WARNING: This operation requires special permissions.
+
+We use gitflow for development (see http://nvie.com/posts/a-successful-git-branching-model/[A successful git branching model]
+for more details). You could use gitflow with native git commands, but then you would have
+to change the versions in the poms manually. Therefore we use the
+https://github.com/aleksandr-m/gitflow-maven-plugin/[mvn gitflow plugin], which handles this and other
+things nicely.
+
+You can build a release with:
+
+[source,sh]
+----
+./mvnw gitflow:release-start
+./mvnw gitflow:release-finish
+----
+
+This will update the versions in the `pom.xml` s accordingly and push the release tag to the `master` branch
+and update the `develop` branch for the new development version.
+
+
+==== Create feature for development
+
+You can create a feature branch for development using:
+
+[source,sh]
+----
+./mvnw gitflow:feature-start
+----
+
+WARNING: This operation requires special permissions.
+
+After the feature is complete, create a PR. To merge the PR into develop use the command:
+
+[source,sh]
+----
+./mvnw gitflow:feature-finish
+----
+
+==== Trigger a deploy
+
+WARNING: This operation requires special permissions.
+
+Currently, CI allows for deployment of artifacts to Maven Central and is executed via Github Actions.
+This means, that a push to `master` branch will start the corresponding build job, and if successful the
+artifacts will get into `Staging Repositories` of OSS Sonatype without manual intervention. The repository
+gets automatically closed and released on successful upload.
+
+If you still want to execute the deployment from your local machine, you need to execute the
+following command on the `master` branch:
+
+[source,sh]
+----
+./mvnw clean deploy -B -DskipTests -DskipExamples -Prelease
+----
