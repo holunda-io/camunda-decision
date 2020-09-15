@@ -1,0 +1,411 @@
+{
+  "ownKey": "index",
+  "childrenPages": {
+    "javadoc": {
+      "ownKey": "javadoc",
+      "childrenPages": {"camunda-bpm-data": {
+        "ownKey": "camunda-bpm-data",
+        "ownPages": [{
+          "reference": {
+            "path": "javadoc",
+            "baseUrl": "https://www.holunda.io/camunda-decision",
+            "fileName": "camunda-bpm-data",
+            "extension": "html",
+            "usePrettyUrl": true,
+            "link": "https://www.holunda.io/camunda-decision/javadoc/camunda-bpm-data"
+          },
+          "description": "",
+          "title": "Camunda BPM Data",
+          "content": "<h1 id=\"camunda-decision\"><a href=\"#camunda-decision\" id=\"camunda-decision\" class=\"anchor\"><\/a>camunda-decision<\/h1>\n<p><a href=\"https://app.codacy.com/gh/holunda-io/camunda-decision?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=holunda-io/camunda-decision&amp;utm_campaign=Badge_Grade_Dashboard\"><img src=\"https://api.codacy.com/project/badge/Grade/e56194c76382443ea1cfa69bc1a8d7e3\" alt=\"Codacy Badge\" /><\/a><\/p>\n<p>Extension for easier, type safe interaction with camunda dmn.<\/p>\n<h2 id=\"dmnwriter\"><a href=\"#dmnwriter\" id=\"dmnwriter\" class=\"anchor\"><\/a>DmnWriter<\/h2>\n<p>Prints <a href=\"http://www.vandermeer.de/projects/skb/java/asciitable/features.html\">ascii table<\/a> like:<\/p>\n<pre><code class=\"language-text\">┌──────────────────────────────────────────────────────────────────────────────┐\n│                        DMN Example ('example') - v666                        │\n├───────────────────┬───────────────────┬───────────────────┬──────────────────┤\n│     Foo Value     │     Bar Value     │    VIP Status     │                  │\n│  'foo' (INTEGER)  │  'bar' (BOOLEAN)  │ 'status' (STRING) │                  │\n├───────────────────┴───────────────────┼───────────────────┼──────────────────┤\n│               - INPUT -               │     - OUTPUT -    │ - DESCRIPTION -  │\n├───────────────────┬───────────────────┼───────────────────┼──────────────────┤\n│       &gt; 10        │       true        │     &quot;SILVER&quot;      │  this is great   │\n├───────────────────┼───────────────────┼───────────────────┼──────────────────┤\n│       &lt; 10        │         -         │     &quot;BRONZE&quot;      │   not so good    │\n├───────────────────┼───────────────────┼───────────────────┼──────────────────┤\n│         -         │       false       │      &quot;GOLD&quot;       │     amazing!     │\n├───────────────────┼───────────────────┼───────────────────┼──────────────────┤\n│         -         │         -         │     &quot;DEFAULT&quot;     │        -         │\n└───────────────────┴───────────────────┴───────────────────┴──────────────────┘\n<\/code><\/pre>\n<h2 id=\"feel\"><a href=\"#feel\" id=\"feel\" class=\"anchor\"><\/a>FEEL<\/h2>\n<ul>\n<li><a href=\"https://camunda.github.io/feel-scala/feel-data-types\">https://camunda.github.io/feel-scala/feel-data-types<\/a><\/li>\n<li><a href=\"https://docs.camunda.org/manual/7.13/reference/dmn/\">https://docs.camunda.org/manual/7.13/reference/dmn/<\/a><\/li>\n<li><a href=\"https://consulting.camunda.com/dmn-simulator/\">https://consulting.camunda.com/dmn-simulator/<\/a><\/li>\n<\/ul>\n"
+        }]
+      }}
+    },
+    "kotlindoc": {
+      "ownKey": "kotlindoc",
+      "childrenPages": {"camunda-bpm-data-kotlin": {
+        "ownKey": "camunda-bpm-data-kotlin",
+        "ownPages": [{
+          "reference": {
+            "path": "kotlindoc",
+            "baseUrl": "https://www.holunda.io/camunda-decision",
+            "fileName": "camunda-bpm-data-kotlin",
+            "extension": "html",
+            "usePrettyUrl": true,
+            "link": "https://www.holunda.io/camunda-decision/kotlindoc/camunda-bpm-data-kotlin"
+          },
+          "description": "",
+          "title": "Camunda BPM Data Kotlin",
+          "content": "<h1 id=\"camunda-decision\"><a href=\"#camunda-decision\" id=\"camunda-decision\" class=\"anchor\"><\/a>camunda-decision<\/h1>\n<p><a href=\"https://app.codacy.com/gh/holunda-io/camunda-decision?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=holunda-io/camunda-decision&amp;utm_campaign=Badge_Grade_Dashboard\"><img src=\"https://api.codacy.com/project/badge/Grade/e56194c76382443ea1cfa69bc1a8d7e3\" alt=\"Codacy Badge\" /><\/a><\/p>\n<p>Extension for easier, type safe interaction with camunda dmn.<\/p>\n<h2 id=\"dmnwriter\"><a href=\"#dmnwriter\" id=\"dmnwriter\" class=\"anchor\"><\/a>DmnWriter<\/h2>\n<p>Prints <a href=\"http://www.vandermeer.de/projects/skb/java/asciitable/features.html\">ascii table<\/a> like:<\/p>\n<pre><code class=\"language-text\">┌──────────────────────────────────────────────────────────────────────────────┐\n│                        DMN Example ('example') - v666                        │\n├───────────────────┬───────────────────┬───────────────────┬──────────────────┤\n│     Foo Value     │     Bar Value     │    VIP Status     │                  │\n│  'foo' (INTEGER)  │  'bar' (BOOLEAN)  │ 'status' (STRING) │                  │\n├───────────────────┴───────────────────┼───────────────────┼──────────────────┤\n│               - INPUT -               │     - OUTPUT -    │ - DESCRIPTION -  │\n├───────────────────┬───────────────────┼───────────────────┼──────────────────┤\n│       &gt; 10        │       true        │     &quot;SILVER&quot;      │  this is great   │\n├───────────────────┼───────────────────┼───────────────────┼──────────────────┤\n│       &lt; 10        │         -         │     &quot;BRONZE&quot;      │   not so good    │\n├───────────────────┼───────────────────┼───────────────────┼──────────────────┤\n│         -         │       false       │      &quot;GOLD&quot;       │     amazing!     │\n├───────────────────┼───────────────────┼───────────────────┼──────────────────┤\n│         -         │         -         │     &quot;DEFAULT&quot;     │        -         │\n└───────────────────┴───────────────────┴───────────────────┴──────────────────┘\n<\/code><\/pre>\n<h2 id=\"feel\"><a href=\"#feel\" id=\"feel\" class=\"anchor\"><\/a>FEEL<\/h2>\n<ul>\n<li><a href=\"https://camunda.github.io/feel-scala/feel-data-types\">https://camunda.github.io/feel-scala/feel-data-types<\/a><\/li>\n<li><a href=\"https://docs.camunda.org/manual/7.13/reference/dmn/\">https://docs.camunda.org/manual/7.13/reference/dmn/<\/a><\/li>\n<li><a href=\"https://consulting.camunda.com/dmn-simulator/\">https://consulting.camunda.com/dmn-simulator/<\/a><\/li>\n<\/ul>\n"
+        }]
+      }}
+    },
+    "license": {
+      "ownKey": "license",
+      "ownPages": [{
+        "reference": {
+          "path": "",
+          "baseUrl": "https://www.holunda.io/camunda-decision",
+          "fileName": "license",
+          "extension": "html",
+          "usePrettyUrl": true,
+          "link": "https://www.holunda.io/camunda-decision/license"
+        },
+        "description": "",
+        "title": "License",
+        "content": ""
+      }]
+    },
+    "wiki": {
+      "ownKey": "wiki",
+      "childrenPages": {
+        "developer-guide": {
+          "ownKey": "developer-guide",
+          "childrenPages": {
+            "contribution": {
+              "ownKey": "contribution",
+              "ownPages": [{
+                "reference": {
+                  "path": "wiki/developer-guide",
+                  "baseUrl": "https://www.holunda.io/camunda-decision",
+                  "fileName": "contribution",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://www.holunda.io/camunda-decision/wiki/developer-guide/contribution"
+                },
+                "next": {
+                  "path": "wiki/developer-guide",
+                  "baseUrl": "https://www.holunda.io/camunda-decision",
+                  "fileName": "project-setup",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://www.holunda.io/camunda-decision/wiki/developer-guide/project-setup"
+                },
+                "description": "",
+                "title": "Contribution",
+                "content": "<div class=\"sect1\">\n<h2 id=\"_contribution\">Contribution<\/h2>\n<div class=\"sectionbody\">\n<div class=\"paragraph\">\n<p>There are several ways in which you may contribute to this project.<\/p>\n<\/div>\n<div class=\"ulist\">\n<ul>\n<li>\n<p>File new issues if you found a bug or missing feature<\/p>\n<\/li>\n<li>\n<p>Submit a pull request, if you have a solution for on of the issues<\/p>\n<\/li>\n<\/ul>\n<\/div>\n<div class=\"sect2\">\n<h3 id=\"_found_a_bug_or_missing_feature\">Found a bug or missing feature?<\/h3>\n<div class=\"paragraph\">\n<p>Please <a href=\"https://github.com/holunda-io/camunda-decision/issues\">file an issue<\/a> in our\nissue tracking system.<\/p>\n<\/div>\n<\/div>\n<div class=\"sect2\">\n<h3 id=\"_submit_a_pull_request\">Submit a Pull Request<\/h3>\n<div class=\"paragraph\">\n<p>If you found a solution to an <a href=\"https://github.com/holunda-io/camunda-decision/issues\">open issue<\/a>\nand implemented it, we would be happy to add your contribution in the code base. For doing so,\nplease create a pull request. Prior to that, please make sure you<\/p>\n<\/div>\n<div class=\"ulist\">\n<ul>\n<li>\n<p>rebased against the <code>develop<\/code> branch<\/p>\n<\/li>\n<li>\n<p>sticked to project coding conventions<\/p>\n<\/li>\n<li>\n<p>added test cases for the problem you are solving<\/p>\n<\/li>\n<li>\n<p>added docs, describing the change<\/p>\n<\/li>\n<li>\n<p>generally complied with codeacy report<\/p>\n<\/li>\n<\/ul>\n<\/div>\n<\/div>\n<\/div>\n<\/div>"
+              }]
+            },
+            "project-setup": {
+              "ownKey": "project-setup",
+              "ownPages": [{
+                "reference": {
+                  "path": "wiki/developer-guide",
+                  "baseUrl": "https://www.holunda.io/camunda-decision",
+                  "fileName": "project-setup",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://www.holunda.io/camunda-decision/wiki/developer-guide/project-setup"
+                },
+                "previous": {
+                  "path": "wiki/developer-guide",
+                  "baseUrl": "https://www.holunda.io/camunda-decision",
+                  "fileName": "contribution",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://www.holunda.io/camunda-decision/wiki/developer-guide/contribution"
+                },
+                "description": "",
+                "title": "Project Setup",
+                "content": "<div class=\"sect1\">\n<h2 id=\"_project_setup\">Project Setup<\/h2>\n<div class=\"sectionbody\">\n<div class=\"paragraph\">\n<p>If you are interested in developing and building the project please follow the following instruction.<\/p>\n<\/div>\n<div class=\"sect2\">\n<h3 id=\"_version_control\">Version control<\/h3>\n<div class=\"paragraph\">\n<p>To checkout sources of the project, please execute from your command line:<\/p>\n<\/div>\n<div class=\"listingblock\">\n<div class=\"content\">\n<pre class=\"highlight\"><code class=\"language-bash\" data-lang=\"bash\">git clone https://github.com/holunda-io/camunda-decision.git\ncd camunda-decision<\/code><\/pre>\n<\/div>\n<\/div>\n<div class=\"paragraph\">\n<p>We are using gitflow in our git SCM. That means that you should start from <code>develop<\/code> branch,\ncreate a <code>feature/&lt;name&gt;<\/code> out of it and once it is completed create a pull request containing\nit. Please squash your commits before submitting and use semantic commit messages, if possible.<\/p>\n<\/div>\n<\/div>\n<div class=\"sect2\">\n<h3 id=\"_project_build\">Project Build<\/h3>\n<div class=\"paragraph\">\n<p>Perform the following steps to get a development setup up and running.<\/p>\n<\/div>\n<div class=\"listingblock\">\n<div class=\"content\">\n<pre class=\"highlight\"><code class=\"language-bash\" data-lang=\"bash\">./mvnw clean install<\/code><\/pre>\n<\/div>\n<\/div>\n<\/div>\n<div class=\"sect2\">\n<h3 id=\"_project_build_modes_and_profiles\">Project build modes and profiles<\/h3>\n<div class=\"sect3\">\n<h4 id=\"_examples\">Examples<\/h4>\n<div class=\"paragraph\">\n<p>If you want to skip the build of examples, please specify the <code>-DskipExamples<\/code> switch in your command line.<\/p>\n<\/div>\n<\/div>\n<div class=\"sect3\">\n<h4 id=\"_documentation\">Documentation<\/h4>\n<div class=\"paragraph\">\n<p>We are using <a href=\"https://github.com/orchidhq/Orchid\">JavaEden Orchid<\/a> for generation of a static site documentation and rely on AsciiDoc as much as possible.<\/p>\n<\/div>\n<div class=\"admonitionblock tip\">\n<table>\n<tr>\n<td class=\"icon\">\n<div class=\"title\">Tip<\/div>\n<\/td>\n<td class=\"content\">\nIf you want to develop your docs in 'live' mode, run <code>./mvnw -f docs -Pserve-docs<\/code> and access\nthe <a href=\"http://localhost:8080/\" class=\"bare\">http://localhost:8080/<\/a> from your browser.\n<\/td>\n<\/tr>\n<\/table>\n<\/div>\n<div class=\"paragraph\">\n<p>For creation of documentation, please run:<\/p>\n<\/div>\n<div class=\"listingblock\">\n<div class=\"content\">\n<pre class=\"highlight\"><code class=\"language-bash\" data-lang=\"bash\">./mvnw -f docs<\/code><\/pre>\n<\/div>\n<\/div>\n<div class=\"admonitionblock warning\">\n<table>\n<tr>\n<td class=\"icon\">\n<div class=\"title\">Warning<\/div>\n<\/td>\n<td class=\"content\">\nThis operation requires special permissions. You need to replace <code>GITHUB_TOKEN<\/code> by the token of\nthe github pages repository, allowing to publish the pages.\n<\/td>\n<\/tr>\n<\/table>\n<\/div>\n<div class=\"paragraph\">\n<p>In order to publish documentation to github pages, please run from command line<\/p>\n<\/div>\n<div class=\"listingblock\">\n<div class=\"content\">\n<pre class=\"highlight\"><code class=\"language-bash\" data-lang=\"bash\">./mvnw -f docs -Pdeploy-docs -DgithubToken=GITHUB_TOKEN<\/code><\/pre>\n<\/div>\n<\/div>\n<\/div>\n<\/div>\n<div class=\"sect2\">\n<h3 id=\"_continuous_integration\">Continuous Integration<\/h3>\n<div class=\"paragraph\">\n<p>Github Actions is building all branches on commit hook. In addition, a special action\nis building releases from master branch.<\/p>\n<\/div>\n<\/div>\n<div class=\"sect2\">\n<h3 id=\"_release_management\">Release Management<\/h3>\n<div class=\"paragraph\">\n<p>Release management has been set-up for use of Sonatype Nexus (= Maven Central).<\/p>\n<\/div>\n<div class=\"sect3\">\n<h4 id=\"_what_modules_get_deployed_to_repository\">What modules get deployed to repository<\/h4>\n<div class=\"paragraph\">\n<p>Currently, the following modules are released to OSS Maven Central:<\/p>\n<\/div>\n<div class=\"ulist\">\n<ul>\n<li>\n<p>camunda-decision<\/p>\n<\/li>\n<\/ul>\n<\/div>\n<\/div>\n<div class=\"sect3\">\n<h4 id=\"_trigger_new_release\">Trigger new release<\/h4>\n<div class=\"admonitionblock warning\">\n<table>\n<tr>\n<td class=\"icon\">\n<div class=\"title\">Warning<\/div>\n<\/td>\n<td class=\"content\">\nThis operation requires special permissions.\n<\/td>\n<\/tr>\n<\/table>\n<\/div>\n<div class=\"paragraph\">\n<p>We use gitflow for development (see <a href=\"http://nvie.com/posts/a-successful-git-branching-model/\">A successful git branching model<\/a>\nfor more details). You could use gitflow with native git commands, but then you would have\nto change the versions in the poms manually. Therefore we use the\n<a href=\"https://github.com/aleksandr-m/gitflow-maven-plugin/\">mvn gitflow plugin<\/a>, which handles this and other\nthings nicely.<\/p>\n<\/div>\n<div class=\"paragraph\">\n<p>You can build a release with:<\/p>\n<\/div>\n<div class=\"listingblock\">\n<div class=\"content\">\n<pre class=\"highlight\"><code class=\"language-sh\" data-lang=\"sh\">./mvnw gitflow:release-start\n./mvnw gitflow:release-finish<\/code><\/pre>\n<\/div>\n<\/div>\n<div class=\"paragraph\">\n<p>This will update the versions in the <code>pom.xml<\/code> s accordingly and push the release tag to the <code>master<\/code> branch\nand update the <code>develop<\/code> branch for the new development version.<\/p>\n<\/div>\n<\/div>\n<div class=\"sect3\">\n<h4 id=\"_create_feature_for_development\">Create feature for development<\/h4>\n<div class=\"paragraph\">\n<p>You can create a feature branch for development using:<\/p>\n<\/div>\n<div class=\"listingblock\">\n<div class=\"content\">\n<pre class=\"highlight\"><code class=\"language-sh\" data-lang=\"sh\">./mvnw gitflow:feature-start<\/code><\/pre>\n<\/div>\n<\/div>\n<div class=\"admonitionblock warning\">\n<table>\n<tr>\n<td class=\"icon\">\n<div class=\"title\">Warning<\/div>\n<\/td>\n<td class=\"content\">\nThis operation requires special permissions.\n<\/td>\n<\/tr>\n<\/table>\n<\/div>\n<div class=\"paragraph\">\n<p>After the feature is complete, create a PR. To merge the PR into develop use the command:<\/p>\n<\/div>\n<div class=\"listingblock\">\n<div class=\"content\">\n<pre class=\"highlight\"><code class=\"language-sh\" data-lang=\"sh\">./mvnw gitflow:feature-finish<\/code><\/pre>\n<\/div>\n<\/div>\n<\/div>\n<div class=\"sect3\">\n<h4 id=\"_trigger_a_deploy\">Trigger a deploy<\/h4>\n<div class=\"admonitionblock warning\">\n<table>\n<tr>\n<td class=\"icon\">\n<div class=\"title\">Warning<\/div>\n<\/td>\n<td class=\"content\">\nThis operation requires special permissions.\n<\/td>\n<\/tr>\n<\/table>\n<\/div>\n<div class=\"paragraph\">\n<p>Currently, CI allows for deployment of artifacts to Maven Central and is executed via Github Actions.\nThis means, that a push to <code>master<\/code> branch will start the corresponding build job, and if successful the\nartifacts will get into <code>Staging Repositories<\/code> of OSS Sonatype without manual intervention. The repository\ngets automatically closed and released on successful upload.<\/p>\n<\/div>\n<div class=\"paragraph\">\n<p>If you still want to execute the deployment from your local machine, you need to execute the\nfollowing command on the <code>master<\/code> branch:<\/p>\n<\/div>\n<div class=\"listingblock\">\n<div class=\"content\">\n<pre class=\"highlight\"><code class=\"language-sh\" data-lang=\"sh\">./mvnw clean deploy -B -DskipTests -DskipExamples -Prelease<\/code><\/pre>\n<\/div>\n<\/div>\n<\/div>\n<\/div>\n<\/div>\n<\/div>"
+              }]
+            }
+          },
+          "ownPages": [
+            {
+              "reference": {
+                "path": "wiki",
+                "baseUrl": "https://www.holunda.io/camunda-decision",
+                "fileName": "developer-guide",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://www.holunda.io/camunda-decision/wiki/developer-guide"
+              },
+              "description": "",
+              "title": "Developer Guide",
+              "content": "<html>\n <head><\/head>\n <body>\n  <h2><a href=\"#\" class=\"anchor\"><\/a><\/h2> \n  <p><a href=\"https://www.holunda.io/camunda-decision/wiki/developer-guide/contribution\">Contribution<\/a> <a href=\"https://www.holunda.io/camunda-decision/wiki/developer-guide/project-setup\">Project Setup<\/a><\/p> \n <\/body>\n<\/html>\n"
+            },
+            {
+              "reference": {
+                "path": "wiki/developer-guide",
+                "baseUrl": "https://www.holunda.io/camunda-decision",
+                "fileName": "book",
+                "extension": "pdf",
+                "usePrettyUrl": false,
+                "link": "https://www.holunda.io/camunda-decision/wiki/developer-guide/book.pdf"
+              },
+              "description": "",
+              "title": "Developer Guide Book",
+              "content": ""
+            }
+          ]
+        },
+        "user-guide": {
+          "ownKey": "user-guide",
+          "childrenPages": {
+            "features": {
+              "ownKey": "features",
+              "ownPages": [{
+                "reference": {
+                  "path": "wiki/user-guide",
+                  "baseUrl": "https://www.holunda.io/camunda-decision",
+                  "fileName": "features",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://www.holunda.io/camunda-decision/wiki/user-guide/features"
+                },
+                "next": {
+                  "path": "wiki/user-guide",
+                  "baseUrl": "https://www.holunda.io/camunda-decision",
+                  "fileName": "examples",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://www.holunda.io/camunda-decision/wiki/user-guide/examples"
+                },
+                "previous": {
+                  "path": "wiki/user-guide",
+                  "baseUrl": "https://www.holunda.io/camunda-decision",
+                  "fileName": "motivation",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://www.holunda.io/camunda-decision/wiki/user-guide/motivation"
+                },
+                "description": "",
+                "title": "Features",
+                "content": "<div class=\"sect1\">\n<h2 id=\"_features\">Features<\/h2>\n<div class=\"sectionbody\">\n\n<\/div>\n<\/div>"
+              }]
+            },
+            "examples": {
+              "ownKey": "examples",
+              "ownPages": [{
+                "reference": {
+                  "path": "wiki/user-guide",
+                  "baseUrl": "https://www.holunda.io/camunda-decision",
+                  "fileName": "examples",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://www.holunda.io/camunda-decision/wiki/user-guide/examples"
+                },
+                "next": {
+                  "path": "wiki/user-guide",
+                  "baseUrl": "https://www.holunda.io/camunda-decision",
+                  "fileName": "further-outlook",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://www.holunda.io/camunda-decision/wiki/user-guide/further-outlook"
+                },
+                "previous": {
+                  "path": "wiki/user-guide",
+                  "baseUrl": "https://www.holunda.io/camunda-decision",
+                  "fileName": "features",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://www.holunda.io/camunda-decision/wiki/user-guide/features"
+                },
+                "description": "",
+                "title": "Java Examples",
+                "content": "<div class=\"sect1\">\n<h2 id=\"_java_examples\">Java Examples<\/h2>\n<div class=\"sectionbody\">\n\n<\/div>\n<\/div>"
+              }]
+            },
+            "further-outlook": {
+              "ownKey": "further-outlook",
+              "ownPages": [{
+                "reference": {
+                  "path": "wiki/user-guide",
+                  "baseUrl": "https://www.holunda.io/camunda-decision",
+                  "fileName": "further-outlook",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://www.holunda.io/camunda-decision/wiki/user-guide/further-outlook"
+                },
+                "previous": {
+                  "path": "wiki/user-guide",
+                  "baseUrl": "https://www.holunda.io/camunda-decision",
+                  "fileName": "examples",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://www.holunda.io/camunda-decision/wiki/user-guide/examples"
+                },
+                "description": "",
+                "title": "Further outlook",
+                "content": "<div class=\"sect1\">\n<h2 id=\"_further_outlook\">Further outlook<\/h2>\n<div class=\"sectionbody\">\n\n<\/div>\n<\/div>"
+              }]
+            },
+            "motivation": {
+              "ownKey": "motivation",
+              "ownPages": [{
+                "reference": {
+                  "path": "wiki/user-guide",
+                  "baseUrl": "https://www.holunda.io/camunda-decision",
+                  "fileName": "motivation",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://www.holunda.io/camunda-decision/wiki/user-guide/motivation"
+                },
+                "next": {
+                  "path": "wiki/user-guide",
+                  "baseUrl": "https://www.holunda.io/camunda-decision",
+                  "fileName": "features",
+                  "extension": "html",
+                  "usePrettyUrl": true,
+                  "link": "https://www.holunda.io/camunda-decision/wiki/user-guide/features"
+                },
+                "description": "",
+                "title": "Motivation",
+                "content": "<div class=\"sect1\">\n<h2 id=\"_motivation\">Motivation<\/h2>\n<div class=\"sectionbody\">\n\n<\/div>\n<\/div>"
+              }]
+            }
+          },
+          "ownPages": [
+            {
+              "reference": {
+                "path": "wiki",
+                "baseUrl": "https://www.holunda.io/camunda-decision",
+                "fileName": "user-guide",
+                "extension": "html",
+                "usePrettyUrl": true,
+                "link": "https://www.holunda.io/camunda-decision/wiki/user-guide"
+              },
+              "description": "",
+              "title": "User Guide",
+              "content": "<html>\n <head><\/head>\n <body>\n  <h2><a href=\"#\" class=\"anchor\"><\/a><\/h2> \n  <ul> \n   <li><a href=\"https://www.holunda.io/camunda-decision/wiki/user-guide/motivation\">Motivation<\/a><\/li> \n   <li><a href=\"https://www.holunda.io/camunda-decision/wiki/user-guide/features\">Features<\/a><\/li> \n   <li><a href=\"https://www.holunda.io/camunda-decision/wiki/user-guide/examples\">Examples<\/a><\/li> \n   <li><a href=\"https://www.holunda.io/camunda-decision/wiki/user-guide/further-outlook\">Further Outlook<\/a><\/li> \n  <\/ul> \n <\/body>\n<\/html>\n"
+            },
+            {
+              "reference": {
+                "path": "wiki/user-guide",
+                "baseUrl": "https://www.holunda.io/camunda-decision",
+                "fileName": "book",
+                "extension": "pdf",
+                "usePrettyUrl": false,
+                "link": "https://www.holunda.io/camunda-decision/wiki/user-guide/book.pdf"
+              },
+              "description": "",
+              "title": "User Guide Book",
+              "content": ""
+            }
+          ]
+        }
+      },
+      "ownPages": [{
+        "reference": {
+          "path": "",
+          "baseUrl": "https://www.holunda.io/camunda-decision",
+          "fileName": "wiki",
+          "extension": "html",
+          "usePrettyUrl": true,
+          "link": "https://www.holunda.io/camunda-decision/wiki"
+        },
+        "description": "",
+        "title": "Wiki",
+        "content": ""
+      }]
+    },
+    "swiftdoc": {
+      "ownKey": "swiftdoc",
+      "ownPages": [{
+        "reference": {
+          "path": "swiftdoc",
+          "baseUrl": "https://www.holunda.io/camunda-decision",
+          "fileName": "",
+          "extension": "html",
+          "usePrettyUrl": true,
+          "link": "https://www.holunda.io/camunda-decision/swiftdoc"
+        },
+        "description": "",
+        "title": "",
+        "content": ""
+      }]
+    },
+    "groovydoc": {
+      "ownKey": "groovydoc",
+      "ownPages": [{
+        "reference": {
+          "path": "groovydoc",
+          "baseUrl": "https://www.holunda.io/camunda-decision",
+          "fileName": "",
+          "extension": "html",
+          "usePrettyUrl": true,
+          "link": "https://www.holunda.io/camunda-decision/groovydoc"
+        },
+        "description": "",
+        "title": "",
+        "content": ""
+      }]
+    },
+    "changelog": {
+      "ownKey": "changelog",
+      "ownPages": [{
+        "reference": {
+          "path": "",
+          "baseUrl": "https://www.holunda.io/camunda-decision",
+          "fileName": "changelog",
+          "extension": "html",
+          "usePrettyUrl": true,
+          "link": "https://www.holunda.io/camunda-decision/changelog"
+        },
+        "description": "",
+        "title": "Changelog",
+        "content": ""
+      }]
+    },
+    "quick-start": {
+      "ownKey": "quick-start",
+      "ownPages": [{
+        "reference": {
+          "path": "",
+          "baseUrl": "https://www.holunda.io/camunda-decision",
+          "fileName": "quick-start",
+          "extension": "html",
+          "usePrettyUrl": true,
+          "link": "https://www.holunda.io/camunda-decision/quick-start"
+        },
+        "description": "",
+        "title": "Quick Start",
+        "content": "<div class=\"sect1\">\n<h2 id=\"_quick_start\">Quick Start<\/h2>\n<div class=\"sectionbody\">\n\n<\/div>\n<\/div>"
+      }]
+    },
+    "readme": {
+      "ownKey": "readme",
+      "ownPages": [{
+        "reference": {
+          "path": "",
+          "baseUrl": "https://www.holunda.io/camunda-decision",
+          "fileName": "readme",
+          "extension": "html",
+          "usePrettyUrl": true,
+          "link": "https://www.holunda.io/camunda-decision/readme"
+        },
+        "description": "",
+        "title": "Readme",
+        "content": ""
+      }]
+    }
+  },
+  "ownPages": [
+    {
+      "reference": {
+        "path": "",
+        "baseUrl": "https://www.holunda.io/camunda-decision",
+        "fileName": "",
+        "extension": "html",
+        "usePrettyUrl": true,
+        "link": "https://www.holunda.io/camunda-decision"
+      },
+      "description": "",
+      "title": "Home",
+      "content": "<h2 id=\"why-should-i-use-this\"><a href=\"#why-should-i-use-this\" id=\"why-should-i-use-this\" class=\"anchor\"><\/a>Why should I use this?<\/h2>\n<h2 id=\"how-to-start\"><a href=\"#how-to-start\" id=\"how-to-start\" class=\"anchor\"><\/a>How to start?<\/h2>\n<p>A good starting point is the <a href=\"./quick-start\">Quick Start<\/a>. For more detailed documentation, please have a look at\n<a href=\"./wiki/user-guide\">User Guide<\/a>.<\/p>\n"
+    },
+    {
+      "reference": {
+        "path": "",
+        "baseUrl": "https://www.holunda.io/camunda-decision",
+        "fileName": "404",
+        "extension": "html",
+        "usePrettyUrl": false,
+        "link": "https://www.holunda.io/camunda-decision/404.html"
+      },
+      "description": "",
+      "title": "Not Found",
+      "content": ""
+    }
+  ]
+}

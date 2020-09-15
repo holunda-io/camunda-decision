@@ -1,0 +1,17 @@
+{
+  "reference": {
+    "path": "",
+    "baseUrl": "https://www.holunda.io/camunda-decision",
+    "fileName": "quick-start",
+    "extension": "html",
+    "usePrettyUrl": true,
+    "link": "https://www.holunda.io/camunda-decision/quick-start"
+  },
+  "data": {
+    "title": "Quick Start",
+    "pageId": "quick-start"
+  },
+  "description": "",
+  "title": "Quick Start",
+  "content": "<div class=\"sect1\">\n<h2 id=\"_quick_start\">Quick Start<\/h2>\n<div class=\"sectionbody\">\n\n<\/div>\n<\/div>"
+}

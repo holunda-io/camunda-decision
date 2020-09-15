@@ -1,0 +1,14 @@
+{
+  "reference": {
+    "path": "wiki/user-guide",
+    "baseUrl": "https://www.holunda.io/camunda-decision",
+    "fileName": "book",
+    "extension": "pdf",
+    "usePrettyUrl": false,
+    "link": "https://www.holunda.io/camunda-decision/wiki/user-guide/book.pdf"
+  },
+  "data": {},
+  "description": "",
+  "title": "User Guide Book",
+  "content": ""
+}

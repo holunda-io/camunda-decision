@@ -1,0 +1,30 @@
+{
+  "reference": {
+    "path": "wiki/user-guide",
+    "baseUrl": "https://www.holunda.io/camunda-decision",
+    "fileName": "features",
+    "extension": "html",
+    "usePrettyUrl": true,
+    "link": "https://www.holunda.io/camunda-decision/wiki/user-guide/features"
+  },
+  "next": {
+    "path": "wiki/user-guide",
+    "baseUrl": "https://www.holunda.io/camunda-decision",
+    "fileName": "examples",
+    "extension": "html",
+    "usePrettyUrl": true,
+    "link": "https://www.holunda.io/camunda-decision/wiki/user-guide/examples"
+  },
+  "previous": {
+    "path": "wiki/user-guide",
+    "baseUrl": "https://www.holunda.io/camunda-decision",
+    "fileName": "motivation",
+    "extension": "html",
+    "usePrettyUrl": true,
+    "link": "https://www.holunda.io/camunda-decision/wiki/user-guide/motivation"
+  },
+  "data": {"title": "Features"},
+  "description": "",
+  "title": "Features",
+  "content": "<div class=\"sect1\">\n<h2 id=\"_features\">Features<\/h2>\n<div class=\"sectionbody\">\n\n<\/div>\n<\/div>"
+}

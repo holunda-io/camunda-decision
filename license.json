@@ -1,0 +1,17 @@
+{
+  "reference": {
+    "path": "",
+    "baseUrl": "https://www.holunda.io/camunda-decision",
+    "fileName": "license",
+    "extension": "html",
+    "usePrettyUrl": true,
+    "link": "https://www.holunda.io/camunda-decision/license"
+  },
+  "data": {
+    "title": "License",
+    "components": [{"type": "license"}]
+  },
+  "description": "",
+  "title": "License",
+  "content": ""
+}

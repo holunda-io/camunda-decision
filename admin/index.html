@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+<head>
+    
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.18.1-SNAPSHOT"/>
+<link rel="icon" href="http://localhost:8080/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>Orchid Content Manager</title>
+
+
+<meta name="description" content="DMN in scaled enterprise context.">
+
+
+
+
+
+<script>
+    window.site = {"orchidVersion":"0.18.1-SNAPSHOT","baseUrl":"http://localhost:8080","environment":"debug","version":"0.0.1-SNAPSHOT"};
+</script>
+
+
+
+
+
+<!-- start:debug info -->
+
+<!-- THEME -->
+<!-- Type: BsDoc -->
+<!-- Class: com.eden.orchid.bsdoc.BSDocTheme -->
+
+<!-- PAGE -->
+<!-- Type: contentManager -->
+<!-- Class: com.eden.orchid.netlifycms.pages.NetlifyCmsAdminPage -->
+<!-- Layout: index -->
+<!-- Resolved Layout: templates/layouts/index.peb -->
+<!-- Page Template: contentManager, page -->
+<!-- Resolved Page Template: templates/pages/page.peb -->
+
+<!-- RESOURCE -->
+<!-- Class: com.eden.orchid.api.resources.resource.JarResource -->
+<!-- Source Filename: netlifyCms/admin.peb -->
+
+<!-- COMPLETE PAGE CONFIGURATION -->
+<script>
+    window.allData = {"reference":{"path":"","baseUrl":"http://localhost:8080","fileName":"admin","extension":"html","usePrettyUrl":true,"link":"http://localhost:8080/admin"},"description":"","title":"Orchid Content Manager"};
+</script>
+
+<!-- end:debug info -->
+
+
+
+
+    <!-- start:inject components -->
+    
+        
+            
+        
+    
+    <!-- end:inject components -->
+
+
+
+    <!-- start:inject components -->
+    
+    <!-- end:inject components -->
+
+
+
+
+
+    <!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="http://localhost:8080/assets/css/fs-backend.min.css"  />
+<link rel="stylesheet" type="text/css" href="https://rawgit.com/PrismJS/prism-themes/master/themes/prism-darcula.css"  />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/line-numbers/prism-line-numbers.min.css"  />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/line-highlight/prism-line-highlight.min.css"  />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/toolbar/prism-toolbar.min.css"  />
+<!-- end:inject styles -->
+</head>
+<body>
+<!-- start:inject scripts -->
+<script  src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+<script  src="http://localhost:8080/assets/js/fs-backend.min.js"></script>
+<script >
+CMS.registerBackend("orchid-server", FileSystemBackendClass)
+</script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/prism.min.js"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-yaml.min.js"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-java.min.js"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-json.min.js"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-kotlin.min.js"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-markdown.min.js"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/line-highlight/prism-line-highlight.min.js"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/toolbar/prism-toolbar.min.js"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/show-language/prism-show-language.min.js"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+<script  src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<!-- end:inject scripts -->
+<!-- start:register templateTags -->
+<script>
+    
+
+    function getTagPatternRegex(tagName, hasContent) {
+        var pattern = "";
+        if(hasContent) {
+            pattern = '\{\%\\s*' + tagName + '\\s*([\\s\\S]*)\\s*\%\}([\\s\\S]*?)\{\%\\s*end' + tagName + '\\s*\%\}';
+        }
+        else {
+            pattern = '\{\%\\s*' + tagName + '\\s*([\\s\\S]*)\\s*\%\}';
+        }
+
+        return new RegExp(pattern);
+    }
+
+    function parseTagPatternRegex(match, tagName, hasContent) {
+        var parsedParams = {};
+        var params = match[1];
+        var body = "";
+        var filters = "";
+        if(hasContent) {
+            params = match[1];
+            body = match[2];
+            if(params.includes("::")) {
+                var paramsPieces = params.split("::");
+                params = paramsPieces[0].trim();
+                filters = paramsPieces[1].trim();
+            }
+        }
+        else {
+            params = match[1];
+            body = "";
+            filters = "";
+        }
+
+        parsedParams.filters = filters;
+        parsedParams.body = body;
+
+        const regex = /((\w+)="(.+?)")*/g;
+        let m;
+
+        while ((m = regex.exec(params)) !== null) {
+            // This is necessary to avoid infinite loops with zero-width matches
+            if (m.index === regex.lastIndex) {
+                regex.lastIndex++;
+            }
+            if(m[2] && m[3]) {
+                parsedParams[m[2]] = m[3];
+            }
+        }
+
+        return parsedParams;
+    }
+
+    function tagBlock(obj, tagName, tagProps, hasContent) {
+        var block = "";
+        var params = "";
+        var filters = "";
+
+        tagProps.forEach(function(key){
+            params += `${key}="${obj[key]}" `
+        });
+
+        if(obj.filters && obj.filters.trim().length > 0) {
+            filters = ":: " + obj.filters.trim();
+        }
+
+        if(hasContent) {
+            block += '{'+'%'+` ${tagName} ${params} ${filters} %}`+obj.body+'{'+'%'+` end${tagName} %}`;
+        }
+        else {
+            block += '{'+'%'+` ${tagName} ${params} %}`;
+        }
+
+        return block
+    }
+
+    function tagPreview(obj, tagName, tagProps, hasContent) {
+        var tableRows = "";
+
+        tagProps.forEach(function(key, i) {
+            tableRows += `<tr><td style="width: 20%; min-width: 40px;"><b>${key}</b></td><td>${obj[key]}</td></tr>`;
+        });
+
+        if(hasContent) {
+            tableRows += `<tr style="border-top: 2px solid #dfdfe3;"><td style="width: 20%; min-width: 40px;padding-top: 16px;"><b>Content Filters</b></td><td>${obj.filters}</td></tr>`;
+            tableRows += `<tr><td style="width: 20%; min-width: 40px;"><b>Content</b></td><td>${obj.body}</td></tr>`;
+        }
+
+        return (`
+<div style="margin-top: 16px;">
+    <label style="background-color: #dfdfe3;border: 0;border-radius: 3px 3px 0 0;color: #7a8291;display: inline-block;font-size: 12px;font-weight: 600;margin: 0;padding: 3px 6px 2px;position: relative;text-transform: uppercase;">${tagName} Tag</label>
+    <div style="background-color: #fff;border: 2px solid #dfdfe3;border-radius: 5px;border-top-left-radius: 0;box-shadow: none;color: #444a57;display: block;font-size: 15px;line-height: 1.5;margin: 0;outline: 0;padding: 16px 20px;position: relative;">
+        <table style="width: 100%;border-collapse: collapse;">${tableRows}</table>
+    </div>
+</div>`);
+    }
+
+</script>
+<!-- end:register templateTags -->
+
+<!-- start:register components -->
+<script>
+    
+</script>
+<!-- end:register components -->
+<!-- start:register menuItems -->
+<script>
+    
+</script>
+<!-- end:register menuItems -->
+
+<script>
+    CMS.registerWidget('componentHolder', 'list');
+    CMS.registerWidget('orchidMenu', 'list');
+</script>
+</body>
+</html>
+

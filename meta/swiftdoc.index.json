@@ -1,0 +1,19 @@
+{
+  "ownKey": "swiftdoc",
+  "childrenPages": {"swiftdoc": {
+    "ownKey": "swiftdoc",
+    "ownPages": [{
+      "reference": {
+        "path": "swiftdoc",
+        "baseUrl": "https://www.holunda.io/camunda-decision",
+        "fileName": "",
+        "extension": "html",
+        "usePrettyUrl": true,
+        "link": "https://www.holunda.io/camunda-decision/swiftdoc"
+      },
+      "description": "",
+      "title": "",
+      "content": ""
+    }]
+  }}
+}

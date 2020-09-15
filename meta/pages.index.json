@@ -1,0 +1,69 @@
+{
+  "ownKey": "pages",
+  "childrenPages": {
+    "license": {
+      "ownKey": "license",
+      "ownPages": [{
+        "reference": {
+          "path": "",
+          "baseUrl": "https://www.holunda.io/camunda-decision",
+          "fileName": "license",
+          "extension": "html",
+          "usePrettyUrl": true,
+          "link": "https://www.holunda.io/camunda-decision/license"
+        },
+        "description": "",
+        "title": "License",
+        "content": ""
+      }]
+    },
+    "changelog": {
+      "ownKey": "changelog",
+      "ownPages": [{
+        "reference": {
+          "path": "",
+          "baseUrl": "https://www.holunda.io/camunda-decision",
+          "fileName": "changelog",
+          "extension": "html",
+          "usePrettyUrl": true,
+          "link": "https://www.holunda.io/camunda-decision/changelog"
+        },
+        "description": "",
+        "title": "Changelog",
+        "content": ""
+      }]
+    },
+    "quick-start": {
+      "ownKey": "quick-start",
+      "ownPages": [{
+        "reference": {
+          "path": "",
+          "baseUrl": "https://www.holunda.io/camunda-decision",
+          "fileName": "quick-start",
+          "extension": "html",
+          "usePrettyUrl": true,
+          "link": "https://www.holunda.io/camunda-decision/quick-start"
+        },
+        "description": "",
+        "title": "Quick Start",
+        "content": "<div class=\"sect1\">\n<h2 id=\"_quick_start\">Quick Start<\/h2>\n<div class=\"sectionbody\">\n\n<\/div>\n<\/div>"
+      }]
+    },
+    "readme": {
+      "ownKey": "readme",
+      "ownPages": [{
+        "reference": {
+          "path": "",
+          "baseUrl": "https://www.holunda.io/camunda-decision",
+          "fileName": "readme",
+          "extension": "html",
+          "usePrettyUrl": true,
+          "link": "https://www.holunda.io/camunda-decision/readme"
+        },
+        "description": "",
+        "title": "Readme",
+        "content": ""
+      }]
+    }
+  }
+}

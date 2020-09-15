@@ -1,0 +1,14 @@
+{
+  "reference": {
+    "path": "",
+    "baseUrl": "https://www.holunda.io/camunda-decision",
+    "fileName": "",
+    "extension": "html",
+    "usePrettyUrl": true,
+    "link": "https://www.holunda.io/camunda-decision"
+  },
+  "data": {"layout": "frontPage"},
+  "description": "",
+  "title": "Home",
+  "content": "<h2 id=\"why-should-i-use-this\"><a href=\"#why-should-i-use-this\" id=\"why-should-i-use-this\" class=\"anchor\"><\/a>Why should I use this?<\/h2>\n<h2 id=\"how-to-start\"><a href=\"#how-to-start\" id=\"how-to-start\" class=\"anchor\"><\/a>How to start?<\/h2>\n<p>A good starting point is the <a href=\"./quick-start\">Quick Start<\/a>. For more detailed documentation, please have a look at\n<a href=\"./wiki/user-guide\">User Guide<\/a>.<\/p>\n"
+}

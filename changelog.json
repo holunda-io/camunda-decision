@@ -1,0 +1,14 @@
+{
+  "reference": {
+    "path": "",
+    "baseUrl": "https://www.holunda.io/camunda-decision",
+    "fileName": "changelog",
+    "extension": "html",
+    "usePrettyUrl": true,
+    "link": "https://www.holunda.io/camunda-decision/changelog"
+  },
+  "data": {"components": [{"type": "changelog"}]},
+  "description": "",
+  "title": "Changelog",
+  "content": ""
+}

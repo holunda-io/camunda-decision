@@ -1,0 +1,19 @@
+{
+  "ownKey": "groovydoc",
+  "childrenPages": {"groovydoc": {
+    "ownKey": "groovydoc",
+    "ownPages": [{
+      "reference": {
+        "path": "groovydoc",
+        "baseUrl": "https://www.holunda.io/camunda-decision",
+        "fileName": "",
+        "extension": "html",
+        "usePrettyUrl": true,
+        "link": "https://www.holunda.io/camunda-decision/groovydoc"
+      },
+      "description": "",
+      "title": "",
+      "content": ""
+    }]
+  }}
+}
