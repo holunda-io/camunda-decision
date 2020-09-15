@@ -12,8 +12,11 @@
   <groupId>io.holunda.decision.project</groupId>
   <artifactId>camunda-decision-root</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <url>https://github.com/holunda-io/camunda-decision/</url>
   <packaging>pom</packaging>
+
+  <name>${project.artifactId}</name>
+  <description>${project.artifactId}</description>
+  <url>https://github.com/holunda-io/camunda-decision/</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -41,8 +44,7 @@
     <additionalparam>-Xdoclint:none</additionalparam>
     <!-- Skip instrumentalization by default -->
     <jacoco.skip>true</jacoco.skip>
-    <!-- holunda GPG key -->
-    <gpg.keyname>86F8C6FC</gpg.keyname>
+
   </properties>
 
   <modules>
@@ -505,7 +507,6 @@
       <plugin>
         <groupId>org.jetbrains.kotlin</groupId>
         <artifactId>kotlin-maven-plugin</artifactId>
-        <version>${kotlin.version}</version>
         <executions>
           <execution>
             <id>compile</id>
@@ -610,18 +611,19 @@
       </build>
     </profile>
 
-    <!--
-  <profile>
-    Profile for documentation
-    <id>docs</id>
-    <activation>
-      <activeByDefault>false</activeByDefault>
-    </activation>
-    <modules>
-      <module>docs</module>
-    </modules>
-  </profile>
-    -->
+
+    <profile>
+      <!--
+      Profile for documentation
+      -->
+      <id>docs</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <modules>
+        <module>docs</module>
+      </modules>
+    </profile>
 
     <profile>
       <!--
@@ -692,6 +694,16 @@
       <organization>Holisticon AG</organization>
       <organizationUrl>https://holisticon.de</organizationUrl>
     </developer>
+    <developer>
+      <id>zambrovski</id>
+      <name>Simon Zambrovski</name>
+      <roles>
+        <role>Developer</role>
+      </roles>
+      <organization>Holisticon AG</organization>
+      <organizationUrl>https://holisticon.de</organizationUrl>
+    </developer>
+
   </developers>
 
 </project>
