@@ -1,7 +1,7 @@
 package io.holunda.decision.runtime
 
 import io.holunda.decision.model.api.DmnDiagramConverter
-import io.holunda.decision.runtime.cache.DmnDiagramEvaluationModelRepository
+import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModelRepository
 import io.holunda.decision.runtime.cache.RefreshDmnDiagramEvaluationModelCacheJobHandler
 import io.holunda.decision.runtime.cache.TransformListener
 import org.camunda.bpm.dmn.engine.impl.DefaultDmnEngineConfiguration

@@ -1,7 +1,6 @@
-package io.holunda.decision.runtime.cache
+package io.holunda.decision.model.api.evaluation
 
 import io.holunda.decision.model.api.Id
-import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModel
 import java.util.*
 
 /**

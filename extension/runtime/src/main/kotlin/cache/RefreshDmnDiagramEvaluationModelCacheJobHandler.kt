@@ -3,7 +3,9 @@ package io.holunda.decision.runtime.cache
 import io.holunda.decision.model.api.DmnDiagramConverter
 import io.holunda.decision.model.api.element.DmnDiagram
 import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModel
+import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModelRepository
 import io.holunda.decision.runtime.cache.RefreshDmnDiagramEvaluationModelCacheConfiguration.ModelType
+import org.camunda.bpm.engine.RepositoryService
 import org.camunda.bpm.engine.impl.interceptor.Command
 import org.camunda.bpm.engine.impl.interceptor.CommandContext
 import org.camunda.bpm.engine.impl.jobexecutor.JobHandler
@@ -27,47 +29,7 @@ class RefreshDmnDiagramEvaluationModelCacheJobHandler(
   override fun execute(configuration: RefreshDmnDiagramEvaluationModelCacheConfiguration, execution: ExecutionEntity?, commandContext: CommandContext, tenantId: String?) {
     val repositoryService = commandContext.processEngineConfiguration.repositoryService
 
-    data class ModelData(
-      val tableKeysToDefinitionIds: Map<String, String>,
-      val diagram: DmnDiagram,
-      val resultDefinitionId: String,
-      val deploymentId: String
-    )
-
-    val modelData = when (configuration.modelType) {
-      ModelType.GRAPH -> {
-        val def = repositoryService.createDecisionRequirementsDefinitionQuery()
-          .decisionRequirementsDefinitionKey(configuration.key)
-          .singleResult()
-
-        val tableKeysToDefinitionIds = repositoryService.createDecisionDefinitionQuery()
-          .decisionRequirementsDefinitionId(def.id)
-          .list().map { it.key to it.id }.toMap()
-
-        val diagram = diagramConverter.fromXml(Dmn.convertToString(repositoryService.getDmnModelInstance(tableKeysToDefinitionIds.values.first())))
-
-        ModelData(
-          tableKeysToDefinitionIds = tableKeysToDefinitionIds,
-          diagram = diagram,
-          resultDefinitionId = tableKeysToDefinitionIds[diagram.resultTable.decisionDefinitionKey]!!,
-          deploymentId = def.deploymentId
-        )
-      }
-      ModelType.TABLE -> {
-        val def = repositoryService.createDecisionDefinitionQuery()
-          .decisionDefinitionKey(configuration.key)
-          .latestVersion()
-          .singleResult()
-        val tableKeysToDefinitionIds = mapOf(def.key to def.id)
-        val diagram = diagramConverter.fromXml(Dmn.convertToString(repositoryService.getDmnModelInstance(def.id)))
-        ModelData(
-          tableKeysToDefinitionIds = tableKeysToDefinitionIds,
-          diagram = diagram,
-          resultDefinitionId = tableKeysToDefinitionIds[diagram.resultTable.decisionDefinitionKey]!!,
-          deploymentId = def.deploymentId
-        )
-      }
-    }
+    val modelData = configuration.modelType.retrieveModelData(repositoryService, diagramConverter, configuration.key)
 
     evaluationModelRepository.save(DmnDiagramEvaluationModel(
       diagramId = modelData.diagram.id,
@@ -118,6 +80,55 @@ data class RefreshDmnDiagramEvaluationModelCacheConfiguration(
   override fun toCanonicalString() = "$key#$modelType"
 
   enum class ModelType {
-    GRAPH, TABLE
+    GRAPH {
+      override fun retrieveModelData(repositoryService: RepositoryService, diagramConverter: DmnDiagramConverter, key: String): ModelData {
+        val def = repositoryService.createDecisionRequirementsDefinitionQuery()
+          .decisionRequirementsDefinitionKey(key)
+          .singleResult()
+
+        val tableKeysToDefinitionIds = repositoryService.createDecisionDefinitionQuery()
+          .decisionRequirementsDefinitionId(def.id)
+          .list().map { it.key to it.id }.toMap()
+
+        val diagram = diagramConverter.fromXml(Dmn.convertToString(repositoryService.getDmnModelInstance(tableKeysToDefinitionIds.values.first())))
+
+        return ModelData(
+          tableKeysToDefinitionIds = tableKeysToDefinitionIds,
+          diagram = diagram,
+          resultDefinitionId = tableKeysToDefinitionIds[diagram.resultTable.decisionDefinitionKey]!!,
+          deploymentId = def.deploymentId
+        )
+      }
+
+    },
+    TABLE {
+      override fun retrieveModelData(repositoryService: RepositoryService, diagramConverter: DmnDiagramConverter, key: String): ModelData {
+        val def = repositoryService.createDecisionDefinitionQuery()
+          .decisionDefinitionKey(key)
+          .latestVersion()
+          .singleResult()
+        val tableKeysToDefinitionIds = mapOf(def.key to def.id)
+        val diagram = diagramConverter.fromXml(Dmn.convertToString(repositoryService.getDmnModelInstance(def.id)))
+        return ModelData(
+          tableKeysToDefinitionIds = tableKeysToDefinitionIds,
+          diagram = diagram,
+          resultDefinitionId = tableKeysToDefinitionIds[diagram.resultTable.decisionDefinitionKey]!!,
+          deploymentId = def.deploymentId
+        )
+      }
+    },
+    ;
+
+    internal abstract fun retrieveModelData(
+      repositoryService: RepositoryService,
+      diagramConverter: DmnDiagramConverter,
+      key: String): ModelData
   }
+
+  internal data class ModelData(
+    val tableKeysToDefinitionIds: Map<String, String>,
+    val diagram: DmnDiagram,
+    val resultDefinitionId: String,
+    val deploymentId: String
+  )
 }

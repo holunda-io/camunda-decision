@@ -4,7 +4,7 @@ import io.holunda.decision.model.api.CamundaDecisionEvaluationService
 import io.holunda.decision.model.api.DmnDiagramConverter
 import io.holunda.decision.model.jackson.converter.JacksonDiagramConverter
 import io.holunda.decision.runtime.cache.DmnDiagramEvaluationModelInMemoryRepository
-import io.holunda.decision.runtime.cache.DmnDiagramEvaluationModelRepository
+import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModelRepository
 import io.holunda.decision.runtime.deployment.CamundaDecisionRepositoryServiceBean
 import io.holunda.decision.runtime.query.CamundaDecisionQueryServiceBean
 import org.apache.commons.lang3.builder.Builder

@@ -2,6 +2,7 @@ package io.holunda.decision.runtime.cache
 
 import io.holunda.decision.model.api.Id
 import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModel
+import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModelRepository
 import java.util.*
 import kotlin.collections.HashMap
 
