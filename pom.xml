@@ -2,13 +2,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.camunda</groupId>
-    <artifactId>camunda-release-parent</artifactId>
-    <version>3.7</version>
-    <relativePath/>
-  </parent>
-
   <groupId>io.holunda.decision.project</groupId>
   <artifactId>camunda-decision-root</artifactId>
   <version>0.0.2-SNAPSHOT</version>
