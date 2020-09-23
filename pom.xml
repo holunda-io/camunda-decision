@@ -306,7 +306,7 @@
         <plugin>
           <groupId>org.jetbrains.dokka</groupId>
           <artifactId>dokka-maven-plugin</artifactId>
-          <version>0.10.1</version>
+          <version>1.4.10</version>
           <executions>
             <execution>
               <phase>package</phase>
@@ -318,10 +318,12 @@
           </executions>
           <configuration>
             <jdkVersion>8</jdkVersion>
+            <!--
             <includes>
               <include>packages.md</include>
               <include>extra.md</include>
             </includes>
+            -->
           </configuration>
         </plugin>
         <plugin>
@@ -585,12 +587,20 @@
       <build>
         <plugins>
           <plugin>
+            <groupId>org.jetbrains.dokka</groupId>
+            <artifactId>dokka-maven-plugin</artifactId>
+          </plugin>
+          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
           </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-source-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
           </plugin>
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
