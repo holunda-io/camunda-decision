@@ -15,6 +15,7 @@ import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.in
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.booleanOutput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
 import io.holunda.decision.model.api.Name
+import io.holunda.decision.model.api.evaluation.CamundaDecisionEvaluationRequest
 import io.holunda.decision.model.ascii.DmnWriter
 import io.holunda.decision.model.jackson.converter.JacksonDiagramConverter
 import io.holunda.decision.runtime.cache.DmnDiagramEvaluationModelInMemoryRepository
@@ -134,11 +135,35 @@ class CamundaDecisionRuntimeTest {
 
     val model = deploy.deployedDiagrams.first()
 
+
+
     val result = camunda.decisionService.evaluateDecisionTableById(model.decisionDefinitionId, Variables
       .putValue(DmnDiagrams.inD11.key, 18)
       .putValue(DmnDiagrams.inD22.key, 11))
 
     val o22: String = result.getSingleEntry()
+
+    assertThat(o22).isEqualTo("A")
+
+    val diagrams = camundaDecisionService.findAllModels()
+    assertThat(diagrams).hasSize(1)
+    logger.info { diagrams }
+  }
+
+  @Test
+  fun `deploy and load diagram via custom api`() {
+    assertThat(camundaDecisionService.findAllModels()).isEmpty()
+    logger.info { "\n${DmnWriter.render(DmnDiagrams.diagram)}" }
+
+    val model = camundaDecisionService.deploy(DmnDiagrams.diagram)
+      .deployedDiagrams
+      .first()
+
+    val result = camundaDecisionService.evaluateDiagram(CamundaDecisionEvaluationRequest.Companion.request(DmnDiagrams.diagram.id, Variables
+      .putValue(DmnDiagrams.inD11.key, 18)
+      .putValue(DmnDiagrams.inD22.key, 11)))
+
+    val o22: String = result.result.first().getValue("outD21", String::class.java)
 
     assertThat(o22).isEqualTo("A")
 

@@ -3,6 +3,7 @@ package io.holunda.decision.runtime.deployment
 import io.holunda.decision.model.api.*
 import io.holunda.decision.model.api.element.DmnDiagram
 import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModel
+import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModelRepository
 import org.camunda.bpm.engine.RepositoryService
 import org.camunda.bpm.engine.repository.DecisionRequirementsDefinition
 import org.camunda.bpm.engine.repository.Deployment
@@ -14,6 +15,7 @@ import java.util.*
  */
 class CamundaDecisionRepositoryServiceBean(
   private val repositoryService: RepositoryService,
+  private val dmnDiagramEvaluationModelRepository: DmnDiagramEvaluationModelRepository,
   private val diagramConverter: DmnDiagramConverter
 ) : CamundaDecisionRepositoryService {
 
@@ -66,9 +68,7 @@ class CamundaDecisionRepositoryServiceBean(
     }
   }
 
-  override fun findModel(diagramId: Id): Optional<DmnDiagramEvaluationModel> {
-    TODO("Not yet implemented")
-  }
+  override fun findModel(diagramId: DiagramId): Optional<DmnDiagramEvaluationModel> = dmnDiagramEvaluationModelRepository.findById(diagramId)
 
   private fun loadDeployedDiagram(diagram: DmnDiagram, deployment: Deployment): DmnDiagramEvaluationModel {
     // finds all tables included in one diagram xml
@@ -88,6 +88,8 @@ class CamundaDecisionRepositoryServiceBean(
       decisionDefinitionId = resultDecisionDefinion.id,
       inputs = diagram.requiredInputs,
       outputs = diagram.resultTable.header.outputs.toSet()
-    )
+    ).apply {
+      dmnDiagramEvaluationModelRepository.save(this)
+    }
   }
 }

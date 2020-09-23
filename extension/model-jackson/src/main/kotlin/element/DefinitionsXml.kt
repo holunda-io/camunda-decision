@@ -2,6 +2,8 @@ package io.holunda.decision.model.jackson.element
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement
+import io.holunda.decision.model.api.DiagramId
+import io.holunda.decision.model.api.Name
 import io.holunda.decision.model.jackson.CamundaDecisionJackson.Namespaces
 
 @JacksonXmlRootElement(
@@ -20,13 +22,13 @@ data class DefinitionsXml(
    * Id of the diagram.
    */
   @JacksonXmlProperty(isAttribute = true)
-  val id: String,
+  val id: DiagramId,
 
   /**
    * Human readable name.
    */
   @JacksonXmlProperty(isAttribute = true)
-  val name: String,
+  val name: Name,
 
   /**
    * The tool used to create the diagram.

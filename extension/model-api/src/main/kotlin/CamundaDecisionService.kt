@@ -1,6 +1,8 @@
 package io.holunda.decision.model.api
 
 import io.holunda.decision.model.api.element.DmnDiagram
+import io.holunda.decision.model.api.evaluation.CamundaDecisionEvaluationRequest
+import io.holunda.decision.model.api.evaluation.CamundaDecisionEvaluationResult
 import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModel
 import java.util.*
 
@@ -20,9 +22,9 @@ interface CamundaDecisionRepositoryService {
    */
   fun deploy(diagrams: List<DmnDiagram>): DmnDiagramDeployment
 
-  fun loadModel(diagramId: Id) : DmnDiagramEvaluationModel = findModel(diagramId).orElseThrow()
+  fun loadModel(diagramId: DiagramId) : DmnDiagramEvaluationModel = findModel(diagramId).orElseThrow()
 
-  fun findModel(diagramId: Id) : Optional<DmnDiagramEvaluationModel>
+  fun findModel(diagramId: DiagramId) : Optional<DmnDiagramEvaluationModel>
 
   fun findAllModels() : List<DmnDiagramEvaluationModel>
 
@@ -30,11 +32,12 @@ interface CamundaDecisionRepositoryService {
 
 interface CamundaDecisionEvaluationService {
 
+  fun evaluateDiagram(request: CamundaDecisionEvaluationRequest) : CamundaDecisionEvaluationResult
 }
 
 interface CamundaDecisionQueryService {
 
-  fun loadDiagram(id: Id) : DmnDiagram
+  fun loadDiagram(decisionDefinitionId: DecisionDefinitionId) : DmnDiagram
 
 }
 

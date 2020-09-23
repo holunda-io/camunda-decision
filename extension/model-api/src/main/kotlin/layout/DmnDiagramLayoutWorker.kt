@@ -65,13 +65,11 @@ class DmnDiagramLayoutWorker(
       )
     }
 
-
     return DmnDiagramLayout(
       decisionTableLayouts = tableLayouts,
       informationRequirementLayouts = informationRequirementLayouts
     )
   }
-
 
   fun layout_Old(): Map<DecisionDefinitionKey, Box> {
     val boxes = decisionDefinitionKeys
@@ -131,23 +129,6 @@ class DmnDiagramLayoutWorker(
     fun isCorner(p: Point) = points.corners.contains(p)
     fun isEdge(p: Point) = points.edges.contains(p)
   }
-
-//  <dmndi:DMNDI>
-//  <dmndi:DMNDiagram>
-//  <dmndi:DMNShape dmnElementRef="d1">
-//  <dc:Bounds height="80" width="180" x="160" y="100" />
-//  </dmndi:DMNShape>
-//  <dmndi:DMNShape id="DMNShape_1lypf5z" dmnElementRef="d2">
-//  <dc:Bounds height="80" width="180" x="400" y="100" />
-//  </dmndi:DMNShape>
-//  <dmndi:DMNEdge id="DMNEdge_06vmsj8" dmnElementRef="InformationRequirement_033c2p0">
-//  <di:waypoint x="340" y="140" />
-//  <di:waypoint x="380" y="140" />
-//  <di:waypoint x="400" y="140" />
-//  </dmndi:DMNEdge>
-//  </dmndi:DMNDiagram>
-//  </dmndi:DMNDI>
-
 
   data class Edge(
     val source: DecisionDefinitionKey,

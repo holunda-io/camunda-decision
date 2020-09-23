@@ -34,7 +34,7 @@ ${dmnXmlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(model)}
 
 
 
-  internal val dmnXmlMapper = XmlMapper(JacksonXmlModule().apply {
+  private val dmnXmlMapper = XmlMapper(JacksonXmlModule().apply {
     setDefaultUseWrapper(false)
   }).registerKotlinModule()
     .configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true)

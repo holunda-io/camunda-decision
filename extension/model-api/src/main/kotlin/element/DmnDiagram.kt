@@ -1,11 +1,7 @@
 package io.holunda.decision.model.api.element
 
-import io.holunda.decision.model.api.CamundaDecisionModelApi
-import io.holunda.decision.model.api.DecisionDefinitionKey
-import io.holunda.decision.model.api.Id
-import io.holunda.decision.model.api.Name
+import io.holunda.decision.model.api.*
 import io.holunda.decision.model.api.definition.InputDefinition
-import java.lang.IllegalStateException
 
 
 /**
@@ -13,14 +9,12 @@ import java.lang.IllegalStateException
  * Contains at least one DmnDecisionTable. If it contains more than one table, these must form a graph.
  */
 data class DmnDiagram(
-  val id: Id = idGenerator(),
+  val id: DiagramId = idGenerator(),
   val name: Name,
   val decisionTables: List<DmnDecisionTable>
 ) {
   companion object {
     val idGenerator = { CamundaDecisionModelApi.generateId(DmnDiagram::class) }
-
-
   }
 
   constructor(decisionTable: DmnDecisionTable) : this(

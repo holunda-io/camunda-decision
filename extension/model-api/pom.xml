@@ -22,6 +22,10 @@
       <artifactId>camunda-bpm-data</artifactId>
       <version>${camunda-bpm-data.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.camunda.commons</groupId>
+      <artifactId>camunda-commons-typed-values</artifactId>
+    </dependency>
   </dependencies>
 
 </project>

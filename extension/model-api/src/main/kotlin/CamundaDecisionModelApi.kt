@@ -6,6 +6,7 @@ import kotlin.reflect.KClass
 typealias HitPolicyName = String
 typealias AggregatorName = String
 typealias Id = String
+typealias DiagramId = Id
 typealias Name = String
 typealias DecisionDefinitionKey = String
 typealias DecisionDefinitionId = String

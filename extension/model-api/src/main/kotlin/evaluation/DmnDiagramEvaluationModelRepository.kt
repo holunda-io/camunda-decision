@@ -1,5 +1,6 @@
 package io.holunda.decision.model.api.evaluation
 
+import io.holunda.decision.model.api.DiagramId
 import io.holunda.decision.model.api.Id
 import java.util.*
 
@@ -19,13 +20,13 @@ interface DmnDiagramEvaluationModelRepository {
    * @return model for given id
    * @throws NoSuchElementException
    */
-  fun loadForId(diagramId: Id) : DmnDiagramEvaluationModel = findById(diagramId).orElseThrow()
+  fun loadForId(diagramId: DiagramId) : DmnDiagramEvaluationModel = findById(diagramId).orElseThrow()
 
   /**
    * @param diagramId the id of the diagram to find
    * @return optional model
    */
-  fun findById(diagramId: Id) : Optional<DmnDiagramEvaluationModel>
+  fun findById(diagramId: DiagramId) : Optional<DmnDiagramEvaluationModel>
 
   /**
    * @return all models
