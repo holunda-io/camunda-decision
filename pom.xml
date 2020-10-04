@@ -16,7 +16,8 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>11.0</java.version>
     <version.java>${java.version}</version.java>
-    <kotlin.version>1.3.72</kotlin.version>
+    <kotlin.version>1.4.10</kotlin.version>
+    <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
     <camunda.version>7.13.0</camunda.version>
     <camunda-ee.version>7.13.5-ee</camunda-ee.version>
@@ -76,7 +77,6 @@
         <version>${project.version}</version>
       </dependency>
 
-
       <dependency>
         <groupId>io.holunda.decision.lib</groupId>
         <artifactId>camunda-decision-lib-test</artifactId>
@@ -113,6 +113,15 @@
         <type>pom</type>
       </dependency>
 
+      <!-- KOTLIN (attention: kotlin bom has to be defined _before_ spring bom!) -->
+      <dependency>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-bom</artifactId>
+        <version>${kotlin.version}</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+
       <!-- SPRING -->
       <dependency>
         <groupId>org.springframework.boot</groupId>
@@ -122,14 +131,6 @@
         <scope>import</scope>
       </dependency>
 
-      <!-- KOTLIN -->
-      <dependency>
-        <groupId>org.jetbrains.kotlin</groupId>
-        <artifactId>kotlin-bom</artifactId>
-        <version>${kotlin.version}</version>
-        <scope>import</scope>
-        <type>pom</type>
-      </dependency>
       <dependency>
         <groupId>io.github.microutils</groupId>
         <artifactId>kotlin-logging</artifactId>
