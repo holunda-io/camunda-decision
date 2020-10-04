@@ -70,8 +70,7 @@
 
     <dependency>
       <groupId>io.github.microutils</groupId>
-      <artifactId>kotlin-logging</artifactId>
-      <version>1.8.3</version>
+      <artifactId>kotlin-logging-jvm</artifactId>
     </dependency>
   </dependencies>
 
