@@ -1,9 +1,9 @@
 package io.holunda.decision.example.kotlin.rest
 
-import io.holunda.decision.example.kotlin.inActive
-import io.holunda.decision.example.kotlin.inCustomerAge
-import io.holunda.decision.example.kotlin.outReasons
-import io.holunda.decision.example.kotlin.outResult
+import io.holunda.decision.example.camundacon2020.data.inActive
+import io.holunda.decision.example.camundacon2020.data.inCustomerAge
+import io.holunda.decision.example.camundacon2020.data.outReasons
+import io.holunda.decision.example.camundacon2020.data.outResult
 import io.holunda.decision.model.CamundaDecisionGenerator
 import io.holunda.decision.model.CamundaDecisionGenerator.rule
 import io.holunda.decision.model.CamundaDecisionGenerator.table
@@ -30,10 +30,10 @@ class DmnDeploymentController(
 ) {
 
   @GetMapping
-  fun getEvaluationModels() : ResponseEntity<List<DmnDiagramEvaluationModel>> = ResponseEntity.ok(repositoryService.findAllModels())
+  fun getEvaluationModels(): ResponseEntity<List<DmnDiagramEvaluationModel>> = ResponseEntity.ok(repositoryService.findAllModels())
 
   @PostMapping
-  fun deploy() : ResponseEntity<DmnDiagramDeployment> {
+  fun deploy(): ResponseEntity<DmnDiagramDeployment> {
     val diagram = CamundaDecisionGenerator.diagram("My Diagram")
       .addDecisionTable(
         table("decision_1")
@@ -76,7 +76,7 @@ class DmnDeploymentController(
   }
 
   @PostMapping("/deploy-single")
-  fun deploySingle() : ResponseEntity<DmnDiagramDeployment> {
+  fun deploySingle(): ResponseEntity<DmnDiagramDeployment> {
     val diagram = CamundaDecisionGenerator.diagram("My Single Diagram")
       .id("my-single-diagram")
       .addDecisionTable(

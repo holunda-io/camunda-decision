@@ -9,11 +9,19 @@
     <version>0.0.2-SNAPSHOT</version>
   </parent>
 
-  <groupId>io.holunda.decision.example</groupId>
-  <artifactId>camunda-decision-example-kotlin-spring-boot</artifactId>
+  <artifactId>camunda-decision-examples-camundacon2020-root</artifactId>
+  <packaging>pom</packaging>
 
+  <modules>
+    <module>application-process-engine</module>
+    <module>application-dmn-repository</module>
+    <module>lib/dmn-data</module>
+  </modules>
+
+  <!-- use enterprise version for this example -->
   <dependencyManagement>
     <dependencies>
+      <!-- CAMUNDA -->
       <dependency>
         <groupId>org.camunda.bpm.dmn</groupId>
         <artifactId>camunda-engine-dmn-bom</artifactId>
@@ -28,66 +36,18 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
+      <!-- EXAMPLE -->
+      <dependency>
+        <groupId>io.holunda.decision.example</groupId>
+        <artifactId>camundacon2020-lib-dmn-data</artifactId>
+        <version>${project.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
-  <dependencies>
-    <!-- PROJECT -->
-    <dependency>
-      <groupId>io.holunda.decision</groupId>
-      <artifactId>camunda-decision-runtime-spring</artifactId>
-    </dependency>
-
-    <!-- CAMUNDA -->
-    <dependency>
-      <groupId>org.camunda.bpm.springboot</groupId>
-      <artifactId>camunda-bpm-spring-boot-starter-webapp-ee</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.camunda.bpm.springboot</groupId>
-      <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-jdbc</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-ui</artifactId>
-      <version>1.4.6</version>
-    </dependency>
-
-    <dependency>
-      <groupId>io.github.microutils</groupId>
-      <artifactId>kotlin-logging</artifactId>
-      <version>1.8.3</version>
-    </dependency>
-  </dependencies>
-
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>${spring-boot.version}</version>
-      </plugin>
-      <plugin>
-        <!-- kotlin compiler -->
-        <groupId>org.jetbrains.kotlin</groupId>
-        <artifactId>kotlin-maven-plugin</artifactId>
-      </plugin>
-      <!-- JGiven Reports -->
       <plugin>
         <groupId>com.tngtech.jgiven</groupId>
         <artifactId>jgiven-maven-plugin</artifactId>
@@ -119,6 +79,7 @@
     </plugins>
   </build>
 
+  <!-- use enterprise version for this example -->
   <repositories>
     <repository>
       <id>camunda-bpm-ee</id>

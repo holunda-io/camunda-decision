@@ -5,37 +5,24 @@
 
   <parent>
     <groupId>io.holunda.decision.project</groupId>
-    <artifactId>camunda-decision-examples-root</artifactId>
+    <artifactId>camunda-decision-examples-camundacon2020-root</artifactId>
     <version>0.0.2-SNAPSHOT</version>
   </parent>
 
   <groupId>io.holunda.decision.example</groupId>
-  <artifactId>camunda-decision-example-kotlin-spring-boot</artifactId>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.camunda.bpm.dmn</groupId>
-        <artifactId>camunda-engine-dmn-bom</artifactId>
-        <version>${camunda-ee.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.camunda.bpm</groupId>
-        <artifactId>camunda-bom</artifactId>
-        <version>${camunda-ee.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
+  <artifactId>camundacon2020-process-application</artifactId>
 
   <dependencies>
     <!-- PROJECT -->
     <dependency>
       <groupId>io.holunda.decision</groupId>
       <artifactId>camunda-decision-runtime-spring</artifactId>
+    </dependency>
+
+    <!-- EXAMPLE -->
+    <dependency>
+      <groupId>io.holunda.decision.example</groupId>
+      <artifactId>camundacon2020-lib-dmn-data</artifactId>
     </dependency>
 
     <!-- CAMUNDA -->
@@ -58,8 +45,8 @@
     </dependency>
 
     <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
     </dependency>
 
     <dependency>
@@ -118,12 +105,4 @@
       </plugin>
     </plugins>
   </build>
-
-  <repositories>
-    <repository>
-      <id>camunda-bpm-ee</id>
-      <name>camunda-bpm-ee</name>
-      <url>https://app.camunda.com/nexus/content/repositories/camunda-bpm-ee</url>
-    </repository>
-  </repositories>
 </project>
