@@ -30,7 +30,7 @@
 
     <jgiven.version>0.18.2</jgiven.version>
 
-    <camunda-bpm-data.version>0.0.5</camunda-bpm-data.version>
+    <camunda-bpm-data.version>1.0.1</camunda-bpm-data.version>
 
     <pattern.class.itest>**/*ITest.*</pattern.class.itest>
     <pattern.package.itest>**/itest/**/*.*</pattern.package.itest>
@@ -611,9 +611,10 @@
       -->
       <id>examples</id>
       <activation>
-        <property>
+        <activeByDefault>true</activeByDefault>
+        <!--property>
           <name>!skipExamples</name>
-        </property>
+        </property-->
       </activation>
       <modules>
         <module>examples</module>

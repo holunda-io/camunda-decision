@@ -63,7 +63,6 @@ class PointTest {
   val p34 = Point(3,4)
   val p68 = Point(6,8)
 
-
   @Test
   fun `distance between two points`() {
     assertThat(distance(p00,p00)).isEqualTo(0.0)

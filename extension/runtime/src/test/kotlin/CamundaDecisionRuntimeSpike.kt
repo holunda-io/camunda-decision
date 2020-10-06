@@ -25,16 +25,13 @@ class CamundaDecisionRuntimeSpike {
     assertThat(camunda.repositoryService.createDecisionDefinitionQuery().decisionDefinitionKey("decision2").singleResult()).isNotNull
 
 
-    var result = decisionService.evaluateDecisionTableByKey("decision1", Variables.putValue("foo", true)).singleResult
+    val result = decisionService.evaluateDecisionTableByKey("decision1", Variables.putValue("foo", true)).singleResult
 
     println(result)
 
-    var r = decisionService.evaluateDecisionTableByKey("decision2",
+    val r = decisionService.evaluateDecisionTableByKey("decision2",
       Variables.putValue("foo", true).putValue("bar", true)).singleResult
 
     println("" + r.getSingleEntry())
-
-
-
   }
 }
