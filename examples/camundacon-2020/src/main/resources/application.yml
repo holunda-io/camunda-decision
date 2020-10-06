@@ -1,16 +1,18 @@
-example:
-  name: "processengine"
+application:
+  appName: "camundacon2020"
+  org: "holunda"
+  repository: "/Users/jangalinski/IdeaProjects/holunda/camunda-decision/examples/camundacon-2020/repository" # TODO: no absolute path
 
 server:
   port: 10110
 
 spring:
   application:
-    name: camundacon-${example.name}
+    name: ${application.appName}
   datasource:
-    url: jdbc:postgresql://localhost/${example.name}
-    username: ${example.name}
-    password: ${example.name}
+    url: jdbc:postgresql://localhost/${application.appName}
+    username: ${application.org}
+    password: ${application.org}
   jpa:
     generate-ddl: false
     hibernate.ddl-auto: none

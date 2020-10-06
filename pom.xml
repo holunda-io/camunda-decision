@@ -23,6 +23,7 @@
     <camunda-ee.version>7.13.5-ee</camunda-ee.version>
 
     <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
+    <spring-doc.version>1.4.6</spring-doc.version>
     <groovy.version>2.4.5</groovy.version>
     <spin.version>1.7.5</spin.version>
 
@@ -43,9 +44,8 @@
   </properties>
 
   <modules>
-    <module>lib/h2</module>
-    <module>lib/test</module>
     <module>extension</module>
+    <module>lib</module>
   </modules>
 
   <dependencyManagement>

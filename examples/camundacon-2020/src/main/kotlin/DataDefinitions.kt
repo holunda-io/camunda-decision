@@ -1,4 +1,4 @@
-package io.holunda.decision.example.camundacon2020.data
+package io.holunda.decision.example.camundacon2020
 
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.booleanInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.integerInput

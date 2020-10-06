@@ -5,9 +5,8 @@
 
   <parent>
     <groupId>io.holunda.decision.project</groupId>
-    <artifactId>camunda-decision-root</artifactId>
+    <artifactId>camunda-decision-lib-root</artifactId>
     <version>0.0.2-SNAPSHOT</version>
-    <relativePath>../../pom.xml</relativePath>
   </parent>
 
   <groupId>io.holunda.decision.lib</groupId>
@@ -15,13 +14,6 @@
 
   <properties>
     <junitparams.version>1.1.1</junitparams.version>
-    <awaitility.version>3.0.0</awaitility.version>
-
-    <jacoco.skip>true</jacoco.skip>
-    <maven.javadoc.skip>true</maven.javadoc.skip>
-    <maven.sources.skip>true</maven.sources.skip>
-    <maven.install.skip>true</maven.install.skip>
-    <gpg.skip>true</gpg.skip>
   </properties>
 
   <dependencies>
@@ -59,12 +51,6 @@
       <!-- unfortunately, we have to use junit 4 here, camunda testing is not yet junit5 ready -->
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <scope>compile</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
       <scope>compile</scope>
     </dependency>
 
@@ -111,7 +97,6 @@
     <dependency>
       <groupId>org.awaitility</groupId>
       <artifactId>awaitility</artifactId>
-      <version>${awaitility.version}</version>
     </dependency>
   </dependencies>
 </project>

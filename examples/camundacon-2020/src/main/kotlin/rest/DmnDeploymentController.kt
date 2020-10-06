@@ -1,9 +1,9 @@
-package io.holunda.decision.example.kotlin.rest
+package io.holunda.decision.example.camundacon2020.rest
 
-import io.holunda.decision.example.camundacon2020.data.inActive
-import io.holunda.decision.example.camundacon2020.data.inCustomerAge
-import io.holunda.decision.example.camundacon2020.data.outReasons
-import io.holunda.decision.example.camundacon2020.data.outResult
+import io.holunda.decision.example.camundacon2020.inActive
+import io.holunda.decision.example.camundacon2020.inCustomerAge
+import io.holunda.decision.example.camundacon2020.outReasons
+import io.holunda.decision.example.camundacon2020.outResult
 import io.holunda.decision.model.CamundaDecisionGenerator
 import io.holunda.decision.model.CamundaDecisionGenerator.rule
 import io.holunda.decision.model.CamundaDecisionGenerator.table

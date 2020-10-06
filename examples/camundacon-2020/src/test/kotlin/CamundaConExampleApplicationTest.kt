@@ -1,0 +1,3 @@
+package io.holunda.decision.example.camundacon2020
+
+class CamundaConExampleApplicationTest

@@ -5,13 +5,7 @@ services:
     container_name: "postgres"
     ports:
       - "5432:5432"
-    volumes:
-      - ./bin/pg-init-scripts:/docker-entrypoint-initdb.d
-      - ./var:/var/lib/postgresql
     environment:
       - POSTGRES_USER=holunda
       - POSTGRES_PASSWORD=holunda
-      - |
-        POSTGRES_MULTIPLE_DATABASES=
-        processengine,
-        dmnrepository
+      - POSTGRES_DB=camundacon2020
