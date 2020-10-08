@@ -18,6 +18,7 @@
 * show cockpit: no auto deployment, app is fresh and empty
 
 * deploy the single `legal_age.dmn`
+* evaluate 
 
 ## Data
 

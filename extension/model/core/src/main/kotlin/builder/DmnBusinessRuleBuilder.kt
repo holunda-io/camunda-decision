@@ -30,7 +30,7 @@ class DmnBusinessRuleBuilder : Builder<DmnRuleList> {
     this.expression = JBoolExpressionSupplier.and(*expressions)
   }
 
-  fun <T : Any> result(vararg outputs: OutputEntry<T>) = apply {
+  fun  result(vararg outputs: OutputEntry<*>) = apply {
     this.result.addAll(outputs.toList())
   }
 

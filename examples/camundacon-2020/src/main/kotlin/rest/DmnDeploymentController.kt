@@ -22,7 +22,8 @@ import org.springframework.web.bind.annotation.*
 class DmnDeploymentController(
   private val camundaDecisionService: CamundaDecisionService,
   private val loader: DmnRepositoryLoader,
-  private val repo: DmnDiagramEvaluationModelInMemoryRepository
+  private val repo: DmnDiagramEvaluationModelInMemoryRepository,
+  private val generator: CombinedLegalAndProductGenerator
 ) {
 
   /**
@@ -47,80 +48,8 @@ class DmnDeploymentController(
   @PostMapping(path = ["/live-demo"])
   fun combinedProductAndLegal(): ResponseEntity<DmnDiagramDeployment> = ResponseEntity.ok(
     camundaDecisionService.deploy(
-      CombinedLegalAndProductGenerator.generate()
+      generator.generate()
     )
   )
 
-
-  //
-
-
-  //
-
-
-  // TODO: remove, testing only
-  @PostMapping
-  fun deploy(): ResponseEntity<DmnDiagramDeployment> {
-    val diagram = CamundaDecisionGenerator.diagram("My Diagram")
-      .addDecisionTable(
-        table("decision_1")
-          .versionTag("1")
-          .addRule(rule()
-            .condition(
-              inCustomerAge.feelGreaterThanOrEqual(18)
-            )
-            .result(
-              outReasons.resultValue("not adult")
-            )
-          )
-      )
-      .addDecisionTable(
-        table("decision_2")
-          .versionTag("2")
-          .requiredDecision("decision_1")
-          .addRule(rule()
-            .condition(
-              outReasons.toInputDefinition().feelEqual("adult"),
-              inActive.feelTrue()
-            )
-            .result(
-              outResult.resultValue("ok")
-            )
-          )
-          .addRule(rule()
-            .condition(
-              outReasons.toInputDefinition().feelEqual("not adult"),
-              inActive.feelFalse()
-            )
-            .result(
-              outResult.resultValue("not ok")
-            )
-          )
-      )
-      .build()
-
-    return ResponseEntity.ok(camundaDecisionService.deploy(diagram))
-  }
-
-  // TODO: remove, testing only
-  @PostMapping("/deploy-single")
-  fun deploySingle(): ResponseEntity<DmnDiagramDeployment> {
-    val diagram = CamundaDecisionGenerator.diagram("My Single Diagram")
-      .id("my-single-diagram")
-      .addDecisionTable(
-        table("single_1")
-          .versionTag("99")
-          .addRule(rule()
-            .condition(
-              inCustomerAge.feelGreaterThanOrEqual(18)
-            )
-            .result(
-              outReasons.resultValue("not adult")
-            )
-          )
-      )
-      .build()
-
-    return ResponseEntity.ok(camundaDecisionService.deploy(diagram))
-  }
 }

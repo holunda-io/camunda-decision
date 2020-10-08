@@ -31,11 +31,9 @@ class CamundaConExampleApplication {
 
 
   @Bean
-  fun onStart(properties: CamundaConExampleProperties, loader : DmnRepositoryLoader): CommandLineRunner = CommandLineRunner {
+  fun onStart(properties: CamundaConExampleProperties): CommandLineRunner = CommandLineRunner {
     logger.info { "loaded with: $properties" }
-
-
-    logger.info { "diagram: \n\n  ${CamundaDecisionModel.render(loader.loadDiagram("legal_age.dmn"))}" }
+    //logger.info { "diagram: \n\n  ${CamundaDecisionModel.render(loader.loadDiagram("legal_age.dmn"))}" }
   }
 
   @Bean

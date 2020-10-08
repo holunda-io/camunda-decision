@@ -27,9 +27,9 @@ GET http://localhost:10110/evaluation/isCustomerAdult/1
 
 ###
 
-POST http://localhost:10110/dmn/deploy
-Content-Type: application/x-www-form-urlencoded
-
-id=99&content=new-element
+# deploy the live demo example
+POST http://localhost:10110/dmn/live-demo
 
 ###
+
+GET http://localhost:10110/evaluation/isShipmentAllowed?customerId=2&productId=1002

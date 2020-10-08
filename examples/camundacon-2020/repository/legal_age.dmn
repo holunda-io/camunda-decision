@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="diagram_is_adult" name="Is Adult Diagram" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.2.0">
-  <decision id="dt_is_adult" name="Is adult?">
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="diagram_is_adult" name="Is Adult Diagram" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.2.0">
+  <decision id="dt_is_adult" name="Is adult?" camunda:versionTag="1">
     <decisionTable id="DecisionTable_0soxfih" hitPolicy="FIRST">
-      <input id="InputClause_1aje4yd" label="Customer Id">
+      <input id="InputClause_1aje4yd" label="Customer Id" biodi:width="150">
         <inputExpression id="LiteralExpression_0tdgms5" typeRef="string">
           <text>customerId</text>
         </inputExpression>
@@ -79,7 +79,7 @@
           <text></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0ig8iu2">
-          <text>&gt;=16</text>
+          <text>&gt;= 16</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0h96htk">
           <text>"female"</text>
@@ -99,7 +99,7 @@
           <text>"Alabama"</text>
         </inputEntry>
         <inputEntry id="UnaryTests_0vwq9x6">
-          <text>&gt;=19</text>
+          <text>&gt;= 19</text>
         </inputEntry>
         <inputEntry id="UnaryTests_19at7yf">
           <text></text>
@@ -146,6 +146,26 @@
         </inputEntry>
         <outputEntry id="LiteralExpression_0tbgn5r">
           <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_06h513x">
+        <inputEntry id="UnaryTests_1au5g2o">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1oehnw9">
+          <text>"USA"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_140wcl8">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00p0hsy">
+          <text>&lt; 18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1raj6hc">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1eay8ia">
+          <text>false</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1f7fd1c">
