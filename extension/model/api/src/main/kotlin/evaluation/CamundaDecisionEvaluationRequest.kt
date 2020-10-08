@@ -19,17 +19,14 @@ interface CamundaDecisionEvaluationRequest {
       diagramId = diagramId,
       variableContext = variables as VariableMapImpl
     )
-
   }
 
   val diagramId: DiagramId
 
   val variableContext: VariableContext
-
 }
 
 data class CamundaDecisionEvaluationRequestDto(
   override val diagramId: DiagramId,
   override val variableContext: VariableContext
 ) : CamundaDecisionEvaluationRequest
-
