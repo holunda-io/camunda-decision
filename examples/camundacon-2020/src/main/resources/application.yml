@@ -22,9 +22,14 @@ spring:
     show-sql: false
     open-in-view: true
 
-camunda.bpm:
-  admin-user:
-    id: admin
+camunda:
+  bpm:
+    admin-user:
+      id: admin
+      email: admin@localhost
+      first-name: Administratus
+      last-name: Admintratow
+      password: admin
 
 springdoc:
   swagger-ui:
