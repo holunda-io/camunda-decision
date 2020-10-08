@@ -2,11 +2,11 @@ package io.holunda.decision.runtime.spring
 
 import io.holunda.decision.model.api.CamundaDecisionRepositoryService
 import io.holunda.decision.model.api.CamundaDecisionService
+import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModelRepository
 import io.holunda.decision.model.jackson.converter.JacksonDiagramConverter
 import io.holunda.decision.runtime.CamundaDecisionProcessEnginePlugin
 import io.holunda.decision.runtime.CamundaDecisionRuntimeContext
 import io.holunda.decision.runtime.cache.DmnDiagramEvaluationModelInMemoryRepository
-import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModelRepository
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl
 import org.springframework.context.annotation.Bean
 
