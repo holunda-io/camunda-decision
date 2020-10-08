@@ -1,6 +1,0 @@
-POST http://localhost:10110/dmn/deploy
-Content-Type: application/x-www-form-urlencoded
-
-id=99&content=new-element
-
-###

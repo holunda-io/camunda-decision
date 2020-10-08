@@ -1,0 +1,23 @@
+# List all customers
+GET http://localhost:10110/customers
+
+###
+
+GET http://localhost:10110/customers/1
+
+###
+
+POST http://localhost:10110/dmn/diagrams/legal_age.dmn
+
+###
+
+GET http://localhost:10110/dmn
+
+###
+
+POST http://localhost:10110/dmn/deploy
+Content-Type: application/x-www-form-urlencoded
+
+id=99&content=new-element
+
+###
