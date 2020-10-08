@@ -1,10 +1,13 @@
 package io.holunda.decision.model.builder
 
-import io.holunda.decision.model.CamundaDecisionModel
+import builder.DecisionTableDiagramReference
+import builder.DecisionTableModelInstanceReference
+import builder.DecisionTableReference
 import io.holunda.decision.model.api.DecisionDefinitionKey
 import io.holunda.decision.model.api.Name
 import io.holunda.decision.model.api.VersionTag
 import io.holunda.decision.model.api.element.DmnDecisionTable
+import io.holunda.decision.model.api.element.DmnDiagram
 import org.camunda.bpm.model.dmn.DmnModelInstance
 
 /**
@@ -14,17 +17,36 @@ class DmnDecisionTableReferenceBuilder : AbstractDmnDecisionTableBuilder() {
 
   lateinit var decisionTableReference: DecisionTableReference
 
+  /**
+   * Set the [DecisionTableReference] via [DmnModelInstance].
+   */
   @JvmOverloads
   fun reference(dmnModelInstance: DmnModelInstance,
-                decisionDefinitionKey: DecisionDefinitionKey? = null) = reference(DecisionTableReference(dmnModelInstance, decisionDefinitionKey))
+                decisionDefinitionKey: DecisionDefinitionKey? = null): DmnDecisionTableReferenceBuilder = reference(
+    DecisionTableModelInstanceReference(dmnModelInstance, decisionDefinitionKey)
+  )
 
+  /**
+   * Set the [DecisionTableReference] via [DmnDiagram].
+   */
+  @JvmOverloads
+  fun reference(dmnDiagram: DmnDiagram,
+                decisionDefinitionKey: DecisionDefinitionKey? = null): DmnDecisionTableReferenceBuilder = reference(
+    DecisionTableDiagramReference(dmnDiagram, decisionDefinitionKey)
+  )
 
-  fun reference(decisionTableReference: DecisionTableReference) = apply {
+  /**
+   * Set the [DecisionTableReference].
+   */
+  fun reference(decisionTableReference: DecisionTableReference): DmnDecisionTableReferenceBuilder = apply {
     this.decisionTableReference = decisionTableReference
   }
 
+  /**
+   * Alter decisionDefinitionKey of specified [DecisionTableReference].
+   */
   fun decisionDefinitionKey(decisionDefinitionKey: DecisionDefinitionKey) = apply { this.decisionDefinitionKey = decisionDefinitionKey }
-
+  
   fun requiredDecision(requiredDecision: DecisionDefinitionKey) = apply { this.requiredDecision = requiredDecision }
 
   fun name(name: Name) = apply { this.decisionName = name }
@@ -41,25 +63,5 @@ class DmnDecisionTableReferenceBuilder : AbstractDmnDecisionTableBuilder() {
       decisionDefinitionKey = decisionDefinitionKey ?: table.decisionDefinitionKey,
       versionTag = versionTag ?: table.versionTag
     )
-  }
-
-  /**
-   * Referencing a table in a given modelInstance.
-   */
-  data class DecisionTableReference(
-    val dmnModelInstance: DmnModelInstance,
-    val decisionDefinitionKey: DecisionDefinitionKey? = null) {
-
-    internal val decisionTable : DmnDecisionTable by lazy {
-      val diagram = CamundaDecisionModel.readDiagram(dmnModelInstance)
-      require(decisionDefinitionKey != null || diagram.decisionTables.size == 1) { "more than one table in diagram: provide definitionKey"}
-
-
-      if (decisionDefinitionKey == null && diagram.decisionTables.size == 1) {
-        diagram.decisionTables.first()
-      } else {
-        diagram.findDecisionTable(decisionDefinitionKey!!) ?: throw IllegalArgumentException("no table found with key: $decisionDefinitionKey")
-      }
-    }
   }
 }

@@ -1,7 +1,7 @@
 application:
   appName: "camundacon2020"
   org: "holunda"
-  repository: "/Users/jangalinski/IdeaProjects/holunda/camunda-decision/examples/camundacon-2020/repository" # TODO: no absolute path
+  repository: "${CAMUNDACON_2020_HOME}/repository"
 
 server:
   port: 10110

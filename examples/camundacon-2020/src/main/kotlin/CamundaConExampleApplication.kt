@@ -41,4 +41,8 @@ data class CamundaConExampleProperties(
   val appName: String = "camundaCon2020",
   val org: String = "holunda",
   val repository: File
-)
+) {
+  init {
+    require(repository.exists() && repository.isDirectory) { "repository path does not exist: $repository" }
+  }
+}

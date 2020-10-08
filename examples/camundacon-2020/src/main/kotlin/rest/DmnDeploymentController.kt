@@ -1,5 +1,6 @@
 package io.holunda.decision.example.camundacon2020.rest
 
+import io.holunda.decision.example.camundacon2020.fn.DmnRepositoryLoader
 import io.holunda.decision.example.camundacon2020.inActive
 import io.holunda.decision.example.camundacon2020.inCustomerAge
 import io.holunda.decision.example.camundacon2020.outReasons
@@ -15,22 +16,25 @@ import io.holunda.decision.model.FeelConditions.resultValue
 import io.holunda.decision.model.api.CamundaDecisionService
 import io.holunda.decision.model.api.DmnDiagramDeployment
 import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModel
-import io.holunda.decision.runtime.CamundaDecisionProcessEnginePlugin
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/dmn")
 class DmnDeploymentController(
-  private val repositoryService: CamundaDecisionService,
-  private val pl: CamundaDecisionProcessEnginePlugin
+  private val camundaDecisionService: CamundaDecisionService,
+  private val loader : DmnRepositoryLoader
 ) {
 
+  @PostMapping(path = ["diagrams/{diagramFile}"])
+  fun deployFile(@PathVariable("diagramFile") diagramFile: String): ResponseEntity<DmnDiagramDeployment> {
+    val diagram = loader.loadDiagram(diagramFile)
+
+    return ResponseEntity.ok(camundaDecisionService.deploy(diagram))
+  }
+
   @GetMapping
-  fun getEvaluationModels(): ResponseEntity<List<DmnDiagramEvaluationModel>> = ResponseEntity.ok(repositoryService.findAllModels())
+  fun getEvaluationModels(): ResponseEntity<List<DmnDiagramEvaluationModel>> = ResponseEntity.ok(camundaDecisionService.findAllModels())
 
   @PostMapping
   fun deploy(): ResponseEntity<DmnDiagramDeployment> {
@@ -72,7 +76,7 @@ class DmnDeploymentController(
       )
       .build()
 
-    return ResponseEntity.ok(repositoryService.deploy(diagram))
+    return ResponseEntity.ok(camundaDecisionService.deploy(diagram))
   }
 
   @PostMapping("/deploy-single")
@@ -93,6 +97,6 @@ class DmnDeploymentController(
       )
       .build()
 
-    return ResponseEntity.ok(repositoryService.deploy(diagram))
+    return ResponseEntity.ok(camundaDecisionService.deploy(diagram))
   }
 }

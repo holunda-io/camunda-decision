@@ -7,7 +7,7 @@ import org.junit.Ignore
 import org.junit.Test
 
 @Ignore
-internal class DmnDecisionTableReferenceBuilderTest {
+internal class DmnDecisionTableModelInstanceReferenceBuilderTest {
 
   private val exampleSingleDmn = readModel("dmn/example_single_table.dmn")
 
