@@ -327,6 +327,10 @@
             </execution>
           </executions>
           <configuration>
+            <sourceDirectories>
+              <dir>${project.basedir}/src/main/kotlin</dir>
+              <dir>${project.basedir}/src/main/java</dir>
+            </sourceDirectories>
             <jdkVersion>11</jdkVersion>
             <!--
             <includes>
