@@ -1,18 +1,22 @@
 package io.holunda.decision.example.camundacon2020
 
-import java.io.File
+import java.nio.file.Paths
 
 object CamundaConExampleTestHelper {
 
   /**
    * Abs path to project folder derived from properties location.
    */
-  val projectRoot = File(CamundaConExampleTestHelper.javaClass.getResource("/application.yml").toURI()).absolutePath.substringBefore("camundacon-2020") + "camundacon-2020"
+  val projectRoot = Paths.get(
+    CamundaConExampleTestHelper::class.java.protectionDomain.codeSource.location.toURI()
+  ).resolve(
+    Paths.get("../..")
+  ).toFile()
 
-  val properties = CamundaConExampleProperties(repository = File("$projectRoot/repository"))
+  val properties = CamundaConExampleProperties(repository = projectRoot.resolve("repository"))
 }
 
 
-fun main(args: Array<String>) : Unit {
+fun main() {
   println(CamundaConExampleTestHelper.properties)
 }
