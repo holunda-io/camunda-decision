@@ -4,8 +4,8 @@ import io.holunda.decision.model.api.DmnDiagramConverter
 import io.holunda.decision.model.api.element.DmnDiagram
 import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModel
 import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModelRepository
-import io.holunda.decision.runtime.cache.RefreshDmnDiagramEvaluationModelCacheConfiguration.ModelType
-import org.camunda.bpm.engine.RepositoryService
+import io.holunda.decision.runtime.CamundaDecisionRuntime
+import cache.DmnModelType
 import org.camunda.bpm.engine.impl.interceptor.Command
 import org.camunda.bpm.engine.impl.interceptor.CommandContext
 import org.camunda.bpm.engine.impl.jobexecutor.JobHandler
@@ -13,7 +13,6 @@ import org.camunda.bpm.engine.impl.jobexecutor.JobHandlerConfiguration
 import org.camunda.bpm.engine.impl.persistence.entity.ExecutionEntity
 import org.camunda.bpm.engine.impl.persistence.entity.JobEntity
 import org.camunda.bpm.engine.impl.persistence.entity.MessageEntity
-import org.camunda.bpm.model.dmn.Dmn
 import org.slf4j.LoggerFactory
 
 class RefreshDmnDiagramEvaluationModelCacheJobHandler(
@@ -24,6 +23,8 @@ class RefreshDmnDiagramEvaluationModelCacheJobHandler(
   companion object {
     const val TYPE = "refreshDmnDiagramEvaluationModelCacheJobHandler"
     private val logger = LoggerFactory.getLogger(RefreshDmnDiagramEvaluationModelCacheJobHandler::class.java)
+
+    fun createJob(adapter: CamundaDecisionRuntime.CommandExecutorAdapter, command: RefreshDmnDiagramEvaluationModelCacheCommand) = adapter.execute(command)
   }
 
   override fun execute(configuration: RefreshDmnDiagramEvaluationModelCacheConfiguration, execution: ExecutionEntity?, commandContext: CommandContext, tenantId: String?) {
@@ -41,7 +42,20 @@ class RefreshDmnDiagramEvaluationModelCacheJobHandler(
       decisionDefinitionId = modelData.resultDefinitionId,
       inputs = modelData.diagram.requiredInputs,
       outputs = modelData.diagram.resultTable.header.outputs.toSet()
-    ))
+    )).let {
+      logger.info("saved evaluationModel: $it")
+    }
+
+
+    logger.info("""
+
+
+      Number of diagrams: ${evaluationModelRepository.findAll().size}
+
+
+      ${evaluationModelRepository as DmnDiagramEvaluationModelInMemoryRepository}
+
+    """.trimIndent())
   }
 
   override fun getType() = TYPE
@@ -52,7 +66,7 @@ class RefreshDmnDiagramEvaluationModelCacheJobHandler(
 
 data class RefreshDmnDiagramEvaluationModelCacheCommand(
   val key: String,
-  val modelType: ModelType
+  val modelType: DmnModelType
 ) : Command<String> {
   override fun execute(commandContext: CommandContext): String {
     val message = MessageEntity()
@@ -67,63 +81,17 @@ data class RefreshDmnDiagramEvaluationModelCacheCommand(
 
 data class RefreshDmnDiagramEvaluationModelCacheConfiguration(
   val key: String,
-  val modelType: ModelType
+  val modelType: DmnModelType
 ) : JobHandlerConfiguration {
 
   companion object {
     fun parse(canonicalString: String): RefreshDmnDiagramEvaluationModelCacheConfiguration {
       val (key, type) = canonicalString.split("#")
-      return RefreshDmnDiagramEvaluationModelCacheConfiguration(key, ModelType.valueOf(type))
+      return RefreshDmnDiagramEvaluationModelCacheConfiguration(key, DmnModelType.valueOf(type))
     }
   }
 
   override fun toCanonicalString() = "$key#$modelType"
-
-  enum class ModelType {
-    GRAPH {
-      override fun retrieveModelData(repositoryService: RepositoryService, diagramConverter: DmnDiagramConverter, key: String): ModelData {
-        val def = repositoryService.createDecisionRequirementsDefinitionQuery()
-          .decisionRequirementsDefinitionKey(key)
-          .singleResult()
-
-        val tableKeysToDefinitionIds = repositoryService.createDecisionDefinitionQuery()
-          .decisionRequirementsDefinitionId(def.id)
-          .list().map { it.key to it.id }.toMap()
-
-        val diagram = diagramConverter.fromXml(Dmn.convertToString(repositoryService.getDmnModelInstance(tableKeysToDefinitionIds.values.first())))
-
-        return ModelData(
-          tableKeysToDefinitionIds = tableKeysToDefinitionIds,
-          diagram = diagram,
-          resultDefinitionId = tableKeysToDefinitionIds[diagram.resultTable.decisionDefinitionKey]!!,
-          deploymentId = def.deploymentId
-        )
-      }
-
-    },
-    TABLE {
-      override fun retrieveModelData(repositoryService: RepositoryService, diagramConverter: DmnDiagramConverter, key: String): ModelData {
-        val def = repositoryService.createDecisionDefinitionQuery()
-          .decisionDefinitionKey(key)
-          .latestVersion()
-          .singleResult()
-        val tableKeysToDefinitionIds = mapOf(def.key to def.id)
-        val diagram = diagramConverter.fromXml(Dmn.convertToString(repositoryService.getDmnModelInstance(def.id)))
-        return ModelData(
-          tableKeysToDefinitionIds = tableKeysToDefinitionIds,
-          diagram = diagram,
-          resultDefinitionId = tableKeysToDefinitionIds[diagram.resultTable.decisionDefinitionKey]!!,
-          deploymentId = def.deploymentId
-        )
-      }
-    },
-    ;
-
-    internal abstract fun retrieveModelData(
-      repositoryService: RepositoryService,
-      diagramConverter: DmnDiagramConverter,
-      key: String): ModelData
-  }
 
   internal data class ModelData(
     val tableKeysToDefinitionIds: Map<String, String>,

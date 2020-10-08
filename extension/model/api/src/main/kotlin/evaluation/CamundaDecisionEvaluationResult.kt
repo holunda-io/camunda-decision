@@ -15,7 +15,9 @@ interface CamundaDecisionEvaluationResult {
 }
 
 data class CamundaDecisionEvaluationResultDto(
+
   override val diagramId: DiagramId,
   override val resultType: ResultType,
   override val result: List<VariableMap>
 ) : CamundaDecisionEvaluationResult
+

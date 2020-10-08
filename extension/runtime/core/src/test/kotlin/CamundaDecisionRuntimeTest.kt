@@ -15,7 +15,8 @@ import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.in
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.booleanOutput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
 import io.holunda.decision.model.api.Name
-import io.holunda.decision.model.api.evaluation.CamundaDecisionEvaluationRequest
+import io.holunda.decision.model.api.element.DmnDiagram
+import io.holunda.decision.model.api.evaluation.CamundaDecisionEvaluationRequest.Companion.request
 import io.holunda.decision.model.ascii.DmnWriter
 import io.holunda.decision.model.jackson.converter.JacksonDiagramConverter
 import io.holunda.decision.runtime.cache.DmnDiagramEvaluationModelInMemoryRepository
@@ -76,7 +77,7 @@ class CamundaDecisionRuntimeTest {
 
   val drd = "multiple_decisions"
 
-  val dmnDiagramEvaluationModelInMemoryRepository = DmnDiagramEvaluationModelInMemoryRepository()
+  private val dmnDiagramEvaluationModelInMemoryRepository = DmnDiagramEvaluationModelInMemoryRepository
 
   @get:Rule
   val camunda = CamundaDecisionTestLib.camunda {
@@ -88,18 +89,18 @@ class CamundaDecisionRuntimeTest {
     )
   }
 
-  val runtimeContext by lazy {
+  private val runtimeContext by lazy {
     CamundaDecisionRuntimeContext.builder()
       .withProcessEngineConfiguration(camunda.processEngineConfiguration)
       .withDmnDiagramEvaluationModelRepository(dmnDiagramEvaluationModelInMemoryRepository)
       .build()
   }
 
-  val camundaDecisionService by lazy {
+  private val camundaDecisionService by lazy {
     runtimeContext.camundaDecisionService
   }
 
-  val decisionService by lazy {
+  private val decisionService by lazy {
     camunda.decisionService
   }
 
@@ -107,6 +108,7 @@ class CamundaDecisionRuntimeTest {
   fun setUp() {
     // no deployments at engine start
     assertThat(camunda.repositoryService.createDecisionDefinitionQuery().list()).isEmpty()
+    dmnDiagramEvaluationModelInMemoryRepository.clear()
   }
 
   @After
@@ -131,7 +133,6 @@ class CamundaDecisionRuntimeTest {
     val model = deploy.deployedDiagrams.first()
 
 
-
     val result = camunda.decisionService.evaluateDecisionTableById(model.decisionDefinitionId, Variables
       .putValue(DmnDiagrams.inD11.key, 18)
       .putValue(DmnDiagrams.inD22.key, 11))
@@ -150,13 +151,18 @@ class CamundaDecisionRuntimeTest {
     assertThat(camundaDecisionService.findAllModels()).isEmpty()
     logger.info { "\n${DmnWriter.render(DmnDiagrams.diagram)}" }
 
-    val model = camundaDecisionService.deploy(DmnDiagrams.diagram)
-      .deployedDiagrams
-      .first()
+    camundaDecisionService.deploy(DmnDiagrams.diagram)
+    await().untilAsserted { assertThat(dmnDiagramEvaluationModelInMemoryRepository.findAll()).hasSize(1) }
 
-    val result = camundaDecisionService.evaluateDiagram(CamundaDecisionEvaluationRequest.Companion.request(DmnDiagrams.diagram.id, Variables
-      .putValue(DmnDiagrams.inD11.key, 18)
-      .putValue(DmnDiagrams.inD22.key, 11)))
+
+    val result = camundaDecisionService.evaluateDiagram(
+      request(
+        diagramId = DmnDiagrams.diagram.id,
+        variables = Variables
+          .putValue(DmnDiagrams.inD11.key, 18)
+          .putValue(DmnDiagrams.inD22.key, 11)
+      )
+    )
 
     val o22: String = result.result.first().getValue("outD21", String::class.java)
 
@@ -191,12 +197,10 @@ class CamundaDecisionRuntimeTest {
     assertThat(camunda.repositoryService.createDecisionDefinitionQuery().decisionDefinitionKey("decision1").list()).isNotNull
     assertThat(camunda.repositoryService.createDecisionDefinitionQuery().decisionDefinitionKey("decision2").singleResult()).isNotNull
 
-    val result = decisionService.evaluateDecisionTableByKey("decision1", Variables.putValue("foo", true)).singleResult
-
-    val r = decisionService.evaluateDecisionTableByKey("decision2",
+    val result = decisionService.evaluateDecisionTableByKey("decision2",
       Variables.putValue("foo", true).putValue("bar", true)).singleResult
 
-    assertThat("" + r.getSingleEntry()).isEqualTo("hurray")
+    assertThat("" + result.getSingleEntry()).isEqualTo("hurray")
   }
 
   @Test
@@ -204,8 +208,6 @@ class CamundaDecisionRuntimeTest {
     assertNoDeployedDmn()
 
     camunda.repositoryService.createDeployment().addClasspathResource(CamundaDecisionTestLib.DmnTestResource.SINGLE_TABLE.fileName).deploy()
-
-
 
     await().untilAsserted {
       assertThat(dmnDiagramEvaluationModelInMemoryRepository.findById("Definitions_07g6v9s")).isNotEmpty()
@@ -216,12 +218,12 @@ class CamundaDecisionRuntimeTest {
     assertThat(dmnDiagramEvaluationModelInMemoryRepository.findAll().first().decisionDefinitionId).startsWith("example")
   }
 
-
   private fun assertNoDeployedDmn() {
-    assertThat(camunda.repositoryService.createDeploymentQuery().list()).isEmpty()
-    assertThat(camunda.repositoryService.createDecisionDefinitionQuery().list()).isEmpty()
-    assertThat(camunda.repositoryService.createDecisionRequirementsDefinitionQuery().list()).isEmpty()
-
+    with(camunda.repositoryService) {
+      assertThat(createDeploymentQuery().list()).isEmpty()
+      assertThat(createDecisionDefinitionQuery().list()).isEmpty()
+      assertThat(createDecisionRequirementsDefinitionQuery().list()).isEmpty()
+    }
     assertThat(dmnDiagramEvaluationModelInMemoryRepository.findAll()).isEmpty()
   }
 }

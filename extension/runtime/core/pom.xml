@@ -30,7 +30,6 @@
     <dependency>
       <groupId>io.github.microutils</groupId>
       <artifactId>kotlin-logging-jvm</artifactId>
-      <scope>test</scope>
     </dependency>
   </dependencies>
 

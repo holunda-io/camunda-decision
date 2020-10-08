@@ -31,4 +31,9 @@ interface DmnDiagramEvaluationModelRepository {
    * @return all models
    */
   fun findAll(): Collection<DmnDiagramEvaluationModel>
+
+  /**
+   * Remove all values from cache.
+   */
+  fun clear()
 }

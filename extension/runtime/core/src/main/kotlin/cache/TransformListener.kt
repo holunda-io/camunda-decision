@@ -1,18 +1,19 @@
 package io.holunda.decision.runtime.cache
 
-import io.holunda.decision.runtime.cache.RefreshDmnDiagramEvaluationModelCacheConfiguration.ModelType
+import cache.DmnModelType
+import io.holunda.decision.runtime.CamundaDecisionRuntime.CommandExecutorAdapter
 import org.camunda.bpm.dmn.engine.DmnDecision
 import org.camunda.bpm.dmn.engine.DmnDecisionRequirementsGraph
 import org.camunda.bpm.dmn.engine.impl.DmnDecisionTableInputImpl
 import org.camunda.bpm.dmn.engine.impl.DmnDecisionTableOutputImpl
 import org.camunda.bpm.dmn.engine.impl.DmnDecisionTableRuleImpl
 import org.camunda.bpm.dmn.engine.impl.spi.transform.DmnTransformListener
-import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl
 import org.camunda.bpm.model.dmn.instance.*
 
 class TransformListener(
-  private val processEngineConfigurationImpl: ProcessEngineConfigurationImpl
+  private val commandExecutorAdapter: CommandExecutorAdapter
 ) : DmnTransformListener {
+
   override fun transformDecision(decision: Decision, dmnDecision: DmnDecision) {
   }
 
@@ -26,12 +27,16 @@ class TransformListener(
   }
 
   override fun transformDecisionRequirementsGraph(definitions: Definitions, dmnDecisionRequirementsGraph: DmnDecisionRequirementsGraph) {
-    val command = if (dmnDecisionRequirementsGraph.decisions.size == 1) {
-      RefreshDmnDiagramEvaluationModelCacheCommand(dmnDecisionRequirementsGraph.decisionKeys.first(), ModelType.TABLE)
-    } else {
-      RefreshDmnDiagramEvaluationModelCacheCommand(dmnDecisionRequirementsGraph.key, ModelType.GRAPH)
-    }
-    processEngineConfigurationImpl.commandExecutorTxRequired.execute(command)
+   createJob(dmnDecisionRequirementsGraph)
   }
 
+  private fun createCommand(dmnDecisionRequirementsGraph: DmnDecisionRequirementsGraph) = if (dmnDecisionRequirementsGraph.decisions.size == 1) {
+    RefreshDmnDiagramEvaluationModelCacheCommand(dmnDecisionRequirementsGraph.decisionKeys.first(), DmnModelType.TABLE)
+  } else {
+    RefreshDmnDiagramEvaluationModelCacheCommand(dmnDecisionRequirementsGraph.key, DmnModelType.GRAPH)
+  }
+
+  private fun createJob(dmnDecisionRequirementsGraph: DmnDecisionRequirementsGraph) {
+    commandExecutorAdapter.execute(createCommand(dmnDecisionRequirementsGraph))
+  }
 }

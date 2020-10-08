@@ -1,7 +1,11 @@
 package io.holunda.decision.example.camundacon2020
 
+import com.fasterxml.jackson.databind.module.SimpleModule
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.holunda.decision.example.camundacon2020.fn.DmnRepositoryLoader
 import io.holunda.decision.model.CamundaDecisionModel
+import io.holunda.decision.model.api.evaluation.CamundaDecisionEvaluationResult
+import io.holunda.decision.model.api.evaluation.CamundaDecisionEvaluationResultDto
 import io.holunda.decision.runtime.spring.EnableCamundaDecision
 import mu.KLogging
 import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication
@@ -33,6 +37,11 @@ class CamundaConExampleApplication {
 
     logger.info { "diagram: \n\n  ${CamundaDecisionModel.render(loader.loadDiagram("legal_age.dmn"))}" }
   }
+
+  @Bean
+  fun objectMapper() = jacksonObjectMapper().registerModule(SimpleModule().apply {
+    addAbstractTypeMapping(CamundaDecisionEvaluationResult::class.java, CamundaDecisionEvaluationResultDto::class.java)
+  })
 }
 
 @ConfigurationProperties(prefix = "application")

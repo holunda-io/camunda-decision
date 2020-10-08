@@ -4,11 +4,11 @@ import io.holunda.decision.model.api.Id
 import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModel
 import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModelRepository
 import java.util.*
-import kotlin.collections.HashMap
+import java.util.concurrent.ConcurrentHashMap
 
-class DmnDiagramEvaluationModelInMemoryRepository(
-  private val cache: MutableMap<String, DmnDiagramEvaluationModel> = HashMap()
-) : DmnDiagramEvaluationModelRepository {
+object DmnDiagramEvaluationModelInMemoryRepository : DmnDiagramEvaluationModelRepository {
+  private val id: String = UUID.randomUUID().toString()
+  private val cache: ConcurrentHashMap<String, DmnDiagramEvaluationModel> = ConcurrentHashMap()
 
   override fun save(model: DmnDiagramEvaluationModel): DmnDiagramEvaluationModel {
     cache[model.decisionDefinitionId] = model
@@ -16,9 +16,19 @@ class DmnDiagramEvaluationModelInMemoryRepository(
   }
 
   override fun findById(diagramId: Id): Optional<DmnDiagramEvaluationModel> = cache.values
-    .find { it.diagramId == diagramId }?.let { Optional.of(it) }?: Optional.empty()
+    .find { it.diagramId == diagramId }?.let { Optional.of(it) } ?: Optional.empty()
 
   override fun findAll(): Collection<DmnDiagramEvaluationModel> {
     return cache.values
   }
+
+  override fun clear() {
+    cache.clear()
+  }
+
+  override fun toString(): String {
+    return "DmnDiagramEvaluationModelInMemoryRepository(id='$id', cache=$cache)"
+  }
+
+
 }

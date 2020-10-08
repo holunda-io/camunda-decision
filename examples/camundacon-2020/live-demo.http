@@ -15,6 +15,10 @@ GET http://localhost:10110/dmn
 
 ###
 
+GET http://localhost:10110/evaluation/isCustomerAdult/1
+
+###
+
 POST http://localhost:10110/dmn/deploy
 Content-Type: application/x-www-form-urlencoded
 

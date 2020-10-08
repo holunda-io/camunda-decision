@@ -16,6 +16,7 @@ import io.holunda.decision.model.FeelConditions.resultValue
 import io.holunda.decision.model.api.CamundaDecisionService
 import io.holunda.decision.model.api.DmnDiagramDeployment
 import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModel
+import io.holunda.decision.runtime.cache.DmnDiagramEvaluationModelInMemoryRepository
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -23,7 +24,8 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/dmn")
 class DmnDeploymentController(
   private val camundaDecisionService: CamundaDecisionService,
-  private val loader : DmnRepositoryLoader
+  private val loader : DmnRepositoryLoader,
+  private val repo : DmnDiagramEvaluationModelInMemoryRepository
 ) {
 
   @PostMapping(path = ["diagrams/{diagramFile}"])
@@ -32,6 +34,9 @@ class DmnDeploymentController(
 
     return ResponseEntity.ok(camundaDecisionService.deploy(diagram))
   }
+
+  @GetMapping(path=["/cache"])
+  fun getCache() = ResponseEntity.ok(repo)
 
   @GetMapping
   fun getEvaluationModels(): ResponseEntity<List<DmnDiagramEvaluationModel>> = ResponseEntity.ok(camundaDecisionService.findAllModels())

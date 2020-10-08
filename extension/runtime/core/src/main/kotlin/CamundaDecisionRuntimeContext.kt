@@ -56,7 +56,7 @@ open class CamundaDecisionRuntimeContext(
 
     private lateinit var processEngineConfiguration: ProcessEngineConfigurationImpl
     private var diagramConverter: DmnDiagramConverter = JacksonDiagramConverter
-    private var dmnDiagramEvaluationModelRepository: DmnDiagramEvaluationModelRepository = DmnDiagramEvaluationModelInMemoryRepository()
+    private lateinit var dmnDiagramEvaluationModelRepository: DmnDiagramEvaluationModelRepository
 
     fun withProcessEngineConfiguration(processEngineConfiguration: ProcessEngineConfigurationImpl) = apply {
       this.processEngineConfiguration = processEngineConfiguration
@@ -64,7 +64,7 @@ open class CamundaDecisionRuntimeContext(
 
 
     fun withDmnDiagramEvaluationModelRepository(dmnDiagramEvaluationModelRepository: DmnDiagramEvaluationModelRepository) = apply {
-      this.dmnDiagramEvaluationModelRepository = dmnDiagramEvaluationModelRepository;
+      this.dmnDiagramEvaluationModelRepository = dmnDiagramEvaluationModelRepository
     }
 
     override fun build(): CamundaDecisionRuntimeContext {

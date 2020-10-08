@@ -1,11 +1,13 @@
 package io.holunda.decision.runtime.deployment
 
-import io.holunda.decision.model.api.*
+import io.holunda.decision.model.api.CamundaDecisionRepositoryService
+import io.holunda.decision.model.api.DiagramId
+import io.holunda.decision.model.api.DmnDiagramConverter
+import io.holunda.decision.model.api.DmnDiagramDeployment
 import io.holunda.decision.model.api.element.DmnDiagram
 import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModel
 import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModelRepository
 import org.camunda.bpm.engine.RepositoryService
-import org.camunda.bpm.engine.repository.DecisionRequirementsDefinition
 import org.camunda.bpm.engine.repository.Deployment
 import org.camunda.bpm.model.dmn.Dmn
 import java.util.*
@@ -19,33 +21,31 @@ class CamundaDecisionRepositoryServiceBean(
   private val diagramConverter: DmnDiagramConverter
 ) : CamundaDecisionRepositoryService {
 
-  override fun findAllModels(): List<DmnDiagramEvaluationModel> = repositoryService
-    .createDecisionRequirementsDefinitionQuery()
-    .latestVersion()
-    .list()
-    .map { load(it) }
+  override fun findAllModels(): List<DmnDiagramEvaluationModel> = dmnDiagramEvaluationModelRepository
+    .findAll()
+    .toList()
 
-  private fun load(requirementsDefinition: DecisionRequirementsDefinition): DmnDiagramEvaluationModel {
-    val tableKeysToDefinitionIds = repositoryService.createDecisionDefinitionQuery()
-      .decisionRequirementsDefinitionId(requirementsDefinition.id)
-      .list().map { it.key to it.id }.toMap()
-
-    val diagram = diagramConverter.fromXml(Dmn.convertToString(repositoryService.getDmnModelInstance(tableKeysToDefinitionIds.values.first())))
-    val decisionDefinitionId: DecisionDefinitionId = tableKeysToDefinitionIds[diagram.resultTable.decisionDefinitionKey]!!
-
-    return DmnDiagramEvaluationModel(
-      diagramId = diagram.id,
-      name = diagram.name,
-      resourceName = diagram.resourceName,
-      deploymentId = requirementsDefinition.deploymentId,
-      deploymentTime = repositoryService.createDeploymentQuery().deploymentId(requirementsDefinition.deploymentId).singleResult().deploymentTime,
-      resultType = diagram.resultTable.resultType,
-      decisionDefinitionId = decisionDefinitionId,
-      inputs = diagram.requiredInputs,
-      outputs = diagram.resultTable.header.outputs.toSet()
-    )
-
-  }
+// TODO: maybe remove/refactor
+//  private fun load(requirementsDefinition: DecisionRequirementsDefinition): DmnDiagramEvaluationModel {
+//    val tableKeysToDefinitionIds = repositoryService.createDecisionDefinitionQuery()
+//      .decisionRequirementsDefinitionId(requirementsDefinition.id)
+//      .list().map { it.key to it.id }.toMap()
+//
+//    val diagram = diagramConverter.fromXml(Dmn.convertToString(repositoryService.getDmnModelInstance(tableKeysToDefinitionIds.values.first())))
+//    val decisionDefinitionId: DecisionDefinitionId = tableKeysToDefinitionIds[diagram.resultTable.decisionDefinitionKey]!!
+//
+//    return DmnDiagramEvaluationModel(
+//      diagramId = diagram.id,
+//      name = diagram.name,
+//      resourceName = diagram.resourceName,
+//      deploymentId = requirementsDefinition.deploymentId,
+//      deploymentTime = repositoryService.createDeploymentQuery().deploymentId(requirementsDefinition.deploymentId).singleResult().deploymentTime,
+//      resultType = diagram.resultTable.resultType,
+//      decisionDefinitionId = decisionDefinitionId,
+//      inputs = diagram.requiredInputs,
+//      outputs = diagram.resultTable.header.outputs.toSet()
+//    )
+//}
 
 
   override fun deploy(diagrams: List<DmnDiagram>): DmnDiagramDeployment {
