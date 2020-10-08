@@ -1,18 +1,19 @@
 package io.holunda.decision.example.camundacon2020
 
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.booleanInput
-import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.dateInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.integerInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.stringInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.booleanOutput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
+import io.holunda.decision.model.api.element.DmnDiagram
 
 object IsAdultDefinitions {
 
+  val inCustomerId = stringInput(key = "customerId", label = "Customer Id")
   val inCustomerCountry = stringInput(key = "customerCountry", label = "Country")
   val inCustomerState = stringInput(key = "customerState", label = "State")
   val inCustomerAge = integerInput(key = "customerAge", label = "Age")
-  val inCustomerSex = integerInput(key = "customerSex", label = "Sex")
+  val inCustomerSex = stringInput(key = "customerSex", label = "Sex")
 
   val outIsAdult = booleanOutput(key = "isAdult", label = "Is Adult?")
 
@@ -26,6 +27,35 @@ object IsAdultDefinitions {
     }
   }
 }
+
+object ShipmentDefinitions {
+
+  val inIsAdult = IsAdultDefinitions.outIsAdult.toInputDefinition()
+  val inName = stringInput(key = "productName", label = "Product Name")
+  val inSize = stringInput(key = "productSize", label = "Product Size")
+
+  val outShippingAllowed = booleanOutput(key = "isShipmentAllowed", label = "Shipment allowed?")
+  val outAdditionalActions = stringOutput(key = "additionalActions", label = "Additional Actions")
+}
+
+
+
+/**
+ * For demonstartion purposes only!
+ */
+object CombinedLegalAndProductGenerator {
+
+  fun generate() : DmnDiagram {
+    TODO("do this live on camera")
+  }
+
+}
+
+
+fun main() {
+
+}
+
 
 val inCustomerAge = integerInput("customerAge")
 

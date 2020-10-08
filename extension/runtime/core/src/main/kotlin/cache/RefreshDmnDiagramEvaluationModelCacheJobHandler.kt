@@ -45,17 +45,6 @@ class RefreshDmnDiagramEvaluationModelCacheJobHandler(
     )).let {
       logger.info("saved evaluationModel: $it")
     }
-
-
-    logger.info("""
-
-
-      Number of diagrams: ${evaluationModelRepository.findAll().size}
-
-
-      ${evaluationModelRepository as DmnDiagramEvaluationModelInMemoryRepository}
-
-    """.trimIndent())
   }
 
   override fun getType() = TYPE

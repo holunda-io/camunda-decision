@@ -1,5 +1,6 @@
 package io.holunda.decision.model.api
 
+import io.holunda.camunda.bpm.data.builder.VariableMapBuilder
 import io.holunda.decision.model.api.definition.*
 import kotlin.reflect.KClass
 
@@ -69,6 +70,7 @@ object CamundaDecisionModelApi {
     @JvmOverloads
     fun dateInput(key: String, label: String = key) = DateInputDefinition(key, label)
 
+    fun <T:Any> VariableMapBuilder.set(input: InputDefinition<T>, value: T) = set(input.variableFactory, value)
   }
 
   object OutputDefinitions {

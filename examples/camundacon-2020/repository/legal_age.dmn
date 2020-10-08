@@ -2,6 +2,11 @@
 <definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="diagram_is_adult" name="Is Adult Diagram" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.2.0">
   <decision id="dt_is_adult" name="Is adult?">
     <decisionTable id="DecisionTable_0soxfih" hitPolicy="FIRST">
+      <input id="InputClause_1aje4yd" label="Customer Id">
+        <inputExpression id="LiteralExpression_0tdgms5" typeRef="string">
+          <text>customerId</text>
+        </inputExpression>
+      </input>
       <input id="Input_1" label="Country" biodi:width="192">
         <inputExpression id="InputExpression_1" typeRef="string">
           <text>customerCountry</text>
@@ -24,6 +29,9 @@
       </input>
       <output id="Output_1" label="is adult" name="isAdult" typeRef="boolean" />
       <rule id="DecisionRule_1v2k6f5">
+        <inputEntry id="UnaryTests_1jizxd2">
+          <text></text>
+        </inputEntry>
         <inputEntry id="UnaryTests_09x6hop">
           <text>"Indonesia","Myanmar","Yemen"</text>
         </inputEntry>
@@ -41,6 +49,9 @@
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0pyhzk1">
+        <inputEntry id="UnaryTests_0hh6rhs">
+          <text></text>
+        </inputEntry>
         <inputEntry id="UnaryTests_0dj4pge">
           <text>"North Korea"</text>
         </inputEntry>
@@ -58,6 +69,9 @@
         </outputEntry>
       </rule>
       <rule id="DecisionRule_19umnl8">
+        <inputEntry id="UnaryTests_0thli5e">
+          <text></text>
+        </inputEntry>
         <inputEntry id="UnaryTests_1a0n74j">
           <text>"Pakistan"</text>
         </inputEntry>
@@ -75,6 +89,9 @@
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1tjl839">
+        <inputEntry id="UnaryTests_0xs552o">
+          <text></text>
+        </inputEntry>
         <inputEntry id="UnaryTests_1dwgfn3">
           <text>"USA"</text>
         </inputEntry>
@@ -92,6 +109,9 @@
         </outputEntry>
       </rule>
       <rule id="DecisionRule_06e62es">
+        <inputEntry id="UnaryTests_1s5ny63">
+          <text></text>
+        </inputEntry>
         <inputEntry id="UnaryTests_0opevrj">
           <text>"Germany"</text>
         </inputEntry>
@@ -109,6 +129,9 @@
         </outputEntry>
       </rule>
       <rule id="DecisionRule_16r2upm">
+        <inputEntry id="UnaryTests_179a33b">
+          <text></text>
+        </inputEntry>
         <inputEntry id="UnaryTests_06b85lg">
           <text>"USA"</text>
         </inputEntry>
@@ -126,6 +149,9 @@
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1f7fd1c">
+        <inputEntry id="UnaryTests_0pcvd8f">
+          <text></text>
+        </inputEntry>
         <inputEntry id="UnaryTests_0z8oynz">
           <text>"Pakistan"</text>
         </inputEntry>
@@ -143,6 +169,9 @@
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1q9n5pn">
+        <inputEntry id="UnaryTests_08brp10">
+          <text></text>
+        </inputEntry>
         <inputEntry id="UnaryTests_0ieg1kc">
           <text>"Algeria"</text>
         </inputEntry>
@@ -160,6 +189,9 @@
         </outputEntry>
       </rule>
       <rule id="DecisionRule_01yzzbx">
+        <inputEntry id="UnaryTests_03iz9v3">
+          <text></text>
+        </inputEntry>
         <inputEntry id="UnaryTests_1l2y2oi">
           <text></text>
         </inputEntry>
@@ -177,6 +209,9 @@
         </outputEntry>
       </rule>
       <rule id="DecisionRule_1fiiw3w">
+        <inputEntry id="UnaryTests_0rd85sr">
+          <text></text>
+        </inputEntry>
         <inputEntry id="UnaryTests_133lh94">
           <text></text>
         </inputEntry>

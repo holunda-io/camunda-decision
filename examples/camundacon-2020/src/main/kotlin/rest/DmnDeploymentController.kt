@@ -1,10 +1,7 @@
 package io.holunda.decision.example.camundacon2020.rest
 
+import io.holunda.decision.example.camundacon2020.*
 import io.holunda.decision.example.camundacon2020.fn.DmnRepositoryLoader
-import io.holunda.decision.example.camundacon2020.inActive
-import io.holunda.decision.example.camundacon2020.inCustomerAge
-import io.holunda.decision.example.camundacon2020.outReasons
-import io.holunda.decision.example.camundacon2020.outResult
 import io.holunda.decision.model.CamundaDecisionGenerator
 import io.holunda.decision.model.CamundaDecisionGenerator.rule
 import io.holunda.decision.model.CamundaDecisionGenerator.table
@@ -24,23 +21,44 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/dmn")
 class DmnDeploymentController(
   private val camundaDecisionService: CamundaDecisionService,
-  private val loader : DmnRepositoryLoader,
-  private val repo : DmnDiagramEvaluationModelInMemoryRepository
+  private val loader: DmnRepositoryLoader,
+  private val repo: DmnDiagramEvaluationModelInMemoryRepository
 ) {
 
+  /**
+   * This returns the list of all [DmnDiagramEvaluationModel]s currently known to the system.
+   */
+  @GetMapping
+  fun getEvaluationModels(): ResponseEntity<List<DmnDiagramEvaluationModel>> = ResponseEntity.ok(camundaDecisionService.findAllModels())
+
+  /**
+   * Deploys a dmn file located in the external repository directory configured via  [CamundaConExampleProperties.repository].
+   */
   @PostMapping(path = ["diagrams/{diagramFile}"])
   fun deployFile(@PathVariable("diagramFile") diagramFile: String): ResponseEntity<DmnDiagramDeployment> {
     val diagram = loader.loadDiagram(diagramFile)
 
-    return ResponseEntity.ok(camundaDecisionService.deploy(diagram))
+    val deployment = camundaDecisionService.deploy(diagram)
+
+    return ResponseEntity.ok(deployment)
   }
 
-  @GetMapping(path=["/cache"])
-  fun getCache() = ResponseEntity.ok(repo)
 
-  @GetMapping
-  fun getEvaluationModels(): ResponseEntity<List<DmnDiagramEvaluationModel>> = ResponseEntity.ok(camundaDecisionService.findAllModels())
+  @PostMapping(path = ["/live-demo"])
+  fun combinedProductAndLegal(): ResponseEntity<DmnDiagramDeployment> = ResponseEntity.ok(
+    camundaDecisionService.deploy(
+      CombinedLegalAndProductGenerator.generate()
+    )
+  )
 
+
+  //
+
+
+  //
+
+
+  // TODO: remove, testing only
   @PostMapping
   fun deploy(): ResponseEntity<DmnDiagramDeployment> {
     val diagram = CamundaDecisionGenerator.diagram("My Diagram")
@@ -84,6 +102,7 @@ class DmnDeploymentController(
     return ResponseEntity.ok(camundaDecisionService.deploy(diagram))
   }
 
+  // TODO: remove, testing only
   @PostMapping("/deploy-single")
   fun deploySingle(): ResponseEntity<DmnDiagramDeployment> {
     val diagram = CamundaDecisionGenerator.diagram("My Single Diagram")

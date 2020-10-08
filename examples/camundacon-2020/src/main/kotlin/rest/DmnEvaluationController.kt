@@ -1,9 +1,11 @@
 package io.holunda.decision.example.camundacon2020.rest
 
+import io.holunda.camunda.bpm.data.CamundaBpmData
 import io.holunda.decision.example.camundacon2020.IsAdultDefinitions
 import io.holunda.decision.example.camundacon2020.domain.CustomerEntity
 import io.holunda.decision.example.camundacon2020.domain.CustomerRepository
 import io.holunda.decision.model.api.CamundaDecisionEvaluationService
+import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.set
 import io.holunda.decision.model.api.evaluation.CamundaDecisionEvaluationRequest.Companion.request
 import io.holunda.decision.model.api.evaluation.CamundaDecisionEvaluationResult
 import mu.KLogging
@@ -26,17 +28,18 @@ class DmnEvaluationController(
   fun evaluateIsAdult(@PathVariable("customerId") customerId: String): ResponseEntity<CamundaDecisionEvaluationResult> {
     val customer = customerRepository.loadById(customerId)
 
-    val inputs = Variables.createVariables()
-      .putValue(IsAdultDefinitions.inCustomerAge.key, customer.age)
-      .putValue(IsAdultDefinitions.inCustomerSex.key, customer.sex)
-      .putValue(IsAdultDefinitions.inCustomerCountry.key, customer.country)
-      .putValue(IsAdultDefinitions.inCustomerState.key, customer.state)
+    val inputs = CamundaBpmData.builder()
+      .set(IsAdultDefinitions.inCustomerId, customer.id)
+      .set(IsAdultDefinitions.inCustomerAge, customer.age as Integer)
+      .set(IsAdultDefinitions.inCustomerSex, customer.sex.name)
+      .set(IsAdultDefinitions.inCustomerCountry, customer.country)
+      .set(IsAdultDefinitions.inCustomerState, customer.state?:"")
+      .build()
 
     val isAdultResult = evaluationService.evaluateDiagram(request(
       IsAdultDefinitions.DiagramData.id,
       inputs
     ))
-
 
     val result = CustomerIsAdultDto(
       customer = customer,

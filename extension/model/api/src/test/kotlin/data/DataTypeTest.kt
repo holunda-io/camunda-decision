@@ -16,15 +16,15 @@ internal class DataTypeTest {
     assertThat(BooleanDataType.name).isEqualTo("BOOLEAN")
     assertThat(BooleanDataType.typeRef).isEqualTo("boolean")
 
-    assertThat(IntegerDataType.type).isEqualTo(Int::class.java)
+    assertThat(IntegerDataType.type).isEqualTo(Integer::class.java)
     assertThat(IntegerDataType.name).isEqualTo("INTEGER")
     assertThat(IntegerDataType.typeRef).isEqualTo("integer")
 
-    assertThat(LongDataType.type).isEqualTo(Long::class.java)
+    assertThat(LongDataType.type).isEqualTo(java.lang.Long::class.java)
     assertThat(LongDataType.name).isEqualTo("LONG")
     assertThat(LongDataType.typeRef).isEqualTo("long")
 
-    assertThat(DoubleDataType.type).isEqualTo(Double::class.java)
+    assertThat(DoubleDataType.type).isEqualTo(java.lang.Double::class.java)
     assertThat(DoubleDataType.name).isEqualTo("DOUBLE")
     assertThat(DoubleDataType.typeRef).isEqualTo("double")
 

@@ -7,6 +7,14 @@ GET http://localhost:10110/customers/1
 
 ###
 
+GET http://localhost:10110/products
+
+###
+
+GET http://localhost:10110/products/1002
+
+###
+
 POST http://localhost:10110/dmn/diagrams/legal_age.dmn
 
 ###

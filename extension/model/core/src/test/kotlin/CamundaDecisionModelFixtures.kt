@@ -1,5 +1,6 @@
 package io.holunda.decision.model
 
+import io.holunda.decision.model.FeelConditions.feelGreaterThan
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.integerInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.integerOutput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.stringOutput
@@ -10,6 +11,7 @@ import io.holunda.decision.model.api.element.DmnRule
 import io.holunda.decision.model.api.element.DmnRuleList
 import io.holunda.decision.model.api.entry.InputEntry
 import io.holunda.decision.model.api.entry.OutputEntry
+import io.holunda.decision.model.api.entry.toEntry
 
 
 object CamundaDecisionModelFixtures {
@@ -41,8 +43,8 @@ object CamundaDecisionModelFixtures {
             DmnRule(
               id = "r1",
               description = "amazing",
-              inputs = listOf(InputEntry<Int>(inputFoo, ">10")),
-              outputs = listOf(OutputEntry<Int>(outputBar, "100"))
+              inputs = listOf(inputFoo.toEntry(">10")),
+              outputs = listOf(outputBar.toEntry( "100"))
             )
           )
         ),
