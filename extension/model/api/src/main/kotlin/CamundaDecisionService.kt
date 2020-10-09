@@ -6,8 +6,7 @@ import io.holunda.decision.model.api.evaluation.CamundaDecisionEvaluationResult
 import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModel
 import java.util.*
 
-interface CamundaDecisionService : CamundaDecisionEvaluationService, CamundaDecisionRepositoryService, CamundaDecisionQueryService{
-}
+interface CamundaDecisionService : CamundaDecisionEvaluationService, CamundaDecisionRepositoryService, CamundaDecisionQueryService
 
 interface CamundaDecisionRepositoryService {
 
@@ -22,22 +21,22 @@ interface CamundaDecisionRepositoryService {
    */
   fun deploy(diagrams: List<DmnDiagram>): DmnDiagramDeployment
 
-  fun loadModel(diagramId: DiagramId) : DmnDiagramEvaluationModel = findModel(diagramId).orElseThrow()
+  fun loadModel(diagramId: DiagramId): DmnDiagramEvaluationModel = findModel(diagramId).orElseThrow { IllegalArgumentException("no diagram deployed with id:$diagramId") }
 
-  fun findModel(diagramId: DiagramId) : Optional<DmnDiagramEvaluationModel>
+  fun findModel(diagramId: DiagramId): Optional<DmnDiagramEvaluationModel>
 
-  fun findAllModels() : List<DmnDiagramEvaluationModel>
+  fun findAllModels(): List<DmnDiagramEvaluationModel>
 
 }
 
 interface CamundaDecisionEvaluationService {
 
-  fun evaluateDiagram(request: CamundaDecisionEvaluationRequest) : CamundaDecisionEvaluationResult
+  fun evaluateDiagram(request: CamundaDecisionEvaluationRequest): CamundaDecisionEvaluationResult
 }
 
 interface CamundaDecisionQueryService {
 
-  fun loadDiagram(decisionDefinitionId: DecisionDefinitionId) : DmnDiagram
+  fun loadDiagram(decisionDefinitionId: DecisionDefinitionId): DmnDiagram
 
 }
 

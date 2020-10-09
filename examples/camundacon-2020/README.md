@@ -5,6 +5,13 @@
 * cockpit: <http://localhost:10110/> (admin/admin)
 * swagger: <http://localhost:10110/swagger-ui.html>
 
+## shortcuts:
+
+* 0: README
+* 1: http runner
+* 2: main method
+* 3: CombinedLegalAndProductGenerator
+
 ## Plan
 
 * show project layout
@@ -13,12 +20,19 @@
   * database postgres from docker
   * dmn repo outside of project
   
-* run app
-
+* run app is running
 * show cockpit: no auto deployment, app is fresh and empty
 
-* deploy the single `legal_age.dmn`
-* evaluate 
+* goto main (2), implement dummy
+  * print out ascii
+  * print xml
+
+* goto Generator (3)
+  * show how we can load reference table isAdult
+  * deploy
+  
+* go to cockpit
+  * show decision requirement graph
 
 ## Data
 

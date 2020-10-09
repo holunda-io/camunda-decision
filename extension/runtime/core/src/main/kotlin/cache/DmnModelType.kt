@@ -10,6 +10,7 @@ enum class DmnModelType {
     override fun retrieveModelData(repositoryService: RepositoryService, diagramConverter: DmnDiagramConverter, key: String): RefreshDmnDiagramEvaluationModelCacheConfiguration.ModelData {
       val def = repositoryService.createDecisionRequirementsDefinitionQuery()
         .decisionRequirementsDefinitionKey(key)
+        .latestVersion()
         .singleResult()
 
       val tableKeysToDefinitionIds = repositoryService.createDecisionDefinitionQuery()

@@ -12,7 +12,6 @@ import io.holunda.decision.model.FeelConditions.feelTrue
 import io.holunda.decision.model.FeelConditions.resultFalse
 import io.holunda.decision.model.FeelConditions.resultTrue
 import io.holunda.decision.model.FeelConditions.resultValue
-import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.booleanInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.integerInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.stringInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.booleanOutput
@@ -20,6 +19,7 @@ import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.s
 import io.holunda.decision.model.api.data.DmnHitPolicy
 import io.holunda.decision.model.api.element.DmnDiagram
 import io.holunda.decision.model.condition.jbool.JBoolExpressionSupplier.Companion.or
+import io.holunda.decision.model.jackson.converter.JacksonDiagramConverter
 import org.springframework.stereotype.Component
 
 object IsAdultDefinitions {
@@ -57,19 +57,18 @@ object ShipmentDefinitions {
 }
 
 
-
 /**
  * For demonstration purposes only!
  */
 @Component
-class  CombinedLegalAndProductGenerator(
+class CombinedLegalAndProductGenerator(
   private val loader: DmnRepositoryLoader
 ) {
 
-  fun generate() : DmnDiagram {
+  fun generate(): DmnDiagram {
     val isAdultDiagram = loader.loadDiagram(IsAdultDefinitions.DiagramData.file)
 
-    return  CamundaDecisionGenerator.diagram("Legal and Product")
+    return CamundaDecisionGenerator.diagram("Legal and Product")
       .id("legal_and_product")
       .addDecisionTable(
         tableReference(isAdultDiagram)
@@ -80,22 +79,22 @@ class  CombinedLegalAndProductGenerator(
       .addDecisionTable(
         table("legal_and_product_shipmentAllowed")
           .hitPolicy(DmnHitPolicy.FIRST)
-          .name("Is Shipment allowed (in diagram)")
+          .name("Sell product (in diagram)")
           .versionTag("1")
           .requiredDecision("legal_and_product_isAdult")
           .addRule(
-              rule(
-                ShipmentDefinitions.inIsAdult.feelTrue(),
-                or(
-                  ShipmentDefinitions.inName.feelEqual("Car"),
-                  ShipmentDefinitions.inSize.feelEqual("L")
-                )
+            rule(
+              ShipmentDefinitions.inIsAdult.feelTrue(),
+              or(
+                ShipmentDefinitions.inName.feelEqual("Car"),
+                ShipmentDefinitions.inSize.feelEqual("L")
               )
-                .description("adult and (car or L)")
-                .result(
-                  ShipmentDefinitions.outShippingAllowed.resultTrue(),
-                  ShipmentDefinitions.outAdditionalActions.resultValue("send gift-basket")
-                )
+            )
+              .description("adult and (car or L)")
+              .result(
+                ShipmentDefinitions.outShippingAllowed.resultTrue(),
+                ShipmentDefinitions.outAdditionalActions.resultValue("send gift-basket")
+              )
           )
           .addRule(
             rule(
@@ -117,5 +116,28 @@ class  CombinedLegalAndProductGenerator(
 fun main() {
   val diagram = CombinedLegalAndProductGenerator(DemoHelper.loader).generate()
 
-  println(CamundaDecisionModel.render(diagram))
+  printDiagram(diagram)
+}
+
+
+private fun printDiagram(diagram: DmnDiagram, withXml:Boolean=false) {
+  println("""
+# ASCII(${diagram.name})
+
+${CamundaDecisionModel.render(diagram)}
+
+""".trimIndent())
+
+  if (withXml) {
+    println("""
+
+
+
+# XML
+
+${JacksonDiagramConverter.toXml(diagram)}
+    """.trimIndent())
+  }
+
+
 }

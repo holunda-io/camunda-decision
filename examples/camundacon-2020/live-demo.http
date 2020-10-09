@@ -23,13 +23,17 @@ GET http://localhost:10110/dmn
 
 ###
 
+GET http://localhost:10110/dmn/legal_and_product
+
+###
+
 GET http://localhost:10110/evaluation/isCustomerAdult/1
 
 ###
 
 # deploy the live demo example
-POST http://localhost:10110/dmn/live-demo
+POST http://localhost:10110/dmn/deploy-live-demo
 
 ###
 
-GET http://localhost:10110/evaluation/isShipmentAllowed?customerId=2&productId=1002
+GET http://localhost:10110/evaluation/isShipmentAllowed?customerId=1&productId=1002

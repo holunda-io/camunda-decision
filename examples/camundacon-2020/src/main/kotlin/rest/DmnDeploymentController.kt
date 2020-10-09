@@ -1,16 +1,10 @@
 package io.holunda.decision.example.camundacon2020.rest
 
-import io.holunda.decision.example.camundacon2020.*
+import io.holunda.decision.example.camundacon2020.CamundaConExampleProperties
+import io.holunda.decision.example.camundacon2020.CombinedLegalAndProductGenerator
 import io.holunda.decision.example.camundacon2020.fn.DmnRepositoryLoader
-import io.holunda.decision.model.CamundaDecisionGenerator
-import io.holunda.decision.model.CamundaDecisionGenerator.rule
-import io.holunda.decision.model.CamundaDecisionGenerator.table
-import io.holunda.decision.model.FeelConditions.feelEqual
-import io.holunda.decision.model.FeelConditions.feelFalse
-import io.holunda.decision.model.FeelConditions.feelGreaterThanOrEqual
-import io.holunda.decision.model.FeelConditions.feelTrue
-import io.holunda.decision.model.FeelConditions.resultValue
 import io.holunda.decision.model.api.CamundaDecisionService
+import io.holunda.decision.model.api.DiagramId
 import io.holunda.decision.model.api.DmnDiagramDeployment
 import io.holunda.decision.model.api.evaluation.DmnDiagramEvaluationModel
 import io.holunda.decision.runtime.cache.DmnDiagramEvaluationModelInMemoryRepository
@@ -32,6 +26,9 @@ class DmnDeploymentController(
   @GetMapping
   fun getEvaluationModels(): ResponseEntity<List<DmnDiagramEvaluationModel>> = ResponseEntity.ok(camundaDecisionService.findAllModels())
 
+  @GetMapping(path = ["/{diagramId}"])
+  fun getEvaluationModel(@PathVariable("diagramId") diagramId: DiagramId): ResponseEntity<DmnDiagramEvaluationModel> = ResponseEntity.of(camundaDecisionService.findModel(diagramId))
+
   /**
    * Deploys a dmn file located in the external repository directory configured via  [CamundaConExampleProperties.repository].
    */
@@ -45,7 +42,7 @@ class DmnDeploymentController(
   }
 
 
-  @PostMapping(path = ["/live-demo"])
+  @PostMapping(path = ["/deploy-live-demo"])
   fun combinedProductAndLegal(): ResponseEntity<DmnDiagramDeployment> = ResponseEntity.ok(
     camundaDecisionService.deploy(
       generator.generate()
