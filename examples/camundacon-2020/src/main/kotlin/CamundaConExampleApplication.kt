@@ -2,14 +2,11 @@ package io.holunda.decision.example.camundacon2020
 
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import io.holunda.decision.example.camundacon2020.fn.DmnRepositoryLoader
-import io.holunda.decision.model.CamundaDecisionModel
 import io.holunda.decision.model.api.evaluation.CamundaDecisionEvaluationResult
 import io.holunda.decision.model.api.evaluation.CamundaDecisionEvaluationResultDto
 import io.holunda.decision.runtime.spring.EnableCamundaDecision
 import mu.KLogging
 import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationProperties
@@ -28,7 +25,6 @@ fun main(args: Array<String>): Unit = runApplication<CamundaConExampleApplicatio
 @ConfigurationPropertiesScan
 class CamundaConExampleApplication {
   companion object : KLogging()
-
 
   @Bean
   fun onStart(properties: CamundaConExampleProperties): CommandLineRunner = CommandLineRunner {

@@ -6,12 +6,16 @@ import io.holunda.decision.model.CamundaDecisionGenerator.rule
 import io.holunda.decision.model.CamundaDecisionGenerator.table
 import io.holunda.decision.model.CamundaDecisionGenerator.tableReference
 import io.holunda.decision.model.CamundaDecisionModel
+import io.holunda.decision.model.FeelConditions.feelBetween
 import io.holunda.decision.model.FeelConditions.feelEqual
 import io.holunda.decision.model.FeelConditions.feelFalse
+import io.holunda.decision.model.FeelConditions.feelGreaterThanOrEqual
+import io.holunda.decision.model.FeelConditions.feelMatchOne
 import io.holunda.decision.model.FeelConditions.feelTrue
 import io.holunda.decision.model.FeelConditions.resultFalse
 import io.holunda.decision.model.FeelConditions.resultTrue
 import io.holunda.decision.model.FeelConditions.resultValue
+import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.booleanInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.integerInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.InputDefinitions.stringInput
 import io.holunda.decision.model.api.CamundaDecisionModelApi.OutputDefinitions.booleanOutput
@@ -66,22 +70,22 @@ class CombinedLegalAndProductGenerator(
 ) {
 
   fun generate(): DmnDiagram {
-    val isAdultDiagram = loader.loadDiagram(IsAdultDefinitions.DiagramData.file)
+    val isAdultDiagram = loader.loadDiagram("legal_age.dmn")
 
     return CamundaDecisionGenerator.diagram("Legal and Product")
       .id("legal_and_product")
       .addDecisionTable(
         tableReference(isAdultDiagram)
-          .decisionDefinitionKey("legal_and_product_isAdult")
+          .decisionDefinitionKey("lap_isAdult")
           .versionTag("2")
           .name("Is Adult (in diagram)")
       )
       .addDecisionTable(
-        table("legal_and_product_shipmentAllowed")
+        table("lap_shipmentAllowed")
           .hitPolicy(DmnHitPolicy.FIRST)
           .name("Sell product (in diagram)")
           .versionTag("1")
-          .requiredDecision("legal_and_product_isAdult")
+          .requiredDecision("lap_isAdult")
           .addRule(
             rule(
               ShipmentDefinitions.inIsAdult.feelTrue(),
@@ -120,24 +124,21 @@ fun main() {
 }
 
 
-private fun printDiagram(diagram: DmnDiagram, withXml:Boolean=false) {
+
+
+//  val diagram = CombinedLegalAndProductGenerator(DemoHelper.loader).generate()
+
+private fun printDiagram(diagram: DmnDiagram, xml:Boolean=false) = if (!xml) {
   println("""
 # ASCII(${diagram.name})
 
 ${CamundaDecisionModel.render(diagram)}
 
 """.trimIndent())
-
-  if (withXml) {
-    println("""
-
-
-
+} else {
+  println("""
 # XML
 
 ${JacksonDiagramConverter.toXml(diagram)}
     """.trimIndent())
-  }
-
-
 }
