@@ -30,7 +30,7 @@ class DmnEvaluationController(
 
     val inputs = CamundaBpmData.builder()
       .set(IsAdultDefinitions.inCustomerId, customer.id)
-      .set(IsAdultDefinitions.inCustomerAge, customer.age as Integer)
+      .set(IsAdultDefinitions.inCustomerAge, customer.age)
       .set(IsAdultDefinitions.inCustomerSex, customer.sex.name)
       .set(IsAdultDefinitions.inCustomerCountry, customer.country)
       .set(IsAdultDefinitions.inCustomerState, customer.state?:"")
@@ -65,7 +65,7 @@ class DmnEvaluationController(
         CamundaBpmData.builder()
           // first
           .set(IsAdultDefinitions.inCustomerId, customer.id)
-          .set(IsAdultDefinitions.inCustomerAge, customer.age as Integer)
+          .set(IsAdultDefinitions.inCustomerAge, customer.age)
           .set(IsAdultDefinitions.inCustomerCountry, customer.country)
           .set(IsAdultDefinitions.inCustomerState, customer.state?:"")
           .set(IsAdultDefinitions.inCustomerSex, customer.sex.name)
