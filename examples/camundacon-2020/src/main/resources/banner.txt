@@ -8,4 +8,4 @@
 
   Spring-Boot: ${spring-boot.formatted-version}
   Camunda BPM: ${camunda.bpm.formatted-version}
-  Camunda BPM Spring Boot Starter: (v7.13.5-ee)
+  Camunda BPM Spring Boot Starter: (v7.14.1-ee)
