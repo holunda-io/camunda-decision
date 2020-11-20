@@ -6,7 +6,7 @@
   <parent>
     <groupId>io.holunda.decision.project</groupId>
     <artifactId>camunda-decision-root</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2-55_kotlin_primitives-SNAPSHOT</version>
   </parent>
 
   <artifactId>camunda-decision-lib-root</artifactId>
