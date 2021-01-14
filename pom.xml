@@ -25,7 +25,7 @@
     <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
     <spring-doc.version>1.4.6</spring-doc.version>
     <groovy.version>2.4.5</groovy.version>
-    <spin.version>1.7.5</spin.version>
+    <spin.version>1.10.1</spin.version>
 
     <jgiven.version>1.0.0-RC6</jgiven.version>
 
