@@ -78,17 +78,17 @@ object BooleanDataType : DataType<Boolean>(typeRefEnum = TypeRefEnum.boolean, ty
 
 sealed class NumberDataType<T : Number>(typeRefEnum: TypeRefEnum, type: Class<T>) : DataType<T>(typeRefEnum, type)
 
-object IntegerDataType : NumberDataType<Integer>(typeRefEnum = TypeRefEnum.integer, type = Integer::class.java) {
+object IntegerDataType : NumberDataType<Int>(typeRefEnum = TypeRefEnum.integer, type = Int::class.java) {
   override fun inputDefinition(key: String, label: String): IntegerInputDefinition = IntegerInputDefinition(key, label)
   override fun outputDefinition(key: String, label: String): IntegerOutputDefinition = IntegerOutputDefinition(key, label)
 }
 
-object LongDataType : NumberDataType<java.lang.Long>(typeRefEnum = TypeRefEnum.long, type = java.lang.Long::class.java) {
+object LongDataType : NumberDataType<Long>(typeRefEnum = TypeRefEnum.long, type = Long::class.java) {
   override fun inputDefinition(key: String, label: String): LongInputDefinition = LongInputDefinition(key, label)
   override fun outputDefinition(key: String, label: String): LongOutputDefinition = LongOutputDefinition(key, label)
 }
 
-object DoubleDataType : NumberDataType<java.lang.Double>(typeRefEnum = TypeRefEnum.double, type = java.lang.Double::class.java) {
+object DoubleDataType : NumberDataType<Double>(typeRefEnum = TypeRefEnum.double, type = Double::class.java) {
   override fun inputDefinition(key: String, label: String): DoubleInputDefinition = DoubleInputDefinition(key, label)
   override fun outputDefinition(key: String, label: String): DoubleOutputDefinition = DoubleOutputDefinition(key, label)
 }

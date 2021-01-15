@@ -4,7 +4,7 @@ import com.bpodgursky.jbool_expressions.And
 import com.bpodgursky.jbool_expressions.Or
 import com.bpodgursky.jbool_expressions.Variable
 import com.bpodgursky.jbool_expressions.rules.RuleSet
-import java.lang.IllegalStateException
+
 
 object JBoolExpressionConverter {
 

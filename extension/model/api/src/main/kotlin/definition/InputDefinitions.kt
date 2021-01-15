@@ -24,15 +24,15 @@ data class BooleanInputDefinition(override val key: String, override val label: 
 
 sealed class NumberInputDefinition<T : Number>(key: String, label: String, dataType: NumberDataType<T>) : InputDefinition<T>(key, label, dataType)
 
-data class IntegerInputDefinition(override val key: String, override val label: String) : NumberInputDefinition<Integer>(key, label, IntegerDataType) {
+data class IntegerInputDefinition(override val key: String, override val label: String) : NumberInputDefinition<Int>(key, label, IntegerDataType) {
   override fun toOutputDefinition(): IntegerOutputDefinition = IntegerOutputDefinition(key, label)
 }
 
-data class LongInputDefinition(override val key: String, override val label: String) : NumberInputDefinition<java.lang.Long>(key, label, LongDataType) {
+data class LongInputDefinition(override val key: String, override val label: String) : NumberInputDefinition<Long>(key, label, LongDataType) {
   override fun toOutputDefinition(): LongOutputDefinition = LongOutputDefinition(key, label)
 }
 
-data class DoubleInputDefinition(override val key: String, override val label: String) : NumberInputDefinition<java.lang.Double>(key, label, DoubleDataType) {
+data class DoubleInputDefinition(override val key: String, override val label: String) : NumberInputDefinition<Double>(key, label, DoubleDataType) {
   override fun toOutputDefinition(): DoubleOutputDefinition = DoubleOutputDefinition(key, label)
 }
 
