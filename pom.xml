@@ -30,7 +30,7 @@
     <jgiven.version>1.0.0-RC6</jgiven.version>
 
     <camunda-bpm-data.version>1.1.2</camunda-bpm-data.version>
-    <kotlin-logging.version>2.0.3</kotlin-logging.version>
+    <kotlin-logging.version>2.0.4</kotlin-logging.version>
 
     <pattern.class.itest>**/*ITest.*</pattern.class.itest>
     <pattern.package.itest>**/itest/**/*.*</pattern.package.itest>
