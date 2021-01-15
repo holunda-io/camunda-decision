@@ -16,7 +16,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>11.0</java.version>
     <version.java>${java.version}</version.java>
-    <kotlin.version>1.4.20</kotlin.version>
+    <kotlin.version>1.4.21-2</kotlin.version>
     <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
     <camunda.version.ce>7.14.0</camunda.version.ce>
