@@ -22,14 +22,14 @@
     <camunda.version.ce>7.14.0</camunda.version.ce>
     <camunda.version.ee>7.14.1-ee</camunda.version.ee>
 
-    <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
+    <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
     <spring-doc.version>1.4.6</spring-doc.version>
     <groovy.version>2.4.5</groovy.version>
     <spin.version>1.7.5</spin.version>
 
-    <jgiven.version>1.0.0-RC6</jgiven.version>
+    <jgiven.version>1.0.0-RC7</jgiven.version>
 
-    <camunda-bpm-data.version>1.1.2-SNAPSHOT</camunda-bpm-data.version>
+    <camunda-bpm-data.version>1.1.2</camunda-bpm-data.version>
     <kotlin-logging.version>2.0.3</kotlin-logging.version>
 
     <pattern.class.itest>**/*ITest.*</pattern.class.itest>
