@@ -4,12 +4,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>io.holunda.decision.project</groupId>
-    <artifactId>camunda-decision-root</artifactId>
+    <groupId>io.holunda.decision._</groupId>
+    <artifactId>camunda-decision_</artifactId>
     <version>0.0.2-SNAPSHOT</version>
   </parent>
 
-  <artifactId>camunda-decision-lib-root</artifactId>
+  <artifactId>lib</artifactId>
   <packaging>pom</packaging>
 
   <modules>

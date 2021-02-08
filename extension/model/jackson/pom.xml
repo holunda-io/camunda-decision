@@ -4,8 +4,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>io.holunda.decision.project</groupId>
-    <artifactId>camunda-decision-extension-root</artifactId>
+    <groupId>io.holunda.decision._</groupId>
+    <artifactId>extension</artifactId>
     <version>0.0.2-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
