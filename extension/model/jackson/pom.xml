@@ -13,10 +13,6 @@
   <groupId>io.holunda.decision</groupId>
   <artifactId>camunda-decision-model-jackson</artifactId>
 
-  <properties>
-    <jacoco.skip>false</jacoco.skip>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>io.holunda.decision</groupId>
