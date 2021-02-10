@@ -48,5 +48,4 @@ ${dmnXmlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(model)}
     double,
     date
   }
-
 }
