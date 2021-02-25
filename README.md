@@ -1,6 +1,7 @@
 # camunda-decision
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e56194c76382443ea1cfa69bc1a8d7e3)](https://app.codacy.com/gh/holunda-io/camunda-decision?utm_source=github.com&utm_medium=referral&utm_content=holunda-io/camunda-decision&utm_campaign=Badge_Grade_Dashboard)
+[![sponsored](https://img.shields.io/badge/sponsoredBy-Holisticon-RED.svg)](https://holisticon.de/)
 
 Extension for easier, type safe interaction with camunda dmn.
 
