@@ -14,13 +14,13 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <java.version>11.0</java.version>
+    <java.version>11</java.version>
     <version.java>${java.version}</version.java>
-    <kotlin.version>1.4.30</kotlin.version>
+    <kotlin.version>1.4.21</kotlin.version>
     <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
 
     <camunda.version.ce>7.14.0</camunda.version.ce>
-    <camunda.version.ee>7.14.1-ee</camunda.version.ee>
+    <camunda.version.ee>7.14.4-ee</camunda.version.ee>
 
     <spring-boot.version>2.4.3</spring-boot.version>
     <spring-doc.version>1.5.4</spring-doc.version>
@@ -272,7 +272,7 @@
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.2.0</version>
           <configuration>
-            <encoding>UTF-8</encoding>
+            <encoding>${project.build.sourceEncoding}</encoding>
           </configuration>
         </plugin>
 
@@ -452,11 +452,6 @@
           <groupId>org.sonatype.plugins</groupId>
           <artifactId>nexus-staging-maven-plugin</artifactId>
           <version>1.6.8</version>
-          <configuration>
-            <autoReleaseAfterClose>true</autoReleaseAfterClose>
-            <serverId>ossrh</serverId>
-            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-          </configuration>
           <executions>
             <execution>
               <id>default-deploy</id>
@@ -464,6 +459,12 @@
               <goals>
                 <goal>deploy</goal>
               </goals>
+              <configuration>
+                <serverId>ossrh</serverId>
+                <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                <keepStagingRepositoryOnCloseRuleFailure>true</keepStagingRepositoryOnCloseRuleFailure><!-- go to oss.nexus.org and inspect the failure -->
+              </configuration>
             </execution>
           </executions>
         </plugin>
