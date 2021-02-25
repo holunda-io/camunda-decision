@@ -4,7 +4,7 @@
 
   <groupId>io.holunda.decision._</groupId>
   <artifactId>camunda-decision_</artifactId>
-  <version>0.0.4-SNAPSHOT</version>
+  <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>${project.artifactId}</name>
