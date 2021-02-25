@@ -11,10 +11,6 @@
   <groupId>io.holunda.decision.lib</groupId>
   <artifactId>camunda-decision-lib-test</artifactId>
 
-  <properties>
-    <junitparams.version>1.1.1</junitparams.version>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.jetbrains.kotlin</groupId>
