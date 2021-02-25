@@ -6,7 +6,7 @@
   <parent>
     <groupId>io.holunda.decision._</groupId>
     <artifactId>camunda-decision_</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
   </parent>
 
   <artifactId>lib</artifactId>
@@ -25,6 +25,7 @@
     <maven.sources.skip>true</maven.sources.skip>
     <maven.install.skip>true</maven.install.skip>
     <gpg.skip>true</gpg.skip>
+    <dokka.skip>true</dokka.skip>
   </properties>
 
 </project>
