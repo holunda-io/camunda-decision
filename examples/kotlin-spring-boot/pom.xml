@@ -6,11 +6,30 @@
   <parent>
     <groupId>io.holunda.decision.project</groupId>
     <artifactId>camunda-decision-examples-root</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
   </parent>
 
   <groupId>io.holunda.decision.example</groupId>
   <artifactId>camunda-decision-example-kotlin-spring-boot</artifactId>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.camunda.bpm.dmn</groupId>
+        <artifactId>camunda-engine-dmn-bom</artifactId>
+        <version>${camunda-ee.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.camunda.bpm</groupId>
+        <artifactId>camunda-bom</artifactId>
+        <version>${camunda-ee.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <!-- PROJECT -->
@@ -22,9 +41,22 @@
     <!-- CAMUNDA -->
     <dependency>
       <groupId>org.camunda.bpm.springboot</groupId>
-      <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
-      <version>${camunda.version}</version>
+      <artifactId>camunda-bpm-spring-boot-starter-webapp-ee</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.camunda.bpm.springboot</groupId>
+      <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jdbc</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
@@ -38,8 +70,7 @@
 
     <dependency>
       <groupId>io.github.microutils</groupId>
-      <artifactId>kotlin-logging</artifactId>
-      <version>1.8.3</version>
+      <artifactId>kotlin-logging-jvm</artifactId>
     </dependency>
   </dependencies>
 
@@ -87,4 +118,11 @@
     </plugins>
   </build>
 
+  <repositories>
+    <repository>
+      <id>camunda-bpm-ee</id>
+      <name>camunda-bpm-ee</name>
+      <url>https://app.camunda.com/nexus/content/repositories/camunda-bpm-ee</url>
+    </repository>
+  </repositories>
 </project>

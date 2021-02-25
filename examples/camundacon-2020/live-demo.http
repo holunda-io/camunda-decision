@@ -1,0 +1,42 @@
+# List all customers
+GET http://localhost:10110/customers
+
+###
+
+# C1
+GET http://localhost:10110/customers/1
+
+###
+
+GET http://localhost:10110/products
+
+###
+
+#P1002
+GET http://localhost:10110/products/1002
+
+###
+
+POST http://localhost:10110/dmn/diagrams/legal_age.dmn
+
+###
+
+GET http://localhost:10110/dmn
+
+###
+
+GET http://localhost:10110/dmn/legal_and_product
+
+###
+
+GET http://localhost:10110/evaluation/isCustomerAdult/1
+
+###
+
+# deploy the live demo example
+POST http://localhost:10110/dmn/deploy-live-demo
+
+###
+
+#E1,1002
+GET http://localhost:10110/evaluation/isShipmentAllowed?customerId=2&productId=1002

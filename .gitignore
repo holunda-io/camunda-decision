@@ -13,6 +13,15 @@
 target/
 pom.xml.versionsBackup
 .mvn/maven.config
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# https://github.com/takari/maven-wrapper#usage-without-binary-jar
+.mvn/wrapper/maven-wrapper.jar
 
 # OSX
 .DS_Store
@@ -20,4 +29,8 @@ pom.xml.versionsBackup
 # DEV
 .tmp/
 .gradle/
-.repository
+#.repository
+
+_slides/
+
+

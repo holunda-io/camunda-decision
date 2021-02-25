@@ -4,12 +4,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>io.holunda.decision.project</groupId>
-    <artifactId>camunda-decision-root</artifactId>
-    <version>0.0.1</version>
+    <groupId>io.holunda.decision._</groupId>
+    <artifactId>camunda-decision_</artifactId>
+    <version>0.0.2</version>
   </parent>
 
-  <artifactId>camunda-decision-examples-root</artifactId>
+  <artifactId>examples</artifactId>
   <packaging>pom</packaging>
 
   <properties>
@@ -18,11 +18,13 @@
     <maven.sources.skip>true</maven.sources.skip>
     <maven.install.skip>true</maven.install.skip>
     <gpg.skip>true</gpg.skip>
+    <dokka.skip>true</dokka.skip>
   </properties>
 
   <modules>
-    <module>java-spring-boot</module>
-    <module>kotlin-spring-boot</module>
+    <!--module>java-spring-boot</module-->
+    <!--module>kotlin-spring-boot</module-->
+    <module>camundacon-2020</module>
   </modules>
 
   <dependencies>
@@ -148,4 +150,59 @@
     </plugins>
   </build>
 
+<!--  <profiles>-->
+<!--    &lt;!&ndash;-->
+<!--      Profile for selecting the Camunda BPM Engine version.-->
+<!--      CE stands for Community Edition-->
+<!--      EE stands for Enterprise Edition-->
+<!--      &ndash;&gt;-->
+<!--    <profile>-->
+<!--      <id>camunda-ce</id>-->
+<!--      <activation>-->
+<!--        <property>-->
+<!--          <name>!camunda-ee</name>-->
+<!--        </property>-->
+<!--      </activation>-->
+<!--      <properties>-->
+<!--        <camunda.version>${camunda.version}</camunda.version>-->
+<!--      </properties>-->
+<!--      <dependencyManagement>-->
+<!--        <dependencies>-->
+<!--          <dependency>-->
+<!--            <groupId>org.camunda.bpm.springboot</groupId>-->
+<!--            <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>-->
+<!--            <version>${camunda.version}</version>-->
+<!--          </dependency>-->
+<!--        </dependencies>-->
+<!--      </dependencyManagement>-->
+<!--    </profile>-->
+
+<!--    <profile>-->
+<!--      <id>camunda-ee</id>-->
+<!--      <activation>-->
+<!--        <property>-->
+<!--          <name>camunda-ee</name>-->
+<!--        </property>-->
+<!--      </activation>-->
+<!--      <properties>-->
+<!--        <camunda.version>${camunda-ee.version}</camunda.version>-->
+<!--      </properties>-->
+<!--      <repositories>-->
+<!--        <repository>-->
+<!--          <id>camunda-bpm-ee</id>-->
+<!--          <name>camunda-bpm-ee</name>-->
+<!--          <url>https://app.camunda.com/nexus/content/repositories/camunda-bpm-ee</url>-->
+<!--        </repository>-->
+<!--      </repositories>-->
+<!--      <dependencyManagement>-->
+<!--        <dependencies>-->
+<!--          <dependency>-->
+<!--            <groupId>org.camunda.bpm.springboot</groupId>-->
+<!--            <artifactId>camunda-bpm-spring-boot-starter-webapp-ee</artifactId>-->
+<!--            <version>${camunda.version}</version>-->
+<!--          </dependency>-->
+<!--        </dependencies>-->
+<!--      </dependencyManagement>-->
+<!--    </profile>-->
+<!--  </profiles>-->
 </project>

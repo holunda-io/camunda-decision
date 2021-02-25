@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="diagram_is_adult" name="Is Adult Diagram" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.2.0">
+  <decision id="dt_is_adult" name="Is adult?" camunda:versionTag="1">
+    <decisionTable id="DecisionTable_0soxfih" hitPolicy="FIRST">
+      <input id="InputClause_1aje4yd" label="Customer Id" biodi:width="150">
+        <inputExpression id="LiteralExpression_0tdgms5" typeRef="string">
+          <text>customerId</text>
+        </inputExpression>
+      </input>
+      <input id="Input_1" label="Country" biodi:width="192">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>customerCountry</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0lqc5hr" label="State" biodi:width="150">
+        <inputExpression id="LiteralExpression_1wyua89" typeRef="string">
+          <text>customerState</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1vhhprj" label="Age" biodi:width="150">
+        <inputExpression id="LiteralExpression_0as7mw7" typeRef="integer">
+          <text>customerAge</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0zeua4v" label="Sex" biodi:width="150">
+        <inputExpression id="LiteralExpression_162e305" typeRef="string">
+          <text>customerSex</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="is adult" name="isAdult" typeRef="boolean" />
+      <rule id="DecisionRule_1v2k6f5">
+        <inputEntry id="UnaryTests_1jizxd2">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09x6hop">
+          <text>"Indonesia","Myanmar","Yemen"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bua8bb">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ebmmox">
+          <text>&gt;= 15</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0md5d0r">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1wa7029">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0pyhzk1">
+        <inputEntry id="UnaryTests_0hh6rhs">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dj4pge">
+          <text>"North Korea"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ieamow">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_047sh8a">
+          <text>&gt;= 17</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1u040eq">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0yg9dzp">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_19umnl8">
+        <inputEntry id="UnaryTests_0thli5e">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1a0n74j">
+          <text>"Pakistan"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05vxao7">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ig8iu2">
+          <text>&gt;= 16</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0h96htk">
+          <text>"female"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1xk5veo">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1tjl839">
+        <inputEntry id="UnaryTests_0xs552o">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dwgfn3">
+          <text>"USA"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1cjim4v">
+          <text>"Alabama"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0vwq9x6">
+          <text>&gt;= 19</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_19at7yf">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1wtli80">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_06e62es">
+        <inputEntry id="UnaryTests_1s5ny63">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0opevrj">
+          <text>"Germany"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ns9pk4">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1unh5z1">
+          <text>&gt;= 18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rrew2b">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0i4dmw8">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_16r2upm">
+        <inputEntry id="UnaryTests_179a33b">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06b85lg">
+          <text>"USA"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1o39739">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rlbe4r">
+          <text>&gt;= 18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05e1zao">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0tbgn5r">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_06h513x">
+        <inputEntry id="UnaryTests_1au5g2o">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1oehnw9">
+          <text>"USA"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_140wcl8">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00p0hsy">
+          <text>&lt; 18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1raj6hc">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1eay8ia">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1f7fd1c">
+        <inputEntry id="UnaryTests_0pcvd8f">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0z8oynz">
+          <text>"Pakistan"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tduyyt">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0soznhu">
+          <text>&gt;= 18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0q9b3gm">
+          <text>"male"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_10ihmbc">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1q9n5pn">
+        <inputEntry id="UnaryTests_08brp10">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ieg1kc">
+          <text>"Algeria"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ltso2l">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04bvf61">
+          <text>&gt;= 19</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0w190l0">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_09gxtgq">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_01yzzbx">
+        <inputEntry id="UnaryTests_03iz9v3">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1l2y2oi">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0smvgdq">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_117igyi">
+          <text>&gt;= 18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0f9tjn7">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1o9f820">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1fiiw3w">
+        <inputEntry id="UnaryTests_0rd85sr">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_133lh94">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1pl3dvm">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0k0egsw">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ggl2mp">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_18dhqks">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="dt_is_adult">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

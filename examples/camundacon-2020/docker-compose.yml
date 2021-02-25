@@ -1,0 +1,11 @@
+version: '3'
+services:
+  db:
+    image: postgres:13-alpine
+    container_name: "postgres"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=holunda
+      - POSTGRES_PASSWORD=holunda
+      - POSTGRES_DB=camundacon2020

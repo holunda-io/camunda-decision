@@ -3,25 +3,27 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
+
   <parent>
-    <groupId>io.holunda.decision.project</groupId>
-    <artifactId>camunda-decision-root</artifactId>
-    <version>0.0.1</version>
+    <groupId>io.holunda.decision._</groupId>
+    <artifactId>camunda-decision_</artifactId>
+    <version>0.0.2</version>
   </parent>
 
-  <artifactId>camunda-decision-extension-root</artifactId>
+  <artifactId>extension</artifactId>
   <packaging>pom</packaging>
 
   <modules>
-    <module>model</module>
-    <module>model-api</module>
-    <module>model-jackson</module>
-    <module>runtime</module>
-    <module>runtime-spring</module>
+    <module>model/api</module>
+    <module>model/core</module>
+    <module>model/jackson</module>
+    <module>runtime/core</module>
+    <module>runtime/spring</module>
   </modules>
 
   <properties>
-    <apiguardian.version>1.1.0</apiguardian.version>
+    <jacoco.skip>false</jacoco.skip>
+    <apiguardian.version>1.1.1</apiguardian.version>
   </properties>
 
   <dependencies>

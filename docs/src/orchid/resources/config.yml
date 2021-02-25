@@ -28,7 +28,7 @@ services:
   publications:
     stages:
       - type: 'githubPages'
-        username: 'zambrovski'
+        username: 'holunda-io'
         repo: 'holunda-io/camunda-decision'
 
 #
