@@ -44,7 +44,7 @@
 
   <modules>
     <module>extension</module>
-    <module>lib</module>
+    <!-- More module see below -->
   </modules>
 
   <dependencyManagement>
@@ -654,6 +654,7 @@
       </activation>
       <modules>
         <module>examples</module>
+        <module>lib</module>
       </modules>
     </profile>
 
