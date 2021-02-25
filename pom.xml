@@ -4,7 +4,7 @@
 
   <groupId>io.holunda.decision._</groupId>
   <artifactId>camunda-decision_</artifactId>
-  <version>0.0.3</version>
+  <version>0.0.1</version>
   <packaging>pom</packaging>
 
   <name>${project.artifactId}</name>
@@ -44,6 +44,7 @@
 
   <modules>
     <module>extension</module>
+    <module>lib</module>
     <!-- More module see below -->
   </modules>
 
@@ -654,7 +655,6 @@
       </activation>
       <modules>
         <module>examples</module>
-        <module>lib</module>
       </modules>
     </profile>
 
