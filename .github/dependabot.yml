@@ -8,7 +8,6 @@ updates:
     # Specify labels for pull requests
     labels:
       - "Type: Dependency Upgrade"
-      - "Priority 1: Must"
       - "Status: In Progress"
     # Add reviewers
     reviewers:
