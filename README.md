@@ -1,9 +1,22 @@
 # camunda-decision
 
+[![Build Status](https://github.com/holunda-io/camunda-decision/workflows/Development%20branches/badge.svg)](https://github.com/holunda-io/camunda-decision/actions)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e56194c76382443ea1cfa69bc1a8d7e3)](https://app.codacy.com/gh/holunda-io/camunda-decision?utm_source=github.com&utm_medium=referral&utm_content=holunda-io/camunda-decision&utm_campaign=Badge_Grade_Dashboard)
 [![sponsored](https://img.shields.io/badge/sponsoredBy-Holisticon-RED.svg)](https://holisticon.de/)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.holunda.decision/camunda-decision-model-api/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.holunda.decision/camunda-decision-model-api)
 
 Extension for easier, type safe interaction with camunda dmn.
+
+## Usage
+
+```xml
+<dependency>
+    <groupId>io.holunda.decision</groupId>
+    <artifactId>camunda-decision-model-api</artifactId>
+    <version>0.0.1</version>
+</dependency>
+```
+
 
 ## DmnWriter
 
