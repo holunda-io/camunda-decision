@@ -27,7 +27,7 @@
     <groovy.version>2.4.21</groovy.version>
     <spin.version>1.11.0</spin.version>
 
-    <jgiven.version>1.0.0</jgiven.version>
+    <jgiven.version>1.1.0</jgiven.version>
 
     <camunda-bpm-data.version>1.2.3</camunda-bpm-data.version>
     <kotlin-logging.version>2.0.10</kotlin-logging.version>
