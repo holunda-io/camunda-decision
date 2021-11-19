@@ -1,5 +1,6 @@
 package io.holunda.decision.model.jackson.element
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 import io.holunda.decision.model.jackson.CamundaDecisionJackson.Namespaces
 import org.camunda.bpm.model.dmn.BuiltinAggregator
@@ -13,6 +14,7 @@ data class DecisionTableXml(
   val hitPolicy: HitPolicy = HitPolicy.UNIQUE,
 
   @JacksonXmlProperty(isAttribute = true)
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   val aggregation: BuiltinAggregator? = null,
 
   @JacksonXmlProperty(localName = "input", namespace = Namespaces.NS_DMN_13)

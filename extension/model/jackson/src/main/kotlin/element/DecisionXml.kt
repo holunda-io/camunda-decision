@@ -1,5 +1,6 @@
 package io.holunda.decision.model.jackson.element
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty
 import io.holunda.decision.model.api.DecisionDefinitionKey
 import io.holunda.decision.model.api.Name
@@ -14,6 +15,7 @@ data class DecisionXml(
   val name: Name,
 
   @JacksonXmlProperty(isAttribute = true, namespace = Namespaces.NS_CAMUNDA)
+  @JsonInclude(JsonInclude.Include.NON_NULL)
   val versionTag:VersionTag? = null,
 
   @JacksonXmlProperty(localName = "informationRequirement", namespace = InformationRequirementXml.NAMESPACE)

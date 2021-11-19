@@ -2,6 +2,7 @@
 # IDEA
 *.iml
 .idea/
+.jpb/
 
 # Eclipse
 .classpath
