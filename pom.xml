@@ -23,7 +23,7 @@
     <camunda.version.ee>7.16.1-ee</camunda.version.ee>
 
     <spring-boot.version>2.5.7</spring-boot.version>
-    <spring-doc.version>1.6.2</spring-doc.version>
+    <spring-doc.version>1.6.3</spring-doc.version>
     <groovy.version>2.4.21</groovy.version>
     <spin.version>1.12.0</spin.version>
 
