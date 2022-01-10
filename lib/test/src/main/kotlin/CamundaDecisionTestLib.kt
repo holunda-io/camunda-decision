@@ -31,7 +31,7 @@ object CamundaDecisionTestLib {
   }
 
   fun readText(resource:String) : String = CamundaDecisionTestLib::class.java
-    .getResource(resource.addTrailingSlash())
+    .getResource(resource.addTrailingSlash())!!
     .readText()
     .trim()
 

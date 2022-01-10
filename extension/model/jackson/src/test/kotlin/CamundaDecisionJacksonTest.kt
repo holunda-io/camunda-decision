@@ -5,6 +5,7 @@ import io.holunda.decision.lib.test.CamundaDecisionTestLib.readText
 import io.holunda.decision.model.jackson.element.*
 import io.holunda.decision.model.jackson.element.HeaderXml.InputXml
 import org.assertj.core.api.Assertions.assertThat
+import org.camunda.bpm.model.dmn.Dmn
 import org.camunda.bpm.model.dmn.HitPolicy
 import org.junit.Test
 
@@ -15,7 +16,7 @@ internal class CamundaDecisionJacksonTest {
   @Test
   fun `create via fluent kotlin`() {
     val definitions = DefinitionsXml(
-      id = "1",
+      id = "d1",
       name = "DRD1",
 
       decisions = listOf(
@@ -101,7 +102,32 @@ internal class CamundaDecisionJacksonTest {
       )
     )
 
+//    <?xml version="1.0" encoding="UTF-8"?>
+//    <definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="Definitions_1ijak9h" name="DRD" namespace="http://camunda.org/schema/1.0/dmn">
+//    <decision id="Decision_1hwv7ki" name="Decision 1">
+//    <decisionTable id="DecisionTable_0cetvgc">
+//    <input id="Input_1">
+//    <inputExpression id="InputExpression_1" typeRef="string">
+//    <text></text>
+//    </inputExpression>
+//    </input>
+//    <output id="Output_1" typeRef="string" />
+//    </decisionTable>
+//    </decision>
+//    <dmndi:DMNDI>
+//    <dmndi:DMNDiagram>
+//    <dmndi:DMNShape dmnElementRef="Decision_1hwv7ki">
+//    <dc:Bounds height="80" width="180" x="160" y="100" />
+//    </dmndi:DMNShape>
+//    </dmndi:DMNDiagram>
+//    </dmndi:DMNDI>
+//    </definitions>
+
+
     val xml = CamundaDecisionJackson.toXml(definitions)
+    println(xml)
+
+    Dmn.validateModel(Dmn.readModelFromStream(xml.byteInputStream()))
 
     val d2 = CamundaDecisionJackson.fromXml(xml)
 

@@ -7,12 +7,22 @@ import io.holunda.decision.model.ascii.DmnWriter
 import io.holunda.decision.model.jackson.converter.JacksonDiagramConverter
 import org.camunda.bpm.model.dmn.Dmn
 import org.camunda.bpm.model.dmn.DmnModelInstance
+import org.camunda.bpm.model.dmn.impl.DmnModelConstants
 import java.io.File
 
 /**
  * Camunda Decision Model - Model DTO for DMN.
  */
 object CamundaDecisionModel {
+
+  object Namespaces {
+    const val NS_DMN_13 = DmnModelConstants.DMN13_NS
+    const val NS_CAMUNDA = DmnModelConstants.CAMUNDA_NS
+    const val NS_DMNDI = "https://www.omg.org/spec/DMN/20191111/DMNDI/"
+    const val NS_DC = "http://www.omg.org/spec/DMN/20180521/DC/"
+    const val NS_DI = "http://www.omg.org/spec/DMN/20180521/DI/"
+  }
+
 
   fun createXml(dmnDiagram: DmnDiagram) = JacksonDiagramConverter.toXml(dmnDiagram)
 

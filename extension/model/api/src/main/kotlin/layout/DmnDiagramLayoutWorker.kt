@@ -3,6 +3,7 @@ package io.holunda.decision.model.api.layout
 import io.holunda.decision.model.api.DecisionDefinitionKey
 import io.holunda.decision.model.api.Id
 import io.holunda.decision.model.api.element.DmnDecisionTable
+import io.holunda.decision.model.api.element.DmnDiagram
 import io.holunda.decision.model.api.layout.DmnDiagramLayoutWorker.*
 import kotlin.math.abs
 import kotlin.math.hypot
@@ -33,6 +34,10 @@ class DmnDiagramLayoutWorker(
     const val Y_OFFSET = 160
   }
 
+  constructor(dmnDiagram: DmnDiagram) : this(
+    dmnDiagram.decisionDefinitionKeys,
+    dmnDiagram.informationRequirements
+  )
 
   private val requiredDecisions: Map<DecisionDefinitionKey, List<DecisionDefinitionKey>> = informationRequirements.groupBy({ it.decisionTable }, { it.requiredDecisionTable })
 

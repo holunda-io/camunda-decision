@@ -21,7 +21,7 @@ class DummyCustomerRepository : CustomerRepository{
     CustomerEntity(id = "1", name = "Peter", age = 19, sex = male, country = "USA", state = "Alabama"),
     CustomerEntity(id = "2", name = "Paul", age = 17, sex = male, country = "Pakistan"),
     CustomerEntity(id = "3", name = "Mary", age = 17, sex = female, country = "Pakistan"),
-  ).map { it.id to it}.toMap()
+  ).associateBy { it.id }
 
   override fun findById(customerId: String)  = Optional.ofNullable(data[customerId])
 

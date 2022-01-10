@@ -109,7 +109,6 @@ class CombinedLegalAndProductGenerator(
                 ShipmentDefinitions.outShippingAllowed.resultFalse(),
                 ShipmentDefinitions.outAdditionalActions.resultValue("call parents")
               )
-
           )
       ).build()
   }
