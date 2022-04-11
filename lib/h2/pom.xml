@@ -13,7 +13,7 @@
   <artifactId>camunda-decision-lib-h2</artifactId>
 
   <properties>
-    <h2.version>2.1.210</h2.version>
+    <h2.version>2.1.212</h2.version>
   </properties>
 
   <dependencies>
