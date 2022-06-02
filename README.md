@@ -1,5 +1,7 @@
 # camunda-decision
 
+[![example](https://img.shields.io/badge/lifecycle-EXAMPLE-blue.svg)](https://github.com/holisticon#open-source-lifecycle)
+[![incubating](https://img.shields.io/badge/lifecycle-INCUBATING-orange.svg)](https://github.com/holisticon#open-source-lifecycle)
 [![Build Status](https://github.com/holunda-io/camunda-decision/workflows/Development%20branches/badge.svg)](https://github.com/holunda-io/camunda-decision/actions)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e56194c76382443ea1cfa69bc1a8d7e3)](https://app.codacy.com/gh/holunda-io/camunda-decision?utm_source=github.com&utm_medium=referral&utm_content=holunda-io/camunda-decision&utm_campaign=Badge_Grade_Dashboard)
 [![sponsored](https://img.shields.io/badge/sponsoredBy-Holisticon-RED.svg)](https://holisticon.de/)
