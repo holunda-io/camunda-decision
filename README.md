@@ -9,6 +9,12 @@
 
 Extension for easier, type safe interaction with camunda dmn.
 
+## Discontinued
+
+### The library was a working solution which has never been adopted for production use. It is now discontinued and the repository is archived because the code is still valuable.
+### If you want to continue working with it - please send us a direct message.
+
+
 ## Usage
 
 ```xml
